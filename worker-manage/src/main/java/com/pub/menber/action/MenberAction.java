@@ -80,8 +80,10 @@ public class MenberAction extends BaseAdmAction
 		limit.setSortProperty("regTime");
 		limit.setSortType("desc");
 
+		String type = request.getParameter("type");
+
 		// 查询
-		List<MenberDTO> list = myMenberFacade.list(limit);
+		List<MenberDTO> list = myMenberFacade.list(limit,type);
 
 		// 设置分页信息
 		limitUtil.setLimitInfo(request, limit);
@@ -377,38 +379,39 @@ public class MenberAction extends BaseAdmAction
 	 * @return
 	 * @throws Exception
 	 */
-//	public ActionForward pointList(ActionMapping mapping, ActionForm form,
-//			HttpServletRequest request, HttpServletResponse response)
-//			throws Exception
-//	{
-//		// 列表控件的TableId值
-//		String tableId = "PointList";
-//
-//		// 获取分页信息
-//		ILimitUtil limitUtil = new ExLimitUtil();
-//		LimitInfo limit = limitUtil.getLimitInfo(request, tableId, 10);
-//
-//		// 查询
-//		List<MenberDTO> list = myMenberFacade.list(limit);
-//
-//		// 设置分页信息
-//		limitUtil.setLimitInfo(request, limit);
-//
-//		// 查询过滤、分页状态保留
-//		this.setActionAttribute(request, "backUrlStore", this.getActionContext(request).getCurentURL());
-//
-//		List menberlist = new ArrayList();
-//		for (Iterator iterator = list.iterator(); iterator.hasNext();) {
-//			MenberDTO menber = (MenberDTO) iterator.next();
-//			menber.setRegTimeStr(format.format(menber.getRegTime()));
-//			if(null != menber.getLastTime()){
-//				menber.setLastTimeStr(format.format(menber.getLastTime()));
-//			}
-//			menberlist.add(menber);
-//		}
-//		request.setAttribute("list", menberlist);
-//		return mapping.findForward("list");
-//	}
+	public ActionForward pointList(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception
+	{
+		// 列表控件的TableId值
+		String tableId = "PointList";
+
+		// 获取分页信息
+		ILimitUtil limitUtil = new ExLimitUtil();
+		LimitInfo limit = limitUtil.getLimitInfo(request, tableId, 10);
+
+		String type =  request.getParameter("type");
+		// 查询
+		List<MenberDTO> list = myMenberFacade.list(limit,type);
+
+		// 设置分页信息
+		limitUtil.setLimitInfo(request, limit);
+
+		// 查询过滤、分页状态保留
+		this.setActionAttribute(request, "backUrlStore", this.getActionContext(request).getCurentURL());
+
+		List menberlist = new ArrayList();
+		for (Iterator iterator = list.iterator(); iterator.hasNext();) {
+			MenberDTO menber = (MenberDTO) iterator.next();
+			menber.setRegTimeStr(format.format(menber.getRegTime()));
+			if(null != menber.getLastTime()){
+				menber.setLastTimeStr(format.format(menber.getLastTime()));
+			}
+			menberlist.add(menber);
+		}
+		request.setAttribute("list", menberlist);
+		return mapping.findForward("list");
+	}
 
 
 }

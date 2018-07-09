@@ -202,10 +202,12 @@
 					<a class="sexybutton" href="${ctx}/pub/cut/queryList.do?menId=${m.id}"><span><span>扣款</span></span></a>
 					<a class="sexybutton" href="${ctx}/pub/cash/queryList.do?menId=${m.id}"><span><span>提现</span></span></a>
 					<a class="sexybutton" href="${ctx}/pub/share/queryList.do?menId=${m.id}"><span><span>好友</span></span></a>
-					<a class="sexybutton" href="${ctx}/pub/menber/beforeEdit.do?id=${m.id}"><span><span>修改</span></span></a>
-					<a class="sexybutton" href="javascript:btn_delete_click('${m.id}')"><span><span>删除</span></span></a>
+
 					--%>
-					<a class="sexybutton" href="#"><span><span>删除</span></span></a>
+					<c:if test="${m.type eq '2'}">
+						<a class="sexybutton" href="${ctx}/pub/menber/beforeEdit.do?id=${m.id}"><span><span>修改</span></span></a>
+						<a class="sexybutton" href="javascript:btn_delete_click('${m.id}')"><span><span>删除</span></span></a>
+					</c:if>
 				</ec:column>
 				
 				

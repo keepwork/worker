@@ -170,7 +170,7 @@
       	<div class="toolbar mb10">
         	<a href="#" class="sexybutton" onclick="beforeSubmit();return false"><span><span>保存</span></span></a>    
         	<a href="#" class="sexybutton"  onClick="rbutton()"><span><span>重置 </span></span></a>
-        	<a href="#" class="sexybutton" onclick="location.href='${pageContext.request.contextPath}/pub/menber/queryList.do'"><span><span>返回</span></span></a> 
+        	<a href="#" class="sexybutton" onclick="location.href='${pageContext.request.contextPath}/pub/menber/queryList.do?type=${m.type}'"><span><span>返回</span></span></a>
         </div>
 		</div>
 	</form>

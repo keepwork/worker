@@ -121,8 +121,8 @@ public class MenberBPO extends BpoSupport {
 	}
 
 
-	public List list(LimitInfo limit) throws AppException {
-		return myMenberDAO.list(limit);
+	public List list(LimitInfo limit,String type) throws AppException {
+		return myMenberDAO.list(limit,type);
 	}
 
 	

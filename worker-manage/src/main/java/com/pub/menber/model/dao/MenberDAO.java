@@ -140,25 +140,25 @@ public class MenberDAO extends DaoSupport
 		this.getHibernateTemplate().saveOrUpdate(dto);
 	}
 
-	public List list(LimitInfo limit)
+	public List list(LimitInfo limit,String type)
 	{
 		//limit.addFilterProperty(HqlProperty.getEq("status", "1"));
 		String hql = "from MenberDTO Z ";
 		Object[] param = limit.getWhereHQL("Z");
 		if (limit.getRowDisplayed() < 1)
 		{// 非分页, 每页记录小于1时表示不进行分页
-			return this.listWithNamePrams(hql + " where 1=1 " + param[0] + " "
+			return this.listWithNamePrams(hql + " where Z.type=" + type + " " + param[0] + " "
 					+ limit.getOrder("Z"), (Map) param[1]);
 		} else
 		{// 分页查询
 			// 查询记录
-			List list = this.listWithLimit(hql + " where 1=1 " + param[0] + " "
+			List list = this.listWithLimit(hql + " where Z.type=" + type + " " + param[0] + " "
 					+ limit.getOrder("Z"), (Map) param[1], limit
 					.getStartLineNum(), limit.getRowDisplayed());
 			// 查询并设置记录总数
 			String totalHQl = "from MenberDTO Z";
 			limit.setTotalNum(this.countHql(
-					totalHQl + " where 1=1 " + param[0], (Map) param[1]));
+					totalHQl + " where Z.type=" + type + " " + param[0], (Map) param[1]));
 
 			return list;
 		}

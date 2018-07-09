@@ -89,8 +89,8 @@ public class MenberFacade {
 	}
 
 
-	public List list(LimitInfo limit) throws AppException {
-		return myMenberBPO.list(limit);
+	public List list(LimitInfo limit,String type) throws AppException {
+		return myMenberBPO.list(limit,type);
 	}
 
 	
