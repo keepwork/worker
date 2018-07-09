@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+                        "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib>
+ <tlib-version>1.0</tlib-version>
+ <jsp-version>1.2</jsp-version>
+ <short-name>goodSelect</short-name>
+ <uri>/cat</uri>
+ <description>商品分类选择标签</description>
+ <tag>
+  <name>category</name>
+  <tag-class>com.common.tag.GoodCategoryTag</tag-class>
+  <body-content>jsp</body-content>
+  <!-- empty:空标记，即起始标记和结束标记之间没有内容; jsp:接受所有JSP语法,如即起始标记和结束标记之间<%=request.getProtocol() %> -->
+  <description>商品分类选择标签</description>
+  <attribute>
+   <name>id</name>
+   <required>true</required>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+  <attribute>
+   <name>value</name>
+   <required>true</required>
+   <rtexprvalue>true</rtexprvalue>
+   <type>java.lang.String</type>
+  </attribute>
+ </tag>
+</taglib>

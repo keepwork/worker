@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.shop.order.model.dto.OrderDTO"
+		table="pub_order">
+		<comment>订单</comment>
+		<id name="orderId" type="java.lang.String">
+			<column name="ORDER_ID" length="32" />
+			<generator class="uuid.hex" />
+		</id>
+		
+		<property name="orderSn" type="java.lang.String">
+			<column name="ORDER_SN" length="100">
+				<comment>订单序列号</comment>
+			</column>
+		</property>
+		<property name="menId" type="java.lang.String">
+			<column name="MEN_ID" length="32">
+				<comment>会员id</comment>
+			</column>
+		</property>
+		<property name="userId" type="java.lang.String">
+			<column name="USER_ID" length="32">
+				<comment>管理员ID</comment>
+			</column>
+		</property>
+		<property name="openId" type="java.lang.String">
+			<column name="OPEN_ID" length="100">
+				<comment>微信ID</comment>
+			</column>
+		</property>
+		<property name="addrId" type="java.lang.String">
+			<column name="ADDR_ID" length="32">
+				<comment>配送地址</comment>
+			</column>
+		</property>
+		<property name="invoice" type="java.lang.String">
+			<column name="INVOICE" length="100">
+				<comment>发票号</comment>
+			</column>
+		</property>
+		
+		<property name="totalPrice" type="java.math.BigDecimal">
+			<column name="TOTAL_PRICE" length="10">
+				<comment>订单总金额</comment>
+			</column>
+		</property>
+		<property name="shippingPrice" type="java.math.BigDecimal">
+			<column name="SHIPPING_PRICE" length="10">
+				<comment>运费</comment>
+			</column>
+		</property>
+		
+		<property name="totalPoint" type="java.lang.Integer">
+			<column name="TOTAL_POINT" length="10">
+				<comment>总积分</comment>
+			</column>
+		</property>
+		<property name="orderStatus" type="java.lang.String">
+			<column name="ORDER_STATUS" length="10">
+				<comment>订单状态：0-未处理,1-已处理,2-已发货,-3-已完成,4-已取消</comment>
+			</column>
+		</property>
+		<property name="shippingStatus" type="java.lang.String">
+			<column name="SHIPPING_STATUS" length="10">
+				<comment>配送状态：0-未配送,1-已配送,2-已送达</comment>
+			</column>
+		</property>
+		<property name="payStatus" type="java.lang.String">
+			<column name="PAY_STATUS" length="10">
+				<comment>支付状态：0-未支付,1-已支付</comment>
+			</column>
+		</property>
+		<property name="payType" type="java.lang.String">
+			<column name="PAY_TYPE" length="10">
+				<comment>支付类型：1-余额支付,2-积分支付,3-微信支付</comment>
+			</column>
+		</property>
+		<property name="orderType" type="java.lang.String">
+			<column name="ORDER_TYPE" length="10">
+				<comment>订单类型：1-微信订单,2-网页订单</comment>
+			</column>
+		</property>
+		<property name="amount" type="java.lang.Integer">
+			<column name="AMOUNT" length="10">
+				<comment>数量</comment>
+			</column>
+		</property>
+		
+		<property name="orderTime" type="java.util.Date">
+			<column name="ORDER_TIME">
+				<comment>下单时间</comment>
+			</column>
+		</property>
+		<property name="takeTime" type="java.util.Date">
+			<column name="TAKE_TIME">
+				<comment>接单时间</comment>
+			</column>
+		</property>
+		<property name="payTime" type="java.util.Date">
+			<column name="PAY_TIME">
+				<comment>支付时间</comment>
+			</column>
+		</property>
+		<property name="sureTime" type="java.util.Date">
+			<column name="SURE_TIME">
+				<comment>确认上门时间</comment>
+			</column>
+		</property>
+		<property name="endTime" type="java.util.Date">
+			<column name="END_TIME">
+				<comment>订单结束时间</comment>
+			</column>
+		</property>
+		
+		
+		<property name="expName" type="java.lang.String">
+			<column name="exp_name" length="100">
+				<comment>快递名称</comment>
+			</column>
+		</property>
+		<property name="expNumber" type="java.lang.String">
+			<column name="exp_number" length="100">
+				<comment>快递单号</comment>
+			</column>
+		</property>
+		<property name="expTime" type="java.util.Date">
+			<column name="exp_time">
+				<comment>快递发货时间</comment>
+			</column>
+		</property>
+		
+		<property name="workerId" type="java.lang.String">
+			<column name="WORKER_ID" length="32">
+				<comment>安装工ID</comment>
+			</column>
+		</property>
+		<property name="serviceType" type="java.lang.String">
+			<column name="SERVICE_TYPE" length="1">
+				<comment>服务类型：1-预约安装,2-预约维修,3-预约保养,4-预约测量,5-预约咨询</comment>
+			</column>
+		</property>
+		<property name="firstCate" type="java.lang.String">
+			<column name="FIRST_CATE" length="32">
+				<comment>产品分类code</comment>
+			</column>
+		</property>
+		<property name="firstCateName" type="java.lang.String">
+			<column name="FIRST_CATE_NAME" length="32">
+				<comment>产品分类名称</comment>
+			</column>
+		</property>
+		<property name="secondCate" type="java.lang.String">
+			<column name="SECOND_CATE" length="32">
+				<comment>产品型号code</comment>
+			</column>
+		</property>
+		<property name="secondCateName" type="java.lang.String">
+			<column name="SECOND_CATE_NAME" length="32">
+				<comment>产品型号名称</comment>
+			</column>
+		</property>
+		<property name="orderDesc" type="java.lang.String">
+			<column name="ORDER_DESC" length="200">
+				<comment>订单描述</comment>
+			</column>
+		</property>
+		<property name="desc1" type="java.lang.String">
+			<column name="DESC1" length="200">
+				<comment>描述1</comment>
+			</column>
+		</property>
+		<property name="desc2" type="java.lang.String">
+			<column name="DESC2" length="200">
+				<comment>描述2</comment>
+			</column>
+		</property>
+		
+	</class>
+</hibernate-mapping>

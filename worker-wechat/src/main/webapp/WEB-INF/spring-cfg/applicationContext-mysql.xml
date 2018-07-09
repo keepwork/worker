@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- JDBC数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName">
+			<value>${jdbc.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
+		<property name="maxActive">
+			<value>40</value>
+		</property>
+		<property name="maxIdle">
+			<value>20</value>
+		</property>
+		<property name="maxWait">
+			<value>-1</value>
+		</property>
+		<property name="defaultAutoCommit">
+			<value>false</value>
+		</property>
+	</bean>
+	 
+	
+	<!-- JNDI方式数据源 
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:comp/env/mpsDs</value>
+		</property>
+	</bean>
+	-->
+
+	<!-- 事务代理 -->
+	<bean id="baseTransactionProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+		abstract="true">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*RTX">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="*TX">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 事务管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<!--spring+hibernate处理LOB大字段
+	<bean id="nativeJdbcExtractor"
+		class="org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor"
+		lazy-init="true" />
+	<bean id="oracleLobHandler"
+		class="org.springframework.jdbc.support.lob.OracleLobHandler"
+		lazy-init="true">
+		<property name="nativeJdbcExtractor">
+			<ref local="nativeJdbcExtractor" />
+		</property>
+	</bean> -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<!--
+		<property name="lobHandler">
+			<ref bean="oracleLobHandler" />
+		</property>
+		-->
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+		<!-- hbm配置文件的classPath路径 -->
+		<property name="mappingDirectoryLocations">
+			<list>
+				<value>classpath:/hbm</value>
+			</list>
+		</property>
+		<!-- 
+			<property name="configLocation">
+			<value>classpath:hibernate.cfg.xml</value>
+			</property>
+			<property name="configurationClass">
+			<value>org.hibernate.cfg.AnnotationConfiguration</value>
+			</property>
+		-->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.jdbc.batch_size">0</prop>
+				<!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->
+			</props>
+		</property>
+	</bean>
+
+	<!-- 消息存储类 -->
+	<!--
+		<bean id="msgBean" class="com.sinovatech.common.message.FileStoreMessage">
+		</bean>
+	-->
+	<!-- 国际化消息存储类
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages</value>
+			</list>
+		</property>
+	</bean>
+	 -->
+
+	<!-- 容器启动时的工作组:不可删除. -->
+	<!-- 需要实现com.sinovatech.common.web.init.IAppInitJob接口 -->
+	<!-- myBmsDomainFacade 缓存域信息 -->
+	<!-- myBmsRscResourceFacade 加载系统中所有需要权限认证的连接 -->
+	<bean id="appStartFacade"
+		class="com.sinovatech.common.web.init.InitAppFacade">
+		<property name="jobList">
+			<list>
+				<!--<ref bean="myCacheJobInit" />
+				 <ref bean="timingRechargeTask" /> 
+				<ref bean="mySeckillJobInit" />--> 
+			</list>
+		</property>
+	</bean>
+
+	<!-- session 监听器 -->
+	<bean id="mySessionUserRegister" class="com.sinovatech.bms.adm.model.facade.SessionUserRegister"></bean>
+	<bean id="sessionListenerFacade"
+		class="com.sinovatech.common.web.listener.SessionListenerFacade">
+		<property name="listeners">
+			<list>
+				<!-- <ref bean="test" /> -->
+				<ref bean="mySessionUserRegister" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

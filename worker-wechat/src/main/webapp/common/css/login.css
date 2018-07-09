@@ -1,0 +1,20 @@
+@charset "utf-8";
+/* CSS Document */
+.login_page{width:1250px; margin:0 auto;}
+/*顶部*/
+.login_top{color:#005bac; margin:30px 10px 20px 0px;}
+	.login_top a{color:#005bac;}
+	.login_top a:hover{color:#ce2a49; text-decoration:none;}
+.login_body{width:781px; margin:0 auto; clear:both;}
+.login_box{width:781px;height:426px;display:block; background:url(images/login_bg.jpg) no-repeat; margin-top:20px; position:relative;}
+.login_form{width:347px; position:absolute; left:330px; top:60px;} 
+.login_title{ width:347px; height:24px; display:block; background:url(images/login_title.png) no-repeat; 
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/css/images/login_title.png"); _background-image:none; }
+.login_form div{ padding:8px 0;}
+.login_form span{color:#13699e; width:65px; display:inline-block; text-align:right;}
+.login_form .login_text_1{width:210px;height:23px;border:1px solid #88bacf;line-height:23px; padding:0 5px;}
+.login_form .login_text_2{width:100px;height:23px;border:1px solid #88bacf;line-height:23px; padding:0 5px;}
+.login_form .code{ width:60px; height:18px; vertical-align:middle;}
+/*底部*/
+.login_footer{width:100%;height:37px;margin-top:20px;background-color:#fff;text-align:center;color:#125ea3;text-align:center;line-height:37px; border-top:solid 1px #ccc;}
+.login_footer a{color:#125ea3;}

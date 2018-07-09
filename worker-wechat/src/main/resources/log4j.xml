@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<!--
+	PropertyConfigurator equivalent: log4j.rootCategory=, NULL
+	log4j.category.A0123456789=INFO
+	log4j.appender.NULL=org.apache.log4j.performance.NullAppender
+	log4j.appender.NULL.layout=org.apache.log4j.PatternLayout
+	log4j.appender.NULL.layout.ConversionPattern=%C.%M.%L - %m%n
+-->
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+	<appender name="log_console" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%t] %C{2} (%F:%L) - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="ASYNC_CONSOLE" class="org.apache.log4j.AsyncAppender">
+	    <param name="BufferSize" value="8192"/>
+	    <appender-ref ref="log_console" />
+	</appender>
+	
+	<appender name="log_file" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 
+		<param name="File" value="/chenxin/tomcat/logs/worker_info.log" />
+		-->
+		<param name="File" value="D:/logs/worker/worker_info.log" />
+		
+		<param name="append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%t] %C{2} (%F:%L) - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="log_file_error" class="org.apache.log4j.RollingFileAppender">
+		<!-- 
+		<param name="File" value="/chenxin/tomcat/logs/worker_error.log" />
+		-->
+		<param name="File" value="D:/logs/worker/worker_error.log" />
+		
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyy-MM-dd HH:mm:ss} [%-5p] %c {%F:%L}  - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="ERROR" />
+			<param name="LevelMax" value="ERROR" />
+		</filter>
+	</appender>
+	
+	<!-- 打印ibatis日志  开始 -->
+	
+	<appender name="IBatis" class="org.apache.log4j.ConsoleAppender">     
+	   <layout class="org.apache.log4j.PatternLayout">     
+	      <param name="ConversionPattern" value="%-4r [%t] %-5p %c %x - %m%n" />     
+	   </layout>     
+	   <filter class="org.apache.log4j.varia.LevelRangeFilter">     
+	      <param name="LevelMin" value="DEBUG" />     
+	      <param name="LevelMax" value="DEBUG" />     
+	   </filter>    
+	</appender>  
+	<logger name="com.test" additivity="true">     
+	   <level value="DEBUG" />     
+	</logger>     
+	<logger name="java.sql.Connection" additivity="true">     
+	   <level value="DEBUG" />     
+	</logger>     
+	<logger name="java.sql.Statement" additivity="true">     
+	   <level value="DEBUG" />     
+	</logger>     
+	<logger name="java.sql.PreparedStatement" additivity="true">     
+	   <level value="DEBUG" />     
+	   <appender-ref ref="IBatis" />     
+	</logger>   
+	<logger name="java.sql.ResultSet" additivity="true">     
+	   <level value="DEBUG" />     
+	   <appender-ref ref="IBatis" />     
+	</logger>  
+	
+	<!-- 打印ibatis日志  结束 -->
+
+	<root>
+		<!-- 打印info、debug、error日志 -->
+		<priority value="info" />
+		
+		<!-- 打印info、error日志 -->
+		<!-- <priority value="INFO" /> -->
+		
+		<!-- 打印error日志 -->
+		<!-- <priority value="error" /> -->
+		
+		<appender-ref ref="log_file" />
+		<appender-ref ref="log_file_error" />
+		<appender-ref ref="log_console" />
+	</root>
+</log4j:configuration>

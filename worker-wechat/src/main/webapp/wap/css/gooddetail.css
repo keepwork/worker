@@ -1,0 +1,88 @@
+.content{width: 100%;margin:0 auto;font-size: 14px;min-width: 320px; color: #181818}
+.detphonebox{text-align: center;height:15em;padding:0.5em 0;}
+.detphonebox img{height:100%}
+.detphonetext{margin-top:1.5em; padding:1em;height: 215px;}
+.detphonetext .detname{font-size: 14px;padding:0.5em 0;}
+.detphonetext .detwxts{font-size: 18px;color:#ff7000;}
+.detphonetext .detjg{padding-top: 0.5em; font-size: 16px}
+.detphonetext .detjg span{color:#ff7000;font-size: 23px;}
+.detphonetext2{margin-top:1.5em; padding:1em;height: auto;}
+.bgfff{background:#fff;}
+.swiper-container2 {
+  	height:100%;
+	margin:0 auto;
+	overflow:hidden;
+}
+.swiper-container2 .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.gwfixe{position: fixed;bottom: 0;left: 0; width: 100%;min-width:320px;text-align: center;background: #ed6d00;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.gwfixe .buttonf{background: #09acf7;height: 2.5em;line-height: 2.5em;width: 100%;margin: 0 auto;border:none;color: #fff; font-size: 16px}
+.gwfixe .dlzs{width: 60%;line-height: 2.5em;height: 2.5em; color:#fff;background:#000;float:left;}
+.gwfixe .buttonf1{background: #ed6d00;height: 2.5em;line-height: 2.5em;width: 40%;margin: 0 auto;border:none;color: #fff; font-size: 16px;float:right;}
+.detbox {padding: 10px;}
+.detbox section{text-align: center;}
+
+
+.bgfff {
+    background: #fff;
+    width: 100%;
+    margin: 0 auto 0.5em;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.detseletbox {
+    border-top: 1px solid #dedede;
+    padding: 1em;
+}
+.bgfff {
+    background: #fff;
+}
+section {
+}
+
+
+
+.detjg dt {
+    float: left;
+    height: 25px;
+    line-height: 25px;
+}
+.detjg dd {
+    float: left;
+    height: 25px;
+    line-height: 25px;
+}
+.detjg dd input {
+    background: #ffffff none repeat scroll 0 0;
+    border: 1px solid #989898;
+    height: 20px;
+    line-height: 20px;
+    margin-left: 10px;
+    text-align: center;
+    width: 50px;
+}
+.detjg dd a {
+    background: #ffffff none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    margin-left: 10px;
+    padding: 2px 5px 0;
+    text-decoration: none;
+}

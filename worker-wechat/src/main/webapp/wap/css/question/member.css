@@ -1,0 +1,30 @@
+﻿
+.join_col{color:#999;font-size:.6rem;line-height:.8rem}
+.join_col span{color:#aeaeae}
+
+.recharge ul:before,.recharge ul:after {height: 0px;}
+.recharge{padding:0 .5rem;}
+.recharge li{float:left;width:30%;margin:.3rem 1.5%}
+.recharge li input,.recharge li input[type=text]{border:.05rem solid #ccc;width:100%;text-align:center;padding:.4rem 0;color:#666;background:#fff;height:2.4rem;}
+.recharge li .cur{border:1px solid #dd3939;color:#dd3939}
+
+
+/*注册*/
+.code{position:absolute;right:.5rem;top:.7rem;border-left:.05rem solid #eee}
+.w_menu,.w_menu2{width:5.8rem;padding:.25rem .5rem;border:none;background:none;}
+.w_menu{color:#fe6000;margin-top:.1rem}
+.w_menu2{color:#999;margin-top:.1rem}d
+.login_txt{padding:0 .8rem;font-size:.6rem !important;}
+.submit{margin:.85rem 0}
+
+/*登录*/
+.other{display:flex;justify-content:center;}
+.other li{width:50%;float:left}
+.qq_user, .weixin_user,.sina_user{width:50px;height:50px;float:left;margin-right:1.5rem}
+.qq_user, .weixin_user,.sina_user{background:url(/Css/Images/for.png) no-repeat;}
+.qq_user{background-position:0 0}
+.weixin_user{background-position:-120px 0}
+.sina_user{background-position:-62px 0}
+
+
+.inner-p4{padding-top:.4rem !important; padding-bottom:.35rem !important}

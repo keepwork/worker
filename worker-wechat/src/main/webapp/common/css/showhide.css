@@ -1,0 +1,17 @@
+/* 提示弹出开始 */
+#cover,#cover1{position:absolute;top:0;left:0;z-index:100;visibility:hidden;background:#000;opacity:0.3;filter:alpha(opacity=30);}
+
+
+
+.pop_555{position:absolute;top:0;left:0;z-index:2000;width:880px;z-index:1000; display:none;  }
+.pop_555 .pop_555_t{width:880px;height:31px;line-height:31px;display:block;background:url(images/pop_880_t.gif) no-repeat;color:#fff;font-size:14px;}
+.pop_555 .pop_555_t .pop_close{width:18px; height:18px; display:block; margin-top:5px; background:url(images/pop_close.png) no-repeat; cursor:pointer;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../../../css/images/pop_close.png"); _background-image:none; }
+.pop_555 .pop_555_m{width:878px; display:block; border:solid 1px #e1e1e1; border-top:none; padding:10px 0px; background-color:#fff;}
+
+.mr15{ margin-right:15px;}
+.ml15{ margin-left:15px;}
+.mt20{ margin-top:20px;}
+.text_c{ text-align:center;}
+.fl{float:left;}
+.fr{float:right;}
+.fn{float:none;}

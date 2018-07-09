@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!DOCTYPE application PUBLIC
+  "-//Apache Software Foundation//Tapestry Specification 4.1//EN"
+  "http://jakarta.apache.org/tapestry/dtd/Tapestry_4_1.dtd">
+<application name="Tapestry Guide">
+    <meta key="org.apache.tapestry.template-encoding" value="utf-8"/>
+    <meta key="org.apache.tapestry.page-class-packages" value="com.sinovatech.deploypage"/>
+    
+     
+</application>
