@@ -1,0 +1,24 @@
+<!-- 
+ * 名称：Sinoframe MVC XML定义 
+ * 创建: 2012/11/14<br />
+ * 作者:<a herf="mailto:zhouzhiming@sinovatech.com">周志明</a>
+-->
+<!ELEMENT sinoframe-config (encode-setting?,mvcframe-config*,interseptors*) >
+<!ELEMENT encode-setting (encode-rule+) >
+<!ELEMENT encode-setting (encoding,url-pattern) >
+<!ELEMENT encoding (#PCDATA) >
+<!ELEMENT mvcframe-config (frame-name,frame-class,init-params) >
+<!ELEMENT frame-name (#PCDATA) >
+<!ELEMENT frame-class (#PCDATA) >
+<!ELEMENT init-params (init-param*) >
+<!ELEMENT init-param (param-name,param-value) >
+<!ELEMENT param-name (#PCDATA) >
+<!ELEMENT param-value (#PCDATA) >
+<!ELEMENT interseptors (interseptor*) >
+<!ELEMENT interseptor (interseptor-name,interseptor-class,interseptor-type,init-params,interseptor-mapping?) >
+<!ELEMENT interseptor-name (#PCDATA) >
+<!ELEMENT interseptor-class (#PCDATA) >
+<!ELEMENT interseptor-type (#PCDATA) >
+<!ELEMENT interseptor-mapping (url-pattern) >
+<!ELEMENT url-pattern (#PCDATA) >
+

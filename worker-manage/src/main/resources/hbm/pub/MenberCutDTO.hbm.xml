@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pub.menber.model.dto.MenberCutDTO"
+		table="pub_menber_cut">
+		<comment>会员扣款</comment>
+		<id name="id" type="java.lang.String">
+			<column name="ID" length="32" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="menId" type="java.lang.String">
+			<column name="MEN_ID" length="32">
+				<comment>扣款会员ID</comment>
+			</column>
+		</property>
+		<property name="type" type="java.lang.Integer">
+			<column name="TYPE" length="1">
+				<comment>扣款类型（1、保证金扣款；2、功德平摊扣款；3、购物扣款）</comment>
+			</column>
+		</property>
+		<property name="helpMenId" type="java.lang.String">
+			<column name="HELP_MEN_ID" length="32">
+				<comment>扣款会员ID</comment>
+			</column>
+		</property>
+		<property name="price" type="java.math.BigDecimal">
+			<column name="PRICE" length="10">
+				<comment>扣款金额</comment>
+			</column>
+		</property>
+		<property name="createTime" type="java.util.Date">
+			<column name="CREATE_TIME">
+				<comment>扣款时间</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

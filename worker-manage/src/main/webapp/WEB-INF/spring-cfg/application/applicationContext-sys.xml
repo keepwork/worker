@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	
+	
+	<bean id="myBmsRoleDAO" class="com.sinovatech.bms.adm.model.dao.BmsRoleDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="myBmsRoleBPO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.sinovatech.bms.adm.model.bpo.BmsRoleBPO">
+				<property name="myBmsRoleDAO">
+					<ref local="myBmsRoleDAO" />
+				</property>
+				<property name="myBmsRoleFuncDAO">
+					<ref local="myBmsRoleFuncDAO" />
+				</property>
+				<property name="myBmsUserRoleDAO">
+					<ref local="myBmsUserRoleDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="myBmsRoleFacade" class="com.sinovatech.bms.adm.model.facade.BmsRoleFacade">
+		<property name="myBmsRoleBPO">
+			<ref local="myBmsRoleBPO" />
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="myBmsUserDAO" class="com.sinovatech.bms.adm.model.dao.BmsUserDAO"
+		lazy-init="default" autowire="default" dependency-check="default">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="myBmsUserBPO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.sinovatech.bms.adm.model.bpo.BmsUserBPO">
+				<property name="myBmsUserDAO">
+					<ref local="myBmsUserDAO" />
+				</property>
+				<property name="myBmsUserRoleDAO">
+					<ref local="myBmsUserRoleDAO" />
+				</property>
+				<property name="myBmsUserLocationsDAO">
+					<ref local="myBmsUserLocationsDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="myBmsUserFacade" class="com.sinovatech.bms.adm.model.facade.BmsUserFacade">
+		<property name="myBmsUserBPO">
+			<ref local="myBmsUserBPO" />
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="myBmsLocationDAO" class="com.sinovatech.bms.adm.model.dao.BmsLocationDAO"
+		lazy-init="default" autowire="default" dependency-check="default">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="myBmsLocationBPO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.sinovatech.bms.adm.model.bpo.BmsLocationBPO">
+				<property name="myBmsLocationDAO">
+					<ref local="myBmsLocationDAO" />
+				</property>
+				<property name="myBmsUserLocationsDAO">
+					<ref local="myBmsUserLocationsDAO" />
+				</property>
+				<property name="myBmsUserDAO">
+					<ref local="myBmsUserDAO" />
+				</property>
+				<property name="myBmsRoleDAO">
+					<ref local="myBmsRoleDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="myBmsLocationFacade" class="com.sinovatech.bms.adm.model.facade.BmsLocationFacade"
+		lazy-init="default" autowire="default" dependency-check="default">
+		<property name="myBmsLocationBPO">
+			<ref local="myBmsLocationBPO" />
+		</property>
+	</bean>
+	
+	
+	
+	
+	<bean id="myBmsRscFuncDAO" class="com.sinovatech.bms.adm.model.dao.BmsRscFuncDAO"
+		lazy-init="default" autowire="default" dependency-check="default">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="myBmsRscFuncBPO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.sinovatech.bms.adm.model.bpo.BmsRscFuncBPO">
+				<property name="myBmsRscFuncDAO">
+					<ref local="myBmsRscFuncDAO" />
+				</property>
+				<property name="myBmsRoleFuncDAO">
+					<ref local="myBmsRoleFuncDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="myBmsRscFuncFacade" class="com.sinovatech.bms.adm.model.facade.BmsRscFuncFacade"
+		lazy-init="default" autowire="default" dependency-check="default">
+		<property name="myBmsRscFuncBPO">
+			<ref local="myBmsRscFuncBPO" />
+		</property>
+	</bean>
+	
+	
+	
+	
+	<bean id="myBmsUserLocationsDAO" class="com.sinovatech.bms.adm.model.dao.BmsUserLocationsDAO"
+		lazy-init="default" autowire="default" dependency-check="default">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="myBmsUserLocationsBPO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.sinovatech.bms.adm.model.bpo.BmsUserLocationsBPO">
+				<property name="myBmsUserLocationsDAO">
+					<ref local="myBmsUserLocationsDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="myBmsUserLocationsFacade"
+		class="com.sinovatech.bms.adm.model.facade.BmsUserLocationsFacade"
+		lazy-init="default" autowire="default" dependency-check="default">
+		<property name="myBmsUserLocationsBPO">
+			<ref local="myBmsUserLocationsBPO" />
+		</property>
+	</bean>
+	
+	
+	
+	
+	<bean id="myBmsRoleFuncDAO" class="com.sinovatech.bms.adm.model.dao.BmsRoleFuncDAO"
+		lazy-init="default" autowire="default" dependency-check="default">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="myBmsRoleFuncBPO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.sinovatech.bms.adm.model.bpo.BmsRoleFuncBPO">
+				<property name="myBmsRoleFuncDAO">
+					<ref local="myBmsRoleFuncDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="myBmsRoleFuncFacade" class="com.sinovatech.bms.adm.model.facade.BmsRoleFuncFacade"
+		lazy-init="default" autowire="default" dependency-check="default">
+		<property name="myBmsRoleFuncBPO">
+			<ref local="myBmsRoleFuncBPO" />
+		</property>
+	</bean>
+	
+	
+	
+	
+	
+	<bean id="myBmsUserRoleDAO" class="com.sinovatech.bms.adm.model.dao.BmsUserRoleDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="myBmsUserRoleBPO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.sinovatech.bms.adm.model.bpo.BmsUserRoleBPO">
+				<property name="myBmsUserRoleDAO">
+					<ref local="myBmsUserRoleDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="myBmsUserRoleFacade" class="com.sinovatech.bms.adm.model.facade.BmsUserRoleFacade">
+		<property name="myBmsUserRoleBPO">
+			<ref local="myBmsUserRoleBPO" />
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="myBmsLogLoginDAO" class="com.sinovatech.bms.adm.model.dao.BmsLogLoginDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="myBmsLogLoginBPO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.sinovatech.bms.adm.model.bpo.BmsLogLoginBPO">
+				<property name="myBmsLogLoginDAO">
+					<ref local="myBmsLogLoginDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="myBmsLogLoginFacade" class="com.sinovatech.bms.adm.model.facade.BmsLogLoginFacade">
+		<property name="myBmsLogLoginBPO">
+			<ref local="myBmsLogLoginBPO" />
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="myBmsLogOpDAO" class="com.sinovatech.bms.adm.model.dao.BmsLogOpDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="myBmsLogOpBPO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.sinovatech.bms.adm.model.bpo.BmsLogOpBPO">
+				<property name="myBmsLogOpDAO">
+					<ref local="myBmsLogOpDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="myBmsLogOpFacade" class="com.sinovatech.bms.adm.model.facade.BmsLogOpFacade">
+		<property name="myBmsLogOpBPO">
+			<ref local="myBmsLogOpBPO" />
+		</property>
+	</bean>
+
+<!--
+	<bean id="logOperator" class="com.sinovatech.bms.util.LogOperator">
+		<property name="myBmsLogOpFacade">
+			<ref bean="myBmsLogOpFacade" />
+		</property>
+		<property name="myBmsLogLoginFacade">
+			<ref bean="myBmsLogLoginFacade" />
+		</property>
+	</bean>
+	-->
+
+	<bean id="mySqlDAO" class="com.sinovatech.bms.sql.SqlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="myDicUtil" class="com.sinovatech.bms.domain.Dictionary">
+		<property name="sqlDao">
+			<ref bean="mySqlDAO" />
+		</property>
+	</bean>
+	
+	<bean id="myTokenDAO" class="com.weixin.token.dao.TokenDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+</beans>

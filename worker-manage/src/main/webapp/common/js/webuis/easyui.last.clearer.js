@@ -1,0 +1,1 @@
+$.parser.auto=false;$(function(){$.parser.parse(window.document);$.parser.auto=true;});$.fn.panel.defaults=$.extend({},$.fn.panel.defaults,{onBeforeDestroy:function(){var a=$("iframe",this);if(a.length>0){a[0].contentWindow.document.write("");a[0].contentWindow.close();a.remove();if($.browser.msie){CollectGarbage();}}}});

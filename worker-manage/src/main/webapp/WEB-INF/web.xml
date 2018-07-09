@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/spring-cfg/applicationContext-mysql.xml,
+			/WEB-INF/spring-cfg/application/applicationContext*.xml
+		</param-value>
+	</context-param>
+	
+	<!-- 字符集过滤 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>
+			org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+          <param-name>forceEncoding</param-name>
+          <param-value>true</param-value>
+        </init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- weixin access filter -->
+	<filter>
+		<filter-name>WXAccessFilter</filter-name>
+		<filter-class>com.weixin.filter.WXAccessFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>WXAccessFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>WXAccessFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	
+	
+	<!-- app 登录 begin -->
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.rn.servlet.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/login.do</url-pattern>
+	</servlet-mapping>
+	<!-- app 登录 end -->
+	<!-- app 注册 begin -->
+	<servlet>
+		<servlet-name>RegistServlet</servlet-name>
+		<servlet-class>com.rn.servlet.RegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RegistServlet</servlet-name>
+		<url-pattern>/regist.do</url-pattern>
+	</servlet-mapping>
+	<!-- app 注册 end -->
+	<!-- app 获取安装工订单列表 begin -->
+	<servlet>
+		<servlet-name>GetWorkerOrdersServlet</servlet-name>
+		<servlet-class>com.rn.servlet.GetWorkerOrdersServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetWorkerOrdersServlet</servlet-name>
+		<url-pattern>/getWorkerOrders.do</url-pattern>
+	</servlet-mapping>
+	<!-- app 获取安装工订单列表 end -->
+	<!-- app 获取所有待抢订单列表 begin -->
+	<servlet>
+		<servlet-name>GetOrdersServlet</servlet-name>
+		<servlet-class>com.rn.servlet.GetOrdersServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetOrdersServlet</servlet-name>
+		<url-pattern>/getOrders.do</url-pattern>
+	</servlet-mapping>
+	<!-- app 获取所有待抢订单列表表 end -->
+	<!-- app 安装工抢单 begin -->
+	<servlet>
+		<servlet-name>OrderTakeServlet</servlet-name>
+		<servlet-class>com.rn.servlet.OrderTakeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrderTakeServlet</servlet-name>
+		<url-pattern>/takeOrder.do</url-pattern>
+	</servlet-mapping>
+	<!-- app 安装工抢单 end -->
+	<!-- app 确认上门时间 begin -->
+	<servlet>
+		<servlet-name>OrderMakeSureServlet</servlet-name>
+		<servlet-class>com.rn.servlet.OrderMakeSureServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrderMakeSureServlet</servlet-name>
+		<url-pattern>/makeSureTime.do</url-pattern>
+	</servlet-mapping>
+	<!-- app 确认上门时间 end -->
+	<!-- app 订单完成（安装） begin -->
+	<servlet>
+		<servlet-name>WorkInstallServlet</servlet-name>
+		<servlet-class>com.rn.servlet.WorkInstallServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WorkInstallServlet</servlet-name>
+		<url-pattern>/workInstall.do</url-pattern>
+	</servlet-mapping>
+	<!-- app 订单完成（安装） end -->
+	<!-- app 订单完成（测量） begin -->
+	<servlet>
+		<servlet-name>WorkMeasureServlet</servlet-name>
+		<servlet-class>com.rn.servlet.WorkMeasureServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WorkMeasureServlet</servlet-name>
+		<url-pattern>/workMeasure.do</url-pattern>
+	</servlet-mapping>
+	<!-- app 订单完成（测量） end -->
+	<!-- app 订单完成（维修） begin -->
+	<servlet>
+		<servlet-name>WorkRepairServlet</servlet-name>
+		<servlet-class>com.rn.servlet.WorkRepairServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WorkRepairServlet</servlet-name>
+		<url-pattern>/workRepair.do</url-pattern>
+	</servlet-mapping>
+	<!-- app 订单完成（维修） end -->
+	<!-- app 微信客户结单 begin -->
+	<servlet>
+		<servlet-name>OrderEndServlet</servlet-name>
+		<servlet-class>com.rn.servlet.OrderEndServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrderEndServlet</servlet-name>
+		<url-pattern>/endOrder.do</url-pattern>
+	</servlet-mapping>
+	<!-- app 微信客户结单 end -->
+	<!-- app 获取订单详情 begin -->
+	<servlet>
+		<servlet-name>OrderGetDetailsServlet</servlet-name>
+		<servlet-class>com.rn.servlet.OrderGetDetailsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrderGetDetailsServlet</servlet-name>
+		<url-pattern>/getOrderDetails.do</url-pattern>
+	</servlet-mapping>
+	<!-- app 获取订单详情 end -->
+	
+	
+	<!-- app 查询产品一级分类列表 begin -->
+	<servlet>
+		<servlet-name>GetFirstCatesServlet</servlet-name>
+		<servlet-class>com.rn.servlet.GetFirstCatesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetFirstCatesServlet</servlet-name>
+		<url-pattern>/getFirstCates.do</url-pattern>
+	</servlet-mapping>
+	<!-- app 查询产品一级分类列表 end -->
+	<!-- app 查询产品二级分类列表 begin -->
+	<servlet>
+		<servlet-name>GetSecondCatesServlet</servlet-name>
+		<servlet-class>com.rn.servlet.GetSecondCatesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetSecondCatesServlet</servlet-name>
+		<url-pattern>/getSecondCates.do</url-pattern>
+	</servlet-mapping>
+	<!-- app 查询产品二级分类列表 end -->
+	<!-- app 查询配件列表 begin -->
+	<servlet>
+		<servlet-name>GetPartsServlet</servlet-name>
+		<servlet-class>com.rn.servlet.GetPartsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetPartsServlet</servlet-name>
+		<url-pattern>/getParts.do</url-pattern>
+	</servlet-mapping>
+	<!-- app 查询配件列表 end -->
+	
+	
+	
+	
+	<servlet>    
+        <servlet-name>WXInitServlet</servlet-name>    
+        <servlet-class>com.weixin.servlet.WXInitServlet</servlet-class>    
+        <load-on-startup>0</load-on-startup>    
+    </servlet>
+	<servlet-mapping>
+		<servlet-name>WXInitServlet</servlet-name>
+		<url-pattern>/wxinit.do</url-pattern>
+	</servlet-mapping>
+    <servlet>
+	    <servlet-name>WXCheckServlet</servlet-name>
+	    <servlet-class>com.weixin.servlet.WXCheckServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+	    <servlet-name>WXCheckServlet</servlet-name>
+	    <url-pattern>/wxcheck.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+	    <servlet-name>WXIndexServlet</servlet-name>
+	    <servlet-class>com.weixin.servlet.WXIndexServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+	    <servlet-name>WXIndexServlet</servlet-name>
+	    <url-pattern>/indexWap.do</url-pattern>
+    </servlet-mapping>
+    
+
+	<!-- 图形验证码 -->
+	<servlet>
+		<servlet-name>sinoDefaultCaptcha</servlet-name>
+		<servlet-class>
+			com.sinovatech.captcha.web.SinoCaptchaServlet
+		</servlet-class>
+		<init-param>
+			<param-name>configFile</param-name>
+			<param-value>DEFAULT</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>sinoDefaultCaptcha</servlet-name>
+		<url-pattern>/yzmservlet</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	<!-- swfupload 多图片上传 -->
+	<servlet>
+		<servlet-name>UploadProductImagesServlet</servlet-name>
+		<servlet-class>
+			com.shop.good.UploadProductImagesServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UploadProductImagesServlet</servlet-name>
+		<url-pattern>/uploadProductImagesServlet</url-pattern>
+	</servlet-mapping>
+	
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/common/error.jsp</location>
+	</error-page>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>frame</web-resource-name>
+			<description>frame</description>
+			<url-pattern>/*</url-pattern>
+			<http-method>PUT</http-method>
+			<http-method>DELETE</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>OPTIONS</http-method>
+			<http-method>TRACE</http-method>
+		</web-resource-collection>
+		<auth-constraint></auth-constraint>
+	</security-constraint>
+
+	<!-- 
+	<login-config>
+		<auth-method>BASIC</auth-method>
+	</login-config>
+	 -->
+	 
+	
+	<!-- struts dispather -->
+	<filter>
+		<filter-name>SinoMutiDispatcherFilter</filter-name>
+		<filter-class>
+			com.sinovatech.framework.web.dispatcher.SinoMutiStruts1DispatherFilter
+		</filter-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>/WEB-INF/sinoframe-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>autoConfig</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>SinoMutiDispatcherFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+</web-app>

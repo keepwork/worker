@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sinoframe-config SYSTEM "tld/sinoframe-config.dtd">
+<sinoframe-config>
+<!--  
+	<interseptors>
+		<interseptor>
+			<interseptor-name>BmsClientIntegrateIntersepter</interseptor-name>
+			<interseptor-class>
+				com.sinovatech.framework.web.interseptor.login.BmsClientIntegrateIntersepter</interseptor-class>
+			<interseptor-type>PRE</interseptor-type>
+			<interseptor-mapping>
+				<url-pattern>*.jsp</url-pattern>
+			</interseptor-mapping>
+			<interseptor-mapping>
+				<url-pattern>*.do</url-pattern>
+			</interseptor-mapping>
+		</interseptor>
+	</interseptors>
+-->
+	<mvcframe-config>
+		<frame-name>struts1</frame-name>
+		<frame-class>
+			com.sinovatech.framework.integrator.struts1.Struts1ActionServlet
+		</frame-class>
+		<init-params>
+			<init-param>
+				<!-- 和struts1配置类似 -->
+				<param-name>config</param-name>
+				<!-- 示例 /WEB-INF/struts1-cfg/struts-config.xml,/WEB-INF/struts1-cfg/test/struts-config-marketplat-extprop.xml-->
+				<param-value>
+					/WEB-INF/struts-cfg/struts-config.xml,
+					/WEB-INF/struts-cfg/struts-config-sys.xml,
+					/WEB-INF/struts-cfg/struts-config-domain.xml,
+					/WEB-INF/struts-cfg/struts-config-pub.xml,
+					/WEB-INF/struts-cfg/struts-config-shop.xml
+				</param-value>
+			</init-param>
+		</init-params>
+	</mvcframe-config>
+</sinoframe-config>

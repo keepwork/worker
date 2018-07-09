@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+  
+  <!-- ================================================ Form Bean Definitions -->
+  <form-beans>
+  		<form-bean name="TBmsRoleDTO" type="com.sinovatech.bms.adm.model.dto.TBmsRoleDTO" />
+		<form-bean name="TBmsUserDTO" type="com.sinovatech.bms.adm.model.dto.TBmsUserDTO" />
+		<form-bean name="TBmsLocationDTO" type="com.sinovatech.bms.adm.model.dto.TBmsLocationDTO" />
+		<form-bean name="TBmsRscFuncDTO" type="com.sinovatech.bms.adm.model.dto.TBmsRscFuncDTO" />
+		<form-bean name="TBmsUserLocationsDTO" type="com.sinovatech.bms.adm.model.dto.TBmsUserLocationsDTO" />
+		<form-bean name="TBmsRoleFuncDTO" type="com.sinovatech.bms.adm.model.dto.TBmsRoleFuncDTO" />
+		<form-bean name="TBmsUserRoleDTO" type="com.sinovatech.bms.adm.model.dto.TBmsUserRoleDTO" />
+		<form-bean name="TBmsLogOpDTO" type="com.sinovatech.bms.adm.model.dto.TBmsLogOpDTO" />
+		<form-bean name="TBmsLogLoginDTO" type="com.sinovatech.bms.adm.model.dto.TBmsLogLoginDTO" />
+		<form-bean name="FormUPload" type="com.sinovatech.bms.adm.model.dto.UploadsActionForm"></form-bean>
+  </form-beans>
+  
+  <!-- ========================================= Global Exception Definitions -->
+  <global-exceptions/>
+  
+  <!-- =========================================== Global Forward Definitions -->
+  <global-forwards>
+    <forward name="commonMapping" path="/common/msgMapping.jsp" module="/"/>
+  </global-forwards>
+  
+  
+  <!-- =========================================== Action Mapping Definitions -->
+  <action-mappings>
+		
+		<action path="/sys/bmsrole/*" type="com.sinovatech.bms.adm.action.BmsRoleAction"
+			scope="request" parameter="{1}" name="TBmsRoleDTO">
+			<forward name="list" path="/WEB-INF/jsp/role/listBmsRole.jsp" />
+			<forward name="add" path="/WEB-INF/jsp/role/addBmsRole.jsp" />
+			<forward name="edit" path="/WEB-INF/jsp/role/editBmsRole.jsp" />
+			<forward name="view" path="/WEB-INF/jsp/role/viewBmsRole.jsp" />
+			<forward name="inDomainFunc" path="/WEB-INF/jsp/role/showDomainFunc.jsp" />
+			<forward name="inDomainFuncLink" path="/WEB-INF/jsp/role/showDomainFuncLink.jsp" />
+			<forward name="showDicItems" path="/WEB-INF/jsp/role/showDicItems.jsp" />
+			<forward name="doGrant" path="/WEB-INF/jsp/role/bmsrole/showDicItems.do" />
+			<forward name="deleteConfirm" path="/WEB-INF/jsp/role/deleteConfirmBmsRole.jsp" />
+			<forward name="listUserForRole" path="/WEB-INF/jsp/role/listBmsUserRole.jsp" />
+			<forward name="definedRscForRole" path="/WEB-INF/jsp/role/definedRscForRole.jsp" />
+			<forward name="notCheckedUserList" path="/WEB-INF/jsp/role/notCheckedUserListForRole.jsp" />
+		</action>
+
+		<action path="/sys/bmsuser/*" type="com.sinovatech.bms.adm.action.BmsUserAction"
+			scope="request" parameter="{1}" name="TBmsUserDTO">
+			<forward name="showActionUser" path="/WEB-INF/jsp/user/actionUser.jsp" />
+			<forward name="list" path="/WEB-INF/jsp/user/listBmsUser.jsp" />
+			<forward name="add" path="/WEB-INF/jsp/user/addBmsUser.jsp" />
+			<forward name="edit" path="/WEB-INF/jsp/user/editBmsUser.jsp" />
+			<forward name="view" path="/WEB-INF/jsp/user/viewBmsUser.jsp" />
+			<forward name="deleteConfirm" path="/WEB-INF/jsp/user/deleteConfirmBmsUser.jsp" />
+			<forward name="listCanVisitLocation" path="/WEB-INF/jsp/user/commonSelCanVisitLocationList.jsp" />
+			<forward name="beforeChangePass" path="/WEB-INF/jsp/user/changePassWord.jsp" />
+			<forward name="listBmsRole" path="/WEB-INF/jsp/user/listUserRole.jsp" />
+			<forward name="export" path="/WEB-INF/jsp/user/listUserExport.jsp" />
+			<forward name="importUserInit" path="/WEB-INF/jsp/user/importUser.jsp" />
+			<forward name="exportUserInit" path="/WEB-INF/jsp/user/userExport.jsp" />
+			<forward name="errorList" path="/WEB-INF/jsp/user/listFailImport.jsp"></forward>
+		</action>
+		<action path="/sys/importUser/*" type="com.sinovatech.bms.adm.action.BmsUserAction"
+			scope="request" parameter="{1}" name="FormUPload">
+		</action>
+		
+		<action path="/sys/bmslocation/*" type="com.sinovatech.bms.adm.action.BmsLocationAction"
+			scope="request" parameter="{1}" name="TBmsLocationDTO">
+			<forward name="main" path="/WEB-INF/jsp/location/location_index.jsp" />
+			<forward name="list" path="/WEB-INF/jsp/location/listBmsLocation.jsp" />
+			<forward name="add" path="/WEB-INF/jsp/location/addBmsLocation.jsp" />
+			<forward name="edit" path="/WEB-INF/jsp/location/editBmsLocation.jsp" />
+			<forward name="toAddUserPage" path="/WEB-INF/jsp/location/addUserForLocationIdx.jsp" />
+			<forward name="listUsersForSel" path="/WEB-INF/jsp/location/listUsersForLocationSel.jsp" />
+			<forward name="view" path="/WEB-INF/jsp/location/viewBmsLocation.jsp" />
+			<forward name="listUserForSelEx" path="/WEB-INF/jsp/location/addUserForLocationList1.jsp" />
+			<forward name="listSelectedUser" path="/WEB-INF/jsp/location/addUserForLocationList2.jsp" />
+			<forward name="ajaxMapping" path="/WEB-INF/jsp/location/ajaxMapping.jsp" />
+			<forward name="userView" path="/WEB-INF/jsp/location/listBmsLocationView.jsp" />
+			<forward name="view" path="/WEB-INF/jsp/location/viewBmsLocation.jsp" />
+			<forward name="toUserForLocation" path="/WEB-INF/jsp/location/listNotUserToLocation.jsp" />
+			<forward name="deleteConfirm" path="/WEB-INF/jsp/location/deleteConfirmBmsLocation.jsp" />
+		</action>
+		
+		<action path="/sys/bmsrscfunc/*" type="com.sinovatech.bms.adm.action.BmsRscFuncAction"
+			scope="request" parameter="{1}" name="TBmsRscFuncDTO">
+			<forward name="main" path="/WEB-INF/jsp/func/mainBmsRscFunc.jsp" />
+			<forward name="list" path="/WEB-INF/jsp/func/listBmsRscFunc.jsp" />
+			<forward name="add" path="/WEB-INF/jsp/func/addBmsRscFunc.jsp" />
+			<forward name="edit" path="/WEB-INF/jsp/func/editBmsRscFunc.jsp" />
+			<forward name="view" path="/WEB-INF/jsp/func/viewBmsRscFunc.jsp" />
+			<forward name="selFunc" path="/WEB-INF/jsp/func/selRscFunc.jsp" />
+			<forward name="deleteConfirm" path="/WEB-INF/jsp/func/deleteConfirmBmsRscFunc.jsp" />
+			<forward name="exportFunc" path="/WEB-INF/jsp/func/exportFunc.jsp"></forward>
+		</action>
+		
+		<action path="/sys/bmsuserlocations/*"
+			type="com.sinovatech.bms.adm.action.BmsUserLocationsAction" scope="request"
+			parameter="{1}" name="TBmsUserLocationsDTO">
+			<forward name="list" path="/WEB-INF/jsp/userLocation/listBmsUserLocations.jsp" />
+			<forward name="add" path="/WEB-INF/jsp/userLocation/addBmsUserLocations.jsp" />
+			<forward name="edit" path="/WEB-INF/jsp/userLocation/editBmsUserLocations.jsp" />
+			<forward name="view" path="/WEB-INF/jsp/userLocation/viewBmsUserLocations.jsp" />
+			<forward name="deleteConfirm" path="/WEB-INF/jsp/userLocation/deleteConfirmBmsUserLocations.jsp" />
+		</action>
+		
+		<action path="/sys/bmsrolefunc/*" type="com.sinovatech.bms.adm.action.BmsRoleFuncAction"
+			scope="request" parameter="{1}" name="TBmsRoleFuncDTO">
+			<forward name="list" path="/WEB-INF/jsp/roleFunc/listBmsRoleFunc.jsp" />
+			<forward name="add" path="/WEB-INF/jsp/roleFunc/addBmsRoleFunc.jsp" />
+			<forward name="edit" path="/WEB-INF/jsp/roleFunc/editBmsRoleFunc.jsp" />
+			<forward name="view" path="/WEB-INF/jsp/roleFunc/viewBmsRoleFunc.jsp" />
+			<forward name="deleteConfirm" path="/WEB-INF/jsp/roleFunc/deleteConfirmBmsRoleFunc.jsp" />
+		</action>
+		
+		<action path="/sys/bmsuserrole/*" type="com.sinovatech.bms.adm.action.BmsUserRoleAction"
+			scope="request" parameter="{1}" name="TBmsUserRoleDTO">
+			<forward name="list" path="/WEB-INF/jsp/userRole/listBmsUserRole.jsp" />
+			<forward name="add" path="/WEB-INF/jsp/userRole/addBmsUserRole.jsp" />
+			<forward name="edit" path="/WEB-INF/jsp/userRole/editBmsUserRole.jsp" />
+			<forward name="view" path="/WEB-INF/jsp/userRole/viewBmsUserRole.jsp" />
+			<forward name="deleteConfirm" path="/WEB-INF/jsp/userRole/deleteConfirmBmsUserRole.jsp" />
+		</action>
+		
+		<action path="/sys/bmsloglogin/*" type="com.sinovatech.bms.adm.action.BmsLogLoginAction"
+			scope="request" parameter="{1}" name="TBmsLogLoginDTO">
+			<forward name="list" path="/WEB-INF/jsp/log/listBmsLogLogin.jsp" />
+		</action>
+		
+		
+		<action path="/sys/bmslogop/*" type="com.sinovatech.bms.adm.action.BmsLogOpAction"
+			scope="request" parameter="{1}" name="TBmsLogOpDTO">
+			<forward name="list" path="/WEB-INF/jsp/log/listBmsLogOp.jsp" />
+		</action>
+		
+		
+		
+  </action-mappings>
+  
+</struts-config>
