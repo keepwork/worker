@@ -117,7 +117,12 @@ public class OrderFacade {
 		if (!StringUtil.stringVerify(order.getEndTime())) {
 			limit.addFilterProperty(HqlProperty.getCompare("orderTime", order.getEndTime(), null));
 		}
-		
+		if (!StringUtil.stringVerify(order.getMenId())) {
+			limit.addFilterProperty(HqlProperty.getEq("menId",order.getMenId()));
+		}
+		if (!StringUtil.stringVerify(order.getWorkerId())) {
+			limit.addFilterProperty(HqlProperty.getEq("workerId",order.getWorkerId()));
+		}
 		return limit;
 	}
 	

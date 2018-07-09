@@ -125,6 +125,14 @@ public class OrderAction extends BaseAdmAction
 			order.setEndTime(DatePaltUtil.parseDate(endTimeStr,"yyyy-MM-dd HH:mm:ss"));
 			order.setEndTimeStr(endTimeStr);
 		}
+		String menId = request.getParameter("menId");
+		if (!StringUtil.stringVerify(menId)) {
+			order.setMenId(menId);
+		}
+		String workerId = request.getParameter("workerId");
+		if (!StringUtil.stringVerify(workerId)) {
+			order.setWorkerId(workerId);
+		}
 		request.setAttribute("order", order);
 		limit = this.myOrderFacade.dtoFilterProperty(order, limit);
 		limit.setSortProperty("orderTime");
