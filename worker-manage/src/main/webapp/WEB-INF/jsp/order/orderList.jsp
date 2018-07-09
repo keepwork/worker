@@ -190,10 +190,7 @@
 				<ec:column title="下单时间" property="orderTimeStr" filterable="false"></ec:column>
 				<ec:column title="操作" property="EEE" sortable="false"
 					filterable="false" width="28%">
-					<a class="sexybutton" href="#"><span><span>查看</span></span></a>
-					<%--
 					<a class="sexybutton" href="${ctx}/pub/order/beforeView.do?orderId=${m.orderId}"><span><span>查看</span></span></a>
-					--%>
 				</ec:column>
 			</ec:row>
 		</ec:table>
