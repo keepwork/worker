@@ -8,14 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 //import com.pub.menber.model.dao.MenberChargeDAO;
-//
+import com.pub.menber.model.dao.MenberDAO;
 //import com.pub.menber.model.dto.MenberAdvertDTO;
 //import com.pub.menber.model.dto.MenberChargeDTO;
-//
-//import com.pub.menber.model.dto.MenberExitDTO;
-//import com.pub.menber.model.dto.MenberPointDTO;
-import com.pub.menber.model.dao.MenberDAO;
 import com.pub.menber.model.dto.MenberDTO;
+//import com.pub.menber.model.dto.MenberExitDTO;
+import com.pub.menber.model.dto.MenberPointDTO;
 import com.sinovatech.common.exception.AppException;
 import com.sinovatech.common.model.bpo.BpoSupport;
 import com.sinovatech.common.web.limit.LimitInfo;
@@ -38,29 +36,29 @@ public class MenberBPO extends BpoSupport {
 		return myMenberDAO.validateMenber(loginName,password);
 	}
 	
-//	public void saveMenberPoint(MenberPointDTO dto)
-//	{
-//		myMenberDAO.saveMenberPoint(dto);
-//	}
+	public void saveMenberPoint(MenberPointDTO dto)
+	{
+		myMenberDAO.saveMenberPoint(dto);
+	}
 	
 	
 	public String saveTX(MenberDTO dto){
 		myMenberDAO.save(dto);
-//		MenberPointDTO point = new MenberPointDTO();
-//		point.setMenId(dto.getId());
-//		point.setPoint(dto.getPoint());
-//		point.setPointDesc("注册送积分");
-//		point.setCreateTime(new Date());
-//		myMenberDAO.saveMenberPoint(point);
+		MenberPointDTO point = new MenberPointDTO();
+		point.setMenId(dto.getId());
+		point.setPoint(dto.getPoint());
+		point.setPointDesc("注册送积分");
+		point.setCreateTime(new Date());
+		myMenberDAO.saveMenberPoint(point);
 		return dto.getId();
 	}
 
-//	/**
-//	 * 保存充值记录
-//	 * @param men
-//	 * @param price
-//	 */
-//	public void saveRechargeTX(MenberDTO men,BigDecimal price,String squeues) {
+	/**
+	 * 保存充值记录
+	 * @param men
+	 * @param price
+	 */
+	public void saveRechargeTX(MenberDTO men,BigDecimal price,String squeues) {
 //		myMenberDAO.update(men);
 //		MenberChargeDTO charge = new MenberChargeDTO();
 //		charge.setMenId(men.getId());
@@ -68,7 +66,7 @@ public class MenberBPO extends BpoSupport {
 //		charge.setCreateTime(new Date());
 //		charge.setSqueues(squeues);
 //		myMenberChargeDAO.save(charge);
-//	}
+	}
 	
 	
 	public void updateTX(MenberDTO dto) {
@@ -84,15 +82,15 @@ public class MenberBPO extends BpoSupport {
 		myMenberDAO.updateMenberPWBySql(dto);
 	}
 	
-//	public void signTX(MenberDTO dto,int point) {
-//		myMenberDAO.update(dto);
-//		MenberPointDTO p = new MenberPointDTO();
-//		p.setMenId(dto.getId());
-//		p.setPoint(point);
-//		p.setPointDesc("签到送积分");
-//		p.setCreateTime(new Date());
-//    	myMenberDAO.saveMenberPoint(p);
-//	}
+	public void signTX(MenberDTO dto,int point) {
+		myMenberDAO.update(dto);
+		MenberPointDTO p = new MenberPointDTO();
+		p.setMenId(dto.getId());
+		p.setPoint(point);
+		p.setPointDesc("签到送积分");
+		p.setCreateTime(new Date());
+    	myMenberDAO.saveMenberPoint(p);
+	}
 
 	
 	public void saveOrUpdateTX(MenberDTO dto) throws AppException {
@@ -171,7 +169,7 @@ public class MenberBPO extends BpoSupport {
 //	public void saveMenberExitTX(MenberExitDTO dto){
 //		myMenberDAO.saveMenberExit(dto);
 //	}
-	
+//
 	
 	
 	/**

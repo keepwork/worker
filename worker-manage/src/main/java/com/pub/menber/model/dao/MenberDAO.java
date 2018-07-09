@@ -14,9 +14,9 @@ import org.hibernate.Session;
 import org.hibernate.transform.Transformers;
 import org.springframework.orm.hibernate3.HibernateCallback;
 
-import com.pub.menber.model.dto.MenberAdvertDTO;
+//import com.pub.menber.model.dto.MenberAdvertDTO;
 import com.pub.menber.model.dto.MenberDTO;
-import com.pub.menber.model.dto.MenberExitDTO;
+//import com.pub.menber.model.dto.MenberExitDTO;
 import com.pub.menber.model.dto.MenberPointDTO;
 import com.sinovatech.common.model.dao.DaoSupport;
 import com.sinovatech.common.web.limit.LimitInfo;
@@ -224,20 +224,20 @@ public class MenberDAO extends DaoSupport
 	 * 保存退出申请
 	 * @param dto
 	 */
-	public void saveMenberExit(MenberExitDTO dto)
-	{
-		this.getHibernateTemplate().save(dto);
-	}
+//	public void saveMenberExit(MenberExitDTO dto)
+//	{
+//		this.getHibernateTemplate().save(dto);
+//	}
 	
 	/**
 	 * 保存会员点击广告记录
 	 * 
 	 * @param dto
 	 */
-	public void saveMenberAdvert(MenberAdvertDTO dto)
-	{
-		this.getHibernateTemplate().save(dto);
-	}
+//	public void saveMenberAdvert(MenberAdvertDTO dto)
+//	{
+//		this.getHibernateTemplate().save(dto);
+//	}
 	/**
 	 * 检查会员当天是否点击过某广告
 	 * @param menId
@@ -265,7 +265,6 @@ public class MenberDAO extends DaoSupport
 	}
 	/**
 	 * 删除所有会员当天点击广告记录
-	 * @param menId
 	 */
 	@SuppressWarnings("unchecked")
 	public void deleteMenberAdvert()

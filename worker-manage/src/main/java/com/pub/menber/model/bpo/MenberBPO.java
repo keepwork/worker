@@ -6,13 +6,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import com.pub.menber.model.dao.MenberChargeDAO;
+//import com.pub.menber.model.dao.MenberChargeDAO;
 import com.pub.menber.model.dao.MenberDAO;
-import com.pub.menber.model.dto.MenberAdvertDTO;
-import com.pub.menber.model.dto.MenberChargeDTO;
+//import com.pub.menber.model.dto.MenberAdvertDTO;
+//import com.pub.menber.model.dto.MenberChargeDTO;
 import com.pub.menber.model.dto.MenberDTO;
-import com.pub.menber.model.dto.MenberExitDTO;
+//import com.pub.menber.model.dto.MenberExitDTO;
 import com.pub.menber.model.dto.MenberPointDTO;
 import com.sinovatech.common.exception.AppException;
 import com.sinovatech.common.model.bpo.BpoSupport;
@@ -30,7 +29,7 @@ public class MenberBPO extends BpoSupport {
 	
 	private static ICache cache = CacheFactory.newCache();
 	private MenberDAO myMenberDAO;
-	private MenberChargeDAO myMenberChargeDAO;
+//	private MenberChargeDAO myMenberChargeDAO;
 
 	public MenberDTO validateMenber(String loginName, String password) {
 		return myMenberDAO.validateMenber(loginName,password);
@@ -59,13 +58,13 @@ public class MenberBPO extends BpoSupport {
 	 * @param price
 	 */
 	public void saveRechargeTX(MenberDTO men,BigDecimal price,String squeues) {
-		myMenberDAO.update(men);
-		MenberChargeDTO charge = new MenberChargeDTO();
-		charge.setMenId(men.getId());
-		charge.setPrice(price);
-		charge.setCreateTime(new Date());
-		charge.setSqueues(squeues);
-		myMenberChargeDAO.save(charge);
+//		myMenberDAO.update(men);
+//		MenberChargeDTO charge = new MenberChargeDTO();
+//		charge.setMenId(men.getId());
+//		charge.setPrice(price);
+//		charge.setCreateTime(new Date());
+//		charge.setSqueues(squeues);
+//		myMenberChargeDAO.save(charge);
 	}
 	
 	
@@ -161,20 +160,19 @@ public class MenberBPO extends BpoSupport {
 	
 	
 	
-	public void saveMenberAdvertTX(MenberAdvertDTO dto){
-		myMenberDAO.saveMenberAdvert(dto);
-	}
-	
-	
-	public void saveMenberExitTX(MenberExitDTO dto){
-		myMenberDAO.saveMenberExit(dto);
-	}
-	
+//	public void saveMenberAdvertTX(MenberAdvertDTO dto){
+//		myMenberDAO.saveMenberAdvert(dto);
+//	}
+//
+//
+//	public void saveMenberExitTX(MenberExitDTO dto){
+//		myMenberDAO.saveMenberExit(dto);
+//	}
+//
 	
 	
 	/**
 	 * 删除所有会员当天点击广告记录
-	 * @param menId
 	 */
 	public void deleteMenberAdvert()
 	{
@@ -232,12 +230,12 @@ public class MenberBPO extends BpoSupport {
 	public void setMyMenberDAO(MenberDAO myMenberDAO) {
 		this.myMenberDAO = myMenberDAO;
 	}
-	public MenberChargeDAO getMyMenberChargeDAO() {
-		return myMenberChargeDAO;
-	}
-	public void setMyMenberChargeDAO(MenberChargeDAO myMenberChargeDAO) {
-		this.myMenberChargeDAO = myMenberChargeDAO;
-	}
+//	public MenberChargeDAO getMyMenberChargeDAO() {
+//		return myMenberChargeDAO;
+//	}
+//	public void setMyMenberChargeDAO(MenberChargeDAO myMenberChargeDAO) {
+//		this.myMenberChargeDAO = myMenberChargeDAO;
+//	}
 
 	
 

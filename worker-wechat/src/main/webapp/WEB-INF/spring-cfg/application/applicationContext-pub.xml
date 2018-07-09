@@ -1,14 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd"
-	default-autowire="byName" default-lazy-init="false">
-	
-	
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+	   default-autowire="byName" default-lazy-init="false">
+
+	<!-- 文章分类 -->
+	<bean id="myArticleCategoryDAO" class="com.pub.article.model.dao.ArticleCategoryDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="myArticleCategoryBPO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.pub.article.model.bpo.ArticleCategoryBPO">
+				<property name="myArticleCategoryDAO">
+					<ref local="myArticleCategoryDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="myArticleCategoryFacade" class="com.pub.article.model.facade.ArticleCategoryFacade">
+		<property name="myArticleCategoryBPO">
+			<ref local="myArticleCategoryBPO" />
+		</property>
+	</bean>
+	<!-- 文章 -->
+	<bean id="myArticleDAO" class="com.pub.article.model.dao.ArticleDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="myArticleBPO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.pub.article.model.bpo.ArticleBPO">
+				<property name="myArticleDAO">
+					<ref local="myArticleDAO" />
+				</property>
+				<property name="myArticleCategoryDAO">
+					<ref local="myArticleCategoryDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="myArticleFacade" class="com.pub.article.model.facade.ArticleFacade">
+		<property name="myArticleBPO">
+			<ref local="myArticleBPO" />
+		</property>
+	</bean>
+
 	<!-- 会员 -->
 	<bean id="myMenberDAO" class="com.pub.menber.model.dao.MenberDAO">
 		<property name="sessionFactory">
@@ -21,6 +64,11 @@
 				<property name="myMenberDAO">
 					<ref local="myMenberDAO" />
 				</property>
+				<!--
+				<property name="myMenberChargeDAO">
+					<ref local="myMenberChargeDAO" />
+				</property>
+				-->
 			</bean>
 		</property>
 	</bean>
@@ -29,33 +77,90 @@
 			<ref local="myMenberBPO" />
 		</property>
 	</bean>
-	
-		<!-- 订单 -->
-	<bean id="myOrderDAO" class="com.shop.order.model.dao.OrderDAO">
+
+	<!-- 配送地址-->
+	<bean id="myMenberAddrDAO" class="com.pub.menber.model.dao.MenberAddrDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="myOrderBPO" parent="baseTransactionProxy">
+	<bean id="myMenberAddrBPO" parent="baseTransactionProxy">
 		<property name="target">
-			<bean class="com.shop.order.model.bpo.OrderBPO">
-				<property name="myOrderDAO">
-					<ref local="myOrderDAO" />
+			<bean class="com.pub.menber.model.bpo.MenberAddrBPO">
+				<property name="myMenberAddrDAO">
+					<ref local="myMenberAddrDAO" />
 				</property>
 			</bean>
 		</property>
 	</bean>
-	<bean id="myOrderFacade" class="com.shop.order.model.facade.OrderFacade">
-		<property name="myOrderBPO">
-			<ref local="myOrderBPO" />
+	<bean id="myMenberAddrFacade" class="com.pub.menber.model.facade.MenberAddrFacade">
+		<property name="myMenberAddrBPO">
+			<ref local="myMenberAddrBPO" />
 		</property>
 	</bean>
 
-
-	<bean id="myTokenDAO" class="com.weixin.token.dao.TokenDAO">
+	<!-- 会员积分 -->
+	<bean id="myMenberPointDAO" class="com.pub.menber.model.dao.MenberPointDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	
+	<bean id="myMenberPointBPO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.pub.menber.model.bpo.MenberPointBPO">
+				<property name="myMenberPointDAO">
+					<ref local="myMenberPointDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="myMenberPointFacade" class="com.pub.menber.model.facade.MenberPointFacade">
+		<property name="myMenberPointBPO">
+			<ref local="myMenberPointBPO" />
+		</property>
+	</bean>
+
+	<!-- 会员分享记录 -->
+	<bean id="myMenberShareDAO" class="com.pub.menber.model.dao.MenberShareDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="myMenberShareBPO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.pub.menber.model.bpo.MenberShareBPO">
+				<property name="myMenberShareDAO">
+					<ref local="myMenberShareDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="myMenberShareFacade" class="com.pub.menber.model.facade.MenberShareFacade">
+		<property name="myMenberShareBPO">
+			<ref local="myMenberShareBPO" />
+		</property>
+	</bean>
+
+
+	<!-- SEO
+	<bean id="mySeoDAO" class="com.pub.seo.model.dao.SeoDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="mySeoBPO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.pub.seo.model.bpo.SeoBPO">
+				<property name="mySeoDAO">
+					<ref local="mySeoDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="mySeoFacade" class="com.pub.seo.model.facade.SeoFacade">
+		<property name="mySeoBPO">
+			<ref local="mySeoBPO" />
+		</property>
+	</bean>
+	-->
 </beans>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	
+	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 实际上不起作用 -->
+	<bean id="startQuertz" lazy-init="true" autowire="no"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="doEveryDayJob" />
+				<!-- <ref bean="doTest" /> --><!-- 定时任务执行时间读取配置文件,带多节点并发控制 -->
+			</list>
+		</property>
+	</bean>
+
+	
+	<!-- 定时刷新缓存任务 begin -->
+	<bean id="refreshCacheJob" class="com.common.job.RefreshCacheJob"></bean>
+    <bean id="refreshCacheJobTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+        <property name="delay">
+            <value>10000</value><!-- 服务启动后延迟10秒执行第一次 -->
+        </property>    
+        <property name="period">
+            <value>3600000000000000</value>
+        </property>
+        <property name="timerTask">
+            <ref local="refreshCacheJob"/>
+        </property>
+    </bean>
+    <bean id="overTimeFactory" class="org.springframework.scheduling.timer.TimerFactoryBean">
+        <property name="scheduledTimerTasks">
+           <list>
+            <ref local="refreshCacheJobTask"/>
+        </list>
+        </property>
+    </bean> 
+    <!-- 定时刷新缓存任务 end -->
+    
+    
+    
+    
+	<!-- 每天定时刷新缓存任务 begin -->
+	<bean id="everyDayJob" class="com.common.job.EveryDayJob"></bean>
+	<!-- 定义调用对象和调用对象的方法 -->
+	<bean id="everyDayJobTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="everyDayJob" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>doExecute</value>
+		</property>
+	</bean>
+	<!-- 0 0/1 * * * ? 每隔一分钟 -->
+	<!-- 0 0 1 * * ?每日1点起动 -->
+	<bean id="doEveryDayJob" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="everyDayJobTask" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 1 * * ?</value>
+		</property>
+	</bean>
+	<!-- 定时刷新缓存任务 end -->
+	
+	
+	
+	
+	
+	<!-- 定时任务执行时间读取配置文件,带多节点并发控制 begin -->
+	<!-- 
+	<bean id="jobPropConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="10" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:job-cfg.properties</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="testJob" class="com.common.job.TestJob">
+		<property name="myYxActivityFacade">
+			<ref bean="myYxActivityFacade" />
+		</property>
+	</bean>
+	<bean id="testJobTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="testJob" />
+		</property>
+		<property name="targetMethod">
+			<value>doTestTask</value>
+		</property>
+	</bean>
+	<bean id="doTest"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="testJobTask" />
+		</property>
+		<property name="cronExpression">
+			<value>${job-pw_top.expr}</value>
+		</property>
+	</bean>
+	 -->
+	<!-- 定时任务执行时间读取配置文件,带多节点并发控制 end -->
+	
+	
+	
+</beans>

@@ -12,9 +12,9 @@ import com.common.util.date.DateUtil;
 import com.common.util.excel.ExcelBean;
 import com.pub.menber.model.bpo.MenberBPO;
 //import com.pub.menber.model.dto.MenberAdvertDTO;
-//import com.pub.menber.model.dto.MenberExitDTO;
-//import com.pub.menber.model.dto.MenberPointDTO;
 import com.pub.menber.model.dto.MenberDTO;
+//import com.pub.menber.model.dto.MenberExitDTO;
+import com.pub.menber.model.dto.MenberPointDTO;
 import com.sinovatech.common.exception.AppException;
 import com.sinovatech.common.web.limit.LimitInfo;
 
@@ -32,10 +32,10 @@ public class MenberFacade {
 		return myMenberBPO.validateMenber(loginName,password);
 	}
 	
-//	public void saveMenberPoint(MenberPointDTO dto)
-//	{
-//		myMenberBPO.saveMenberPoint(dto);
-//	}
+	public void saveMenberPoint(MenberPointDTO dto)
+	{
+		myMenberBPO.saveMenberPoint(dto);
+	}
 	
 	
 	public String save(MenberDTO dto){
@@ -48,9 +48,9 @@ public class MenberFacade {
 	}
 	
 	
-//	public void saveRecharge(MenberDTO dto,BigDecimal price,String squeues){
-//		myMenberBPO.saveRechargeTX(dto,price,squeues);
-//	}
+	public void saveRecharge(MenberDTO dto,BigDecimal price,String squeues){
+		myMenberBPO.saveRechargeTX(dto,price,squeues);
+	}
 	
 	
 	public void updateMenberBySql(MenberDTO dto){
@@ -61,9 +61,9 @@ public class MenberFacade {
 	}
 	
 	
-//	public void sign(MenberDTO dto,int point){
-//		myMenberBPO.signTX(dto,point);
-//	}
+	public void sign(MenberDTO dto,int point){
+		myMenberBPO.signTX(dto,point);
+	}
 
 	public void saveOrUpdate(MenberDTO dto) throws AppException {
 		myMenberBPO.saveOrUpdateTX(dto);

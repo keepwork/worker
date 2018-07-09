@@ -5,27 +5,24 @@
   
   <!-- ================================================ Form Bean Definitions -->
   <form-beans>
-  		<form-bean name="ArticleCategoryDTO" type="com.pub.article.model.dto.ArticleCategoryDTO" />
-		<form-bean name="ArticleDTO" type="com.pub.article.model.dto.ArticleDTO" />
-		<form-bean name="MessageCategoryDTO" type="com.pub.message.model.dto.MessageCategoryDTO" />
-		<form-bean name="MessageDTO" type="com.pub.message.model.dto.MessageDTO" />
-		<form-bean name="MenberDTO" type="com.pub.menber.model.dto.MenberDTO" />
-		<form-bean name="MenberPointDTO" type="com.pub.menber.model.dto.MenberPointDTO" />
-		<form-bean name="MenberCutDTO" type="com.pub.menber.model.dto.MenberCutDTO" />
-		<form-bean name="MenberCashDTO" type="com.pub.menber.model.dto.MenberCashDTO" />
-		<form-bean name="MenberExitDTO" type="com.pub.menber.model.dto.MenberExitDTO" />
-		<form-bean name="MenberChargeDTO" type="com.pub.menber.model.dto.MenberChargeDTO" />
-		<form-bean name="MenberShareDTO" type="com.pub.menber.model.dto.MenberShareDTO" />
-		<form-bean name="MenberAddrDTO" type="com.pub.menber.model.dto.MenberAddrDTO" />
-		<form-bean name="SeoDTO" type="com.pub.seo.model.dto.SeoDTO" />
-  </form-beans>
-  
-  <!-- ========================================= Global Exception Definitions -->
+	  <form-bean name="ArticleCategoryDTO" type="com.pub.article.model.dto.ArticleCategoryDTO" />
+	  <form-bean name="ArticleDTO" type="com.pub.article.model.dto.ArticleDTO" />
+	  <form-bean name="MenberDTO" type="com.pub.menber.model.dto.MenberDTO" />
+	  <form-bean name="MenberPointDTO" type="com.pub.menber.model.dto.MenberPointDTO" />
+	  <form-bean name="MenberShareDTO" type="com.pub.menber.model.dto.MenberShareDTO" />
+	  <form-bean name="MenberAddrDTO" type="com.pub.menber.model.dto.MenberAddrDTO" />
+
+	  <!--
+      <form-bean name="SeoDTO" type="com.pub.seo.model.dto.SeoDTO" />
+       -->
+</form-beans>
+
+<!-- ========================================= Global Exception Definitions -->
   <global-exceptions/>
   
   <!-- =========================================== Global Forward Definitions -->
   <global-forwards>
-    <forward name="commonMapping" path="/common/msgMapping.jsp" module="/"/>
+    <forward name="commonMapping" path="/common/msgMapping.jsp" module="/" />
   </global-forwards>
   
   
@@ -48,92 +45,19 @@
 			<forward name="add" path="/WEB-INF/jsp/article/articleAdd.jsp" />
 			<forward name="edit" path="/WEB-INF/jsp/article/articleUpdate.jsp" />
 			<forward name="deleteConfirm" path="/WEB-INF/jsp/article/articleDeleteConfirm.jsp" />
-			<!-- front wap -->
-			<forward name="articleList_wap" path="/wap/articleList.jsp" />
-			<forward name="articleDetail_wap" path="/wap/articleDetail.jsp" />
-			<forward name="questionList_wap" path="/wap/questionList.jsp" />
-			<forward name="questionDetail_wap" path="/wap/questionDetail.jsp" />
-			<forward name="aboutUs_wap" path="/wap/aboutUs.jsp" />
-			<!-- front web -->
-			<forward name="articleList_web" path="/web/articleList.jsp" />
-			<forward name="articleDetail_web" path="/web/articleDetail.jsp" />
-			<forward name="questionList_web" path="/web/questionList.jsp" />
-			<forward name="questionDetail_web" path="/web/questionDetail.jsp" />
-			<forward name="aboutUs_web" path="/web/aboutUs.jsp" />
 		</action>
-		
-		
-		
-		<!-- 消息分类 -->
-		<action path="/pub/messageCate/*" type="com.pub.message.action.MessageCategoryAction"
-			scope="request" parameter="{1}" name="MessageCategoryDTO">
-			<forward name="list" path="/WEB-INF/jsp/message/messageCategoryList.jsp" />
-			<forward name="add" path="/WEB-INF/jsp/message/messageCategoryAdd.jsp" />
-			<forward name="edit" path="/WEB-INF/jsp/message/messageCategoryUpdate.jsp" />
-			<forward name="deleteConfirm" path="/WEB-INF/jsp/message/messageCategoryDeleteConfirm.jsp" />
-		</action>
-		<!-- 消息 -->
-		<action path="/pub/message/*" type="com.pub.message.action.MessageAction"
-			scope="request" parameter="{1}" name="MessageDTO">
-			<!-- back -->
-			<forward name="list" path="/WEB-INF/jsp/message/messageList.jsp" />
-			<forward name="add" path="/WEB-INF/jsp/message/messageAdd.jsp" />
-			<forward name="edit" path="/WEB-INF/jsp/message/messageUpdate.jsp" />
-			<forward name="deleteConfirm" path="/WEB-INF/jsp/message/messageDeleteConfirm.jsp" />
-		</action>
-		
-		
-		<!-- 会员 -->
-		<action path="/pub/menber/*" type="com.pub.menber.action.MenberAction"
-			scope="request" parameter="{1}" name="MenberDTO">
-			<!-- back -->
-			<forward name="list" path="/WEB-INF/jsp/menber/menberList.jsp" />
-			<forward name="add" path="/WEB-INF/jsp/menber/menberAdd.jsp" />
-			<forward name="edit" path="/WEB-INF/jsp/menber/menberUpdate.jsp" />
-			<forward name="deleteConfirm" path="/WEB-INF/jsp/menber/menberDeleteConfirm.jsp" />
-			<forward name="pointList" path="/WEB-INF/jsp/menber/pointList.jsp" />
-			<!-- front wap -->
-			<forward name="sign_wap" path="/wap/indexWap.jsp" />
-			<forward name="planDetail_wap" path="/wap/planDetail.jsp" />
-			<forward name="center_wap" path="/wap/userCenter/center.jsp" />
-			<forward name="menberUpdate_wap" path="/wap/userCenter/menberUpdate.jsp" />
-			<forward name="myAccount_wap" path="/wap/userCenter/myAccount.jsp" />
-			<forward name="myInvitation_wap" path="/wap/userCenter/myInvitation.jsp" />
-			<forward name="myInvitationPage1_wap" path="/wap/userCenter/myInvitationPage1.jsp" />
-			<forward name="myInvitationPage2_wap" path="/wap/userCenter/myInvitationPage2.jsp" />
-			<forward name="myInvitationPage2View_wap" path="/wap/userCenter/myInvitationPage2View.jsp" />
-			<forward name="invitation_wap" path="/wap/invitation.jsp" />
-			<forward name="recharge_wap" path="/wap/userCenter/recharge.jsp" />
-			<!-- front web -->
-			<forward name="sign_web" path="/web/index.jsp" />
-			<forward name="planDetail_web" path="/web/planDetail.jsp" />
-			<forward name="center_web" path="/web/userCenter/center.jsp" />
-			<forward name="menberUpdate_web" path="/web/userCenter/menberUpdate.jsp" />
-			<forward name="myAccount_web" path="/web/userCenter/myAccount.jsp" />
-			<forward name="myInvitation_web" path="/web/userCenter/myInvitation.jsp" />
-			<forward name="myInvitationPage1_web" path="/web/userCenter/myInvitationPage1.jsp" />
-			<forward name="myInvitationPage2_web" path="/web/userCenter/myInvitationPage2.jsp" />
-			<forward name="recharge_web" path="/web/userCenter/recharge.jsp" />
-			<forward name="updatePW_web" path="/web/userCenter/updatePW.jsp" />
-		</action>
-		
-		<!-- 会员亲友 -->
-		<action path="/pub/family/*" type="com.pub.menber.action.MenberFamilyAction"
-			scope="request" parameter="{1}" name="MenberDTO">
-			<forward name="list" path="/WEB-INF/jsp/menber/familyList.jsp" />
-			<forward name="add" path="/WEB-INF/jsp/menber/familyAdd.jsp" />
-			<forward name="edit" path="/WEB-INF/jsp/menber/familyUpdate.jsp" />
-			<forward name="deleteConfirm" path="/WEB-INF/jsp/menber/familyDeleteConfirm.jsp" />
-			<!-- front wap -->
-			<forward name="familyList_wap" path="/wap/userCenter/familyList.jsp" />
-			<forward name="familyAddFront_wap" path="/wap/userCenter/familyAdd.jsp" />
-			<forward name="familyEditFront_wap" path="/wap/userCenter/familyUpdate.jsp" />
-			<!-- front web -->
-			<forward name="familyList_web" path="/web/userCenter/familyList.jsp" />
-			<forward name="familyAddFront_web" path="/web/userCenter/familyAdd.jsp" />
-			<forward name="familyEditFront_web" path="/web/userCenter/familyUpdate.jsp" />
-		</action>
-		
+
+	    <!-- 会员 -->
+	    <action path="/pub/menber/*" type="com.pub.menber.action.MenberAction"
+			  scope="request" parameter="{1}" name="MenberDTO">
+		  <!-- back -->
+		  <forward name="list" path="/WEB-INF/jsp/menber/menberList.jsp" />
+		  <forward name="add" path="/WEB-INF/jsp/menber/menberAdd.jsp" />
+		  <forward name="edit" path="/WEB-INF/jsp/menber/menberUpdate.jsp" />
+		  <forward name="deleteConfirm" path="/WEB-INF/jsp/menber/menberDeleteConfirm.jsp" />
+		  <forward name="pointList" path="/WEB-INF/jsp/menber/pointList.jsp" />
+	    </action>
+
 		<!-- 会员地址 -->
 		<action path="/pub/addr/*" type="com.pub.menber.action.MenberAddrAction"
 			scope="request" parameter="{1}" name="MenberAddrDTO">
@@ -142,61 +66,29 @@
 			<forward name="edit" path="/WEB-INF/jsp/menber/addrUpdate.jsp" />
 			<forward name="deleteConfirm" path="/WEB-INF/jsp/menber/addrDeleteConfirm.jsp" />
 		</action>
-		
-		<!-- 会员积分 -->
+
+		<!-- 会员积分-->
 		<action path="/pub/point/*" type="com.pub.menber.action.MenberPointAction"
 			scope="request" parameter="{1}" name="MenberPointDTO">
 			<forward name="list" path="/WEB-INF/jsp/menber/pointList.jsp" />
-			<!-- front wap -->
 			<forward name="pointList_wap" path="/wap/userCenter/myPointList.jsp" />
-			<!-- front web -->
 			<forward name="pointList_web" path="/web/userCenter/myPointList.jsp" />
 		</action>
-		
-		<!-- 会员扣款 -->
-		<action path="/pub/cut/*" type="com.pub.menber.action.MenberCutAction"
-			scope="request" parameter="{1}" name="MenberCutDTO">
-			<forward name="list" path="/WEB-INF/jsp/menber/cutList.jsp" />
-			<!-- front wap -->
-			<forward name="myCutList_wap" path="/wap/userCenter/myCutList.jsp" />
-			<!-- front web -->
-			<forward name="myCutList_web" path="/web/userCenter/myCutList.jsp" />
-		</action>
-		
-		<!-- 会员充值 -->
-		<action path="/pub/charge/*" type="com.pub.menber.action.MenberChargeAction"
-			scope="request" parameter="{1}" name="MenberChargeDTO">
-			<forward name="list" path="/WEB-INF/jsp/menber/chargeList.jsp" />
-			<!-- front wap -->
-			<forward name="myChargeList_wap" path="/wap/userCenter/myChargeList.jsp" />
-			<!-- front web -->
-			<forward name="myChargeList_web" path="/web/userCenter/myChargeList.jsp" />
-		</action>
-		
-		<!-- 会员提现 -->
-		<action path="/pub/cash/*" type="com.pub.menber.action.MenberCashAction"
-			scope="request" parameter="{1}" name="MenberCashDTO">
-			<forward name="listMenberCash" path="/WEB-INF/jsp/menber/menberCashList.jsp" />
-			<forward name="listAll" path="/WEB-INF/jsp/menber/cashList.jsp" />
-		</action>
-		
-		<!-- 会员分享 -->
+
+		<!-- 会员分享-->
 		<action path="/pub/share/*" type="com.pub.menber.action.MenberShareAction"
 			scope="request" parameter="{1}" name="MenberShareDTO">
 			<forward name="list" path="/WEB-INF/jsp/menber/shareList.jsp" />
-			<!-- front wap -->
 			<forward name="shareList_wap" path="/wap/userCenter/myShareList.jsp" />
-			<!-- front web -->
 			<forward name="shareList_web" path="/web/userCenter/myShareList.jsp" />
 		</action>
-		
-		
-		
-		<!-- SEO -->
+
+		<!-- SEO
 		<action path="/pub/seo/*" type="com.pub.seo.action.SeoAction"
 			scope="request" parameter="{1}" name="SeoDTO">
 			<forward name="edit" path="/WEB-INF/jsp/seo/seoUpdate.jsp" />
 		</action>
+		 -->
 		
   </action-mappings>
   

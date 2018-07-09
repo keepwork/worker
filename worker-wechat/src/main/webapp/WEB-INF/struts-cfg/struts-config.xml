@@ -85,11 +85,35 @@
 
 	<!-- =========================================== Action Mapping Definitions -->
 	<action-mappings>
-
-		<action path="/weixin/*" type="com.weixin.action.WeixinAction" scope="request" parameter="{1}" >
-			<forward name="index" path="/wap/index.jsp" />
+		<action path="/sys/login/*"
+			type="com.sinovatech.bms.adm.action.LoginOrOutAction"
+			scope="request" parameter="{1}">
+			<forward name="login" path="/login.jsp" />
+			<forward name="loginSuccess" path="/indexBack.jsp" />
+			<forward name="logOutSuccess" path="/indexBack.jsp" />
+			<forward name="exit" path="/exitUser.jsp" />
+			<forward name="logout" path="/logout.jsp" />
 		</action>
-
+		
+		<action path="/sys/main/*" type="com.sinovatech.bms.adm.action.BmsMainAction"
+			scope="request" parameter="{1}">
+			<forward name="main" path="/sys/main/main_index.jsp"></forward>
+			<forward name="top" path="/sys/main/main_top.jsp" />
+			<forward name="left" path="/sys/main/main_left.jsp" />
+			<forward name="todo" path="/sys/main/main_todo.jsp" />
+			<forward name="loadapp" path="/sys/main/main_loadapp.jsp" />
+		</action>
+		
+		<action path="/sys/bmscommon/*" type="com.sinovatech.bms.adm.action.BmsCommonAction"
+			scope="request" parameter="{1}">
+			<forward name="selLocation" path="/WEB-INF/jsp/common/commonSelLocation.jsp" />
+			<forward name="selCanVisitLocation" path="/WEB-INF/jsp/common/commonSelCanVisitLocation.jsp" />
+			<forward name="listUserForSel" path="/WEB-INF/jsp/common/commonSelUserForRole.jsp">
+			</forward>
+		</action>
+		
+	    <action path="/sys/upolad/*" type="com.common.action.UploadAction" scope="request" parameter="{1}" name="UploadDTO">
+	    </action>
 	   
 	</action-mappings>
 	

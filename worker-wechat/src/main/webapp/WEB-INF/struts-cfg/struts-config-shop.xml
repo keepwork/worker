@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+
+	<!-- ================================================ Form Bean Definitions -->
+	<form-beans>
+		<form-bean name="GoodCategoryDTO" type="com.shop.good.model.dto.GoodCategoryDTO" />
+		<form-bean name="GoodDTO" type="com.shop.good.model.dto.GoodDTO" />
+		<form-bean name="ComplaintDTO" type="com.shop.complaint.model.dto.ComplaintDTO" />
+		<form-bean name="OrderDTO" type="com.shop.order.model.dto.OrderDTO" />
+		<!--
+          <form-bean name="ShopCarDTO" type="com.shop.order.model.dto.ShopCarDTO" />
+          -->
+	</form-beans>
+
+	<!-- ========================================= Global Exception Definitions -->
+	<global-exceptions/>
+
+	<!-- =========================================== Global Forward Definitions -->
+	<global-forwards>
+		<forward name="commonMapping" path="/common/msgMapping.jsp" module="/"/>
+	</global-forwards>
+
+
+	<!-- =========================================== Action Mapping Definitions -->
+	<action-mappings>
+
+		<!-- 商品分类 -->
+		<action path="/pub/goodCate/*" type="com.shop.good.action.GoodCategoryAction"
+				scope="request" parameter="{1}" name="GoodCategoryDTO">
+			<!-- front wap -->
+			<forward name="firstCates_wap" path="/wap/firstCates.jsp" />
+			<forward name="secondCates_wap" path="/wap/secondCates.jsp" />
+		</action>
+		<!-- 商品 -->
+		<action path="/pub/good/*" type="com.shop.good.action.GoodAction"
+				scope="request" parameter="{1}" name="GoodDTO">
+			<!-- front wap -->
+			<forward name="goodList_wap" path="/wap/goodList.jsp" />
+			<forward name="goodDetail_wap" path="/wap/goodDetail.jsp" />
+			<!-- front web -->
+			<forward name="goodList_web" path="/web/goodList.jsp" />
+			<forward name="goodDetail_web" path="/web/goodDetail.jsp" />
+		</action>
+
+
+		<!-- 投诉与建议 -->
+		<action path="/pub/complaint/*" type="com.shop.complaint.action.ComplaintAction"
+				scope="request" parameter="{1}" name="ComplaintDTO">
+			<!-- front wap -->
+			<forward name="complaintList_wap" path="/wap/complaintList.jsp" />
+			<forward name="complaintDetail_wap" path="/wap/complaintDetail.jsp" />
+			<!-- front web -->
+			<forward name="complaintList_web" path="/web/complaintList.jsp" />
+			<forward name="complaintDetail_web" path="/web/complaintDetail.jsp" />
+		</action>
+
+
+		<!-- 订单 -->
+		<action path="/pub/order/*" type="com.shop.order.action.OrderAction"
+				scope="request" parameter="{1}" name="OrderDTO">
+			<!-- front wap -->
+			<forward name="orderWrite_wap" path="/wap/orderWrite.jsp" />
+			<forward name="orderResult_wap" path="/wap/orderResult.jsp" />
+			<forward name="myOrderList_wap" path="/wap/userCenter/myOrderList.jsp" />
+			<forward name="myOrderView_wap" path="/wap/userCenter/myOrderView.jsp" />
+			<!-- front web -->
+			<forward name="orderWrite_web" path="/web/orderWrite.jsp" />
+			<forward name="orderResult_web" path="/web/orderResult.jsp" />
+			<forward name="myOrderList_web" path="/web/userCenter/myOrderList.jsp" />
+			<forward name="myOrderView_web" path="/web/userCenter/myOrderView.jsp" />
+		</action>
+
+
+		<!-- 购物车
+		<action path="/pub/shopcar/*" type="com.shop.order.action.ShopCarAction"
+			scope="request" parameter="{1}" name="ShopCarDTO">
+			<forward name="shopcar_wap" path="/wap/shopcar.jsp" />
+			<forward name="shopcar_web" path="/web/shopcar.jsp" />
+		</action>
+		-->
+
+	</action-mappings>
+
+</struts-config>

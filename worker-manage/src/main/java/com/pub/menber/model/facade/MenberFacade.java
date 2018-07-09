@@ -11,9 +11,9 @@ import java.util.Map;
 import com.common.util.date.DateUtil;
 import com.common.util.excel.ExcelBean;
 import com.pub.menber.model.bpo.MenberBPO;
-import com.pub.menber.model.dto.MenberAdvertDTO;
+//import com.pub.menber.model.dto.MenberAdvertDTO;
 import com.pub.menber.model.dto.MenberDTO;
-import com.pub.menber.model.dto.MenberExitDTO;
+//import com.pub.menber.model.dto.MenberExitDTO;
 import com.pub.menber.model.dto.MenberPointDTO;
 import com.sinovatech.common.exception.AppException;
 import com.sinovatech.common.web.limit.LimitInfo;
@@ -170,13 +170,13 @@ public class MenberFacade {
 		return myMenberBPO.checkAdvertClick(menId,advertId);
 	}
 	
-	public void saveMenberAdvert(MenberAdvertDTO dto){
-		myMenberBPO.saveMenberAdvertTX(dto);
-	}
-	
-	public void saveMenberExit(MenberExitDTO dto){
-		myMenberBPO.saveMenberExitTX(dto);
-	}
+//	public void saveMenberAdvert(MenberAdvertDTO dto){
+//		myMenberBPO.saveMenberAdvertTX(dto);
+//	}
+//
+//	public void saveMenberExit(MenberExitDTO dto){
+//		myMenberBPO.saveMenberExitTX(dto);
+//	}
 	
 	public MenberBPO getMyMenberBPO() {
 		return myMenberBPO;

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+
+	<!-- ================================================ Form Bean Definitions -->
+	<form-beans>
+		<form-bean name="ArticleCategoryDTO" type="com.pub.article.model.dto.ArticleCategoryDTO" />
+		<form-bean name="ArticleDTO" type="com.pub.article.model.dto.ArticleDTO" />
+		<form-bean name="MenberDTO" type="com.pub.menber.model.dto.MenberDTO" />
+		<form-bean name="MenberPointDTO" type="com.pub.menber.model.dto.MenberPointDTO" />
+		<form-bean name="MenberShareDTO" type="com.pub.menber.model.dto.MenberShareDTO" />
+		<form-bean name="MenberAddrDTO" type="com.pub.menber.model.dto.MenberAddrDTO" />
+
+		<!--
+        <form-bean name="SeoDTO" type="com.pub.seo.model.dto.SeoDTO" />
+         -->
+	</form-beans>
+
+	<!-- ========================================= Global Exception Definitions -->
+	<global-exceptions/>
+
+	<!-- =========================================== Global Forward Definitions -->
+	<global-forwards>
+		<forward name="commonMapping" path="/common/msgMapping.jsp" module="/" />
+	</global-forwards>
+
+
+	<!-- =========================================== Action Mapping Definitions -->
+	<action-mappings>
+
+		<!-- 文章分类 -->
+		<action path="/pub/articleCate/*" type="com.pub.article.action.ArticleCategoryAction"
+				scope="request" parameter="{1}" name="ArticleCategoryDTO">
+			<forward name="list" path="/WEB-INF/jsp/article/articleCategoryList.jsp" />
+			<forward name="add" path="/WEB-INF/jsp/article/articleCategoryAdd.jsp" />
+			<forward name="edit" path="/WEB-INF/jsp/article/articleCategoryUpdate.jsp" />
+			<forward name="deleteConfirm" path="/WEB-INF/jsp/article/articleCategoryDeleteConfirm.jsp" />
+		</action>
+		<!-- 文章 -->
+		<action path="/pub/article/*" type="com.pub.article.action.ArticleAction"
+				scope="request" parameter="{1}" name="ArticleDTO">
+			<!-- back -->
+			<forward name="list" path="/WEB-INF/jsp/article/articleList.jsp" />
+			<forward name="add" path="/WEB-INF/jsp/article/articleAdd.jsp" />
+			<forward name="edit" path="/WEB-INF/jsp/article/articleUpdate.jsp" />
+			<forward name="deleteConfirm" path="/WEB-INF/jsp/article/articleDeleteConfirm.jsp" />
+		</action>
+
+		<!-- 会员 -->
+		<action path="/pub/menber/*" type="com.pub.menber.action.MenberAction"
+				scope="request" parameter="{1}" name="MenberDTO">
+			<!-- back -->
+			<forward name="list" path="/WEB-INF/jsp/menber/menberList.jsp" />
+			<forward name="add" path="/WEB-INF/jsp/menber/menberAdd.jsp" />
+			<forward name="edit" path="/WEB-INF/jsp/menber/menberUpdate.jsp" />
+			<forward name="deleteConfirm" path="/WEB-INF/jsp/menber/menberDeleteConfirm.jsp" />
+			<forward name="pointList" path="/WEB-INF/jsp/menber/pointList.jsp" />
+		</action>
+
+		<!-- 会员地址 -->
+		<action path="/pub/addr/*" type="com.pub.menber.action.MenberAddrAction"
+				scope="request" parameter="{1}" name="MenberAddrDTO">
+			<forward name="list" path="/WEB-INF/jsp/menber/addrList.jsp" />
+			<forward name="add" path="/WEB-INF/jsp/menber/addrAdd.jsp" />
+			<forward name="edit" path="/WEB-INF/jsp/menber/addrUpdate.jsp" />
+			<forward name="deleteConfirm" path="/WEB-INF/jsp/menber/addrDeleteConfirm.jsp" />
+		</action>
+
+		<!-- 会员积分-->
+		<action path="/pub/point/*" type="com.pub.menber.action.MenberPointAction"
+				scope="request" parameter="{1}" name="MenberPointDTO">
+			<forward name="list" path="/WEB-INF/jsp/menber/pointList.jsp" />
+			<forward name="pointList_wap" path="/wap/userCenter/myPointList.jsp" />
+			<forward name="pointList_web" path="/web/userCenter/myPointList.jsp" />
+		</action>
+
+		<!-- 会员分享-->
+		<action path="/pub/share/*" type="com.pub.menber.action.MenberShareAction"
+				scope="request" parameter="{1}" name="MenberShareDTO">
+			<forward name="list" path="/WEB-INF/jsp/menber/shareList.jsp" />
+			<forward name="shareList_wap" path="/wap/userCenter/myShareList.jsp" />
+			<forward name="shareList_web" path="/web/userCenter/myShareList.jsp" />
+		</action>
+
+		<!-- SEO
+		<action path="/pub/seo/*" type="com.pub.seo.action.SeoAction"
+			scope="request" parameter="{1}" name="SeoDTO">
+			<forward name="edit" path="/WEB-INF/jsp/seo/seoUpdate.jsp" />
+		</action>
+		 -->
+
+	</action-mappings>
+
+</struts-config>

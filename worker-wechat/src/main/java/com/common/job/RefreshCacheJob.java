@@ -24,14 +24,14 @@ public class RefreshCacheJob extends TimerTask{
 	public void run() {
 //		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //		log.info("服务器重启定时任务-->刷新缓存.........开始时间=" + sdf.format(new Date()));
-		executeOperate();
+		//executeOperate();
 //		log.info("服务器重启定时任务-->刷新缓存.........结束时间=" + sdf.format(new Date()));
 	}
 	
 	public void executeOperate()
 	{
 		//刷新缓存（将字典表信息放入缓存中）
-		myBmsDomainBPO.refreshCache();
+		//myBmsDomainBPO.refreshCache();
 		
 		//将当天操作日志入库
 //		myBmsLogOpFacade.importTodayLogs();

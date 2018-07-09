@@ -94,30 +94,7 @@
 			<ref local="myOrderItemBPO" />
 		</property>
 	</bean>
-	
-	
-	<!-- 购物车 -->
-	<bean id="myShopCarDAO" class="com.shop.order.model.dao.ShopCarDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>
-	<bean id="myShopCarBPO" parent="baseTransactionProxy">
-		<property name="target">
-			<bean class="com.shop.order.model.bpo.ShopCarBPO">
-				<property name="myShopCarDAO">
-					<ref local="myShopCarDAO" />
-				</property>
-			</bean>
-		</property>
-	</bean>
-	<bean id="myShopCarFacade" class="com.shop.order.model.facade.ShopCarFacade">
-		<property name="myShopCarBPO">
-			<ref local="myShopCarBPO" />
-		</property>
-	</bean>
-	
-	
+
 	<!-- 投诉与建议 -->
 	<bean id="myComplaintDAO" class="com.shop.complaint.model.dao.ComplaintDAO">
 		<property name="sessionFactory">

@@ -9,7 +9,9 @@
 		<form-bean name="GoodDTO" type="com.shop.good.model.dto.GoodDTO" />
 		<form-bean name="ComplaintDTO" type="com.shop.complaint.model.dto.ComplaintDTO" />
 		<form-bean name="OrderDTO" type="com.shop.order.model.dto.OrderDTO" />
+	  <!--
 		<form-bean name="ShopCarDTO" type="com.shop.order.model.dto.ShopCarDTO" />
+		-->
   </form-beans>
   
   <!-- ========================================= Global Exception Definitions -->
@@ -32,9 +34,6 @@
 			<forward name="add" path="/WEB-INF/jsp/good/goodCategoryAdd.jsp" />
 			<forward name="edit" path="/WEB-INF/jsp/good/goodCategoryUpdate.jsp" />
 			<forward name="deleteConfirm" path="/WEB-INF/jsp/good/goodCategoryDeleteConfirm.jsp" />
-			<!-- front wap -->
-			<forward name="firstCates_wap" path="/wap/firstCates.jsp" />
-			<forward name="secondCates_wap" path="/wap/secondCates.jsp" />
 		</action>
 		<!-- 商品 -->
 		<action path="/pub/good/*" type="com.shop.good.action.GoodAction"
@@ -44,12 +43,6 @@
 			<forward name="add" path="/WEB-INF/jsp/good/goodAdd.jsp" />
 			<forward name="edit" path="/WEB-INF/jsp/good/goodUpdate.jsp" />
 			<forward name="deleteConfirm" path="/WEB-INF/jsp/good/goodDeleteConfirm.jsp" />
-			<!-- front wap -->
-			<forward name="goodList_wap" path="/wap/goodList.jsp" />
-			<forward name="goodDetail_wap" path="/wap/goodDetail.jsp" />
-			<!-- front web -->
-			<forward name="goodList_web" path="/web/goodList.jsp" />
-			<forward name="goodDetail_web" path="/web/goodDetail.jsp" />
 		</action>
 		
 		
@@ -61,12 +54,6 @@
 			<forward name="add" path="/WEB-INF/jsp/complaint/complaintAdd.jsp" />
 			<forward name="edit" path="/WEB-INF/jsp/complaint/complaintUpdate.jsp" />
 			<forward name="deleteConfirm" path="/WEB-INF/jsp/complaint/complaintDeleteConfirm.jsp" />
-			<!-- front wap -->
-			<forward name="complaintList_wap" path="/wap/complaintList.jsp" />
-			<forward name="complaintDetail_wap" path="/wap/complaintDetail.jsp" />
-			<!-- front web -->
-			<forward name="complaintList_web" path="/web/complaintList.jsp" />
-			<forward name="complaintDetail_web" path="/web/complaintDetail.jsp" />
 		</action>
 		
 		
@@ -77,28 +64,8 @@
 			<forward name="list" path="/WEB-INF/jsp/order/orderList.jsp" />
 			<forward name="view" path="/WEB-INF/jsp/order/orderView.jsp" />
 			<forward name="addExpInfo" path="/WEB-INF/jsp/order/addExpInfo.jsp" />
-			<!-- front wap -->
-			<forward name="orderWrite_wap" path="/wap/orderWrite.jsp" />
-			<forward name="orderResult_wap" path="/wap/orderResult.jsp" />
-			<forward name="myOrderList_wap" path="/wap/userCenter/myOrderList.jsp" />
-			<forward name="myOrderView_wap" path="/wap/userCenter/myOrderView.jsp" />
-			<!-- front web -->
-			<forward name="orderWrite_web" path="/web/orderWrite.jsp" />
-			<forward name="orderResult_web" path="/web/orderResult.jsp" />
-			<forward name="myOrderList_web" path="/web/userCenter/myOrderList.jsp" />
-			<forward name="myOrderView_web" path="/web/userCenter/myOrderView.jsp" />
 		</action>
-		
-		
-		<!-- 购物车 -->
-		<action path="/pub/shopcar/*" type="com.shop.order.action.ShopCarAction"
-			scope="request" parameter="{1}" name="ShopCarDTO">
-			<!-- front wap -->
-			<forward name="shopcar_wap" path="/wap/shopcar.jsp" />
-			<!-- front web -->
-			<forward name="shopcar_web" path="/web/shopcar.jsp" />
-		</action>
-		
+
   </action-mappings>
   
 </struts-config>
