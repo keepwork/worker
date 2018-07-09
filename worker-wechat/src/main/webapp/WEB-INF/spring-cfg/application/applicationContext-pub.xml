@@ -50,5 +50,12 @@
 			<ref local="myOrderBPO" />
 		</property>
 	</bean>
+
+
+	<bean id="myTokenDAO" class="com.weixin.token.dao.TokenDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 	
 </beans>
