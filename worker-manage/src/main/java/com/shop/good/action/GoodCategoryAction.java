@@ -26,7 +26,6 @@ import com.sinovatech.common.web.action.CommonMapping;
 import com.sinovatech.common.web.limit.ExLimitUtil;
 import com.sinovatech.common.web.limit.ILimitUtil;
 import com.sinovatech.common.web.limit.LimitInfo;
-import com.weixin.util.ServletUtil;
 
 /**
  * 商品分类管理
