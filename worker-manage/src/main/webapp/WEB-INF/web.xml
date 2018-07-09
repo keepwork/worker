@@ -33,21 +33,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-	<!-- weixin access filter -->
-	<filter>
-		<filter-name>WXAccessFilter</filter-name>
-		<filter-class>com.weixin.filter.WXAccessFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>WXAccessFilter</filter-name>
-		<url-pattern>*.do</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>WXAccessFilter</filter-name>
-		<url-pattern>*.jsp</url-pattern>
-	</filter-mapping>
-	
-	
 	<!-- app 登录 begin -->
 	<servlet>
 		<servlet-name>LoginServlet</servlet-name>
@@ -191,35 +176,6 @@
 	</servlet-mapping>
 	<!-- app 查询配件列表 end -->
 	
-	
-	
-	
-	<servlet>    
-        <servlet-name>WXInitServlet</servlet-name>    
-        <servlet-class>com.weixin.servlet.WXInitServlet</servlet-class>    
-        <load-on-startup>0</load-on-startup>    
-    </servlet>
-	<servlet-mapping>
-		<servlet-name>WXInitServlet</servlet-name>
-		<url-pattern>/wxinit.do</url-pattern>
-	</servlet-mapping>
-    <servlet>
-	    <servlet-name>WXCheckServlet</servlet-name>
-	    <servlet-class>com.weixin.servlet.WXCheckServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-	    <servlet-name>WXCheckServlet</servlet-name>
-	    <url-pattern>/wxcheck.do</url-pattern>
-    </servlet-mapping>
-    <servlet>
-	    <servlet-name>WXIndexServlet</servlet-name>
-	    <servlet-class>com.weixin.servlet.WXIndexServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-	    <servlet-name>WXIndexServlet</servlet-name>
-	    <url-pattern>/indexWap.do</url-pattern>
-    </servlet-mapping>
-    
 
 	<!-- 图形验证码 -->
 	<servlet>
