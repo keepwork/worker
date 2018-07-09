@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="GBK"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
 	<class name="com.sinovatech.bms.adm.model.dto.TBmsUserLocationsDTO"
 		table="sys_user_locations">
-		<comment>ÓÃ»§¿É·ÃÎÊÇøÓò</comment>
+		<comment>ç”¨æˆ·å¯è®¿é—®åŒºåŸŸ</comment>
 		<id name="id" type="java.lang.String">
 			<column name="ID" length="32" />
 			<generator class="uuid.hex" />
@@ -13,7 +13,7 @@
 		
 		<property name="bmsStatus" type="java.lang.String">
 			<column name="BMS_STATUS" length="1">
-				<comment>×´Ì¬£º1Õý³££¬0É¾³ý</comment>
+				<comment>çŠ¶æ€ï¼š1æ­£å¸¸ï¼Œ0åˆ é™¤</comment>
 			</column>
 		</property>
 		
@@ -21,7 +21,7 @@
 			class="com.sinovatech.bms.adm.model.dto.TBmsLocationDTO"
 			fetch="select">
 			<column name="LOCATIONID" length="32">
-				<comment>ÇøÓò±àºÅ</comment>
+				<comment>åŒºåŸŸç¼–å·</comment>
 			</column>
 		</many-to-one>
 
@@ -29,7 +29,7 @@
 			class="com.sinovatech.bms.adm.model.dto.TBmsUserDTO"
 			fetch="select">
 			<column name="USERID" length="32">
-				<comment>ÓÃ»§±àºÅ</comment>
+				<comment>ç”¨æˆ·ç¼–å·</comment>
 			</column>
 		</many-to-one>
 

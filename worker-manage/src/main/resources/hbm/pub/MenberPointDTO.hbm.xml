@@ -1,33 +1,33 @@
-<?xml version="1.0" encoding="GBK"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
 	<class name="com.pub.menber.model.dto.MenberPointDTO"
 		table="pub_menber_point">
-		<comment>会员积分</comment>
+		<comment>浼氬憳绉垎</comment>
 		<id name="id" type="java.lang.String">
 			<column name="ID" length="32" />
 			<generator class="uuid.hex" />
 		</id>
 		<property name="menId" type="java.lang.String">
 			<column name="MEN_ID" length="32">
-				<comment>会员编号</comment>
+				<comment>浼氬憳缂栧彿</comment>
 			</column>
 		</property>
 		<property name="point" type="java.lang.Integer">
 			<column name="POINT" length="10">
-				<comment>本次积分</comment>
+				<comment>鏈绉垎</comment>
 			</column>
 		</property>
 		<property name="pointDesc" type="java.lang.String">
 			<column name="POINT_DESC" length="300">
-				<comment>本次积分描述</comment>
+				<comment>鏈绉垎鎻忚堪</comment>
 			</column>
 		</property>
 		<property name="createTime" type="java.util.Date">
 			<column name="CREATE_TIME">
-				<comment>积分时间</comment>
+				<comment>绉垎鏃堕棿</comment>
 			</column>
 		</property>
 	</class>

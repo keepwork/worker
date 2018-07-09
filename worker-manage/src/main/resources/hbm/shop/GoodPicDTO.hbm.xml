@@ -1,28 +1,28 @@
-<?xml version="1.0" encoding="GBK"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
 	<class name="com.shop.good.model.dto.GoodPicDTO"
 		table="pub_good_pic">
-		<comment>商品图片关联表</comment>
+		<comment>鍟嗗搧鍥剧墖鍏宠仈琛�</comment>
 		<id name="id" type="java.lang.String">
 			<column name="ID" length="32" />
 			<generator class="uuid.hex" />
 		</id>
 		<property name="goodId" type="java.lang.String">
 			<column name="GOOD_ID" length="100">
-				<comment>菜品分类编号</comment>
+				<comment>鑿滃搧鍒嗙被缂栧彿</comment>
 			</column>
 		</property>
 		<property name="pic" type="java.lang.String">
 			<column name="PIC" length="200">
-				<comment>商品图片</comment>
+				<comment>鍟嗗搧鍥剧墖</comment>
 			</column>
 		</property>
 		<property name="orderNum" type="java.lang.String">
 			<column name="ORDER_NUM" length="100">
-				<comment>显示排序</comment>
+				<comment>鏄剧ず鎺掑簭</comment>
 			</column>
 		</property>
 	</class>

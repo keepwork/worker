@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="GBK"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
 	<class name="com.pub.menber.model.dto.MenberAdvertDTO"
 		table="pub_menber_advert">
-		<comment>会员点击广告记录（只记录当天数据）</comment>
+		<comment>浼氬憳鐐瑰嚮骞垮憡璁板綍锛堝彧璁板綍褰撳ぉ鏁版嵁锛�</comment>
 		<id name="id" type="java.lang.String">
 			<column name="ID" length="32" />
 			<generator class="uuid.hex" />
 		</id>
 		<property name="menId" type="java.lang.String">
 			<column name="MEN_ID" length="32">
-				<comment>会员id</comment>
+				<comment>浼氬憳id</comment>
 			</column>
 		</property>
 		<property name="adId" type="java.lang.String">
 			<column name="AD_ID" length="32">
-				<comment>广告ID</comment>
+				<comment>骞垮憡ID</comment>
 			</column>
 		</property>
 	</class>

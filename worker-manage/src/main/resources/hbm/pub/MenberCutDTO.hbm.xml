@@ -1,38 +1,38 @@
-<?xml version="1.0" encoding="GBK"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
 	<class name="com.pub.menber.model.dto.MenberCutDTO"
 		table="pub_menber_cut">
-		<comment>会员扣款</comment>
+		<comment>浼氬憳鎵ｆ</comment>
 		<id name="id" type="java.lang.String">
 			<column name="ID" length="32" />
 			<generator class="uuid.hex" />
 		</id>
 		<property name="menId" type="java.lang.String">
 			<column name="MEN_ID" length="32">
-				<comment>扣款会员ID</comment>
+				<comment>鎵ｆ浼氬憳ID</comment>
 			</column>
 		</property>
 		<property name="type" type="java.lang.Integer">
 			<column name="TYPE" length="1">
-				<comment>扣款类型（1、保证金扣款；2、功德平摊扣款；3、购物扣款）</comment>
+				<comment>鎵ｆ绫诲瀷锛�1銆佷繚璇侀噾鎵ｆ锛�2銆佸姛寰峰钩鎽婃墸娆撅紱3銆佽喘鐗╂墸娆撅級</comment>
 			</column>
 		</property>
 		<property name="helpMenId" type="java.lang.String">
 			<column name="HELP_MEN_ID" length="32">
-				<comment>扣款会员ID</comment>
+				<comment>鎵ｆ浼氬憳ID</comment>
 			</column>
 		</property>
 		<property name="price" type="java.math.BigDecimal">
 			<column name="PRICE" length="10">
-				<comment>扣款金额</comment>
+				<comment>鎵ｆ閲戦</comment>
 			</column>
 		</property>
 		<property name="createTime" type="java.util.Date">
 			<column name="CREATE_TIME">
-				<comment>扣款时间</comment>
+				<comment>鎵ｆ鏃堕棿</comment>
 			</column>
 		</property>
 	</class>

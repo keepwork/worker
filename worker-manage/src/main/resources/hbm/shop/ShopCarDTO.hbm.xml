@@ -1,78 +1,78 @@
-<?xml version="1.0" encoding="GBK"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
 	<class name="com.shop.order.model.dto.ShopCarDTO"
 		table="pub_shop_car">
-		<comment>¹ºÎï³µ</comment>
+		<comment>è´­ç‰©è½¦</comment>
 		<id name="id" type="java.lang.String">
 			<column name="ID" length="32" />
 			<generator class="uuid.hex" />
 		</id>
 		<property name="menId" type="java.lang.String">
 			<column name="MEN_ID" length="32">
-				<comment>»áÔ±id</comment>
+				<comment>ä¼šå‘˜id</comment>
 			</column>
 		</property>
 		<property name="openId" type="java.lang.String">
 			<column name="OPEN_ID" length="32">
-				<comment>Î¢ÐÅID</comment>
+				<comment>å¾®ä¿¡ID</comment>
 			</column>
 		</property>
 		<property name="goodId" type="java.lang.String">
 			<column name="GOOD_ID" length="32">
-				<comment>ÉÌÆ·±àºÅ</comment>
+				<comment>å•†å“ç¼–å·</comment>
 			</column>
 		</property>
 		<property name="goodName" type="java.lang.String">
 			<column name="GOOD_NAME" length="300">
-				<comment>ÉÌÆ·Ãû³Æ</comment>
+				<comment>å•†å“åç§°</comment>
 			</column>
 		</property>
 		<property name="goodPicture" type="java.lang.String">
 			<column name="GOOD_PICTURE" length="300">
-				<comment>ÉÌÆ·Í¼Æ¬</comment>
+				<comment>å•†å“å›¾ç‰‡</comment>
 			</column>
 		</property>
 		<property name="price" type="java.math.BigDecimal">
 			<column name="PRICE" length="10">
-				<comment>×Ü½ð¶î</comment>
+				<comment>æ€»é‡‘é¢</comment>
 			</column>
 		</property>
 		<property name="totalPrice" type="java.math.BigDecimal">
 			<column name="TOTAL_PRICE" length="10">
-				<comment>×Ü½ð¶î</comment>
+				<comment>æ€»é‡‘é¢</comment>
 			</column>
 		</property>
 		<property name="priceShip" type="java.math.BigDecimal">
 			<column name="PRICE_SHIP" length="10">
-				<comment>ÔË·Ñ</comment>
+				<comment>è¿è´¹</comment>
 			</column>
 		</property>
 		<property name="point" type="java.lang.Integer">
 			<column name="POINT" length="10">
-				<comment>»ý·Ö</comment>
+				<comment>ç§¯åˆ†</comment>
 			</column>
 		</property>
 		<property name="totalPoint" type="java.lang.Integer">
 			<column name="TOTAL_POINT" length="10">
-				<comment>×Ü»ý·Ö</comment>
+				<comment>æ€»ç§¯åˆ†</comment>
 			</column>
 		</property>
 		<property name="amount" type="java.lang.Integer">
 			<column name="AMOUNT" length="10">
-				<comment>ÊýÁ¿</comment>
+				<comment>æ•°é‡</comment>
 			</column>
 		</property>
 		<property name="orderType" type="java.lang.String">
 			<column name="ORDER_TYPE" length="10">
-				<comment>¶©µ¥ÀàÐÍ£¨1¡¢Î¢ÐÅ¶©µ¥£»2¡¢ÍøÕ¾¶©µ¥£©</comment>
+				<comment>è®¢å•ç±»åž‹ï¼ˆ1ã€å¾®ä¿¡è®¢å•ï¼›2ã€ç½‘ç«™è®¢å•ï¼‰</comment>
 			</column>
 		</property>
 		<property name="createTime" type="java.util.Date">
 			<column name="CREATE_TIME">
-				<comment>¼ÓÈëÊ±¼ä</comment>
+				<comment>åŠ å…¥æ—¶é—´</comment>
 			</column>
 		</property>
 	</class>

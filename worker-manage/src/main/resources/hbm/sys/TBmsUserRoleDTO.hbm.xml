@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="GBK"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
 	<class  name="com.sinovatech.bms.adm.model.dto.TBmsUserRoleDTO"  table="sys_user_role" >
-		<comment>сц╩╖╫ги╚╤тс╕╧ьо╣</comment>
+		<comment>Г■╗Ф┬╥Х╖▓Х┴╡Е╞╧Е╨■Е┘ЁГЁ╩</comment>
 		<id name="id"  type="java.lang.String" >
 			<column  name="ID"  length="32"  />
 			<generator class="uuid.hex" />
@@ -12,25 +12,25 @@
 		
 		<property name="bmsStatus" type="java.lang.String">
 			<column name="BMS_STATUS" length="1">
-				<comment>в╢л╛ё╨1уЩЁёё╛0и╬ЁЩ</comment>
+				<comment>Г┼╤Ф─│О╪ 1Ф╜ёЕ╦╦О╪▄0Е┬═И≥╓</comment>
 			</column>
 		</property>
 		
 		<property  name="authadm"  type="java.lang.String" >
 			<column  name="AUTHADM"  length="2" >
-				<comment>сц╩╖йг╥Ясп╤Ч╪╤йзх╗х╗оч:1спё╛0нч</comment>
+				<comment>Г■╗Ф┬╥Ф≤╞Е░╕Ф°┴Д╨▄Г╨╖Ф▌┬Ф²┐Ф²┐И≥░:1Ф°┴О╪▄0Ф≈═</comment>
 			</column>
 		</property>
 
 		<many-to-one  name="tbTBmsRoleDTO"  class="com.sinovatech.bms.adm.model.dto.TBmsRoleDTO"  fetch="select" >
 			<column  name="ROLEID"  length="32" >
-				<comment>╫ги╚╠Ю╨е</comment>
+				<comment>Х╖▓Х┴╡Г╪√Е▐╥</comment>
 			</column>
 		</many-to-one>
 
 		<many-to-one  name="tbTBmsUserDTO"  class="com.sinovatech.bms.adm.model.dto.TBmsUserDTO"  fetch="select" >
 			<column  name="USERID"  length="32" >
-				<comment>сц╩╖╠Ю╨е</comment>
+				<comment>Г■╗Ф┬╥Г╪√Е▐╥</comment>
 			</column>
 		</many-to-one>
 

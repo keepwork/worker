@@ -1,58 +1,58 @@
-<?xml version="1.0" encoding="GBK"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
 	<class name="com.shop.complaint.model.dto.ComplaintDTO"
 		table="pub_complaint">
-		<comment>Ͷ���뽨��</comment>
+		<comment>投诉与建议</comment>
 		<id name="id" type="java.lang.String">
 			<column name="ID" length="32" />
 			<generator class="uuid.hex" />
 		</id>
 		<property name="menId" type="java.lang.String">
 			<column name="MEN_ID" length="32">
-				<comment>��Ա���</comment>
+				<comment>会员编号</comment>
 			</column>
 		</property>
 		<property name="userId" type="java.lang.String">
 			<column name="USER_ID" length="32">
-				<comment>����Ա���</comment>
+				<comment>管理员编号</comment>
 			</column>
 		</property>
 		<property name="content" type="java.lang.String">
 			<column name="CONTENT" length="1000">
-				<comment>����</comment>
+				<comment>内容</comment>
 			</column>
 		</property>
 		<property name="feedback" type="java.lang.String">
 			<column name="FEEDBACK" length="1000">
-				<comment>�ظ�����</comment>
+				<comment>回复内容</comment>
 			</column>
 		</property>
 		<property name="type" type="java.lang.Integer">
 			<column name="TYPE" length="1">
-				<comment>Ͷ������ 0-��Ʒ 1-����̬��</comment>
+				<comment>投诉类型 0-商品 1-服务态度</comment>
 			</column>
 		</property>
 		<property name="status" type="java.lang.Integer">
 			<column name="STATUS" length="1">
-				<comment>״̬ 0-δ����  1-�Ѵ���</comment>
+				<comment>状态 0-未处理  1-已处理</comment>
 			</column>
 		</property>
 		<property name="compTime" type="java.util.Date">
 			<column name="COMP_TIME">
-				<comment>Ͷ��ʱ��</comment>
+				<comment>投诉时间</comment>
 			</column>
 		</property>
 		<property name="handTime" type="java.util.Date">
 			<column name="HAND_TIME">
-				<comment>����ʱ��(��һ�β鿴ʱ��)</comment>
+				<comment>受理时间(第一次查看时间)</comment>
 			</column>
 		</property>
 		<property name="commitTime" type="java.util.Date">
 			<column name="COMMIT_TIME">
-				<comment>����ʱ��</comment>
+				<comment>处理时间</comment>
 			</column>
 		</property>
 	</class>

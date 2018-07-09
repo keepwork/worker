@@ -1,33 +1,33 @@
-<?xml version="1.0" encoding="GBK"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
 	<class name="com.pub.menber.model.dto.MenberChargeDTO"
 		table="pub_menber_charge">
-		<comment>╩Ат╠ЁДж╣</comment>
+		<comment>Д╪ Е▒≤Е┘┘Е─╪</comment>
 		<id name="id" type="java.lang.String">
 			<column name="ID" length="32" />
 			<generator class="uuid.hex" />
 		</id>
 		<property name="menId" type="java.lang.String">
 			<column name="MEN_ID" length="32">
-				<comment>ЁДж╣╩Ат╠ID</comment>
+				<comment>Е┘┘Е─╪Д╪ Е▒≤ID</comment>
 			</column>
 		</property>
 		<property name="price" type="java.math.BigDecimal">
 			<column name="PRICE" length="10">
-				<comment>ЁДж╣╫П╤Н</comment>
+				<comment>Е┘┘Е─╪И┤▒И╒²</comment>
 			</column>
 		</property>
 		<property name="createTime" type="java.util.Date">
 			<column name="CREATE_TIME">
-				<comment>ЁДж╣й╠╪Д</comment>
+				<comment>Е┘┘Е─╪Ф≈╤И≈╢</comment>
 			</column>
 		</property>
 		<property name="squeues" type="java.lang.String">
 			<column name="SQUEUES" length="32">
-				<comment>ряж╖╦╤╥╣╩ь╠Йй╤</comment>
+				<comment>Е╥╡Ф■╞Д╩≤Х©■Е⌡·Ф═┤Х╞├</comment>
 			</column>
 		</property>
 	</class>
