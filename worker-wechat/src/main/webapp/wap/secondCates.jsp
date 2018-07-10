@@ -34,11 +34,22 @@
 		已选产品分类： ${firstCate.name}
 	  </h3>
 	  <ul>
+		<%--
 	  	<c:forEach var="a" items="${requestScope.secondCateList}">
 	         <li class="l" onclick="javascript:window.location.href='${ctx}/pub/order/orderWrite.do?type=wap&serviceType=${requestScope.serviceType}&firstCateCode=${requestScope.firstCateCode}&secondCateCode=${a.code}'">
 	         	<a href="#" ><p><img src="${ctx}/${firstCate.pic}" /><span>${a.name}</span></p></a>
 	         </li>
 	    </c:forEach>
+	    --%>
+
+		<br/>
+		<input class="submit" type="button" value="电话咨询" onclick="tel()"/>
+		<c:if test="${serviceType!='5'}">
+			<br/>
+			<input class="submit" type="button" value="立即下单" onclick="javascript:window.location.href='${ctx}/pub/order/orderWrite.do?type=wap&serviceType=${serviceType}&firstCateCode=${firstCate.code}'" />
+		</c:if>
+		<br/>
+
 	  </ul>	
 	</div>
   
@@ -50,3 +61,8 @@
 	</jsp:include>
 </body>
 </html>
+<SCRIPT type=text/javascript>
+    function tel(){
+        alert("拨打电话");
+    }
+</SCRIPT>

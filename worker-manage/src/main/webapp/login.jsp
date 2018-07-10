@@ -140,7 +140,7 @@
 						<div class="err"></div>
 						<div class="content">
 							<div id="inp_zh">
-								<input name="userName" id="userName_" type="text" value=""/>
+								<input name="userName" id="userName_" type="text" value="admin"/>
 								<!--<input name="userName" id="userName_" type="text" value="${userName }"/>-->
 							</div>
 							<div id="inp_mm">
@@ -153,12 +153,12 @@
 								    onkeypress="javascript:hiddenPass(event);"
 								    onpaste="return false" 
 								    onchange="javascript:checkChinese();"
-									value=""
+									value="test123"
 									/>
 							</div>
 							
 							<div id="inp_yzm">
-								<input id="yzm_" name="yzm" type="text" maxlength="5" />
+								<input id="yzm_" name="yzm" type="text" maxlength="5" value="test1"/>
 								<img width="65px" height="25px"
 									style="cursor: pointer; border: 1px solid #cc00; margin-left: 1px;"
 									src="${pageContext.request.contextPath}/yzmservlet"

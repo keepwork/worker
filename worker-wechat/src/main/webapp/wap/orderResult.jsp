@@ -23,8 +23,8 @@
 	</header>
 	        
 	<main class="end">
-	  <section class="one">订单已提交，等待师傅接单...</section>
-	  <section class="two">已发给最近的师傅<br>页面可以关闭，不影响师傅接单。</section>
+	  <section class="one">订单已提交，等待派单...</section>
+	  <section class="two">您可以到我的订单中查看订单的进度<br>页面可以关闭，不影响师傅接单。</section>
 	  <section class="three"><a href="${ctx}/pub/order/myOrderList.do?type=wap" class="view">查看我的订单 >></a><a href="${ctx}/weixin/index.do">继续服务</a></section>
 	</main>
   

@@ -86,7 +86,7 @@
 				<ec:column title="分类名称" property="name">
 					<a href="${pageContext.request.contextPath}/pub/goodCate/beforeEdit.do?code=${m.code}">${m.name} </a>
 				</ec:column>
-				<ec:column title="图片" property="pic">
+				<ec:column title="图片${m.pic}" property="pic">
 					<c:if test="${null!=m.pic}"><img src="${ctx}/${m.pic}" style="width: 30px;height: 30px;"/></c:if>
 				</ec:column>
 				<ec:column title="上级分类" property="parentName" filterable="false"></ec:column>

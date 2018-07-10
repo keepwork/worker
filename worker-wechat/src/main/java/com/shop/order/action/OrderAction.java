@@ -88,9 +88,9 @@ public class OrderAction extends BaseAdmAction
 		String type = request.getParameter("type");//类型：wap,web
 		String serviceType = request.getParameter("serviceType");
     	String firstCateCode = request.getParameter("firstCateCode");
-    	String secondCateCode = request.getParameter("secondCateCode");
+//    	String secondCateCode = request.getParameter("secondCateCode");
     	request.setAttribute("serviceType", serviceType);
-    	System.out.println("========================== serviceType:"+serviceType+",firstCateCode:"+firstCateCode+",secondCateCode:"+secondCateCode);
+    	System.out.println("========================== serviceType:"+serviceType+",firstCateCode:"+firstCateCode);
     	
 		String returnPage = "";
 		MenberDTO menber = null;
@@ -100,9 +100,9 @@ public class OrderAction extends BaseAdmAction
 			request.setAttribute("pageTitle", "填写订单");
 			
 			GoodCategoryDTO firstCate = myGoodCategoryFacade.get(firstCateCode);
-			GoodCategoryDTO secondCate = myGoodCategoryFacade.get(secondCateCode);
+//			GoodCategoryDTO secondCate = myGoodCategoryFacade.get(secondCateCode);
 			request.setAttribute("firstCate", firstCate);
-	    	request.setAttribute("secondCate", secondCate);
+//	    	request.setAttribute("secondCate", secondCate);
     	}
 		
         if(null != menber)
@@ -187,8 +187,8 @@ public class OrderAction extends BaseAdmAction
             	String serviceType = request.getParameter("serviceType");
             	String firstCateCode = request.getParameter("fcCode");
             	String firstCateName = request.getParameter("fcName");
-            	String secondCateCode = request.getParameter("scCode");
-            	String secondCateName = request.getParameter("scName");
+//            	String secondCateCode = request.getParameter("scCode");
+//            	String secondCateName = request.getParameter("scName");
             	String orderDesc = request.getParameter("orderDesc");
             	
             	OrderDTO order = new OrderDTO();
@@ -219,8 +219,8 @@ public class OrderAction extends BaseAdmAction
                 order.setServiceType(serviceType);
                 order.setFirstCate(firstCateCode);
                 order.setFirstCateName(firstCateName);
-                order.setSecondCate(secondCateCode);
-                order.setSecondCateName(secondCateName);
+//                order.setSecondCate(secondCateCode);
+//                order.setSecondCateName(secondCateName);
                 String orderId = myOrderFacade.save(order);//保存订单
                 if(null != orderId)
                 {
@@ -394,7 +394,7 @@ public class OrderAction extends BaseAdmAction
             sb.append("\"shippingStatus\":\"" + order.getShippingStatus() + "\",");
             sb.append("\"serviceType\":\"" + order.getServiceType() + "\",");
             sb.append("\"firstCateName\":\"" + order.getFirstCateName() + "\",");
-            sb.append("\"secondCateName\":\"" + order.getSecondCateName() + "\",");
+//            sb.append("\"secondCateName\":\"" + order.getSecondCateName() + "\",");
             sb.append("\"orderTime\":\"" + DateUtil.date2string(order.getOrderTime(), "yyyy-MM-dd HH:mm:ss") + "\"");
             sb.append("}");
             i++;
@@ -456,9 +456,9 @@ public class OrderAction extends BaseAdmAction
         	request.setAttribute("address", address);
         	
         	GoodCategoryDTO firstCate = myGoodCategoryFacade.get(order.getFirstCate());
-			GoodCategoryDTO secondCate = myGoodCategoryFacade.get(order.getSecondCate());
+//			GoodCategoryDTO secondCate = myGoodCategoryFacade.get(order.getSecondCate());
 			request.setAttribute("firstCateName", firstCate.getName());
-	    	request.setAttribute("secondCateName", secondCate.getName());
+//	    	request.setAttribute("secondCateName", secondCate.getName());
         	
     		return mapping.findForward(returnPage);
         }

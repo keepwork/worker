@@ -65,7 +65,7 @@
 						    
 						    var orderStatus = "";
 						    if(n.orderStatus=='1'){
-		            			orderStatus = "<font color='black'>待接单</font>";
+		            			orderStatus = "<font color='black'>待派单</font>";
 		            		}else if(n.orderStatus=='2'){
 		            			orderStatus = "<font color='black'>已接单，待确认时间</font>";
 		            		}else if(n.orderStatus=='3'){
@@ -79,15 +79,15 @@
 						    trs = trs + "   <img src='${ctx}/wap/html/images/nopic.jpg' class='pic' />";
 						    
 						    if(n.serviceType=='1'){
-		            			trs = trs + "    	<b>安装 "+n.firstCateName+" "+n.secondCateName+"</b><br/>";
+		            			trs = trs + "    	<b>安装 "+n.firstCateName+"</b><br/>";
 		            		}else if(n.serviceType=='2'){
-		            			trs = trs + "    	<b>维修 "+n.firstCateName+" "+n.secondCateName+"</b><br/>";
+		            			trs = trs + "    	<b>维修 "+n.firstCateName+"</b><br/>";
 		            		}else if(n.serviceType=='3'){
-		            			trs = trs + "    	<b>保养 "+n.firstCateName+" "+n.secondCateName+"</b><br/>";
+		            			trs = trs + "    	<b>保养 "+n.firstCateName+"</b><br/>";
 		            		}else if(n.serviceType=='4'){
-		            			trs = trs + "    	<b>测量 "+n.firstCateName+" "+n.secondCateName+"</b><br/>";
+		            			trs = trs + "    	<b>测量 "+n.firstCateName+"</b><br/>";
 		            		}else if(n.serviceType=='5'){
-		            			trs = trs + "    	<b>咨询 "+n.firstCateName+" "+n.secondCateName+"</b><br/>";
+		            			trs = trs + "    	<b>咨询 "+n.firstCateName+"</b><br/>";
 		            		}
 		            		
 							trs = trs + "下单时间："+n.orderTime+"<br> ";

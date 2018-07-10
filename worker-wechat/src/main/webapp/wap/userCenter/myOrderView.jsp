@@ -75,12 +75,10 @@
 	<div class="qrddxxf">
 	    <h4 style="height:5px;padding:0px;">&nbsp;</h4>
 	    <ul>
-	        <c:if test="${requestScope.order.serviceType == '1'}">
-		        <li>服务费用<span style="float:right">380元<br></span></li>
-		        <li>&nbsp;<span style="float:right">收费说明</span></li>
-		        <hr size=1 style="color: black;border-style:dotted;" width="100%">
-		        <li>支付方式<span style="float:right">微信支付</span></li>
-	        </c:if>
+			<li>服务费用<span style="float:right">0元<br></span></li>
+			<li>&nbsp;<span style="float:right">收费说明</span></li>
+			<hr size=1 style="color: black;border-style:dotted;" width="100%">
+			<li>支付方式<span style="float:right">微信支付</span></li>
 	        <c:if test="${requestScope.order.orderStatus == '4'}"><li>回访结果<span style="float:right">很满意</span></li></c:if>
 	    </ul>
 	</div>
@@ -115,7 +113,7 @@
 	    </span>
 	    <br><br>
 	    <span style="padding-left: 20px;">
-	    	<span>&nbsp;等待接单&nbsp;</span>
+	    	<span>&nbsp;等待派单&nbsp;</span>
 			<span style="padding-left: 20px;">待确认时间</span>
 			<span style="padding-left: 20px;">待上门服务</span>
 			<span style="padding-left: 20px;">&nbsp;服务完成&nbsp;</span>

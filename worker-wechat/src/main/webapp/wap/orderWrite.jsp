@@ -34,7 +34,7 @@
 		  }
 		  
 		  //保存订单
-		  function saveOrder(serviceType,firstCate,firstCateName,secondCate,secondCateName)
+		  function saveOrder(serviceType,firstCate,firstCateName)
 		  {
 	  			var addressId = document.getElementById("addressValue");
 	  			if(addressId==null || addressId.value==''){
@@ -61,7 +61,7 @@
 					 complete: function (XMLHttpRequest,textStatus) {
 					    if(XMLHttpRequest.responseText!=""){
 		                    if(XMLHttpRequest.responseText==0){
-						 		window.location.href="${ctx}/pub/order/saveOrder.do?type=wap&addressId="+addressId.value+"&serviceType="+serviceType+"&fcCode="+firstCate+"&fcName="+firstCateName+"&scCode="+secondCate+"&scName="+secondCateName+"&payType="+payType+"&orderDesc="+orderDesc.value;
+						 		window.location.href="${ctx}/pub/order/saveOrder.do?type=wap&addressId="+addressId.value+"&serviceType="+serviceType+"&fcCode="+firstCate+"&fcName="+firstCateName+"&payType="+payType+"&orderDesc="+orderDesc.value;
 						 	}else if(XMLHttpRequest.responseText==5){
 						 		alert("您的积分不足，请先充值或选择微信支付！");
 						 	}else if(XMLHttpRequest.responseText==4){
@@ -262,7 +262,11 @@
 	
 	<header>
 	  <ul>
-	    <li class="back"><a href="${ctx}/pub/goodCate/secondCates.do?type=wap&serviceType=${requestScope.serviceType}&firstCateCode=${firstCate.code}"><img src="${ctx}/wap/html/images/back.png" width="40" height="50" /></a></li>
+	    <li class="back">
+				<a href="${ctx}/pub/goodCate/secondCates.do?type=wap&serviceType=${requestScope.serviceType}&firstCateCode=${firstCate.code}">
+					<img src="${ctx}/wap/html/images/back.png" width="40" height="50" />
+				</a>
+		</li>
 	    <li class="logo">订单填写</li>
 	    <li class="more">&nbsp;</li>
 	  </ul>
@@ -356,9 +360,7 @@
 		        <c:if test="${serviceType=='4'}">预约测量</c:if>
 		        <c:if test="${serviceType=='5'}">预约咨询</c:if>
 	        </span></li>
-	        <!-- <li class="bg">产品类型<span style="float:right">${firstCate.name}</span></li> -->
 	        <li>产品类型<span style="float:right">${firstCate.name}</span></li>
-	        <li>产品型号<span style="float:right">${secondCate.name}</span></li>
 	    </ul>
 	</div>
 	
@@ -376,14 +378,8 @@
 	<div class="qrddxxf">
 	    <h4 style="height:5px;padding:0px;">&nbsp;</h4>
 	    <ul>
-	        <li>服务费用<span style="float:right">
-	        <c:if test="${serviceType=='1'}">
-		    	380元（收费说明）
-		    </c:if>
-		    <c:if test="${serviceType!='1'}">
-		    	0元（收费说明）
-		    </c:if>
-	        </span></li>
+	        <li>服务费用<span style="float:right">0元</span></li>
+			<li>&nbsp;<span style="float:right">（预约后我们会主动跟您联系）</span></li>
 	    </ul>
 	</div>
 	
@@ -392,12 +388,15 @@
 	</div>
 	
 	<div class="mdxqh">
+		<%--
 	    <c:if test="${serviceType=='1'}">
-	    	<input class="submit" type="button" value="立即预约，去支付" onclick="saveOrder('${serviceType}','${firstCate.code}','${firstCate.name}','${secondCate.code}','${secondCate.name}')"/>
+	    	<input class="submit" type="button" value="立即预约，去支付" onclick="saveOrder('${serviceType}','${firstCate.code}','${firstCate.name}')"/>
 	    </c:if>
 	    <c:if test="${serviceType!='1'}">
-	    	<input class="submit" type="button" value="立即预约" onclick="saveOrder('${serviceType}','${firstCate.code}','${firstCate.name}','${secondCate.code}','${secondCate.name}')"/>
+	    	<input class="submit" type="button" value="立即预约" onclick="saveOrder('${serviceType}','${firstCate.code}','${firstCate.name}')"/>
 	    </c:if>
+	    --%>
+		<input class="submit" type="button" value="立即预约" onclick="saveOrder('${serviceType}','${firstCate.code}','${firstCate.name}')"/>
 	</div>
 	
 	<table height="180px;"><tr><td >&nbsp;</td></tr></table>
