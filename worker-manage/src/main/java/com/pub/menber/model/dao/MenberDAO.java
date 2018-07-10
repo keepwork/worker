@@ -190,6 +190,10 @@ public class MenberDAO extends DaoSupport
 		if(null!=isjoin && !isjoin.equals("")){
 			where += " and Z.isjoin = " + isjoin + " ";
 		}
+		String type = params.get("type");
+		if(null!=type && !type.equals("")){
+			where += " and Z.type = " + type + " ";
+		}
 		return this.getHibernateTemplate().find("from MenberDTO Z " + where);
 	}
 	

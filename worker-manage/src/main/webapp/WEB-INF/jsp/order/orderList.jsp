@@ -7,30 +7,45 @@
 	<TITLE>后台管理系统</TITLE>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-	<meta name=generator content="MSHTML 8.00.6001.18939">
-	
+
 	<link href="${ctx}/sys/css/public.css" rel="stylesheet" type="text/css">
 	<link href="${ctx}/sys/css/style.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" type="text/css" href="${ctx}/common/css/public2.css"/>
+	<link rel="stylesheet" type="text/css" href="${ctx}/common/css/showhide.css"/>
+
 	<script type="text/javascript" src="${ctx}/js/mootools-release-1.11.js"></script>
-	<script type="text/javascript" src="${ctx}/common/js/calendar/WdatePicker.js"></script>
-	<script type="text/javascript" src="${ctx}/common/js/jquery.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="${ctx}/common/js/jquery-impromptu.3.2.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="${ctx}/common/js/showdiv.js"></script>
-	
+	<script type="text/javascript" src="${ctx}/common/js/jquery-1.4.4.min.js" ></script>
+	<script type="text/javascript" src="${ctx}/common/js/showhide.js"></script>
+
 	<script type="text/javascript">
-	function btn_add_click()
-	{
-		var url = "${ctx}/pub/menber/beforeAdd.do";
-		document.location.href=url;
-	}		
-	
 	function submitQuery(){
 		document.getElementById("searchForm").submit();
 	};
 	function resetQuery(){
 		document.getElementById("searchForm").reset();
 	};
+
+    function openDiv(orderId) {
+        document.getElementById("orderId").value=orderId;
+        show('cover1','pop_sh','');
+    }
+    function updateOrder() {
+        var orderId = document.getElementById("orderId");
+        var workerId = document.getElementById("workerId");
+        var totalPrice = document.getElementById("totalPrice");
+        if(workerId.value == ''){
+            alert("请选择工人");
+            workerId.focus();
+            return;
+        }
+        if(totalPrice.value == ''){
+            alert("订单金额不能为空");
+            totalPrice.focus();
+            return;
+        }
+        document.updateOrderForm.submit();
+
+    }
+
 	</script>
 <body class="overfwidth">
 
@@ -55,7 +70,7 @@
 					<td width="55%">
 						&nbsp;
 					</td>
-					<!-- 
+					<%--
 					<td>
 						订单状态：
 						<select id="orderStatus" name="orderStatus" class="select_2 va_mid" style="width: 100px;">
@@ -84,9 +99,9 @@
 							<option value="1" <c:if test = "${order.payStatus eq '1'}">selected='selected'</c:if> >已支付</option>
 						</select>
 					</td>
-					 -->
+					 --%>
 				</tr>
-				<!-- 
+				<%--
 				<tr bgcolor="#f7f7f7">
 					<td>
 						&nbsp;&nbsp;配送状态：
@@ -117,15 +132,13 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<a class="sexybutton" onclick="submitQuery();return false;"><span><span>查询</span></span></a>
 						<a class="sexybutton" onclick="resetQuery();"><span><span>清空</span></span></a>
-						<%-- 
 						<span class="fillet_btn_01 mr20">
 							<span class="fillet_btn_01_left" onclick="exportData_();return false;">导出</span>
 						</span>
 						<input type="hidden" id="exportParams_" name="exportParams" value="${exportParams}" />
-						--%>
 					</td>
 				</tr>
-				-->
+				--%>
         	</table>
         	</form>
         </div>
@@ -141,7 +154,9 @@
 					width="1%" sortable="false">
 					<input type="checkbox" name="ckids" value="${m.orderId}" />
 				</ec:column>
+				<%--
 				<ec:column title="订单ID" property="orderId"></ec:column>
+				--%>
 				<ec:column title="订单编号" property="orderSn"></ec:column>
 				<ec:column title="服务类型" property="serviceType" filterable="false">
 					<c:if test="${m.serviceType eq '1'}">安装</c:if>
@@ -153,6 +168,7 @@
 				<ec:column title="会员姓名" property="menName"></ec:column>
 				<ec:column title="安装工姓名" property="workerName"></ec:column>
 				<ec:column title="手机" property="menMobile"></ec:column>
+				<ec:column title="订单总额" property="totalPrice" filterable="false"></ec:column>
 				<%-- 
 				<ec:column title="订单总额" property="totalPoint" filterable="false">
 					<c:if test="${m.payType eq '2'}">
@@ -165,7 +181,7 @@
 				--%>
 				
 				<ec:column title="订单状态" property="orderStatus" filterable="false">
-					<c:if test="${m.orderStatus eq '1'}"><font color="red">待接单</font></c:if>
+					<c:if test="${m.orderStatus eq '1'}"><font color="red">待派单</font></c:if>
 					<c:if test="${m.orderStatus eq '2'}">已接单</c:if>
 					<c:if test="${m.orderStatus eq '3'}">已确认</c:if>
 					<c:if test="${m.orderStatus eq '4'}"><font color="green">已完成</font></c:if>
@@ -191,6 +207,11 @@
 				<ec:column title="操作" property="EEE" sortable="false"
 					filterable="false" width="28%">
 					<a class="sexybutton" href="${ctx}/pub/order/beforeView.do?orderId=${m.orderId}"><span><span>查看</span></span></a>
+					<c:if test="${m.orderStatus eq '1'}">
+						<a class="sexybutton" href="javascript:void(0)" onclick="openDiv('${m.orderId }')">
+							<span><span>派单</span></span>
+						</a>
+					</c:if>
 				</ec:column>
 			</ec:row>
 		</ec:table>
@@ -201,15 +222,48 @@
     <!--主体 结束-->
 </div>
 
+<!--提示弹出层 开始-->
+<div id="cover1"></div>
+<div class="pop_555" id="pop_sh" style="width: 600px; height: 190px;">
+	<div class="pop_555_t" style="width: 600px;">
+		<!---pop_555_t-->
+		<strong class="fl ml15">派单</strong> <span
+			class="fr mr15 pop_close" onclick="hide('cover1','pop_sh');"></span>
+	</div>
+	<div class="pop_555_m text_c" style="width: 600px; padding-top: 20px">
+		<!---pop_555_m-->
+		<div id="win_publish_Id">
+			<form name="updateOrderForm" class="cmxform" action="${ctx}/pub/order/updateOrderPrice.do" target="hideframe" method="post" >
+				<input type="hidden" name="orderId" id="orderId" />
+				<table align="center">
+					<tr>
+						<td align="right">指派给：</td>
+						<td align="left">
+							<select name="workerId" id="workerId">
+								<option value="" >===请选择工人===</option>
+								<c:forEach var="a" items="${requestScope.workerList}" varStatus="status">
+									<option value="${a.id}"  >${a.realName}</option>
+								</c:forEach>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">订单金额：</td>
+						<td align="left">
+							<input type="text" name="totalPrice" id="totalPrice" class="bgw" />
+						</td>
+					</tr>
+				</table>
+				<input id="" type="button" value="保存" onclick="updateOrder();" />
+			</form>
+		</div>
+	</div>
+</div>
+<!--提示弹出层 结束-->
+
 <iframe name="hideframe" id="hideframe" width="0" height="0"></iframe>
 
 
 
 </body>
 </html>
-<script type="text/javascript">
-//动态加载弹出框Iframe内容
-function AddConfigIframe(url,htmlId){
-	jQuery("#"+htmlId).attr("src",url);
-}	
-</script>

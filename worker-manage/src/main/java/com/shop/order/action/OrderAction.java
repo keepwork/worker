@@ -166,6 +166,13 @@ public class OrderAction extends BaseAdmAction
 			orderList.add(o);
 		}
 		request.setAttribute("list", orderList);
+
+		//查询安装工列表
+		Map<String,String> params = new HashMap<String,String>();
+		params.put("type","2");
+		List workerList = myMenberFacade.listMenbers(params);
+		request.setAttribute("workerList", workerList);
+
 		return mapping.findForward("list");
 	}
 
@@ -418,6 +425,43 @@ public class OrderAction extends BaseAdmAction
 		request.setAttribute("mping", mping);
 		return mapping.findForward(ActionConstent.COMMON_MAPPING);
 	}
-    
+
+
+	/**
+	 * 修改订单金额
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward updateOrderPrice(ActionMapping mapping,
+										   ActionForm form, HttpServletRequest request,
+										   HttpServletResponse response) throws Exception
+	{
+		String orderId = request.getParameter("orderId");
+		String workerId = request.getParameter("workerId");
+		String totalPrice = request.getParameter("totalPrice");
+
+		MenberDTO menber = myMenberFacade.get(workerId);
+
+		OrderDTO order = myOrderFacade.get(orderId);
+		order.setWorkerId(workerId);
+		order.setWorkerName(menber.getRealName());
+		order.setTotalPrice(new BigDecimal(totalPrice));
+		myOrderFacade.update(order);
+		try
+		{
+			JSONObject json = new JSONObject();
+			ServletUtil.outputXML(response, json.toString());
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
