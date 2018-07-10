@@ -5,7 +5,6 @@
 
 	<!-- ================================================ Form Bean Definitions -->
 	<form-beans>
-		<form-bean name="ArticleCategoryDTO" type="com.pub.article.model.dto.ArticleCategoryDTO" />
 		<form-bean name="ArticleDTO" type="com.pub.article.model.dto.ArticleDTO" />
 		<form-bean name="MenberDTO" type="com.pub.menber.model.dto.MenberDTO" />
 		<form-bean name="MenberPointDTO" type="com.pub.menber.model.dto.MenberPointDTO" />
@@ -29,63 +28,78 @@
 	<!-- =========================================== Action Mapping Definitions -->
 	<action-mappings>
 
-		<!-- 文章分类 -->
-		<action path="/pub/articleCate/*" type="com.pub.article.action.ArticleCategoryAction"
-				scope="request" parameter="{1}" name="ArticleCategoryDTO">
-			<forward name="list" path="/WEB-INF/jsp/article/articleCategoryList.jsp" />
-			<forward name="add" path="/WEB-INF/jsp/article/articleCategoryAdd.jsp" />
-			<forward name="edit" path="/WEB-INF/jsp/article/articleCategoryUpdate.jsp" />
-			<forward name="deleteConfirm" path="/WEB-INF/jsp/article/articleCategoryDeleteConfirm.jsp" />
-		</action>
 		<!-- 文章 -->
 		<action path="/pub/article/*" type="com.pub.article.action.ArticleAction"
 				scope="request" parameter="{1}" name="ArticleDTO">
-			<!-- back -->
-			<forward name="list" path="/WEB-INF/jsp/article/articleList.jsp" />
-			<forward name="add" path="/WEB-INF/jsp/article/articleAdd.jsp" />
-			<forward name="edit" path="/WEB-INF/jsp/article/articleUpdate.jsp" />
-			<forward name="deleteConfirm" path="/WEB-INF/jsp/article/articleDeleteConfirm.jsp" />
+			<!-- front wap -->
+			<forward name="articleList_wap" path="/wap/articleList.jsp" />
+			<forward name="articleDetail_wap" path="/wap/articleDetail.jsp" />
+			<forward name="questionList_wap" path="/wap/questionList.jsp" />
+			<forward name="questionDetail_wap" path="/wap/questionDetail.jsp" />
+			<forward name="aboutUs_wap" path="/wap/aboutUs.jsp" />
+			<!-- front web -->
+			<forward name="articleList_web" path="/web/articleList.jsp" />
+			<forward name="articleDetail_web" path="/web/articleDetail.jsp" />
+			<forward name="questionList_web" path="/web/questionList.jsp" />
+			<forward name="questionDetail_web" path="/web/questionDetail.jsp" />
+			<forward name="aboutUs_web" path="/web/aboutUs.jsp" />
 		</action>
 
 		<!-- 会员 -->
 		<action path="/pub/menber/*" type="com.pub.menber.action.MenberAction"
 				scope="request" parameter="{1}" name="MenberDTO">
-			<!-- back -->
-			<forward name="list" path="/WEB-INF/jsp/menber/menberList.jsp" />
-			<forward name="add" path="/WEB-INF/jsp/menber/menberAdd.jsp" />
-			<forward name="edit" path="/WEB-INF/jsp/menber/menberUpdate.jsp" />
-			<forward name="deleteConfirm" path="/WEB-INF/jsp/menber/menberDeleteConfirm.jsp" />
-			<forward name="pointList" path="/WEB-INF/jsp/menber/pointList.jsp" />
+			<!-- front wap -->
+			<forward name="sign_wap" path="/wap/indexWap.jsp" />
+			<forward name="planDetail_wap" path="/wap/planDetail.jsp" />
+			<forward name="center_wap" path="/wap/userCenter/center.jsp" />
+			<forward name="menberUpdate_wap" path="/wap/userCenter/menberUpdate.jsp" />
+			<forward name="myAccount_wap" path="/wap/userCenter/myAccount.jsp" />
+			<forward name="myInvitation_wap" path="/wap/userCenter/myInvitation.jsp" />
+			<forward name="myInvitationPage1_wap" path="/wap/userCenter/myInvitationPage1.jsp" />
+			<forward name="myInvitationPage2_wap" path="/wap/userCenter/myInvitationPage2.jsp" />
+			<forward name="myInvitationPage2View_wap" path="/wap/userCenter/myInvitationPage2View.jsp" />
+			<forward name="invitation_wap" path="/wap/invitation.jsp" />
+			<forward name="recharge_wap" path="/wap/userCenter/recharge.jsp" />
+			<!-- front web -->
+			<forward name="sign_web" path="/web/index.jsp" />
+			<forward name="planDetail_web" path="/web/planDetail.jsp" />
+			<forward name="center_web" path="/web/userCenter/center.jsp" />
+			<forward name="menberUpdate_web" path="/web/userCenter/menberUpdate.jsp" />
+			<forward name="myAccount_web" path="/web/userCenter/myAccount.jsp" />
+			<forward name="myInvitation_web" path="/web/userCenter/myInvitation.jsp" />
+			<forward name="myInvitationPage1_web" path="/web/userCenter/myInvitationPage1.jsp" />
+			<forward name="myInvitationPage2_web" path="/web/userCenter/myInvitationPage2.jsp" />
+			<forward name="recharge_web" path="/web/userCenter/recharge.jsp" />
+			<forward name="updatePW_web" path="/web/userCenter/updatePW.jsp" />
 		</action>
 
 		<!-- 会员地址 -->
 		<action path="/pub/addr/*" type="com.pub.menber.action.MenberAddrAction"
 				scope="request" parameter="{1}" name="MenberAddrDTO">
-			<forward name="list" path="/WEB-INF/jsp/menber/addrList.jsp" />
-			<forward name="add" path="/WEB-INF/jsp/menber/addrAdd.jsp" />
-			<forward name="edit" path="/WEB-INF/jsp/menber/addrUpdate.jsp" />
-			<forward name="deleteConfirm" path="/WEB-INF/jsp/menber/addrDeleteConfirm.jsp" />
+
 		</action>
 
-		<!-- 会员积分-->
+		<!-- 会员积分 -->
 		<action path="/pub/point/*" type="com.pub.menber.action.MenberPointAction"
 				scope="request" parameter="{1}" name="MenberPointDTO">
-			<forward name="list" path="/WEB-INF/jsp/menber/pointList.jsp" />
+			<!-- front wap -->
 			<forward name="pointList_wap" path="/wap/userCenter/myPointList.jsp" />
+			<!-- front web -->
 			<forward name="pointList_web" path="/web/userCenter/myPointList.jsp" />
 		</action>
 
-		<!-- 会员分享-->
+		<!-- 会员分享 -->
 		<action path="/pub/share/*" type="com.pub.menber.action.MenberShareAction"
 				scope="request" parameter="{1}" name="MenberShareDTO">
-			<forward name="list" path="/WEB-INF/jsp/menber/shareList.jsp" />
+			<!-- front wap -->
 			<forward name="shareList_wap" path="/wap/userCenter/myShareList.jsp" />
+			<!-- front web -->
 			<forward name="shareList_web" path="/web/userCenter/myShareList.jsp" />
 		</action>
 
 		<!-- SEO
 		<action path="/pub/seo/*" type="com.pub.seo.action.SeoAction"
-			scope="request" parameter="{1}" name="SeoDTO">
+				scope="request" parameter="{1}" name="SeoDTO">
 			<forward name="edit" path="/WEB-INF/jsp/seo/seoUpdate.jsp" />
 		</action>
 		 -->

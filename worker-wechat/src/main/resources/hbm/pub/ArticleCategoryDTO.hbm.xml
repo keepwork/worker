@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pub.article.model.dto.ArticleCategoryDTO"
+		table="pub_article_category">
+		<comment>文章分类</comment>
+		<id name="code" type="java.lang.String">
+			<column name="CODE" length="32" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="parentCode" type="java.lang.String">
+			<column name="PARENT_CODE" length="32">
+				<comment>父类编号</comment>
+			</column>
+		</property>
+		<property name="name" type="java.lang.String">
+			<column name="NAME" length="60">
+				<comment>分类名称</comment>
+			</column>
+		</property>
+		<property name="keyword" type="java.lang.String">
+			<column name="KEYWORD" length="200">
+				<comment>关键字</comment>
+			</column>
+		</property>
+		<property name="descr" type="java.lang.String">
+			<column name="DESCR" length="500">
+				<comment>分类描述</comment>
+			</column>
+		</property>
+		<property name="catType" type="java.lang.Integer">
+			<column name="CAT_TYPE" length="1">
+				<comment>分类类型</comment>
+			</column>
+		</property>
+		<property name="orderNum" type="java.lang.Integer">
+			<column name="ORDER_NUM" length="10">
+				<comment>排序</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

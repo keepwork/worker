@@ -71,16 +71,12 @@
 		<action path="/pub/point/*" type="com.pub.menber.action.MenberPointAction"
 			scope="request" parameter="{1}" name="MenberPointDTO">
 			<forward name="list" path="/WEB-INF/jsp/menber/pointList.jsp" />
-			<forward name="pointList_wap" path="/wap/userCenter/myPointList.jsp" />
-			<forward name="pointList_web" path="/web/userCenter/myPointList.jsp" />
 		</action>
 
 		<!-- 会员分享-->
 		<action path="/pub/share/*" type="com.pub.menber.action.MenberShareAction"
 			scope="request" parameter="{1}" name="MenberShareDTO">
 			<forward name="list" path="/WEB-INF/jsp/menber/shareList.jsp" />
-			<forward name="shareList_wap" path="/wap/userCenter/myShareList.jsp" />
-			<forward name="shareList_web" path="/web/userCenter/myShareList.jsp" />
 		</action>
 
 		<!-- SEO

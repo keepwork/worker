@@ -28,7 +28,11 @@
 				<param-name>config</param-name>
 				<!-- 示例 /WEB-INF/struts1-cfg/struts-config.xml,/WEB-INF/struts1-cfg/test/struts-config-marketplat-extprop.xml-->
 				<param-value>
-					/WEB-INF/struts-cfg/struts-config.xml
+					/WEB-INF/struts-cfg/struts-config.xml,
+					/WEB-INF/struts-cfg/struts-config-sys.xml,
+					/WEB-INF/struts-cfg/struts-config-domain.xml,
+					/WEB-INF/struts-cfg/struts-config-pub.xml,
+					/WEB-INF/struts-cfg/struts-config-shop.xml
 				</param-value>
 			</init-param>
 		</init-params>

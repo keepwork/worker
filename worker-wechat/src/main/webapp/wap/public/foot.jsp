@@ -4,7 +4,7 @@
 
 <%
 	String menu = request.getParameter("menu");
-System.out.println(menu);
+//System.out.println(menu);
 %>
 <footer>      
   <ul>

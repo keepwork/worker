@@ -80,7 +80,7 @@ public class WXAccessFilter implements Filter
 //					log.info("WXAccessFilter ============= 微信访问");
 				
 				////////////////////////////////////////////////测试用，生产上要去掉
-				if ("/worker/weixin/index.do".equals(uri))
+				if ("/webchat/weixin/index.do".equals(uri))
 				{
 					request.getSession().setAttribute("openID", "o7Jq2wIeiWcLoA7UCQL5VhAa118M");
 	                MenberDTO sessionMenber1 = myMenberFacade.findMenberByOpenId("o7Jq2wIeiWcLoA7UCQL5VhAa118M");
@@ -223,8 +223,9 @@ public class WXAccessFilter implements Filter
     /**
      * 新增会员信息
      * @param request
-     * @param openID
-     * @throws IOException 
+	 * @param response
+	 * @param wxuser
+     * @throws IOException
      */
     public void addMenber(HttpServletRequest request,HttpServletResponse response,WeiXinUserInfo wxuser) throws IOException
 	{
@@ -280,8 +281,8 @@ public class WXAccessFilter implements Filter
     
     /**
      * 修改会员信息
-     * @param request
-     * @param openID
+	 * @param menber
+	 * @param wxuser
      */
     public void updateMenber(MenberDTO menber,WeiXinUserInfo wxuser)
 	{

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.shop.good.model.dto.GoodDTO"
+		table="pub_good">
+		<comment>商品</comment>
+		<id name="id" type="java.lang.String">
+			<column name="ID" length="32" />
+			<generator class="uuid.hex" />
+		</id>
+		
+		<property name="catCode" type="java.lang.String">
+			<column name="CAT_CODE" length="100">
+				<comment>菜品分类编号</comment>
+			</column>
+		</property>
+		<property name="catName" type="java.lang.String">
+			<column name="CAT_NAME" length="100">
+				<comment>菜品分类名称</comment>
+			</column>
+		</property>
+		<property name="name" type="java.lang.String">
+			<column name="NAME" length="100">
+				<comment>名称</comment>
+			</column>
+		</property>
+		<property name="code" type="java.lang.String">
+			<column name="CODE" length="100">
+				<comment>商品编码</comment>
+			</column>
+		</property>
+		<property name="keyWord" type="java.lang.String">
+			<column name="KEY_WORD" length="100">
+				<comment>关键字</comment>
+			</column>
+		</property>
+		<property name="spic" type="java.lang.String">
+			<column name="S_PIC" length="200">
+				<comment>小图</comment>
+			</column>
+		</property>
+		<property name="bpic" type="java.lang.String">
+			<column name="B_PIC" length="200">
+				<comment>大图</comment>
+			</column>
+		</property>
+		<property name="author" type="java.lang.String">
+			<column name="AUTHOR" length="100">
+				<comment>顶级分类编号（作者）</comment>
+			</column>
+		</property>
+		<property name="press" type="java.lang.String">
+			<column name="PRESS" length="100">
+				<comment>顶级分类名称（出版社）</comment>
+			</column>
+		</property>
+		<property name="isbn" type="java.lang.String">
+			<column name="ISBN" length="100">
+				<comment>图书报刊编号</comment>
+			</column>
+		</property>
+		<property name="spec" type="java.lang.String">
+			<column name="SPEC" length="100">
+				<comment>规格</comment>
+			</column>
+		</property>
+		<property name="pages" type="java.lang.String">
+			<column name="PAGES" length="100">
+				<comment>页数</comment>
+			</column>
+		</property>
+		<property name="weight" type="java.lang.String">
+			<column name="WEIGHT" length="100">
+				<comment>重量</comment>
+			</column>
+		</property>
+		<property name="words" type="java.lang.String">
+			<column name="WORDS" length="100">
+				<comment>字数</comment>
+			</column>
+		</property>
+		<property name="descr1" type="java.lang.String">
+			<column name="DESCR1" >
+				<comment>简介</comment>
+			</column>
+		</property>
+		<property name="descr2" type="java.lang.String">
+			<column name="DESCR2" >
+				<comment>详细介绍</comment>
+			</column>
+		</property>
+		
+		<property name="orderNum" type="java.lang.Integer">
+			<column name="ORDER_NUM" length="10">
+				<comment>排序</comment>
+			</column>
+		</property>
+		<property name="status" type="java.lang.Integer">
+			<column name="STATUS" length="1">
+				<comment>状态：0-上架1-下架2-缺货</comment>
+			</column>
+		</property>
+		<property name="totalHits" type="java.lang.Integer">
+			<column name="TOTAL_HITS" length="10">
+				<comment>点击次数</comment>
+			</column>
+		</property>
+		<property name="point" type="java.lang.Integer">
+			<column name="POINT" length="10">
+				<comment>积分价</comment>
+			</column>
+		</property>
+		
+		<property name="price" type="java.math.BigDecimal">
+			<column name="PRICE" length="10">
+				<comment>零售价</comment>
+			</column>
+		</property>
+		<property name="priceMarket" type="java.math.BigDecimal">
+			<column name="PRICE_MARKET" length="10">
+				<comment>市场价</comment>
+			</column>
+		</property>
+		<property name="promotionPrice" type="java.math.BigDecimal">
+			<column name="PROMOTION_PRICE" length="10">
+				<comment>促销单价-单本</comment>
+			</column>
+		</property>
+		<property name="priceY" type="java.math.BigDecimal">
+			<column name="PRICE_Y" length="10">
+				<comment>进价</comment>
+			</column>
+		</property>
+		<property name="priceH" type="java.math.BigDecimal">
+			<column name="PRICE_H" length="10">
+				<comment>团购价</comment>
+			</column>
+		</property>
+		<property name="priceQ" type="java.math.BigDecimal">
+			<column name="PRICE_Q" length="10">
+				<comment>积分</comment>
+			</column>
+		</property>
+		
+		<property name="updateTime" type="java.util.Date">
+			<column name="UPDATE_TIME">
+				<comment>更新时间</comment>
+			</column>
+		</property>
+		
+	</class>
+</hibernate-mapping>

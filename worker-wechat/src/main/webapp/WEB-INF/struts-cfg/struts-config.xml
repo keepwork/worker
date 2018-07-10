@@ -85,6 +85,8 @@
 
 	<!-- =========================================== Action Mapping Definitions -->
 	<action-mappings>
+
+		<!--
 		<action path="/sys/login/*"
 			type="com.sinovatech.bms.adm.action.LoginOrOutAction"
 			scope="request" parameter="{1}">
@@ -111,9 +113,14 @@
 			<forward name="listUserForSel" path="/WEB-INF/jsp/common/commonSelUserForRole.jsp">
 			</forward>
 		</action>
+		-->
 		
 	    <action path="/sys/upolad/*" type="com.common.action.UploadAction" scope="request" parameter="{1}" name="UploadDTO">
 	    </action>
+
+		<action path="/weixin/*" type="com.weixin.action.WeixinAction" scope="request" parameter="{1}" >
+			<forward name="index" path="/wap/index.jsp" />
+		</action>
 	   
 	</action-mappings>
 	
