@@ -402,7 +402,28 @@ public class ArticleAction extends BaseAdmAction
 		return null;
     }
 
-  
+	/**
+	 * 报价查询列表页 - 前台
+	 * @param request
+	 * @return
+	 */
+	public ActionForward priceList(ActionMapping mapping,
+									  ActionForm form, HttpServletRequest request,
+									  HttpServletResponse response) throws Exception
+	{
+		String type = request.getParameter("type");
+		String cateCode = request.getParameter("cateCode");
+		List<ArticleDTO> articleList = myArticleFacade.listByCateCode(cateCode);
+		request.setAttribute("priceList", articleList);
+
+		String returnStr = "";
+		if(type.equals("wap")){
+			returnStr = "priceList_wap";
+		}else if(type.equals("web")){
+			returnStr = "priceList_web";
+		}
+		return mapping.findForward(returnStr);
+	}
 	
 
 }

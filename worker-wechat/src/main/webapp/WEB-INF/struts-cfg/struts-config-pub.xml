@@ -5,6 +5,7 @@
 
 	<!-- ================================================ Form Bean Definitions -->
 	<form-beans>
+		<form-bean name="ArticleCategoryDTO" type="com.pub.article.model.dto.ArticleCategoryDTO" />
 		<form-bean name="ArticleDTO" type="com.pub.article.model.dto.ArticleDTO" />
 		<form-bean name="MenberDTO" type="com.pub.menber.model.dto.MenberDTO" />
 		<form-bean name="MenberPointDTO" type="com.pub.menber.model.dto.MenberPointDTO" />
@@ -28,6 +29,12 @@
 	<!-- =========================================== Action Mapping Definitions -->
 	<action-mappings>
 
+		<!-- 文章分类 -->
+		<action path="/pub/articleCate/*" type="com.pub.article.action.ArticleCategoryAction"
+				scope="request" parameter="{1}" name="ArticleCategoryDTO">
+			<!-- front wap -->
+			<forward name="articleCateList_wap" path="/wap/priceSearch.jsp" />
+		</action>
 		<!-- 文章 -->
 		<action path="/pub/article/*" type="com.pub.article.action.ArticleAction"
 				scope="request" parameter="{1}" name="ArticleDTO">
@@ -37,6 +44,7 @@
 			<forward name="questionList_wap" path="/wap/questionList.jsp" />
 			<forward name="questionDetail_wap" path="/wap/questionDetail.jsp" />
 			<forward name="aboutUs_wap" path="/wap/aboutUs.jsp" />
+			<forward name="priceList_wap" path="/wap/priceSearchDetail.jsp" />
 			<!-- front web -->
 			<forward name="articleList_web" path="/web/articleList.jsp" />
 			<forward name="articleDetail_web" path="/web/articleDetail.jsp" />

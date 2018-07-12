@@ -12,16 +12,25 @@
 		<%if(menu.equals("fw")){%>
 			<img src="${ctx}/wap/html/images/fl_24.png" width="20" height="19">
 			<br/><label><font color="#218FFF">服务</font></label>
-		<%}else if(menu.equals("wd")){%>
+		<%}else{%>
 			<img src="${ctx}/wap/html/images/cd_24.png" width="20" height="19">
 			<br/><label><font color="black">服务</font></label>
 		<%}%>
+	</a></li>
+	<li onclick="javascript:window.location.href='${ctx}/pub/articleCate/articleCateList.do?parentCode=3&type=wap'"><a href="#">
+		  <%if(menu.equals("sfcx")){%>
+		  <img src="${ctx}/wap/html/images/fl_24.png" width="20" height="19">
+		  <br/><label><font color="#218FFF">收费查询</font></label>
+		  <%}else{%>
+		  <img src="${ctx}/wap/html/images/cd_24.png" width="20" height="19">
+		  <br/><label><font color="black">收费查询</font></label>
+		  <%}%>
 	</a></li>
 	<li onclick="javascript:window.location.href='${ctx}/pub/menber/centerInit.do?type=wap'"><a href="#">
 		<%if(menu.equals("fw")){%>
 			<img src="${ctx}/wap/html/images/fl_26.png" width="20" height="19">
 			<br/><label><font color="black">我的</font></label>
-		<%}else if(menu.equals("wd")){%>
+		<%}else{%>
 			<img src="${ctx}/wap/html/images/cd_26.png" width="20" height="19">
 			<br/><label><font color="#218FFF">我的</font></label>
 		<%}%>

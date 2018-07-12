@@ -451,17 +451,13 @@ public class OrderAction extends BaseAdmAction
 		order.setWorkerId(workerId);
 		order.setWorkerName(menber.getRealName());
 		order.setTotalPrice(new BigDecimal(totalPrice));
+		order.setOrderStatus("2");
+		order.setTakeTime(new Date());
 		myOrderFacade.update(order);
-		try
-		{
-			JSONObject json = new JSONObject();
-			ServletUtil.outputXML(response, json.toString());
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		return null;
+
+		CommonMapping mping = new CommonMapping("保存成功!", getRealUri(mapping,"order/queryList"), ActionConstent.ALERT);
+		request.setAttribute("mping", mping);
+		return mapping.findForward(ActionConstent.COMMON_MAPPING);
 	}
 
 }

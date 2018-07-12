@@ -42,6 +42,7 @@
             totalPrice.focus();
             return;
         }
+        hide('cover1','pop_sh','');
         document.updateOrderForm.submit();
 
     }
@@ -210,6 +211,11 @@
 					<c:if test="${m.orderStatus eq '1'}">
 						<a class="sexybutton" href="javascript:void(0)" onclick="openDiv('${m.orderId }')">
 							<span><span>派单</span></span>
+						</a>
+					</c:if>
+					<c:if test="${m.orderStatus eq '2' || m.orderStatus eq '3'}">
+						<a class="sexybutton" href="javascript:void(0)" onclick="openDiv('${m.orderId }')">
+							<span><span>重新派单</span></span>
 						</a>
 					</c:if>
 				</ec:column>

@@ -1,4 +1,4 @@
-/* 头部    */
+/* 澶撮儴    */
 header{width:100%; height:50px; line-height:50px; background:#0676e1;}
 header ul { margin:0 10px 0 10px;}
 header ul li{ width:33%; height:50px; line-height:50px; float:left;}
@@ -6,7 +6,7 @@ header ul .back{ width:30%;}
 header ul .logo{ width:40%; text-align:center; font-size:18px; color:#FFF;}
 header ul .more{ width:30%; text-align:right;}
 
-/* 首页内容 */
+/* 棣栭〉鍐呭 */
 .main{ height:auto; overflow:hidden; padding:10px; margin:0 0 70px 0;}
 .banner{background:url(../images/fw2_03.png);background-size:100% 100%;}
 .banner li{ height:auto; overflow:hidden; text-align:center;}
@@ -31,16 +31,16 @@ header ul .more{ width:30%; text-align:right;}
 .mainmenu li:nth-child(6n+3){ background-color:#fff}
 .mainmenu li:nth-child(6n+4){ background-color:#fff}
 
-/* 底部菜单 */
+/* 搴曢儴鑿滃崟 */
 footer {width:100%;height:50px;margin:0; padding:5px 0 0 0;position:fixed;z-index:900;bottom:0;left:0;right:0; background:#FFF; border-top:solid #dedede 1px;}
 footer ul{}
-footer ul li{position:relative;text-align:center;display:inline-block;width:50%; line-height:25px;float:left;}
+footer ul li{position:relative;text-align:center;display:inline-block;width:33%; line-height:25px;float:left;}
 footer ul li a label{font-size:16px;overflow:hidden; margin:0; padding:0;}
 footer ul li a{display:block;text-align:center;}
 footer ul li a img{vertical-align:middle; margin:0; padding:0;}
 footer ul li a:hover,.top_menu li a:active{}
 
-/* 选择分类 */
+/* 閫夋嫨鍒嗙被 */
 .xzfl{ height:auto; overflow:hidden; padding:10px; margin:0 0 70px 0;}
 .xzfl h3{ height:50; line-height:60px; font-size:20px; font-weight:normal; text-align:left;margin-left: 5px;}
 .xzfl ul{ height:auto; overflow:hidden;border-radius:10px; border:solid #dedede 1px; background:#FFF;}
@@ -53,7 +53,7 @@ footer ul li a:hover,.top_menu li a:active{}
 .xzfl ul .l { border-right:solid #dedede 1px; border-bottom:solid #dedede 1px;}
 .xzfl ul .r { border-bottom:solid #dedede 1px;}
 
-/* 选择产品型号 */
+/* 閫夋嫨浜у搧鍨嬪彿 */
 .xzxh{ height:auto; overflow:hidden; padding:10px; margin:0 0 70px 0;}
 .xzxh h3{ height:30px; line-height:60px; font-size:20px; font-weight:normal; text-align:left;margin-left: 5px;}
 .xzxh ul{ height:auto; overflow:hidden; border-left:solid #dedede 1px;border-top:solid #dedede 1px; background:#FFF;margin-top: 30px;}
@@ -63,9 +63,9 @@ footer ul li a:hover,.top_menu li a:active{}
 .xzxh ul li a img {width:100%; height:100%;}
 .xzxh ul li:active { background-color:rgba(255, 255, 255, 0.1) }
 .xzxh ul li a span {clear:both; display:block; padding:29px 13px; line-height:30px; font-size:20px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:center; position:absolute; z-index:999; top:15px;text-shadow:#fff 1px 0 0,#fff 0 1px 0,#fff -1px 0 0,#fff 0 -1px 0;
--webkit-text-shadow:#fff 1px 0 0,#fff 0 1px 0,#fff -1px 0 0,#fff 0 -1px 0;-moz-text-shadow:#fff 1px 0 0,#fff 0 1px 0,#fff -1px 0 0,#fff 0 -1px 0;*filter: Glow(color=#fff, strength=1);}
+	-webkit-text-shadow:#fff 1px 0 0,#fff 0 1px 0,#fff -1px 0 0,#fff 0 -1px 0;-moz-text-shadow:#fff 1px 0 0,#fff 0 1px 0,#fff -1px 0 0,#fff 0 -1px 0;*filter: Glow(color=#fff, strength=1);}
 
-/* 填写订单 */
+/* 濉啓璁㈠崟 */
 .txdd1{ height:auto; overflow:hidden; margin:10px;border-radius:10px; border:solid #dedede 1px; background:#FFF; padding:15px;}
 .txdd1 h4{ border-left:solid #ff6920 4px;font-size:18px; padding:0 10px;}
 .txdd1 ul{ margin:10px 0 0 0;}
@@ -95,11 +95,11 @@ footer ul li a:hover,.top_menu li a:active{}
 	background-image: -webkit-linear-gradient(bottom, #0097d3 0%, #00b6f2 100%);
 	background-image: -ms-linear-gradient(bottom, #0097d3 0%, #00b6f2 100%);
 	background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0, #0097d3),
-	color-stop(1, #00b6f2)
+			linear,
+			left bottom,
+			left top,
+			color-stop(0, #0097d3),
+			color-stop(1, #00b6f2)
 	);
 	-webkit-box-shadow: 0 1px 0 #00bffe inset, 0 1px 2px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 0 1px 0 #00bffe inset, 0 1px 2px rgba(0, 0, 0, 0.5);
@@ -125,11 +125,11 @@ footer ul li a:hover,.top_menu li a:active{}
 	background-image: -webkit-linear-gradient(bottom,  #00b6f2 0%, #0097d3 100%);
 	background-image: -ms-linear-gradient(bottom,  #00b6f2 0%, #0097d3 100%);
 	background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0, #00b6f2),
-	color-stop(1, #0097d3)
+			linear,
+			left bottom,
+			left top,
+			color-stop(0, #00b6f2),
+			color-stop(1, #0097d3)
 	);
 	-webkit-box-shadow: 0 1px 0 #00b6f2 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 0 1px 0 #00b6f2 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
@@ -147,11 +147,11 @@ footer ul li a:hover,.top_menu li a:active{}
 	background-image: -webkit-linear-gradient(bottom, #fff 0%, #fff 100%);
 	background-image: -ms-linear-gradient(bottom, #fff 0%, #fff 100%);
 	background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0, #ccc),
-	color-stop(1, #fff)
+			linear,
+			left bottom,
+			left top,
+			color-stop(0, #ccc),
+			color-stop(1, #fff)
 	);
 	-webkit-box-shadow: 0 1px 0 #fff inset, 0 1px 2px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 0 1px 0 #fff inset, 0 1px 2px rgba(0, 0, 0, 0.5);
@@ -177,11 +177,11 @@ footer ul li a:hover,.top_menu li a:active{}
 	background-image: -webkit-linear-gradient(bottom,  #ccc 0%, #ccc 100%);
 	background-image: -ms-linear-gradient(bottom,  #ccc 0%, #ccc 100%);
 	background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0, #fff),
-	color-stop(1, #ccc)
+			linear,
+			left bottom,
+			left top,
+			color-stop(0, #fff),
+			color-stop(1, #ccc)
 	);
 	-webkit-box-shadow: 0 1px 0 #fff inset, 0 1px 2px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 0 1px 0 #fff inset, 0 1px 2px rgba(0, 0, 0, 0.5);
@@ -189,7 +189,7 @@ footer ul li a:hover,.top_menu li a:active{}
 }
 .spacing{ margin:0 0 70px 0; clear:both;}
 
-/*切换*/
+/*鍒囨崲*/
 #tabsholder{ margin:10px;margin-top: 70px;}
 .marginbot {}
 ul.list li {list-style-type:none;margin-left:20px;}
@@ -209,7 +209,7 @@ ul.tabs li.current {background: url(../images/tab.png) bottom center no-repeat; 
 .hzjh li .dz{ margin:5px 0;}
 .hzjh li .dz img{ width:25px; height:21px; float:left; margin:7px 3px 0 0;}
 
-/* 个人中心 */
+/* 涓汉涓績 */
 .grzx1 { height:auto; overflow:hidden; text-align:center; padding:10px; margin:10px;border-radius:10px; border:solid #dedede 1px; background:#FFF;}
 .grzx1 img{border-radius:50%; border:solid #dedede 1px; width:25%; height:25%; margin:20px 0 0 0;}
 .grzx1 h4{border-radius:30px; background:#4ec96e; width:30%; margin:20px auto; color:#FFF;  font-size:18px; padding:10px 30px;}

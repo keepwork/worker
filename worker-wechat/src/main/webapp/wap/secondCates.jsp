@@ -8,7 +8,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-	<title>惠达</title>
+	<title>惠修</title>
 	<link rel="stylesheet" href="${ctx}/wap/html/css/Basc.css" />
 	<link rel="stylesheet" href="${ctx}/wap/html/css/demo.css" />
 </head>
@@ -17,7 +17,7 @@
 	<header>
 	  <ul>
 	    <li class="back"><a href="${ctx}/pub/goodCate/firstCates.do?type=wap&serviceType=${requestScope.serviceType}"><img src="${ctx}/wap/html/images/back.png" width="40" height="50" /></a></li>
-	    <li class="logo">选择产品型号</li>
+	    <li class="logo">开始预约</li>
 	    <li class="more"><a href="${ctx}/pub/menber/centerInit.do?type=wap"><img src="${ctx}/wap/html/images/more.png" alt="" width="40" height="50" /></a></li>
 	  </ul>
 	</header>
@@ -31,7 +31,7 @@
 		<c:if test="${requestScope.serviceType eq '5'}">咨询</c:if>
 	  </h3>
 	  <h3>
-		已选产品分类： ${firstCate.name}
+		已选服务项目： ${firstCate.name}
 	  </h3>
 	  <ul>
 		<%--
@@ -46,7 +46,7 @@
 		<input class="submit" type="button" value="电话咨询" onclick="tel()"/>
 		<c:if test="${serviceType!='5'}">
 			<br/>
-			<input class="submit" type="button" value="立即下单" onclick="javascript:window.location.href='${ctx}/pub/order/orderWrite.do?type=wap&serviceType=${serviceType}&firstCateCode=${firstCate.code}'" />
+			<input class="submit" type="button" value="立即预约" onclick="javascript:window.location.href='${ctx}/pub/order/orderWrite.do?type=wap&serviceType=${serviceType}&firstCateCode=${firstCate.code}'" />
 		</c:if>
 		<br/>
 

@@ -18,22 +18,21 @@
 	  <ul>
 	    <li class="back"><a href="${ctx}/weixin/index.do?type=wx"><img src="${ctx}/wap/html/images/back.png" width="40" height="50" /></a></li>
 	    <li class="logo">选择服务项目</li>
-	    <li class="more"><a href="${ctx}/pub/menber/centerInit.do?type=wap"><img src="${ctx}/wap/html/images/more.png" alt="" width="40" height="50" /></a></li>
+	    <li class="more">
+			<%--
+			<a href="${ctx}/pub/menber/centerInit.do?type=wap"><img src="${ctx}/wap/html/images/more.png" alt="" width="40" height="50" /></a>
+			--%>
+		</li>
 	  </ul>
 	</header>
 	
 	<div class="xzfl">
-	  <h3>已选服务类型：
-	  	<c:if test="${requestScope.serviceType eq '1'}">安装</c:if>
-		<c:if test="${requestScope.serviceType eq '2'}">维修</c:if>
-		<c:if test="${requestScope.serviceType eq '3'}">保养</c:if>
-		<c:if test="${requestScope.serviceType eq '4'}">测量</c:if>
-		<c:if test="${requestScope.serviceType eq '5'}">咨询</c:if>
-	  </h3>
 	  <ul>
-	  	<c:forEach var="a" items="${requestScope.firstCateList}">
-	         <li class="l" onclick="javascript:window.location.href='${ctx}/pub/goodCate/secondCates.do?type=wap&serviceType=${requestScope.serviceType}&firstCateCode=${a.code}'">
-	         	<a href="#" ><p><img src="${ctx}/${a.pic}" width="60" height="60"/><span><strong>${a.name}</strong></span></p></a>
+	  	<c:forEach var="a" items="${requestScope.cateList}">
+	         <li class="l" onclick="javascript:window.location.href='${ctx}/pub/article/priceList.do?type=wap&cateCode=${a.code}'">
+				 <br/>
+	         	<a href="#" ><p><span><strong>${a.name}</strong></span></p></a>
+				 <br/>
 	         </li>
 	    </c:forEach>
 	  </ul>	

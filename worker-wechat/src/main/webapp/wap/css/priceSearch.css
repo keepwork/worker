@@ -1,0 +1,31 @@
+.F_wd_top_con2{width:100%;background:#fff; border-top:0.1em solid #ccc; margin-top:50px; font-family:"微软雅黑"; font-size:14px;}
+
+.F_wd_top_con2_l{width:22.6%; background:#f2f2f2; float:left; }
+.F_wd_top_con2_l ul li{ line-height:4.59em;  border-bottom:0.1em solid #cacaca; text-align:center; border-right:0.1em solid #cacaca; font-weight:bold; }
+.F_wd_top_con2_r{width:75.4%;  float:right; margin-left:5px; }
+.F_wd_top_con2_r ul li{   padding:0.47em 6px ;  cursor:pointer; height:3.64em; overflow:hidden; }
+
+.b_left{ border-left:2px solid #00923f;}
+
+.F_wd_top_con2_r_borb1{ border-bottom:0.1em solid #ccc;  }
+.F_wd_top_con2_r_borb2{ border-bottom:0.1em solid #00923f; color:#00923f;  }
+
+
+.F_wd_top_con2_l_1{ width:40%; float:left;}
+.F_wd_top_con2_l_1 ul li{ line-height:5em; text-indent:1em;}
+.F_wd_top_con2_r_1{ width:55%;  float:right;}
+.F_wd_top_con2_r_1 ul li{ line-height:5em; text-indent:1em;}
+
+.F_wd_top_con2_l_2{width:40%; background:#f2f2f2; float:left;}
+.F_wd_top_con2_l_2 ul li{ line-height:5em; text-indent:1em; border-bottom:0.1em solid #f2f2f2;}
+.F_wd_top_con2_r_2{width:55%;  float:right;}
+.F_wd_top_con2_r_2 ul li{ line-height:5em; text-indent:1em;}
+
+
+.current{background: #fff; color: #00923f;border-left:3px solid #00923f; border-right:0em; }
+.by{display: none;}
+
+
+/**********知情**********/
+
+@media screen and (min-height:660px){}

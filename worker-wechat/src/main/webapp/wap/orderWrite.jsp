@@ -360,7 +360,7 @@
 		        <c:if test="${serviceType=='4'}">预约测量</c:if>
 		        <c:if test="${serviceType=='5'}">预约咨询</c:if>
 	        </span></li>
-	        <li>产品类型<span style="float:right">${firstCate.name}</span></li>
+	        <li>服务项目<span style="float:right">${firstCate.name}</span></li>
 	    </ul>
 	</div>
 	

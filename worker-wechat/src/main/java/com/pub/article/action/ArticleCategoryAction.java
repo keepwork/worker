@@ -34,5 +34,31 @@ public class ArticleCategoryAction extends BaseAdmAction
 		this.myArticleCategoryFacade = (ArticleCategoryFacade) this.getBeanContext().getBean("myArticleCategoryFacade");
 	}
 
+	/**
+	 * 文章分类列表 - 前台
+	 * @param request
+	 * @return
+	 */
+	public ActionForward articleCateList(ActionMapping mapping,
+									 ActionForm form, HttpServletRequest request,
+									 HttpServletResponse response) throws Exception
+	{
+		String type = request.getParameter("type");
+		String parentCode = request.getParameter("parentCode");
+
+		//查出指定主分类下所有子分类
+		List<ArticleCategoryDTO> cateList = myArticleCategoryFacade.listByParent(parentCode);
+		request.setAttribute("cateList", cateList);
+
+		//菜单选中
+		request.setAttribute("menu", "sfcx");
+
+		if(type.equals("wap")){
+			return mapping.findForward("articleCateList_wap");
+		}else if(type.equals("web")){
+			return mapping.findForward("articleCateList_web");
+		}
+		return null;
+	}
 
 }
