@@ -21,19 +21,22 @@
 	    <li class="more"><a href="${ctx}/pub/menber/centerInit.do?type=wap"><img src="${ctx}/wap/html/images/more.png" alt="" width="40" height="50" /></a></li>
 	  </ul>
 	</header>
-        
+
 	<div class="xzxh">
-	  <h3>已选服务类型：
-	  	<c:if test="${requestScope.serviceType eq '1'}">安装</c:if>
-		<c:if test="${requestScope.serviceType eq '2'}">维修</c:if>
-		<c:if test="${requestScope.serviceType eq '3'}">保养</c:if>
-		<c:if test="${requestScope.serviceType eq '4'}">测量</c:if>
-		<c:if test="${requestScope.serviceType eq '5'}">咨询</c:if>
-	  </h3>
-	  <h3>
-		已选服务项目： ${firstCate.name}
-	  </h3>
-	  <ul>
+		<ul style="font-size: 18px;margin-top: 10px;">
+				<br/>&nbsp;&nbsp;&nbsp;&nbsp;已选服务类型：
+				<c:if test="${requestScope.serviceType eq '1'}">安装</c:if>
+				<c:if test="${requestScope.serviceType eq '2'}">维修</c:if>
+				<c:if test="${requestScope.serviceType eq '3'}">保养</c:if>
+				<c:if test="${requestScope.serviceType eq '4'}">测量</c:if>
+				<c:if test="${requestScope.serviceType eq '5'}">咨询</c:if>
+				<br/>
+				<br/>&nbsp;&nbsp;&nbsp;&nbsp;已选服务项目： ${firstCate.name}
+				<br/><br/>
+		</ul>
+		<br/>
+
+	  <ul style="margin-top: 10px;">
 		<%--
 	  	<c:forEach var="a" items="${requestScope.secondCateList}">
 	         <li class="l" onclick="javascript:window.location.href='${ctx}/pub/order/orderWrite.do?type=wap&serviceType=${requestScope.serviceType}&firstCateCode=${requestScope.firstCateCode}&secondCateCode=${a.code}'">

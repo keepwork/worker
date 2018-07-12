@@ -190,6 +190,24 @@ public class ArticleAction extends BaseAdmAction
         ArticleDTO a = myArticleFacade.get(id);
     	a.setUpdateTimeStr(a.getUpdateTime() == null ? "" : (DateUtil.format(a.getUpdateTime(), "yyyy-MM-dd HH:ss:mm")));
     	request.setAttribute("article", a);
+
+    	if(a.getId().equals("101")){
+			request.setAttribute("title", "公司简介");
+		}else if(a.getId().equals("102")){
+			request.setAttribute("title", "联系我们");
+		}else if(a.getId().equals("103")){
+			request.setAttribute("title", "报价说明");
+		}else if(a.getId().equals("104")){
+			request.setAttribute("title", "师傅招聘");
+		}else if(a.getId().equals("105")){
+			request.setAttribute("title", "保修说明");
+		}else if(a.getId().equals("106")){
+			request.setAttribute("title", "材料说明");
+		}else if(a.getId().equals("107")){
+			request.setAttribute("title", "扫码支付");
+		}else if(a.getId().equals("108")){
+			request.setAttribute("title", "小广播通知");
+		}
         
     	request.setAttribute("pageTitle", a.getTitle());
         if(type.equals("wap")){

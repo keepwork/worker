@@ -53,11 +53,11 @@
 				<c:forEach var="a" items="${requestScope.priceList}" varStatus="status">
 					<div class="content">
 						<ul class="by nav-main"  <c:if test="${status.index==0}">style="display: block;"</c:if>  <c:if test="${status.index!=0}">style="display: none;"</c:if>  >
-							<li class="F_wd_top_con2_r_borb1 F_wd_top_con2_r_borb2" id="box-1">
-								<p style=" padding-top:0px; margin-top:0px; height:auto; color:#ed7e0a;">
-										${a.content}
-								</p>
-							</li>
+								<c:set var="newVariable" scope="page" value="${a.content}"/>
+								<%
+									String html = (String)pageContext.getAttribute("newVariable");
+								%>
+								<%=htmlspecialchars(html)%>
 						</ul>
 					</div>
 				</c:forEach>
@@ -74,3 +74,21 @@
 	</jsp:include>
 </body>
 </html>
+<%!
+	private String htmlspecialchars(String str) {
+		str = str.replaceAll("&lt;", "<");
+		str = str.replaceAll("&gt;", ">");
+		str = str.replaceAll("&quot;", "\"");
+		str = str.replaceAll("&nbsp;", " ");
+		str = str.replaceAll("&lt；", "<");
+		str = str.replaceAll("&gt；", ">");
+		str = str.replaceAll("&quot；", "\"");
+		str = str.replaceAll("&nbsp；", " ");
+		str = str.replaceAll("＝", "=");
+		str = str.replaceAll("  ", "&nbsp;&nbsp;");
+		str = str.replaceAll("；", ";");
+		str = str.replaceAll("（", "(");
+		str = str.replaceAll("）", ")");
+		return str;
+	}
+%>

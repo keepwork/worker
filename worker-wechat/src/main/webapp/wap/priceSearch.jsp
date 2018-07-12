@@ -35,8 +35,36 @@
 				 <br/>
 	         </li>
 	    </c:forEach>
-	  </ul>	
+	  </ul>
+
+		<br/>
+		<ul>
+			<li class="l" onclick="javascript:window.location.href='${ctx}/pub/article/articleDetail.do?type=wap&id=103'">
+				<br/>
+				<a href="#" ><p><span><strong>报价说明</strong></span></p></a>
+				<br/>
+			</li>
+			<li class="l" onclick="javascript:window.location.href='${ctx}/pub/article/articleDetail.do?type=wap&id=105'">
+				<br/>
+				<a href="#" ><p><span><strong>保修说明</strong></span></p></a>
+				<br/>
+			</li>
+			<%--
+			<li class="l" onclick="javascript:window.location.href='${ctx}/pub/article/articleDetail.do?type=wap&id=106'">
+				<br/>
+				<a href="#" ><p><span><strong>材料说明</strong></span></p></a>
+				<br/>
+			</li>
+			--%>
+			<li class="l" onclick="javascript:window.location.href='${ctx}/pub/article/articleDetail.do?type=wap&id=107'">
+				<br/>
+				<a href="#" ><p><span><strong>扫码支付</strong></span></p></a>
+				<br/>
+			</li>
+		</ul>
 	</div>
+
+
   
 	<table height="100px;"><tr><td >&nbsp;</td></tr></table>
 	

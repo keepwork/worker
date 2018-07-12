@@ -91,7 +91,7 @@
 					<a href="${pageContext.request.contextPath}/pub/article/beforeEdit.do?id=${m.id}">${m.title} </a>
 				</ec:column>
 				<ec:column title="文章分类" property="catName" filterable="false"></ec:column>
-				<ec:column title="排序" property="asc" filterable="false"></ec:column>
+				<ec:column title="排序" property="orderNum" filterable="false"></ec:column>
 				<ec:column title="操作" property="EEE" sortable="false"
 					filterable="false" width="28%">
 					<a class="sexybutton" href="${pageContext.request.contextPath}/pub/article/beforeEdit.do?id=${m.id}">

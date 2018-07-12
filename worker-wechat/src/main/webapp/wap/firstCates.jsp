@@ -23,14 +23,20 @@
 	</header>
 	
 	<div class="xzfl">
-	  <h3>已选服务类型：
-	  	<c:if test="${requestScope.serviceType eq '1'}">安装</c:if>
-		<c:if test="${requestScope.serviceType eq '2'}">维修</c:if>
-		<c:if test="${requestScope.serviceType eq '3'}">保养</c:if>
-		<c:if test="${requestScope.serviceType eq '4'}">测量</c:if>
-		<c:if test="${requestScope.serviceType eq '5'}">咨询</c:if>
-	  </h3>
-	  <ul>
+		<ul>
+				<li style="margin-left: 20px;font-size: 18px;">
+					<br/>已选服务类型：
+					<c:if test="${requestScope.serviceType eq '1'}">安装</c:if>
+					<c:if test="${requestScope.serviceType eq '2'}">维修</c:if>
+					<c:if test="${requestScope.serviceType eq '3'}">保养</c:if>
+					<c:if test="${requestScope.serviceType eq '4'}">测量</c:if>
+					<c:if test="${requestScope.serviceType eq '5'}">咨询</c:if>
+					<br/><br/>
+				</li>
+		</ul>
+		<br/>
+
+		<ul>
 	  	<c:forEach var="a" items="${requestScope.firstCateList}">
 	         <li class="l" onclick="javascript:window.location.href='${ctx}/pub/goodCate/secondCates.do?type=wap&serviceType=${requestScope.serviceType}&firstCateCode=${a.code}'">
 	         	<a href="#" ><p><img src="${ctx}/${a.pic}" width="60" height="60"/><span><strong>${a.name}</strong></span></p></a>
@@ -39,7 +45,7 @@
 	  </ul>	
 	</div>
   
-	<table height="100px;"><tr><td >&nbsp;</td></tr></table>
+	<table height="50px;"><tr><td >&nbsp;</td></tr></table>
 	
 	<!-- 公用底部 -->
 	<jsp:include page="public/foot.jsp" flush="false">
