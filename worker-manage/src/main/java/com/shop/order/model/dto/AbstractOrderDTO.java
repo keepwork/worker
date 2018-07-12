@@ -23,7 +23,7 @@ public abstract class AbstractOrderDTO extends DtoSupport
 	private BigDecimal totalPrice;//订单总金额
 	private BigDecimal shippingPrice;//运费
 	private Integer totalPoint;//订单总积分
-	private String orderStatus;//订单状态：1-待派单，2-已接单，3-已确认，4-已完成,-5-已取消
+	private String orderStatus;//订单状态：1-待派单，2-已派单，3-已确认时间，4-已上门，5-已完成施工，6-已评价，7-已取消订单
 	private String shippingStatus;//配送状态：0-未配送,1-已配送,2-已送达
 	private String payStatus;//支付状态：0-未支付,1-已支付
 	private String payType;//支付类型：1-余额支付,2-积分支付,3-微信支付
