@@ -24,7 +24,7 @@ public class ShopCarDTO extends AbstractShopCarDTO
 
 	public boolean equals(Object other)
 	{
-		if (!(other instanceof ShopCarDTO))
+		if (!(other instanceof ShopCarDTO)) 
 			return false;
 		ShopCarDTO castOther = (ShopCarDTO) other;
 		return new EqualsBuilder().append(this.getId(), castOther.getId())
