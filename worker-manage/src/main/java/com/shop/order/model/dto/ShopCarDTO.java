@@ -15,12 +15,16 @@ public class ShopCarDTO extends AbstractShopCarDTO
 	public ShopCarDTO()
 	{
 		super();
+		System.out.print("111");
+
 	}
 
 	public ShopCarDTO(java.lang.String id)
 	{
 		super(id);
 		System.out.print("");
+		System.out.print("22");
+
 	}
 
 	public boolean equals(Object other)
