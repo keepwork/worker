@@ -35,6 +35,5 @@ public class ShopCarDTO extends AbstractShopCarDTO
 	{
 		return new HashCodeBuilder().append(getId()).toHashCode();
 	}   
-
 	
 }
