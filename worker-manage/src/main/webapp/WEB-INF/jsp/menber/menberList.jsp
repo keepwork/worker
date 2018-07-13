@@ -101,10 +101,12 @@
 <div id="workspace">
 	<!--主体 开始-->
     <div id="container">
+		<c:if test="${type eq '2'}">
 		<div class="overf pt5 pb5">
 			<span class="left"><a href="#" onclick="btn_delete_click()" class="sexybutton"><span><span>批量删除</span></span></a> </span>
 			<span class="left ml10"><a class="sexybutton" href="#" onclick="btn_add_click('${type}')"><span><span>新增用户</span></span></a></span>
 		</div>
+		</c:if>
         <!--searchForm 开始-->
         <%--
         <div id="searchForm"></div>
