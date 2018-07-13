@@ -15,11 +15,13 @@ public class ShopCarDTO extends AbstractShopCarDTO
 	public ShopCarDTO()
 	{
 		super();
+		System.out.print("111");
 	}
 
 	public ShopCarDTO(java.lang.String id)
 	{
 		super(id);
+		System.out.print("222");
 	}
 
 	public boolean equals(Object other)
@@ -35,6 +37,6 @@ public class ShopCarDTO extends AbstractShopCarDTO
 	{
 		return new HashCodeBuilder().append(getId()).toHashCode();
 	}
-  
+
 	
 }
