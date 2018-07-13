@@ -29,6 +29,9 @@ public class OrderDTO extends AbstractOrderDTO
 	
 	private Date beginTime;
 	private Date endTime;
+
+	private String locationName = "";//所属地区或团队
+
 	
 	public OrderDTO()
 	{
@@ -150,6 +153,11 @@ public class OrderDTO extends AbstractOrderDTO
 		this.takeTimeStr = takeTimeStr;
 	}
 
-	
-	
+	public String getLocationName() {
+		return locationName;
+	}
+
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
+	}
 }

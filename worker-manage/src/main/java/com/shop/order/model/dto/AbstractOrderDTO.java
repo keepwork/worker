@@ -3,6 +3,7 @@ package com.shop.order.model.dto;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.sinovatech.bms.adm.model.dto.TBmsLocationDTO;
 import com.sinovatech.common.model.dto.DtoSupport;
 
 /**
@@ -48,7 +49,9 @@ public abstract class AbstractOrderDTO extends DtoSupport
 	private Date endTime;//订单结束时间
 	private String desc1;//描述
 	private String desc2;//描述
-    
+
+	//所属地区或团队
+	private TBmsLocationDTO tbTBmsLocationDTO;
 
 	public AbstractOrderDTO()
 	{
@@ -255,6 +258,12 @@ public abstract class AbstractOrderDTO extends DtoSupport
 	public void setDesc2(String desc2) {
 		this.desc2 = desc2;
 	}
-	
-	
+
+	public TBmsLocationDTO getTbTBmsLocationDTO() {
+		return this.tbTBmsLocationDTO;
+	}
+
+	public void setTbTBmsLocationDTO(TBmsLocationDTO tbTBmsLocationDTO) {
+		this.tbTBmsLocationDTO = tbTBmsLocationDTO;
+	}
 }

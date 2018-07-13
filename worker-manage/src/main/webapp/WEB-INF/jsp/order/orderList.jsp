@@ -158,18 +158,19 @@
 				<%--
 				<ec:column title="订单ID" property="orderId"></ec:column>
 				--%>
-				<ec:column title="订单编号" property="orderSn"></ec:column>
-				<ec:column title="服务类型" property="serviceType" filterable="false">
+				<ec:column title="订单编号" property="orderSn" width="7%"></ec:column>
+				<ec:column title="区域" property="locationName" width="7%"></ec:column>
+				<ec:column title="安装工姓名" property="workerName" width="10%"></ec:column>
+				<ec:column title="服务类型" property="serviceType" filterable="false" width="5%">
 					<c:if test="${m.serviceType eq '1'}">安装</c:if>
 					<c:if test="${m.serviceType eq '2'}">维修</c:if>
 					<c:if test="${m.serviceType eq '3'}">保养</c:if>
 					<c:if test="${m.serviceType eq '4'}">测量</font></c:if>
 					<c:if test="${m.serviceType eq '5'}">咨询</c:if>
 				</ec:column>
-				<ec:column title="会员姓名" property="menName"></ec:column>
-				<ec:column title="安装工姓名" property="workerName"></ec:column>
-				<ec:column title="手机" property="menMobile"></ec:column>
-				<ec:column title="订单总额" property="totalPrice" filterable="false"></ec:column>
+				<ec:column title="会员姓名" property="menName" width="7%"></ec:column>
+				<ec:column title="手机" property="menMobile" width="7%"></ec:column>
+				<ec:column title="订单总额" property="totalPrice" filterable="false" width="7%"></ec:column>
 				<%-- 
 				<ec:column title="订单总额" property="totalPoint" filterable="false">
 					<c:if test="${m.payType eq '2'}">
@@ -181,7 +182,7 @@
 				</ec:column>
 				--%>
 				
-				<ec:column title="订单状态" property="orderStatus" filterable="false">
+				<ec:column title="订单状态" property="orderStatus" filterable="false" width="7%">
 					<c:if test="${m.orderStatus eq '1'}"><font color="red">待派单</font></c:if>
 					<c:if test="${m.orderStatus eq '2'}">已接单</c:if>
 					<c:if test="${m.orderStatus eq '3'}">已确认</c:if>
@@ -204,9 +205,8 @@
 					<c:if test="${m.shippingStatus eq '2'}"><font color="green">已送达</font></c:if>
 				</ec:column>
 				--%>
-				<ec:column title="下单时间" property="orderTimeStr" filterable="false"></ec:column>
-				<ec:column title="操作" property="EEE" sortable="false"
-					filterable="false" width="28%">
+				<ec:column title="下单时间" property="orderTimeStr" filterable="false" width="15%"></ec:column>
+				<ec:column title="操作" property="EEE" sortable="false" filterable="false" width="25%">
 					<a class="sexybutton" href="${ctx}/pub/order/beforeView.do?orderId=${m.orderId}"><span><span>查看</span></span></a>
 					<c:if test="${m.orderStatus eq '1'}">
 						<a class="sexybutton" href="javascript:void(0)" onclick="openDiv('${m.orderId }')">

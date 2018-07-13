@@ -3,6 +3,7 @@ package com.pub.menber.model.dto;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.sinovatech.bms.adm.model.dto.TBmsLocationDTO;
 import com.sinovatech.common.model.dto.DtoSupport;
 
 /**
@@ -48,7 +49,10 @@ public abstract class AbstractMenberDTO extends DtoSupport
     private String sex;//微信性别
     private String city;//微信用户所在城市
     private String headimgurl;//微信用户头像
-    
+
+	//所属地区或团队
+	private TBmsLocationDTO tbTBmsLocationDTO;
+
 
 	public AbstractMenberDTO()
 	{
@@ -263,5 +267,11 @@ public abstract class AbstractMenberDTO extends DtoSupport
 		this.serviceType = serviceType;
 	}
 
+	public TBmsLocationDTO getTbTBmsLocationDTO() {
+		return this.tbTBmsLocationDTO;
+	}
 
+	public void setTbTBmsLocationDTO(TBmsLocationDTO tbTBmsLocationDTO) {
+		this.tbTBmsLocationDTO = tbTBmsLocationDTO;
+	}
 }

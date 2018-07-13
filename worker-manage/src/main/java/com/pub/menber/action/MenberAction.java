@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.sinovatech.bms.adm.model.dto.TBmsLocationDTO;
+import com.sinovatech.bms.adm.model.facade.BmsLocationFacade;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -45,6 +48,7 @@ public class MenberAction extends BaseAdmAction
 	private SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
 	
 	private MenberFacade myMenberFacade;
+//	private BmsLocationFacade myBmsLocationFacade;
 //	private MenberPointFacade myMenberPointFacade;
 //	private MenberShareFacade myMenberShareFacade;
 	
@@ -53,6 +57,7 @@ public class MenberAction extends BaseAdmAction
 			throws Exception
 	{
 		this.myMenberFacade = (MenberFacade) this.getBeanContext().getBean("myMenberFacade");
+//		this.myBmsLocationFacade = ((BmsLocationFacade)getBeanContext().getBean("myBmsLocationFacade"));
 //		this.myMenberPointFacade = (MenberPointFacade) this.getBeanContext().getBean("myMenberPointFacade");
 //		this.myMenberShareFacade = (MenberShareFacade) this.getBeanContext().getBean("myMenberShareFacade");
 	}
@@ -80,7 +85,9 @@ public class MenberAction extends BaseAdmAction
 		limit.setSortProperty("regTime");
 		limit.setSortType("desc");
 
+		//1：微信客户，2：工人
 		String type = request.getParameter("type");
+		request.setAttribute("type", type);
 
 		// 查询
 		List<MenberDTO> list = myMenberFacade.list(limit,type);
@@ -98,6 +105,12 @@ public class MenberAction extends BaseAdmAction
 			if(null != menber.getLastTime()){
 				menber.setLastTimeStr(format.format(menber.getLastTime()));
 			}
+			if(null != menber.getTbTBmsLocationDTO()){
+				menber.setLocationName( menber.getTbTBmsLocationDTO().getName());
+			}else{
+				menber.setLocationName("未指派");
+			}
+
 			menberlist.add(menber);
 		}
 		request.setAttribute("list", menberlist);
@@ -121,6 +134,11 @@ public class MenberAction extends BaseAdmAction
 	public ActionForward beforeAdd(ActionMapping mapping,
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+
+		//1：微信客户，2：工人
+		String type = request.getParameter("type");
+		request.setAttribute("type", type);
+
 		return mapping.findForward("add");
 	}
 
@@ -173,7 +191,7 @@ public class MenberAction extends BaseAdmAction
 	    dto.setPassword(password);
 	    
 		this.myMenberFacade.save(dto);
-		mping = new CommonMapping("保存成功!", getRealUri(mapping,"menber/queryList"), ActionConstent.ALERT);
+		mping = new CommonMapping("保存成功!", getRealUri(mapping,"menber/queryList") + "?type="+dto.getType(), ActionConstent.ALERT);
 		
 		request.setAttribute("mping", mping);
 		return mapping.findForward(ActionConstent.COMMON_MAPPING);
@@ -275,7 +293,7 @@ public class MenberAction extends BaseAdmAction
 //		}
 	    
 		this.myMenberFacade.update(dto);
-		CommonMapping mping = new CommonMapping("保存成功!", getRealUri(mapping,"menber/queryList"), ActionConstent.ALERT);
+		CommonMapping mping = new CommonMapping("保存成功!", getRealUri(mapping,"menber/queryList") + "?type="+dto.getType(), ActionConstent.ALERT);
 		request.setAttribute("mping", mping);
 		return mapping.findForward(ActionConstent.COMMON_MAPPING);
 	}

@@ -17,6 +17,7 @@ import com.shop.order.model.dto.OrderDTO;
 import com.shop.order.model.facade.OrderFacade;
 import com.shop.order.model.facade.OrderItemFacade;
 import com.shop.order.model.facade.ShopCarFacade;
+import com.sinovatech.bms.adm.model.dto.TBmsLocationDTO;
 import com.sinovatech.common.config.GlobalConfig;
 import com.sinovatech.common.util.Validate;
 import com.sinovatech.common.web.action.ActionConstent;
@@ -162,6 +163,11 @@ public class OrderAction extends BaseAdmAction
 			MenberDTO worker = myMenberFacade.get(o.getWorkerId());
 			if(null!=worker){
 				o.setWorkerName(worker.getRealName());
+			}
+			if(null != o.getTbTBmsLocationDTO()){
+				o.setLocationName( o.getTbTBmsLocationDTO().getName());
+			}else{
+				o.setLocationName("未指派");
 			}
 			orderList.add(o);
 		}
@@ -428,7 +434,7 @@ public class OrderAction extends BaseAdmAction
 
 
 	/**
-	 * 修改订单金额
+	 * 订单指派（修改订单金额和接单工人）
 	 *
 	 * @param mapping
 	 * @param form
@@ -453,6 +459,7 @@ public class OrderAction extends BaseAdmAction
 		order.setTotalPrice(new BigDecimal(totalPrice));
 		order.setOrderStatus("2");
 		order.setTakeTime(new Date());
+		order.setTbTBmsLocationDTO(menber.getTbTBmsLocationDTO());
 		myOrderFacade.update(order);
 
 		CommonMapping mping = new CommonMapping("保存成功!", getRealUri(mapping,"order/queryList"), ActionConstent.ALERT);

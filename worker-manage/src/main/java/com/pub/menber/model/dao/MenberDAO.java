@@ -91,7 +91,8 @@ public class MenberDAO extends DaoSupport
 	
 	public MenberDTO get(java.lang.String id)
 	{
-		String hql = "from MenberDTO Z where Z.id=?";
+		String hql = "from MenberDTO Z "
+			+" left join fetch Z.tbTBmsLocationDTO B  where Z.id=?";
 		List list = this.getHibernateTemplate().find(hql, id);
 		if (list.size() == 1)
 			return (MenberDTO) list.get(0);
@@ -143,7 +144,8 @@ public class MenberDAO extends DaoSupport
 	public List list(LimitInfo limit,String type)
 	{
 		//limit.addFilterProperty(HqlProperty.getEq("status", "1"));
-		String hql = "from MenberDTO Z ";
+		String hql = "from MenberDTO Z "
+				+ "left join fetch Z.tbTBmsLocationDTO B  ";
 		Object[] param = limit.getWhereHQL("Z");
 		if (limit.getRowDisplayed() < 1)
 		{// 非分页, 每页记录小于1时表示不进行分页
