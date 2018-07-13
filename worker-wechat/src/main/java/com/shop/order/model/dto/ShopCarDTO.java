@@ -15,7 +15,7 @@ public class ShopCarDTO extends AbstractShopCarDTO
 	public ShopCarDTO()
 	{
 		super();
-		System.out.print("111");
+		System.out.print("111333");
 	}
 
 	public ShopCarDTO(java.lang.String id)
