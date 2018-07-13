@@ -15,14 +15,14 @@ public class ShopCarDTO extends AbstractShopCarDTO
 	public ShopCarDTO()
 	{
 		super();
-		System.out.print("111");
+		System.out.print("chenxin");
 
 	}
 
 	public ShopCarDTO(java.lang.String id)
 	{
 		super(id);
-		System.out.print("22");
+		System.out.print("23332");
 
 	}
 
