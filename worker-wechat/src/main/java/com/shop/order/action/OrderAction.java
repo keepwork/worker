@@ -34,6 +34,7 @@ import org.apache.struts.action.ActionMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -255,40 +256,44 @@ public class OrderAction extends BaseAdmAction
 	{
     	return mapping.findForward("orderFilish");
 	}
-    
-    
-    
-    /**
-     * 我的订单列表初始化 - 前台
-     * 
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward myOrderList(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception
+
+
+
+	/**
+	 * 我的订单列表初始化 - 前台
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward myOrderList(ActionMapping mapping,
+									 ActionForm form, HttpServletRequest request,
+									 HttpServletResponse response) throws Exception
 	{
-    	String type = request.getParameter("type");//类型：wap,web
+		String type = request.getParameter("type");//类型：wap,web
 		String returnPage = "";
 		MenberDTO menber = null;
 		if(type.equals("wap")){
 			menber = (MenberDTO)request.getSession().getAttribute("wxmenber");
 			returnPage = "myOrderList_wap";
+			String userType = menber.getType()+"";
+			if("2".equals(userType)){//2:安装工
+				returnPage = "workerOrderList_wap";
+			}
 			request.setAttribute("pageTitle", "我的订单列表");
-    	}else if(type.equals("web")){
-    		
-    	}
-        if(null != menber)
-        {
-        	request.setAttribute("status", "9");
-        	return mapping.findForward(returnPage);
-        }
+		}else if(type.equals("web")){
+
+		}
+		if(null != menber)
+		{
+			request.setAttribute("status", "9");
+			return mapping.findForward(returnPage);
+		}
 		return null;
-    	
+
 	}
     
     
@@ -303,24 +308,30 @@ public class OrderAction extends BaseAdmAction
      * @return
      * @throws Exception
      */
-    public ActionForward listOrdersForPagination(ActionMapping mapping,
-			ActionForm form, HttpServletRequest req,
-			HttpServletResponse response) throws Exception
+	public ActionForward listOrdersForPagination(ActionMapping mapping,
+												 ActionForm form, HttpServletRequest req,
+												 HttpServletResponse response) throws Exception
 	{
-    	Map<String, String> params = new HashMap<String, String>();
-    	String status = req.getParameter("status");
-    	req.setAttribute("status", status);
-    	params.put("status", status);
-        
-    	MenberDTO menber = null;
-    	String type = req.getParameter("type");
-    	if(type.equals("wap")){
+		Map<String, String> params = new HashMap<String, String>();
+		String status = req.getParameter("status");
+		req.setAttribute("status", status);
+		params.put("status", status);
+
+		MenberDTO menber = null;
+		String type = req.getParameter("type");
+		if(type.equals("wap")){
 			menber = (MenberDTO)req.getSession().getAttribute("wxmenber");
-    	}else if(type.equals("web")){
-    		menber = (MenberDTO)req.getSession().getAttribute("pcmenber");
-    	}
-    	params.put("menId", menber.getId());
-    	
+			String userType = menber.getType()+"";
+			if("1".equals(userType)){//1:微信客户2：安装工
+				params.put("menId", menber.getId());
+			}else{
+				params.put("workerId", menber.getId());
+			}
+		}else if(type.equals("web")){
+			menber = (MenberDTO)req.getSession().getAttribute("pcmenber");
+		}
+
+
 //    	if(orderType.equals("1")){//进行中
 //    		params.put("orderStatus", "1");
 //    	}else if(orderType.equals("2")){//已完成
@@ -349,68 +360,75 @@ public class OrderAction extends BaseAdmAction
 //    			params.put("endTime", endTime);
 //    		}
 //    	}
-    	
+
 //        String orderId = req.getParameter("orderId");
 //        if (orderId != null && !orderId.equals(""))
 //        {
 //        	params.put("orderId", orderId);
 //        }
-//        
+//
 //        String orderSn = req.getParameter("orderSn");
 //        if (orderSn != null && !orderSn.equals(""))
 //        {
 //        	params.put("orderSn", orderSn);
 //        }
-        
-        StringBuilder sb = new StringBuilder();
-        int i = 0;
-        String size = req.getParameter("pageCount") == null ? "20" : req.getParameter("pageCount").trim();
-        String start = req.getParameter("page") == null ? "0" : req.getParameter("page").trim();
-        int startTemp = (start == null || start.isEmpty() ? '0' : Integer.parseInt(start))
-            * (size == null || size.isEmpty() ? '0' : Integer.parseInt(size));
-        params.put("start", startTemp + "");
-        params.put("size", size);
-        
-        @SuppressWarnings("unchecked")
-        List<OrderDTO> list = (List<OrderDTO>)myOrderFacade.listForPagination(params).get("list");
-        int count = (Integer)myOrderFacade.listForPagination(params).get("rows");
-        sb.append("{\"pageCount\":\"" + count + "\",\"pageData\":[");
-        
-        for (OrderDTO order : list)
-        {
-            if (i > 0)
-            {
-                sb.append(",");
-            }
-            sb.append("{");
-            sb.append("\"orderId\":\"" + order.getOrderId() + "\",");
-            sb.append("\"orderSn\":\"" + order.getOrderSn() + "\",");
-            sb.append("\"orderType\":\"" + order.getOrderType() + "\",");
-            sb.append("\"totalPoint\":\"" + order.getTotalPoint() + "\",");
-            sb.append("\"totalPrice\":\"" + order.getTotalPrice() + "\",");
-            sb.append("\"orderStatus\":\"" + order.getOrderStatus() + "\",");
-            sb.append("\"payStatus\":\"" + order.getPayStatus() + "\",");
-            sb.append("\"payType\":\"" + order.getPayType() + "\",");
-            sb.append("\"shippingStatus\":\"" + order.getShippingStatus() + "\",");
-            sb.append("\"serviceType\":\"" + order.getServiceType() + "\",");
-            sb.append("\"firstCateName\":\"" + order.getFirstCateName() + "\",");
+
+		StringBuilder sb = new StringBuilder();
+		int i = 0;
+		String size = req.getParameter("pageCount") == null ? "20" : req.getParameter("pageCount").trim();
+		String start = req.getParameter("page") == null ? "0" : req.getParameter("page").trim();
+		int startTemp = (start == null || start.isEmpty() ? '0' : Integer.parseInt(start))
+				* (size == null || size.isEmpty() ? '0' : Integer.parseInt(size));
+		params.put("start", startTemp + "");
+		params.put("size", size);
+
+		@SuppressWarnings("unchecked")
+		List<OrderDTO> list = (List<OrderDTO>)myOrderFacade.listForPagination(params).get("list");
+		int count = (Integer)myOrderFacade.listForPagination(params).get("rows");
+		sb.append("{\"pageCount\":\"" + count + "\",\"pageData\":[");
+
+		for (OrderDTO order : list)
+		{
+			if (i > 0)
+			{
+				sb.append(",");
+			}
+			sb.append("{");
+			sb.append("\"orderId\":\"" + order.getOrderId() + "\",");
+			sb.append("\"orderSn\":\"" + order.getOrderSn() + "\",");
+			sb.append("\"orderType\":\"" + order.getOrderType() + "\",");
+			sb.append("\"totalPoint\":\"" + order.getTotalPoint() + "\",");
+			sb.append("\"totalPrice\":\"" + order.getTotalPrice() + "\",");
+			sb.append("\"orderStatus\":\"" + order.getOrderStatus() + "\",");
+			sb.append("\"payStatus\":\"" + order.getPayStatus() + "\",");
+			sb.append("\"payType\":\"" + order.getPayType() + "\",");
+			sb.append("\"shippingStatus\":\"" + order.getShippingStatus() + "\",");
+			sb.append("\"serviceType\":\"" + order.getServiceType() + "\",");
+			sb.append("\"firstCateName\":\"" + order.getFirstCateName() + "\",");
 //            sb.append("\"secondCateName\":\"" + order.getSecondCateName() + "\",");
-            sb.append("\"orderTime\":\"" + DateUtil.date2string(order.getOrderTime(), "yyyy-MM-dd HH:mm:ss") + "\"");
-            sb.append("}");
-            i++;
-            
-        }
-        sb.append("],\"status\":\"" + status + "\"}");
-        try
-        {
-            ServletUtil.outputXML(response, sb.toString());
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+			sb.append("\"orderTime\":\"" + DateUtil.date2string(order.getOrderTime(), "yyyy-MM-dd HH:mm:ss") + "\",");
+			if(order.getOrderStatus().equals("2")) {//已派单
+				sb.append("\"takeTime\":\"" + DateUtil.date2string(order.getTakeTime(), "yyyy-MM-dd HH:mm:ss") + "\"");
+			}else if(order.getOrderStatus().equals("3")){//已确定时间
+				sb.append("\"sureTime\":\"" + DateUtil.date2string(order.getSureTime(), "yyyy-MM-dd HH:mm:ss") + "\"");
+			}else if(order.getOrderStatus().equals("4") || order.getOrderStatus().equals("5")) {//已完成或已关闭
+				sb.append("\"endTime\":\"" + DateUtil.date2string(order.getEndTime(), "yyyy-MM-dd HH:mm:ss") + "\"");
+			}
+			sb.append("}");
+			i++;
+
+		}
+		sb.append("],\"status\":\"" + status + "\"}");
+		try
+		{
+			ServletUtil.outputXML(response, sb.toString());
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 		return null;
-    }
+	}
     
     
     /**
@@ -636,6 +654,91 @@ public class OrderAction extends BaseAdmAction
 		CommonMapping mping = new CommonMapping("保存成功!", getRealUri(mapping,"order/queryList"), ActionConstent.ALERT);
 		request.setAttribute("mping", mping);
 		return mapping.findForward(ActionConstent.COMMON_MAPPING);
+	}
+
+
+	/**
+	 * 工人端订单确认时间修改
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward sureTimeUpdate(ActionMapping mapping,
+				ActionForm form, HttpServletRequest request,
+				HttpServletResponse response) throws Exception
+	{
+		String orderId = request.getParameter("orderId");
+		String sureTime = request.getParameter("sureTimeStr");
+
+		OrderDTO order = myOrderFacade.get(orderId);
+		order.setSureTime(DateUtil.string2date(sureTime,"yyyy-MM-dd HH:mm:ss"));
+		order.setOrderStatus("3");//3待上门
+		myOrderFacade.update(order);
+		try
+		{
+			PrintWriter out = response.getWriter();
+			out.print("success");
+			out.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			PrintWriter out = response.getWriter();
+			out.print("error");
+			out.close();
+		}
+		return null;
+	}
+
+	/**
+	 * 工人端订单详情查看
+	 * @param request
+	 * @return
+	 */
+	public ActionForward workerOrderView(ActionMapping mapping,
+										 ActionForm form, HttpServletRequest request,
+										 HttpServletResponse response) throws Exception
+	{
+		String type = request.getParameter("type");//类型：wap,web
+		String returnPage = "";
+		MenberDTO menber = null;
+		if(type.equals("wap")){
+			menber = (MenberDTO)request.getSession().getAttribute("wxmenber");
+			returnPage = "workerOrderView_wap";
+			request.setAttribute("pageTitle", "订单明细");
+		}else if(type.equals("web")){
+		}
+		if(null != menber)
+		{
+			String orderId = request.getParameter("orderId");
+			OrderDTO order = myOrderFacade.get(orderId);
+			order.setOrderTimeStr(format.format(order.getOrderTime()));
+			if(null!=order.getSureTime()){//确认时间
+				order.setSureTimeStr(format.format(order.getSureTime()));
+			}
+			if(null!=order.getEndTime()){//完成时间
+				order.setEndTimeStr(format.format(order.getEndTime()));
+			}
+			if(null!=order.getTakeTime()){//接单时间
+				order.setTakeTimeStr(format.format(order.getTakeTime()));
+			}
+			request.setAttribute("order", order);
+
+			MenberAddrDTO address = myMenberAddrFacade.get(order.getAddrId());
+			request.setAttribute("address", address);
+
+			GoodCategoryDTO firstCate = myGoodCategoryFacade.get(order.getFirstCate());
+//			GoodCategoryDTO secondCate = myGoodCategoryFacade.get(order.getSecondCate());
+			request.setAttribute("firstCateName", firstCate.getName());
+//	    	request.setAttribute("secondCateName", secondCate.getName());
+
+			return mapping.findForward(returnPage);
+		}
+		return null;
 	}
     
 

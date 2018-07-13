@@ -80,10 +80,11 @@ public class WXAccessFilter implements Filter
 //					log.info("WXAccessFilter ============= 微信访问");
 				
 				////////////////////////////////////////////////测试用，生产上要去掉
-				if ("/webchat/weixin/index.do".equals(uri))
+				if ("/worker-wechat/weixin/index.do".equals(uri))
 				{
 					request.getSession().setAttribute("openID", "o7Jq2wIeiWcLoA7UCQL5VhAa118M");
-	                MenberDTO sessionMenber1 = myMenberFacade.findMenberByOpenId("o7Jq2wIeiWcLoA7UCQL5VhAa118M");
+	                //MenberDTO sessionMenber1 = myMenberFacade.findMenberByOpenId("o7Jq2wIeiWcLoA7UCQL5VhAa118M");
+					MenberDTO sessionMenber1 = myMenberFacade.findMenberByOpenId("o7Jq2wIeiWcLoA7UCQL5VhAa118D");
                 	request.getSession().setAttribute("wxmenber", sessionMenber1);
                 	request.getSession().setAttribute("wxmenberId", sessionMenber1.getId());
                 	request.getSession().setAttribute("jsapi_ticket", "");

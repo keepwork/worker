@@ -60,11 +60,16 @@
 		<!-- 订单 -->
 		<action path="/pub/order/*" type="com.shop.order.action.OrderAction"
 				scope="request" parameter="{1}" name="OrderDTO">
-			<!-- front wap -->
+			<!-- front wap 会员端-->
 			<forward name="orderWrite_wap" path="/wap/orderWrite.jsp" />
 			<forward name="orderResult_wap" path="/wap/orderResult.jsp" />
 			<forward name="myOrderList_wap" path="/wap/userCenter/myOrderList.jsp" />
 			<forward name="myOrderView_wap" path="/wap/userCenter/myOrderView.jsp" />
+
+			<!-- front wap 工人端-->
+			<forward name="workerOrderList_wap" path="/wap/workerCenter/myOrderList.jsp" />
+			<forward name="workerOrderView_wap" path="/wap/workerCenter/myOrderView.jsp" />
+
 			<!-- front web -->
 			<forward name="orderWrite_web" path="/web/orderWrite.jsp" />
 			<forward name="orderResult_web" path="/web/orderResult.jsp" />

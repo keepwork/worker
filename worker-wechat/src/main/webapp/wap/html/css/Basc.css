@@ -27,4 +27,35 @@ textarea { outline:none; resize:none; ;overflow:auto;border:none;background: tra
 .show{display:block;}
 .hide{display:none;}
 
+.button-info {
+    background-color: #5bc0de;
+    border: none;
+    color: white;
+    padding: 4px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    float:right;
+}
+
+.button-none {
+    background-color: white;
+    border: solid;
+    border-width:1px;
+    color: #5bc0de;
+    padding: 3px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    float:right;
+}
+
 
