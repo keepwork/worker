@@ -22,7 +22,6 @@ public class ShopCarDTO extends AbstractShopCarDTO
 	public ShopCarDTO(java.lang.String id)
 	{
 		super(id);
-		System.out.print("");
 		System.out.print("22");
 
 	}
