@@ -57,6 +57,22 @@
 			
 			document.frmApply.submit();
 		}
+        function selLocation()
+        {
+            showSelDiv("locationDiv",false)
+        }
+        function showSelDiv(n,showMain)
+        {
+            document.getElementById("mainDiv").style.display = showMain?"block":"none";
+            document.getElementById(n).style.display = showMain?"none":"block";
+        }
+        function selLocationSuc(id,name)
+        {
+            document.getElementById("locationName_").value = name;
+            document.getElementById("locationid_").value = id;
+            showSelDiv('locationDiv',true);
+        }
+
 		</script>
 <body class="overfwidth">
 <div id="mainDiv">
@@ -67,7 +83,7 @@
  <div class="toolbar">
         <a href="#" class="sexybutton" onclick="beforeSubmit();return false"><span><span>保存</span></span></a>    
 		<a href="#" class="sexybutton"  onClick="rbutton()"><span><span>重置 </span></span></a>
-        	<a href="${ctx}/pub/menber/queryList.do" class="sexybutton" ><span><span>返回</span></span></a> 
+        	<a href="${ctx}/pub/menber/queryList.do?type=${type}" class="sexybutton" ><span><span>返回</span></span></a>
                </div>
         <!--按钮 结束-->
         <!--框内内容 开始-->
@@ -112,7 +128,17 @@
                   <li class="listyle_4">
                     <label class="left pt5"><em>*</em>状态：</label>
                     <h1 class="cmxformh1"> <span class="cmxformspan" style="width: 200px;">
-                      <domain:radioDomain domain="dataIsused" name="status" uid="userStatus_" value="1" />
+                      <domain:radioDomain domain="dataIsused" name="status" uid="userStatus_" value="0" />
+                    </span></h1>
+                  </li>
+                  <li class="listyle_4">
+                    <label class="mt5 left"><em>*</em>所属部门：</label>
+                    <h1 class="cmxformh1"> <span class="cmxformspan">
+                      <input type="text" id="locationName_" class="bgw" disabled="disabled" readonly="readonly"
+                             value="${m.tbTBmsLocationDTO.name}" />
+					  <input id="locationid_" type="hidden" name="locationid"
+                             value="${m.tbTBmsLocationDTO.id}" />
+                    <a href="javascript:selLocation();"><img align="absmiddle" class="hand" src="${pageContext.request.contextPath}/sys/images/2j13.gif" /></a>
                     </span></h1>
                   </li>
                   <li class="listyle_4">
@@ -156,6 +182,10 @@
         <a href="${ctx}/pub/menber/queryList.do" class="sexybutton"><span><span>返回</span></span></a>
                </div>
               </div>
+</div>
+
+<div id="locationDiv" style="display: none; text-align: center;">
+  <iframe src="${pageContext.request.contextPath}/sys/bmscommon/selLocation.do" width="100%" height="100%" frameborder="0" scrolling="yes"></iframe>
 </div>
 
 	<iframe name="hideframe" id="hideframe" width="0" height="0"></iframe>

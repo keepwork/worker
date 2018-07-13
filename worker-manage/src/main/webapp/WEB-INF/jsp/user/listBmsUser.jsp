@@ -114,7 +114,9 @@
 				<ec:column title="状态" property="userStatus"  filterCell="droplist" filterOptions="BMSDOMAIN.dataIsused" width="5%">
 					<domain:viewDomain domain="dataIsused" value="${m.userStatus}"/>
 				</ec:column>
+				<%--
 				<ec:column title="${userapplyname}" property="applyid" width="10%" />
+				--%>
 				<ec:column title="角色信息" property="SSS" sortable="false" filterable="false" width="7%">
 					<a
 						href="${pageContext.request.contextPath}/sys/bmsuser/queryBmsRole.do?id=${m.id}">

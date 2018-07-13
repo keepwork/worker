@@ -69,6 +69,8 @@ public class ComplaintAction extends BaseAdmAction
 		// 获取分页信息
 		ILimitUtil limitUtil = new ExLimitUtil();
 		LimitInfo limit = limitUtil.getLimitInfo(request, tableId, 10);
+		limit.setSortProperty("compTime");
+		limit.setSortType("desc");
 
 		// 查询
 		List<ComplaintDTO> list = myComplaintFacade.list(limit);

@@ -178,5 +178,13 @@
 				<comment>服务类型：1-安装,2-维修,3-保养,4-测量,5-咨询</comment>
 			</column>
 		</property>
+
+		<many-to-one name="tbTBmsLocationDTO"
+					 class="com.sinovatech.bms.adm.model.dto.TBmsLocationDTO"
+					 fetch="select">
+			<column name="LOCATIONID" length="32">
+				<comment>区域编号</comment>
+			</column>
+		</many-to-one>
 	</class>
 </hibernate-mapping>

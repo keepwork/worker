@@ -87,22 +87,24 @@
 				<ec:column title="处理人" property="userName" filterable="false"></ec:column>
 				<ec:column title="处理时间" property="commitTime" filterable="false"></ec:column>
 				<ec:column title="处理状态" property="status" filterable="false">
-					<c:if test="${m.status eq '0'}">未处理</c:if>
-					<c:if test="${m.status eq '1'}">已处理</c:if>
+					<c:if test="${m.status eq '0'}"><font color="red">未处理</font></c:if>
+					<c:if test="${m.status eq '1'}"><font color="green">已处理</font></c:if>
 				</ec:column>
 				<ec:column title="操作" property="EEE" sortable="false"
 					filterable="false" width="28%">
 					<a class="sexybutton" href="${pageContext.request.contextPath}/pub/complaint/beforeEdit.do?id=${m.id}">
 					<span><span>查看处理</span></span></a>
+					<%--
 					<a class="sexybutton" href="javascript:btn_delete_click('${m.id}')">
 					<span><span>删除</span></span></a>
+					 --%>
 				</ec:column>
 			</ec:row>
 		</ec:table>
         </div>
-         <div class="toolbar">
-        <a href="#" onClick="btn_delete_click()" class="sexybutton"><span><span>批量删除</span></span></a>    
-               </div>
+        <div class="toolbar">
+        	<a href="#" onClick="btn_delete_click()" class="sexybutton"><span><span>批量删除</span></span></a>
+        </div>
     <!--CmsSiteList 结束-->
     </div>
     <!--主体 结束-->

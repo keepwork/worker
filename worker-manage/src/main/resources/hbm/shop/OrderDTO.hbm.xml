@@ -177,6 +177,14 @@
 				<comment>描述2</comment>
 			</column>
 		</property>
+
+		<many-to-one name="tbTBmsLocationDTO"
+					 class="com.sinovatech.bms.adm.model.dto.TBmsLocationDTO"
+					 fetch="select">
+			<column name="LOCATIONID" length="32">
+				<comment>区域编号</comment>
+			</column>
+		</many-to-one>
 		
 	</class>
 </hibernate-mapping>

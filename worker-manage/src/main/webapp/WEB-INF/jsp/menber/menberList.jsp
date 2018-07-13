@@ -47,9 +47,9 @@
 				
 			}
 			
-			function btn_add_click()
+			function btn_add_click(type)
 			{
-				var url = "${ctx}/pub/menber/beforeAdd.do";
+				var url = "${ctx}/pub/menber/beforeAdd.do?type="+type;
 				document.location.href=url;
 			}			
 			
@@ -100,10 +100,15 @@
 
 <div id="workspace">
 	<!--主体 开始-->
-    <div id="container">    
-    
+    <div id="container">
+		<c:if test="${type eq '2'}">
+		<div class="overf pt5 pb5">
+			<span class="left"><a href="#" onclick="btn_delete_click()" class="sexybutton"><span><span>批量删除</span></span></a> </span>
+			<span class="left ml10"><a class="sexybutton" href="#" onclick="btn_add_click('${type}')"><span><span>新增用户</span></span></a></span>
+		</div>
+		</c:if>
         <!--searchForm 开始-->
-        <!--
+        <%--
         <div id="searchForm"></div>
         <div class="toolbar">
 	        <c:if test="${listShowType eq 'window'}">
@@ -155,7 +160,7 @@
 	        	
 	        </c:if>
         </div>
-         -->
+         --%>
         <!--searchForm 结束-->
         
         <!--CmsSiteList 开始-->
@@ -178,23 +183,25 @@
 				
 				<ec:column title="真实姓名" property="realName"></ec:column>
 				
-	        	<ec:column title="微信名" property="loginName"></ec:column>
+	        	<ec:column title="微信名" property="loginName"  width="7%"></ec:column>
+				<%--
 	        	<ec:column title="会员类型" property="type" filterable="false">
 					<c:if test="${m.type eq '1'}">微信客户</c:if>
 					<c:if test="${m.type eq '2'}">安装工</c:if>
 				</ec:column>
-	        	<ec:column title="手机" property="mobile"></ec:column>
-	        	<ec:column title="身份证" property="pid"></ec:column>
-				<ec:column title="注册时间" property="regTimeStr" filterable="false"></ec:column>
+				--%>
+				<ec:column title="区域" property="locationName"  width="10%"></ec:column>
+	        	<ec:column title="手机" property="mobile"  width="7%"></ec:column>
+	        	<ec:column title="身份证" property="pid"  width="15%"></ec:column>
+				<ec:column title="注册时间" property="regTimeStr" filterable="false"  width="15%"></ec:column>
 				<%--<ec:column title="余额" property="balanceFee" filterable="false"></ec:column>
 				<ec:column title="积分" property="point" filterable="false"></ec:column> --%>
 				<ec:column title="状态" property="status" filterable="false">
-					<c:if test="${m.status eq '0'}">正常</c:if>
-					<c:if test="${m.status eq '1'}">停用</c:if>
+					<c:if test="${m.status eq '0'}"><font color="green">正常</font></c:if>
+					<c:if test="${m.status eq '1'}"><font color="red">停用</font></c:if>
 				</ec:column>
 				
-				<ec:column title="操作" property="EEE" sortable="false"
-					filterable="false" width="20%">
+				<ec:column title="操作" property="EEE" sortable="false" filterable="false" width="20%">
 					<%--
 					<a class="sexybutton" href="${ctx}/pub/family/queryList.do?familyMenId=${m.id}"><span><span>托管</span></span></a>
 					<a class="sexybutton" href="${ctx}/pub/point/queryList.do?menId=${m.id}"><span><span>积分</span></span></a>

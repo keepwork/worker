@@ -67,6 +67,23 @@
 			
 			document.frmApply.submit();
 		}
+
+        function selLocation()
+        {
+            showSelDiv("locationDiv",false)
+        }
+        function showSelDiv(n,showMain)
+        {
+            document.getElementById("mainDiv").style.display = showMain?"block":"none";
+            document.getElementById(n).style.display = showMain?"none":"block";
+        }
+        function selLocationSuc(id,name)
+        {
+            document.getElementById("locationName_").value = name;
+            document.getElementById("locationid_").value = id;
+            showSelDiv('locationDiv',true);
+        }
+
 		</script>
 <meta name=generator content="MSHTML 8.00.6001.18939">
 <body class="overfwidth">
@@ -107,7 +124,7 @@
                     <em>密码长度6~16位，首字符为英文，必须包含数字。</em></span></h1>
                   </li>
                   <li class="listyle_4">
-                    <label class="left pt5"><em>*</em>微信openid：</label>
+                    <label class="left pt5">微信openid：</label>
                     <h1 class="cmxformh1"> <span class="cmxformspan">
                     	${m.openId}
                       <!-- <input type="text" id="openId" name="openId"  class="bgw" value="${m.openId}"/>
@@ -115,7 +132,7 @@
                     </span></h1>
                   </li>
                   <li class="listyle_4">
-                    <label class="left pt5"><em>*</em>微信名：</label>
+                    <label class="left pt5">微信名：</label>
                     <h1 class="cmxformh1"> <span class="cmxformspan">
                       <input type="text" id="loginName" name="loginName"  class="bgw" value="${m.loginName}"/>
                     </span></h1>
@@ -126,6 +143,14 @@
                       <domain:radioDomain domain="menberType" name="type" uid="type" value="${m.type}" />
                     </span></h1>
                   </li>
+                    <li class="listyle_4">
+                        <label class="mt5 left"><em>*</em>所属部门：</label>
+                        <h1 class="cmxformh1"> <span class="cmxformspan">
+                        <input type="text" id="locationName_" class="bgw" disabled="disabled" readonly="readonly" value="${m.tbTBmsLocationDTO.name}" />
+					    <input id="locationid_" type="hidden" name="locationid" value="${m.tbTBmsLocationDTO.id}" />
+                        <a href="javascript:selLocation();"><img align="absmiddle" class="hand" src="${pageContext.request.contextPath}/sys/images/2j13.gif" /></a>
+                        </span></h1>
+                    </li>
                   <li class="listyle_4">
                     <label class="left pt5"><em>*</em>状态：</label>
                     <h1 class="cmxformh1"> <span class="cmxformspan" style="width: 200px;">
@@ -175,6 +200,11 @@
 		</div>
 	</form>
 </div>
+
+<div id="locationDiv" style="display: none; text-align: center;">
+    <iframe src="${pageContext.request.contextPath}/sys/bmscommon/selLocation.do" width="100%" height="100%" frameborder="0" scrolling="yes"></iframe>
+</div>
+
 </body>
 </html>
 <iframe name="hideframe" id="hideframe" width="0" height="0"></iframe>
