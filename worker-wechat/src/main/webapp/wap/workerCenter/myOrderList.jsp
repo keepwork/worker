@@ -11,11 +11,10 @@
 	<title>订单中心</title>
 	<link rel="stylesheet" href="${ctx}/wap/html/css/Basc.css" />
 	<link rel="stylesheet" href="${ctx}/wap/html/css/demo.css" />
-	<script type="text/javascript" src="${ctx}/wap/html/js/jquery.min.js" charset="UTF-8"></script>
+	<link rel="stylesheet" href="${ctx}/wap/css/jquery.alertable.css">
+	<script src="${ctx}/wap/js/alertable.js"></script>
+	<script src="${ctx}/wap/js/jquery.alertable.min.js"></script>
 	<script type="text/javascript" src="${ctx}/wap/html/js/tytabs.jquery.min.js" charset="UTF-8"></script>
-	<style>
-		ul.tabs li {list-style-type:none;display:block;float:left;cursor:pointer; width:20%; height:50px; line-height:50px; text-align:center; font-size:16px;}
-	</style>
 
 	<script type="text/javascript">
 	<!--
@@ -59,12 +58,11 @@
 				success: function(data){
 					var returnData = data.pageData;
 					var status = data.status;
-					var userType = data.userType;
+					//var userType = data.userType;
 
 					document.getElementById("content1").innerHTML="";
 					document.getElementById("content2").innerHTML="";
 					document.getElementById("content3").innerHTML="";
-					document.getElementById("content4").innerHTML="";
     				
 					if(returnData==""){
 	                    return false;
@@ -76,25 +74,23 @@
     						trs = trs + "<li onclick='javascript:window.location.href=\"${ctx}/pub/order/workerOrderView.do?type=wap&orderId=" + n.orderId + "\"' >";
 						    
 						    var orderStatus = "";
-						    var timeTypeName = "";
-						    var time = "";
 						    if(n.orderStatus=='2'){
 		            			orderStatus = "<font color='black'>待确认时间</font>";
-                                timeTypeName = "派单时间";
-                                time = n.takeTime;
 		            		}else if(n.orderStatus=='3'){
-		            			orderStatus = "<font color='black'>待上门</font>";
-                                timeTypeName = "上门时间";
-                                time = n.sureTime;
+		            			orderStatus = "<font color='black'>待上门服务</font>";
 		            		}else if(n.orderStatus=='4'){
-		            			orderStatus = "<font color='black'>已完成，待评价</font>";
-                                timeTypeName = "完成时间";
-                                time = n.endTime;
+		            			orderStatus = "<font color='black'>待完成施工</font>";
 		            		}else if(n.orderStatus=='5'){
-		            			orderStatus = "<font color='#999'>已关闭</font>";
-                                timeTypeName = "完成时间";
-                                time = n.endTime;
-		            		}
+                                if(n.payStatus=='1'){
+                                    orderStatus = "<font color='black'>已支付待评价</font>";
+                                }else{
+                                    orderStatus = "<font color='black'>已施工待支付</font>";
+                                }
+		            		}else if(n.orderStatus=='6'){
+                                orderStatus = "<font color='green'>已评价</font>";
+                            }else if(n.orderStatus=='7'){
+                                orderStatus = "<font color='red'>已取消</font>";
+                            }
 						    trs = trs + "	<h3><span>" +orderStatus+ "</span>订单编号：" + n.orderSn + "</h3>";
 						    trs = trs + "   <img src='${ctx}/wap/html/images/nopic.jpg' class='pic' />";
 						    
@@ -110,16 +106,17 @@
 		            			trs = trs + "    	<b>咨询 "+n.firstCateName+"</b><br/>";
 		            		}
 
-							trs = trs + timeTypeName+"："+time+"<br> ";
-							if(n.serviceType=='1'){
-		            			trs = trs + "<font color='red'>￥<span>100</span></font><br /> ";
+                            trs = trs + "下单时间："+n.orderTime+"<br> ";
+							if(n.serviceType!='5'){
+		            			trs = trs + "<font color='red'>￥<span>"+n.totalPrice+"</span></font><br />";
 		            		}
-
-							if(n.orderStatus=='2'){
-                                trs = trs + "<a href='#' class='button-info' id='sureTime' name='"+n.orderId+"'>确定时间</a><a href='#' class='button-none' >联系业主</a>";
-							}else if(n.orderStatus=='3'){
-                                trs = trs + "<a href='#' class='button-info' >确定签到</a>"
-							}
+							if(n.orderStatus=='2'){//已派单
+                                trs = trs + "<a href='#' class='button-info' id='sureTime' name='"+n.orderId+"'>确定时间</a><a href='tel:"+n.mobile+"' id='lxyz' class='button-none' >联系业主</a>";
+							}else if(n.orderStatus=='3'){//已确认时间
+                                trs = trs + "<a href='#' class='button-info' id='sureTime' name='"+n.orderId+"'>调整时间</a><a href='tel:"+n.mobile+"' id='lxyz' class='button-none'id='' >联系业主</a>"
+							}else if(n.orderStatus=='4'){//已上门
+                                trs = trs + "<a href='javascript:window.location.href=\"${ctx}/wap/workerCenter/workContentSubmit.jsp?type=wap&orderId=" + n.orderId + "\"' class='button-info' name='"+n.orderId+"'>施工完成</a>"
+                            }
 							trs = trs + "</li>";
     				});
     				trs = trs + "</ul>";
@@ -156,11 +153,15 @@
 		           current_page:pageIndex,//当前页索引
 		           num_edge_entries:2//两侧首尾分页条目数
             });
+
+            $("#lxyz").click(function(event) {
+                event.stopPropagation();
+            });
 		}
 
 		function pageselectCallback(page_id,jq) {
            initData(page_id,'${requestScope.status}');
-       }
+        }
        //日期选择确认回调事件，更新订单确认时间和状态
        function YCallback(sureTimeStr,orderId) {
            $.ajax({
@@ -178,7 +179,20 @@
         //日期选择取消回调事件
        function NCallback(result) {
        }
-  </script>  
+
+//        //确认弹框
+//        function newconfirm(e,obj) {
+//            e.stopPropagation();//阻止点击事件向上冒泡
+//            var orderId = $(obj).attr('name');
+//            $.alertable.confirm('确定已完成施工？').then(function() {
+//                completeWorkUpdateStatus(orderId);
+//            }, function() {
+//                console.log('Confirmation canceled');
+//            });
+//        }
+
+
+	</script>
   
 </head>
 
@@ -192,10 +206,10 @@
 	
 	        <ul class="tabs">
 	            <li id="tab1" onclick="initData(0,'9')" >全部</li>
-	            <li id="tab2" onclick="initData(0,'1')" >待定时</li>
-	            <li id="tab3" onclick="initData(0,'2')" >待上门</li>
-	            <li id="tab4" onclick="initData(0,'3')" >已完成</li>
-	            <li id="tab5" onclick="initData(0,'4')" >已关闭</li>
+	            <li id="tab2" onclick="initData(0,'1')" >进行中</li>
+	            <li id="tab3" onclick="initData(0,'2')" >待支付</li>
+	            <li id="tab4" onclick="initData(0,'3')" >待评价</li>
+	            <li id="tab5" onclick="initData(0,'4')" >已完成</li>
 	        </ul>
 	        <div class="contents marginbot">
 		        <div id="content1" class="tabscontent">
@@ -226,7 +240,9 @@
 	        </div>
 	</div>
 	<!-- /Tabs -->
-	
+
+	<!--刷新页面-->
+	<div style="position: fixed;bottom: 50px;right: 10px;margin-bottom: 10px;"><a href="javascript:window.location.reload();"><img src="${ctx}/wap/images/shuaxin.png" width="42px"></a></div>
 	<div id="pagination" class="flickr" style="text-align:right;"></div>
 
 	<table height="150px;"><tr><td >&nbsp;</td></tr></table>

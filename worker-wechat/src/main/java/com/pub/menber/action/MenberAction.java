@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.common.util.RegexCheckUtil;
+import com.sms.SmsUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -33,6 +36,9 @@ import com.sinovatech.common.web.action.CommonMapping;
 import com.sinovatech.common.web.limit.ExLimitUtil;
 import com.sinovatech.common.web.limit.ILimitUtil;
 import com.sinovatech.common.web.limit.LimitInfo;
+import com.sinovatech.hd.tools.cache.CacheFactory;
+import com.sinovatech.hd.tools.cache.ICache;
+import com.sinovatech.common.util.DateUtil;
 /**
  * 会员管理
  * 
@@ -47,6 +53,7 @@ public class MenberAction extends BaseAdmAction
 	private MenberFacade myMenberFacade;
 //	private MenberPointFacade myMenberPointFacade;
 //	private MenberShareFacade myMenberShareFacade;
+	private static ICache cache = CacheFactory.newCache();
 	
 	public void init(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
@@ -750,7 +757,7 @@ public class MenberAction extends BaseAdmAction
 	}
 	/**
 	 * 修改密码 - 前台会员中心
-	 * 
+	 *
 	 * @param mapping
 	 * @param form
 	 * @param request
@@ -765,25 +772,117 @@ public class MenberAction extends BaseAdmAction
 		String id = request.getParameter("id");
 		String newPass1 = request.getParameter("newPass1");
 		MenberDTO dto = myMenberFacade.get(id);
-		
-		String k = (StringUtils.isBlank(GlobalConfig.getProperty("bms", 
-	      "sysusercreateKey"))) ? 
-	      "123456565643450987657689876543267676787651234567" : 
+
+		String k = (StringUtils.isBlank(GlobalConfig.getProperty("bms",
+	      "sysusercreateKey"))) ?
+	      "123456565643450987657689876543267676787651234567" :
 	      GlobalConfig.getProperty("bms", "sysusercreateKey");
 	    String password = com.sinovatech.common.util.Des.encrytWithBase64("DESede", newPass1, k);
 	    dto.setPassword(password);
-	    
+
 		this.myMenberFacade.updateMenberPWBySql(dto);
 		request.getSession().setAttribute("wxmenber",dto);//更新session
-		
+
 		String leftMenu = request.getParameter("leftMenu");
 		request.setAttribute("leftMenu", leftMenu);
 		CommonMapping mping = new CommonMapping("修改成功!", getRealUri(mapping,"menber/beforeUpdatePW") + "?type=web&leftMenu=" + leftMenu, ActionConstent.ALERT);
 		request.setAttribute("mping", mping);
 		return mapping.findForward(ActionConstent.COMMON_MAPPING);
 	}
-	
-	
+
+	/**
+	 * 工人师傅绑定
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward workerBind(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception
+	{
+		//进入到此方法说明已经工人已经绑定，所以直接跳转到个人中心
+		request.getRequestDispatcher("/pub/menber/centerInit.do?type=wap").forward(request,response);
+		return null;
+	}
+
+	/**
+	 * 下发验证码（工人师傅绑定时）
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward sendCode(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+			throws Exception
+	{
+		String resp = "success";
+		String mobile = request.getParameter("mobile");
+		if (!RegexCheckUtil.isMobileNo(mobile)){
+			resp = "formatError";
+		}else{
+			MenberDTO dto = this.myMenberFacade.findMenberByMobile(mobile);
+			if (null != dto){
+				if ((null != dto.getOpenId()) && (!"".equals(dto.getOpenId()))){
+					resp = "bind";
+				}else{
+					String code = SmsUtil.sendVerificationCode(mobile);
+					int exptime = Integer.parseInt(GlobalConfig.getProperty("weixin", "message.code.exptime"));//短信验证码有效期(分钟)
+					Date timeout = DateUtil.addMinius(new Date(), exptime);
+					cache.set(mobile, code, timeout);
+				}
+			}else {
+				resp = "notExist";
+			}
+		}
+		response.getWriter().write(resp);
+		response.getWriter().flush();
+		return null;
+	}
+
+	/**
+	 * 验证码校验
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward checkCode(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+			throws Exception
+	{
+		String mobile = request.getParameter("mobile");
+		String code = request.getParameter("code");
+		String resp = "";
+
+		String openId = (String)request.getSession().getAttribute("openID");
+
+		String sCode = (String)cache.get(mobile);
+		if ((null != sCode) && (code.equals(sCode)))
+		{
+			cache.delete(mobile);
+			MenberDTO dto = this.myMenberFacade.findMenberByMobile(mobile);
+
+			dto.setOpenId(openId);
+			this.myMenberFacade.saveOrUpdate(dto);
+			resp = "/pub/menber/centerInit.do?type=wap";
+		}
+		else
+		{
+			resp = "error";
+		}
+		response.getWriter().write(resp);
+		response.getWriter().flush();
+		return null;
+	}
 	
 	
 	public static void main(String[] ages){

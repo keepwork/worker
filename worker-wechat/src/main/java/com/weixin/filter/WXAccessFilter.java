@@ -82,9 +82,11 @@ public class WXAccessFilter implements Filter
 				////////////////////////////////////////////////测试用，生产上要去掉
 				if ("/worker-wechat/weixin/index.do".equals(uri))
 				{
-					request.getSession().setAttribute("openID", "o7Jq2wIeiWcLoA7UCQL5VhAa118M");
-	                //MenberDTO sessionMenber1 = myMenberFacade.findMenberByOpenId("o7Jq2wIeiWcLoA7UCQL5VhAa118M");
-					MenberDTO sessionMenber1 = myMenberFacade.findMenberByOpenId("o7Jq2wIeiWcLoA7UCQL5VhAa118D");
+					String openID = request.getParameter("openID");
+					request.getSession().setAttribute("openID", openID);
+	                MenberDTO sessionMenber1 = myMenberFacade.findMenberByOpenId(openID);
+//	                request.getSession().setAttribute("openID", "o7Jq2wIeiWcLoA7UCQL5VhAa118M");
+//	                MenberDTO sessionMenber1 = myMenberFacade.findMenberByOpenId("o7Jq2wIeiWcLoA7UCQL5VhAa118M");
                 	request.getSession().setAttribute("wxmenber", sessionMenber1);
                 	request.getSession().setAttribute("wxmenberId", sessionMenber1.getId());
                 	request.getSession().setAttribute("jsapi_ticket", "");
@@ -100,7 +102,8 @@ public class WXAccessFilter implements Filter
 			                
 			                String appid = GlobalConfig.getProperty("weixin", "appid");//应用ID
 			    			String appsecret = GlobalConfig.getProperty("weixin", "appsecret");//应用密钥
-			    			String openID = (String)request.getSession().getAttribute("openID");
+			    			openID = (String)request.getSession().getAttribute("openID");
+//			    			String openID = (String)request.getSession().getAttribute("openID");
 			    			log.info("WXAccessFilter ============= session openId:"+openID);
 			                
 			                MenberDTO sm = (MenberDTO)request.getSession().getAttribute("wxmenber");
@@ -148,8 +151,13 @@ public class WXAccessFilter implements Filter
 			                        	log.info("wxuser openId:"+wxuser.getOpenid());
 			                        	// 保存微信用户到数据库
 			                        	MenberDTO menber = myMenberFacade.findMenberByOpenId(wxuser.getOpenid());
-			                            log.info("WXAccessFilter ============= menber1:"+menber);
-			                        	if(null == menber){
+										log.info("WXAccessFilter ============= menber1:"+menber);
+
+
+			                        	if(null == menber && "/menber/workerBind.do".equals(uri)){//工人师傅绑定
+											response.sendRedirect("http://" + serverDomain + "/wap/workerBind.html");
+											return;
+										}else if(null == menber){
 			                        		addMenber(request,response,wxuser);//新增会员信息
 			                        	}else{
 			                        		//将用户信息保存在session中
@@ -172,7 +180,10 @@ public class WXAccessFilter implements Filter
 			                	// 更新微信用户资料到数据库
 			                	MenberDTO menber = myMenberFacade.findMenberByOpenId(openID);
 			                    log.info("WXAccessFilter ============= menber2:"+menber);
-			                    if(null != menber)
+								if(null == menber && "/menber/workerBind.do".equals(uri)){//工人师傅绑定
+									response.sendRedirect("http://" + serverDomain + "/wap/workerBind.html");
+									return;
+								}else if(null != menber)
 			                    {
 			                    	String accessToken = (String)request.getSession().getAttribute("accessToken");
 			                    	log.info("WXAccessFilter ============= accessToken2:"+accessToken);

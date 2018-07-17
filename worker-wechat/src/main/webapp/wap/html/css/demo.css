@@ -194,7 +194,7 @@ footer ul li a:hover,.top_menu li a:active{}
 .marginbot {}
 ul.list li {list-style-type:none;margin-left:20px;}
 ul.tabs {width:100%;overflow:hidden;}
-ul.tabs li {list-style-type:none;display:block;float:left;cursor:pointer; width:25%; height:50px; line-height:50px; text-align:center; font-size:16px;}
+ul.tabs li {list-style-type:none;display:block;float:left;cursor:pointer; width:20%; height:50px; line-height:50px; text-align:center; font-size:16px;}
 ul.tabs li.current {background: url(../images/tab.png) bottom center no-repeat; color:#008fcb}
 .tabscontent {display:none;width:100%;text-align:justify;}
 .hzjh{}

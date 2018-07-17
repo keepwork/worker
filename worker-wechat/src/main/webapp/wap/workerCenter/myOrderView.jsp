@@ -50,7 +50,8 @@
   <li><h2>联系电话</h2><span>${requestScope.address.mobile}</span></li>
   <li><h2>服务地址</h2><span>${requestScope.address.province}${requestScope.address.city}${requestScope.address.county}${requestScope.address.street}</span></li>
   <li><h2>备注留言</h2><span>${requestScope.order.orderDesc}</span></li>
-  <li><p>实付款：<em>￥100.00</em></p></li>
+  <li><h2>客户评价</h2><span>${requestScope.order.desc2}</span></li>
+  <li><p>金额<em>￥100.00</em></p></li>
 </ul>
 </div>
 <!--order-confirm-end-->

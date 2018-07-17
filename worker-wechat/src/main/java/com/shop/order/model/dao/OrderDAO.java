@@ -139,26 +139,16 @@ public class OrderDAO extends DaoSupport
 		}
 
 		String status = params.get("status");
-		String menId = params.get("menId");
+
 		if(null != status && !status.equals("")){
-			if(null != menId && !"".equals(menId)) {//会员订单
-				if (status.equals("1")) {
-					where += " and t.ORDER_STATUS in('1','2','3') ";
-				} else if (status.equals("2")) {
-					where += " and t.ORDER_STATUS = '4' ";
-				} else if (status.equals("3")) {
-					where += " and t.ORDER_STATUS = '5' ";
-				}
-			}else{//工人订单
-				if (status.equals("1")) {
-					where += " and t.ORDER_STATUS = '2' ";
-				} else if (status.equals("2")) {
-					where += " and t.ORDER_STATUS = '3' ";
-				} else if (status.equals("3")) {
-					where += " and t.ORDER_STATUS = '4' ";
-				}else if (status.equals("4")) {
-					where += " and t.ORDER_STATUS = '5' ";
-				}
+			if (status.equals("1")) {
+				where += " and t.ORDER_STATUS in('1','2','3','4') ";//进行中状态
+			} else if (status.equals("2")) {
+				where += " and t.ORDER_STATUS = '5' and t.PAY_STATUS = '0' ";//待支付（已完成施工且未支付）
+			} else if (status.equals("3")) {
+				where += " and t.ORDER_STATUS = '5' and t.PAY_STATUS = '1' ";//待评价（已完成施工且已支付）
+			}else if (status.equals("4")) {
+				where += " and t.ORDER_STATUS in('6','7') ";//已完成（包括已评价和已取消）
 			}
 		}
 
@@ -182,7 +172,7 @@ public class OrderDAO extends DaoSupport
 			where += " and t.ORDER_TYPE = '"+orderType+"' ";
 		}
 
-
+		String menId = params.get("menId");
 		if(null != menId && !menId.equals("")){
 			where += " and t.MEN_ID = '"+menId+"' ";
 		}
@@ -201,7 +191,7 @@ public class OrderDAO extends DaoSupport
 		final String sql = "select t.ORDER_ID,t.ORDER_SN,t.MEN_ID,t.USER_ID,t.OPEN_ID,t.ADDR_ID," +
 				"t.INVOICE,t.TOTAL_PRICE,t.SHIPPING_PRICE,t.TOTAL_POINT,t.ORDER_STATUS,t.SHIPPING_STATUS," +
 				"t.PAY_STATUS,t.PAY_TYPE,t.ORDER_TYPE,t.AMOUNT,t.ORDER_TIME,t.PAY_TIME,t.TAKE_TIME,t.SURE_TIME,t.END_TIME,t.SERVICE_TYPE,"+
-				"t.FIRST_CATE_NAME,t.SECOND_CATE_NAME from pub_order t  " + where +
+				"t.FIRST_CATE_NAME,t.SECOND_CATE_NAME,t.DESC1,t.DESC2 from pub_order t  " + where +
 				" order by t.ORDER_TIME  desc " +
 				" LIMIT "+params.get("start")+","+params.get("size")+" ";
 
@@ -244,6 +234,8 @@ public class OrderDAO extends DaoSupport
 			temp.setServiceType((String) map.get("SERVICE_TYPE"));
 			temp.setFirstCateName((String) map.get("FIRST_CATE_NAME"));
 			temp.setSecondCateName((String) map.get("SECOND_CATE_NAME"));
+			temp.setDesc1((String) map.get("DESC1"));
+			temp.setDesc2((String) map.get("DESC2"));
 			result.add(temp);
 		}
 		return result;

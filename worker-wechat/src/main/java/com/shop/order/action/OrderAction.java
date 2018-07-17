@@ -201,6 +201,7 @@ public class OrderAction extends BaseAdmAction
                 order.setUserId("");// 会员所对应的业务员
                 order.setOrderStatus("1");// 订单状态，默认为进行中
                 order.setShippingStatus("0");// 邮递状态，默认为未配送
+				order.setPayStatus("0");//支付状态，默认为未支付
                 order.setAmount(0);
                 order.setOrderType("1");
             	order.setTotalPrice(new BigDecimal(0.00));
@@ -225,10 +226,10 @@ public class OrderAction extends BaseAdmAction
                 String orderId = myOrderFacade.save(order);//保存订单
                 if(null != orderId)
                 {
-                	MenberAddrDTO addr = myMenberAddrFacade.get(addressId);
-                	//将订单消息发送给所有安装工列队
-                	myOrderFacade.sendBaiduMessageAndroid(order,addr.getStreet());
-                	myOrderFacade.sendBaiduMessageIOS(order,addr.getStreet());
+//                	MenberAddrDTO addr = myMenberAddrFacade.get(addressId);
+//                	//将订单消息发送给所有安装工列队
+//                	myOrderFacade.sendBaiduMessageAndroid(order,addr.getStreet());
+//                	myOrderFacade.sendBaiduMessageIOS(order,addr.getStreet());
                 }
                
                 return mapping.findForward("orderResult_wap");
@@ -389,6 +390,7 @@ public class OrderAction extends BaseAdmAction
 
 		for (OrderDTO order : list)
 		{
+
 			if (i > 0)
 			{
 				sb.append(",");
@@ -405,16 +407,24 @@ public class OrderAction extends BaseAdmAction
 			sb.append("\"shippingStatus\":\"" + order.getShippingStatus() + "\",");
 			sb.append("\"serviceType\":\"" + order.getServiceType() + "\",");
 			sb.append("\"firstCateName\":\"" + order.getFirstCateName() + "\",");
-//            sb.append("\"secondCateName\":\"" + order.getSecondCateName() + "\",");
-			sb.append("\"orderTime\":\"" + DateUtil.date2string(order.getOrderTime(), "yyyy-MM-dd HH:mm:ss") + "\",");
-			if(order.getOrderStatus().equals("2")) {//已派单
-				sb.append("\"takeTime\":\"" + DateUtil.date2string(order.getTakeTime(), "yyyy-MM-dd HH:mm:ss") + "\"");
-			}else if(order.getOrderStatus().equals("3")){//已确定时间
-				sb.append("\"sureTime\":\"" + DateUtil.date2string(order.getSureTime(), "yyyy-MM-dd HH:mm:ss") + "\"");
-			}else if(order.getOrderStatus().equals("4") || order.getOrderStatus().equals("5")) {//已完成或已关闭
-				sb.append("\"endTime\":\"" + DateUtil.date2string(order.getEndTime(), "yyyy-MM-dd HH:mm:ss") + "\"");
+			sb.append("\"desc1\":\"" + order.getDesc1() + "\",");
+			sb.append("\"desc2\":\"" + order.getDesc2() + "\",");
+			sb.append("\"desc2\":\"" + order.getDesc2() + "\",");
+			if(menber.getType().equals("1") && (order.getOrderStatus().equals("2")
+					|| order.getOrderStatus().equals("3"))){//师傅端订单列表待确认时间和已确认时间状态时需联系业主
+				MenberDTO menberDTO = myMenberFacade.get(order.getMenId());
+				sb.append("\"mobile\":\"" + menber.getMobile() + "\",");
 			}
-			sb.append("}");
+//            sb.append("\"secondCateName\":\"" + order.getSecondCateName() + "\",");
+			sb.append("\"orderTime\":\"" + DateUtil.date2string(order.getOrderTime(), "yyyy-MM-dd HH:mm:ss") + "\"}");
+//			if(order.getOrderStatus().equals("2")) {//已派单
+//				sb.append(",\"takeTime\":\"" + DateUtil.date2string(order.getTakeTime(), "yyyy-MM-dd HH:mm:ss") + "\"");
+//			}else if(order.getOrderStatus().equals("3")){//已确定时间
+//				sb.append(",\"sureTime\":\"" + DateUtil.date2string(order.getSureTime(), "yyyy-MM-dd HH:mm:ss") + "\"");
+//			}else if(order.getOrderStatus().equals("4") || order.getOrderStatus().equals("5")) {//已完成或已关闭
+//				sb.append(",\"endTime\":\"" + DateUtil.date2string(order.getEndTime(), "yyyy-MM-dd HH:mm:ss") + "\"");
+//			}
+//			sb.append("}");
 			i++;
 
 		}
@@ -693,6 +703,112 @@ public class OrderAction extends BaseAdmAction
 		}
 		return null;
 	}
+
+	/**
+	 * 客户端师傅已上门状态更新
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward sureArriveHomeUpdateStatus(ActionMapping mapping,
+										ActionForm form, HttpServletRequest request,
+										HttpServletResponse response) throws Exception
+	{
+		String orderId = request.getParameter("orderId");
+
+		OrderDTO order = myOrderFacade.get(orderId);
+		order.setOrderStatus("4");//3已上门
+		myOrderFacade.update(order);
+		try
+		{
+			PrintWriter out = response.getWriter();
+			out.print("success");
+			out.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 客户端取消订单
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward cancelOrder(ActionMapping mapping,
+				ActionForm form, HttpServletRequest request,
+				HttpServletResponse response) throws Exception
+	{
+		String orderId = request.getParameter("orderId");
+		MenberDTO menber = (MenberDTO)request.getSession().getAttribute("wxmenber");
+        if(null != menber){
+			OrderDTO order = myOrderFacade.get(orderId);
+			order.setOrderStatus("7");//7取消订单
+			myOrderFacade.update(order);
+			try
+			{
+				PrintWriter out = response.getWriter();
+				out.print("success");
+				out.close();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * 工人端施工内容上传
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward workContentSubimt(ActionMapping mapping,
+						ActionForm form, HttpServletRequest request,
+						HttpServletResponse response) throws Exception
+	{
+		String orderId = request.getParameter("orderId");
+		String workContent = request.getParameter("workContent");
+
+		OrderDTO order = myOrderFacade.get(orderId);
+		if(null != workContent && !"".equals(workContent)){
+			order.setDesc1(workContent);
+		}
+		order.setOrderStatus("5");//已完成施工
+		myOrderFacade.update(order);
+		try
+		{
+			PrintWriter out = response.getWriter();
+			out.print("success");
+			out.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			PrintWriter out = response.getWriter();
+			out.print("error");
+			out.close();
+		}
+		return null;
+	}
+
 
 	/**
 	 * 工人端订单详情查看
