@@ -3,16 +3,17 @@ package com.shop.order.model.dto;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.sinovatech.bms.adm.model.dto.TBmsLocationDTO;
 import com.sinovatech.common.model.dto.DtoSupport;
 
 /**
  * 实体对象，请勿做客户化操作， 对应表:PUB_ORDER 订单
- * 
+ *
  * @author kevin(keepwork512@163.com)
  * @date Dec 28, 2015 12:39:58 PM
  */
 public abstract class AbstractOrderDTO extends DtoSupport
-{ 
+{
 	private String orderId;//订单ID
 	private String orderSn;//订单序列号
 	private String menId;//会员id
@@ -23,7 +24,7 @@ public abstract class AbstractOrderDTO extends DtoSupport
 	private BigDecimal totalPrice;//订单总金额
 	private BigDecimal shippingPrice;//运费
 	private Integer totalPoint;//订单总积分
-	private String orderStatus;//订单状态：1-待接单，2-已接单，3-已确认，4-已完成,-5-已取消
+	private String orderStatus;//订单状态：1-待派单，2-已派单，3-已确认时间，4-已上门，5-已完成施工，6-已评价，7-已取消订单
 	private String shippingStatus;//配送状态：0-未配送,1-已配送,2-已送达
 	private String payStatus;//支付状态：0-未支付,1-已支付
 	private String payType;//支付类型：1-余额支付,2-积分支付,3-微信支付
@@ -32,11 +33,11 @@ public abstract class AbstractOrderDTO extends DtoSupport
 	private Integer amount;//数量
 	private Date orderTime;//下单时间
 	private Date payTime;//支付时间
-	
+
 	private String expName;//快递名称
 	private String expNumber;//快递单号
 	private Date expTime;//快递发货时间
-	
+
 	private String workerId;//安装工ID
 	private String serviceType;//服务类型：1-预约安装,2-预约维修,3-预约保养,4-预约测量,5-预约咨询
 	private String firstCate;//产品分类
@@ -48,7 +49,9 @@ public abstract class AbstractOrderDTO extends DtoSupport
 	private Date endTime;//订单结束时间
 	private String desc1;//描述
 	private String desc2;//描述
-    
+
+	//所属地区或团队
+	private TBmsLocationDTO tbTBmsLocationDTO;
 
 	public AbstractOrderDTO()
 	{
@@ -255,6 +258,12 @@ public abstract class AbstractOrderDTO extends DtoSupport
 	public void setDesc2(String desc2) {
 		this.desc2 = desc2;
 	}
-	
-	
+
+	public TBmsLocationDTO getTbTBmsLocationDTO() {
+		return this.tbTBmsLocationDTO;
+	}
+
+	public void setTbTBmsLocationDTO(TBmsLocationDTO tbTBmsLocationDTO) {
+		this.tbTBmsLocationDTO = tbTBmsLocationDTO;
+	}
 }

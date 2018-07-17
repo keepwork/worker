@@ -3,16 +3,17 @@ package com.pub.menber.model.dto;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.sinovatech.bms.adm.model.dto.TBmsLocationDTO;
 import com.sinovatech.common.model.dto.DtoSupport;
 
 /**
  * 实体对象，请勿做客户化操作， 对应表:PUB_MENBER 会员
- * 
+ *
  * @author kevin(keepwork512@163.com)
  * @date Dec 28, 2015 12:39:58 PM
  */
 public abstract class AbstractMenberDTO extends DtoSupport
-{ 
+{
 	private String id;//会员ID
 	private String salesMenId;//推荐人id
 	private String familyMenId;//托管人id
@@ -43,12 +44,15 @@ public abstract class AbstractMenberDTO extends DtoSupport
 	private Integer sign;//用于保存推荐人是否已经奖励过积分（1已奖励，0未奖励）
 	private String realNameEmergency;//紧急联系人姓名
 	private String mobileEmergency;//紧急联系人电话
-	//微信资料 
-    private String openId;//微信用户id
-    private String sex;//微信性别
-    private String city;//微信用户所在城市
-    private String headimgurl;//微信用户头像
-    
+	//微信资料
+	private String openId;//微信用户id
+	private String sex;//微信性别
+	private String city;//微信用户所在城市
+	private String headimgurl;//微信用户头像
+
+	//所属地区或团队
+	private TBmsLocationDTO tbTBmsLocationDTO;
+
 
 	public AbstractMenberDTO()
 	{
@@ -57,7 +61,7 @@ public abstract class AbstractMenberDTO extends DtoSupport
 	{
 		this.setId(id);
 	}
-	
+
 	public String getId() {
 		return id;
 	}
@@ -263,5 +267,11 @@ public abstract class AbstractMenberDTO extends DtoSupport
 		this.serviceType = serviceType;
 	}
 
+	public TBmsLocationDTO getTbTBmsLocationDTO() {
+		return this.tbTBmsLocationDTO;
+	}
 
+	public void setTbTBmsLocationDTO(TBmsLocationDTO tbTBmsLocationDTO) {
+		this.tbTBmsLocationDTO = tbTBmsLocationDTO;
+	}
 }

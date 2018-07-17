@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+		"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
 	<class name="com.pub.article.model.dto.ArticleDTO"
-		table="pub_article">
+		   table="pub_article">
 		<comment>文章</comment>
 		<id name="id" type="java.lang.String">
 			<column name="ID" length="32" />
@@ -28,6 +28,11 @@
 		<property name="orderNum" type="java.lang.Integer">
 			<column name="ORDER_NUM" length="10">
 				<comment>排序</comment>
+			</column>
+		</property>
+		<property name="status" type="java.lang.Integer">
+			<column name="STATUS" length="1">
+				<comment>状态：1可用，0禁用</comment>
 			</column>
 		</property>
 		<property name="updateTime" type="java.util.Date">

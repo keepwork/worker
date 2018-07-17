@@ -4,28 +4,30 @@ import com.sinovatech.common.model.dto.DtoSupport;
 
 /**
  * 实体对象，请勿做客户化操作， 对应表:BMS_ROLE 文章分类
- * 
+ *
  * @author kevin(keepwork512@163.com)
  * @date Dec 28, 2015 12:39:58 PM
  */
 public abstract class AbstractGoodCategoryDTO extends DtoSupport
-{ 
+{
 	private String code;// 分类编号
-    
-    private String parentCode;// 父类编号
-    
-    private String name; // 分类名称
-    
-    private String keyword;// 关键字
-    
-    private String descr; // 分类描述
-    
-    private Integer catType; // 分类类型
-    
-    private Integer reserve; // 排序
-    
-    private String pic; // 图片
-    
+
+	private String parentCode;// 父类编号
+
+	private String name; // 分类名称
+
+	private String keyword;// 关键字
+
+	private String descr; // 分类描述
+
+	private Integer catType; // 分类类型
+
+	private Integer status;// 状态：1可用，0禁用
+
+	private Integer orderNum;// 排序
+
+	private String pic; // 图片
+
 
 	public AbstractGoodCategoryDTO()
 	{
@@ -35,7 +37,7 @@ public abstract class AbstractGoodCategoryDTO extends DtoSupport
 		this.setCode(code);
 	}
 
-	
+
 
 	public String getCode() {
 		return code;
@@ -74,6 +76,12 @@ public abstract class AbstractGoodCategoryDTO extends DtoSupport
 	public void setDescr(String descr) {
 		this.descr = descr;
 	}
+	public String getPic() {
+		return pic;
+	}
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
 
 	public Integer getCatType() {
 		return catType;
@@ -83,20 +91,19 @@ public abstract class AbstractGoodCategoryDTO extends DtoSupport
 		this.catType = catType;
 	}
 
-	public Integer getReserve() {
-		return reserve;
+	public Integer getStatus() {
+		return status;
 	}
 
-	public void setReserve(Integer reserve) {
-		this.reserve = reserve;
-	}
-	public String getPic() {
-		return pic;
-	}
-	public void setPic(String pic) {
-		this.pic = pic;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
-	
+	public Integer getOrderNum() {
+		return orderNum;
+	}
 
+	public void setOrderNum(Integer orderNum) {
+		this.orderNum = orderNum;
+	}
 }

@@ -5,26 +5,28 @@ import com.sinovatech.common.model.dto.DtoSupport;
 
 /**
  * 实体对象，请勿做客户化操作， 对应表:PUB_ARTICLE 文章
- * 
+ *
  * @author kevin(keepwork512@163.com)
  * @date Dec 28, 2015 12:39:58 PM
  */
 public abstract class AbstractArticleDTO extends DtoSupport
-{ 
+{
 	private String id;// 文章新闻编号
-    
-    private String catCode;// 类别编号
-    
-    private String title;// 标题
-    
-    private String pic;// 图片
-    
-    private Integer orderNum;// 排序
-    
-    private Date updateTime;// 更新时间
-    
-    private String content;// 内容
-    
+
+	private String catCode;// 类别编号
+
+	private String title;// 标题
+
+	private String pic;// 图片
+
+	private Integer status;// 状态：1可用，0禁用
+
+	private Integer orderNum;// 排序
+
+	private Date updateTime;// 更新时间
+
+	private String content;// 内容
+
 
 	public AbstractArticleDTO()
 	{
@@ -33,8 +35,8 @@ public abstract class AbstractArticleDTO extends DtoSupport
 	{
 		this.setId(id);
 	}
-	
-	
+
+
 
 	public String getId() {
 		return id;
@@ -88,5 +90,11 @@ public abstract class AbstractArticleDTO extends DtoSupport
 		this.pic = pic;
 	}
 
+	public Integer getStatus() {
+		return status;
+	}
 
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 }

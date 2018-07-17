@@ -35,7 +35,8 @@ public class OrderDAO extends DaoSupport
 
 	public OrderDTO get(java.lang.String id)
 	{
-		String hql = "from OrderDTO Z where Z.orderId=?";
+		String hql = "from OrderDTO Z "
+				+" left join fetch Z.tbTBmsLocationDTO B  where Z.orderId=?";
 		List list = this.getHibernateTemplate().find(hql, id);
 		if (list.size() == 1)
 			return (OrderDTO) list.get(0);
@@ -76,7 +77,8 @@ public class OrderDAO extends DaoSupport
 	public List list(LimitInfo limit)
 	{
 		//limit.addFilterProperty(HqlProperty.getEq("status", "1"));
-		String hql = "from OrderDTO Z ";
+		String hql = "from OrderDTO Z "
+				+ "left join fetch Z.tbTBmsLocationDTO B  ";
 		Object[] param = limit.getWhereHQL("Z");
 		if (limit.getRowDisplayed() < 1)
 		{// 非分页, 每页记录小于1时表示不进行分页

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+		"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
 	<class name="com.shop.order.model.dto.OrderDTO"
-		table="pub_order">
+		   table="pub_order">
 		<comment>订单</comment>
 		<id name="orderId" type="java.lang.String">
 			<column name="ORDER_ID" length="32" />
 			<generator class="uuid.hex" />
 		</id>
-		
+
 		<property name="orderSn" type="java.lang.String">
 			<column name="ORDER_SN" length="100">
 				<comment>订单序列号</comment>
@@ -41,7 +41,7 @@
 				<comment>发票号</comment>
 			</column>
 		</property>
-		
+
 		<property name="totalPrice" type="java.math.BigDecimal">
 			<column name="TOTAL_PRICE" length="10">
 				<comment>订单总金额</comment>
@@ -52,7 +52,7 @@
 				<comment>运费</comment>
 			</column>
 		</property>
-		
+
 		<property name="totalPoint" type="java.lang.Integer">
 			<column name="TOTAL_POINT" length="10">
 				<comment>总积分</comment>
@@ -88,7 +88,7 @@
 				<comment>数量</comment>
 			</column>
 		</property>
-		
+
 		<property name="orderTime" type="java.util.Date">
 			<column name="ORDER_TIME">
 				<comment>下单时间</comment>
@@ -114,8 +114,8 @@
 				<comment>订单结束时间</comment>
 			</column>
 		</property>
-		
-		
+
+
 		<property name="expName" type="java.lang.String">
 			<column name="exp_name" length="100">
 				<comment>快递名称</comment>
@@ -131,7 +131,7 @@
 				<comment>快递发货时间</comment>
 			</column>
 		</property>
-		
+
 		<property name="workerId" type="java.lang.String">
 			<column name="WORKER_ID" length="32">
 				<comment>安装工ID</comment>
@@ -177,6 +177,14 @@
 				<comment>描述2</comment>
 			</column>
 		</property>
-		
+
+		<many-to-one name="tbTBmsLocationDTO"
+					 class="com.sinovatech.bms.adm.model.dto.TBmsLocationDTO"
+					 fetch="select">
+			<column name="LOCATIONID" length="32">
+				<comment>区域编号</comment>
+			</column>
+		</many-to-one>
+
 	</class>
 </hibernate-mapping>

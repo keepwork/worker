@@ -91,7 +91,8 @@ public class MenberDAO extends DaoSupport
 	
 	public MenberDTO get(java.lang.String id)
 	{
-		String hql = "from MenberDTO Z where Z.id=?";
+		String hql = "from MenberDTO Z "
+				+" left join fetch Z.tbTBmsLocationDTO B  where Z.id=?";
 		List list = this.getHibernateTemplate().find(hql, id);
 		if (list.size() == 1)
 			return (MenberDTO) list.get(0);

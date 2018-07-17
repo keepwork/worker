@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+		"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
 	<class name="com.pub.article.model.dto.ArticleCategoryDTO"
-		table="pub_article_category">
+		   table="pub_article_category">
 		<comment>文章分类</comment>
 		<id name="code" type="java.lang.String">
 			<column name="CODE" length="32" />
@@ -33,6 +33,11 @@
 		<property name="catType" type="java.lang.Integer">
 			<column name="CAT_TYPE" length="1">
 				<comment>分类类型</comment>
+			</column>
+		</property>
+		<property name="status" type="java.lang.Integer">
+			<column name="STATUS" length="1">
+				<comment>状态：1可用，0禁用</comment>
 			</column>
 		</property>
 		<property name="orderNum" type="java.lang.Integer">
