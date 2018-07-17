@@ -77,6 +77,21 @@
                       <input type="file" id="upFile" name="upFile" onchange="uploadImg()"  />
                     </span></h1>
                   </li>
+                    <li class="listyle_4">
+                        <label class="left pt5" ><em>*</em>状态：</label>
+                        <h1 class="cmxformh1"> <span class="cmxformspan">
+		                      		可用<input id="status" name="status" type="radio" value="1" checked />
+									禁用<input id="status" name="status" type="radio" value="0" />
+                        </span></h1>
+                    </li>
+                    <li class="listyle_4">
+                        <label class="left pt5" >排序：</label>
+                        <h1 class="cmxformh1"> <span class="cmxformspan">
+		                      <input type="text" id="orderNum" name="orderNum"  class="bgw"
+                                     onkeyup='this.value=this.value.replace(/[^0-9]/gi,"");'
+                                     onafterpaste='this.value=this.value.replace(/[^0-9]/gi,"")' maxlength="5" />
+		                    </span></h1>
+                    </li>
                  <li class="listyle_4 bordernone">
                     <label class="left pt5">分类描述：</label>
                     <textarea name="descr" id="descr" cols="80" rows="3"></textarea>

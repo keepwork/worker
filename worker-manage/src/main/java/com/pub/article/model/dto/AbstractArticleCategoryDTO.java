@@ -21,6 +21,8 @@ public abstract class AbstractArticleCategoryDTO extends DtoSupport
     private String descr; // 分类描述
     
     private Integer catType; // 分类类型
+
+	private Integer status;// 状态：1可用，0禁用
     
     private Integer orderNum; // 排序
     
@@ -86,6 +88,12 @@ public abstract class AbstractArticleCategoryDTO extends DtoSupport
 	public void setOrderNum(Integer orderNum) {
 		this.orderNum = orderNum;
 	}
-	
 
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 }

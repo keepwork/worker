@@ -119,12 +119,21 @@
                       <input type="file" id="imgFile" name="imgFile" onchange="uploadImg()"  />
                     </span></h1>
                   </li>
-                  <li class="listyle_4">
-                    <label class="left pt5">排序：</label>
-                    <h1 class="cmxformh1"> <span class="cmxformspan">
-                      <input type="text" id="orderNum" class="bgw" name="orderNum" value="${m.orderNum}" />
-                    </span></h1>
-                  </li>
+					<li class="listyle_4">
+						<label class="left pt5" ><em>*</em>状态：</label>
+						<h1 class="cmxformh1"> <span class="cmxformspan">
+		                      		可用<input id="status" name="status" type="radio" value="1" <c:if test="${m.status=='1'}">checked</c:if> />
+									禁用<input id="status" name="status" type="radio" value="0" <c:if test="${m.status=='0'}">checked</c:if> />
+		                    </span></h1>
+					</li>
+					<li class="listyle_4">
+						<label class="left pt5" >排序：</label>
+						<h1 class="cmxformh1"> <span class="cmxformspan">
+		                      <input type="text" id="orderNum" name="orderNum"  class="bgw" value="${m.orderNum}"
+									 onkeyup='this.value=this.value.replace(/[^0-9]/gi,"");'
+									 onafterpaste='this.value=this.value.replace(/[^0-9]/gi,"")' maxlength="5" />
+		                    </span></h1>
+					</li>
                  <li class="listyle_4 bordernone">
                     <label class="left pt5">内容：</label>
                     <h1 class="cmxformh1"> <span class="cmxformspan">

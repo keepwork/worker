@@ -21,8 +21,10 @@ public abstract class AbstractGoodCategoryDTO extends DtoSupport
     private String descr; // 分类描述
     
     private Integer catType; // 分类类型
-    
-    private Integer reserve; // 排序
+
+	private Integer status;// 状态：1可用，0禁用
+
+	private Integer orderNum;// 排序
     
     private String pic; // 图片
     
@@ -74,6 +76,12 @@ public abstract class AbstractGoodCategoryDTO extends DtoSupport
 	public void setDescr(String descr) {
 		this.descr = descr;
 	}
+	public String getPic() {
+		return pic;
+	}
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
 
 	public Integer getCatType() {
 		return catType;
@@ -83,20 +91,19 @@ public abstract class AbstractGoodCategoryDTO extends DtoSupport
 		this.catType = catType;
 	}
 
-	public Integer getReserve() {
-		return reserve;
+	public Integer getStatus() {
+		return status;
 	}
 
-	public void setReserve(Integer reserve) {
-		this.reserve = reserve;
-	}
-	public String getPic() {
-		return pic;
-	}
-	public void setPic(String pic) {
-		this.pic = pic;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
-	
+	public Integer getOrderNum() {
+		return orderNum;
+	}
 
+	public void setOrderNum(Integer orderNum) {
+		this.orderNum = orderNum;
+	}
 }

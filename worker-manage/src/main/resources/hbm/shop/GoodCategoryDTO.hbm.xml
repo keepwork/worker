@@ -35,9 +35,14 @@
 				<comment>分类类型</comment>
 			</column>
 		</property>
-		<property name="reserve" type="java.lang.String">
-			<column name="RESERVE" length="10">
+		<property name="orderNum" type="java.lang.Integer">
+			<column name="ORDER_NUM" length="10">
 				<comment>排序</comment>
+			</column>
+		</property>
+		<property name="status" type="java.lang.Integer">
+			<column name="STATUS" length="1">
+				<comment>状态：1可用，0禁用</comment>
 			</column>
 		</property>
 		<property name="pic" type="java.lang.String">

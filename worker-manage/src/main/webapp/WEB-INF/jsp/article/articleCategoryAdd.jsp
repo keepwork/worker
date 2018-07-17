@@ -65,6 +65,13 @@
                       <input type="text" id="name" name="name"  class="bgw" />
                     </span></h1>
                   </li>
+                    <li class="listyle_4">
+                        <label class="left pt5" ><em>*</em>状态：</label>
+                        <h1 class="cmxformh1"> <span class="cmxformspan">
+		                      		可用<input id="status" name="status" type="radio" value="1" checked />
+									禁用<input id="status" name="status" type="radio" value="0" />
+                        </span></h1>
+                    </li>
                   <li class="listyle_4">
                     <label class="left pt5">排序：</label>
                     <h1 class="cmxformh1"> <span class="cmxformspan">

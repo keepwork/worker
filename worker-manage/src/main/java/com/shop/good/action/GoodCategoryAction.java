@@ -66,7 +66,7 @@ public class GoodCategoryAction extends BaseAdmAction
 		// 获取分页信息
 		ILimitUtil limitUtil = new ExLimitUtil();
 		LimitInfo limit = limitUtil.getLimitInfo(request, tableId, 30);
-		limit.setSortProperty("parentCode,code");
+		limit.setSortProperty("orderNum");
 		limit.setSortType("asc");
 		
 		// 查询

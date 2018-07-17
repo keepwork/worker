@@ -92,6 +92,10 @@
 				</ec:column>
 				<ec:column title="文章分类" property="catName" filterable="false"></ec:column>
 				<ec:column title="排序" property="orderNum" filterable="false"></ec:column>
+				<ec:column title="状态" property="status" filterable="false">
+					<c:if test="${m.status==0}"><font color="red">禁用</font></c:if>
+					<c:if test="${m.status==1}"><font color="green">可用</font></c:if>
+				</ec:column>
 				<ec:column title="操作" property="EEE" sortable="false"
 					filterable="false" width="28%">
 					<a class="sexybutton" href="${pageContext.request.contextPath}/pub/article/beforeEdit.do?id=${m.id}">

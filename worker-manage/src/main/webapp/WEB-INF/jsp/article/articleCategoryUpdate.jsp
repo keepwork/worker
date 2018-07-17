@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="/WEB-INF/tld/domain.tld" prefix="domain"%>
 <%@ taglib uri="/WEB-INF/tld/articleCategory.tld" prefix="cat" %>
+<%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <%@ include file="../common/commonHeader.jsp"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
-<!-- saved from url=(0070)http://192.168.2.36:8011/cms/info/index.do -->
-<HTML xmlns="http://www.w3.org/1999/xhtml">
+<HTML>
 <HEAD>
 <TITLE>后台管理系统</TITLE>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -60,12 +60,22 @@
                       <input type="text" id="name" class="bgw" name="name" value="${m.name}" />
                     </span></h1>
                   </li>
-                  <li class="listyle_4">
-                    <label class="left pt5">排序：</label>
-                    <h1 class="cmxformh1"> <span class="cmxformspan">
-                      <input type="text" id="orderNum" name="orderNum"  class="bgw" value="${m.orderNum}"/>
-                    </span></h1>
-                  </li>
+                    <li class="listyle_4">
+                        <label class="left pt5" ><em>*</em>状态：</label>
+                        <h1 class="cmxformh1"> <span class="cmxformspan">
+		                      		可用<input id="status" name="status" type="radio" value="1" <c:if test="${m.status=='1'}">checked</c:if> />
+									禁用<input id="status" name="status" type="radio" value="0" <c:if test="${m.status=='0'}">checked</c:if> />
+		                    </span></h1>
+                    </li>
+                    <li class="listyle_4">
+                        <label class="left pt5" >排序：</label>
+                        <h1 class="cmxformh1"> <span class="cmxformspan">
+		                      <input type="text" id="orderNum" name="orderNum"  class="bgw" value="${m.orderNum}"
+                                     onkeyup='this.value=this.value.replace(/[^0-9]/gi,"");'
+                                     onafterpaste='this.value=this.value.replace(/[^0-9]/gi,"")' maxlength="5" />
+		                    </span></h1>
+                    </li>
+
                  <li class="listyle_4 bordernone">
                     <label class="left pt5">分类描述：</label>
                     <textarea name="descr" id="descr" cols="80" rows="3">${m.descr}</textarea>
