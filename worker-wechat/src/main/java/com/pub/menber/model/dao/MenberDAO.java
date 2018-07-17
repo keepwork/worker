@@ -120,6 +120,16 @@ public class MenberDAO extends DaoSupport
 			return null;
 	}
 
+	public MenberDTO findMenberByMobile(java.lang.String mobile)
+	{
+		String hql = "from MenberDTO Z where Z.mobile='"+mobile+"'";
+		List list = this.getHibernateTemplate().find(hql);
+		if (list.size()>0)
+			return (MenberDTO) list.get(0);
+		else
+			return null;
+	}
+
 	public void delete(MenberDTO dto)
 	{
 		this.getHibernateTemplate().delete(dto);

@@ -194,7 +194,7 @@ footer ul li a:hover,.top_menu li a:active{}
 .marginbot {}
 ul.list li {list-style-type:none;margin-left:20px;}
 ul.tabs {width:100%;overflow:hidden;}
-ul.tabs li {list-style-type:none;display:block;float:left;cursor:pointer; width:25%; height:50px; line-height:50px; text-align:center; font-size:16px;}
+ul.tabs li {list-style-type:none;display:block;float:left;cursor:pointer; width:20%; height:50px; line-height:50px; text-align:center; font-size:16px;}
 ul.tabs li.current {background: url(../images/tab.png) bottom center no-repeat; color:#008fcb}
 .tabscontent {display:none;width:100%;text-align:justify;}
 .hzjh{}
@@ -202,7 +202,7 @@ ul.tabs li.current {background: url(../images/tab.png) bottom center no-repeat; 
 .hzjh li{ height: auto; overflow:hidden; border-radius:10px; border:solid #dedede 1px; margin:10px 0; padding:10px; line-height:30px; font-size:14px; color:#666; background:#FFF url(../images/dz_10.png) no-repeat 97% 90px; background-size:9px 16px;}
 .hzjh li h3{ background:url(../images/tx_16.png) no-repeat 0 11px; background-size:11px 16px; font-size:14px; padding:0 0 0 20px; border-bottom:solid #dedede 1px; height:40px; line-height:40px; margin:0 0 10px 0;}
 .hzjh li h3 span{ float:right;font-size:14px;}
-.hzjh li .pic{ width:120px; height:90px; float:left; margin:0 10px 0 0;}
+.hzjh li .pic{ width:3rem; height:4rem; float:left; margin:0 10px 0 0;}
 .hzjh li b{ font-size:16px; font-weight:normal;}
 .hzjh li time{ background:url(../images/dd_09.png) no-repeat 0 2px;background-size:16px 16px; padding:0 0 0 25px; }
 .hzjh li span{ color:#ff6600; font-size:18px;}

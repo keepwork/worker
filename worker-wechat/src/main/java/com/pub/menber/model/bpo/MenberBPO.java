@@ -121,6 +121,10 @@ public class MenberBPO extends BpoSupport {
 		return myMenberDAO.findMenberByLoginName(loginName);
 	}
 
+	public MenberDTO findMenberByMobile(java.lang.String mobile){
+		return myMenberDAO.findMenberByMobile(mobile);
+	}
+
 
 	public List list(LimitInfo limit) throws AppException {
 		return myMenberDAO.list(limit);

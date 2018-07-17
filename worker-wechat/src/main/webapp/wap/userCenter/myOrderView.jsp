@@ -47,6 +47,7 @@
 	       		<c:if test="${requestScope.order.orderStatus == '3'}"><span style="float:right">${requestScope.order.sureTimeStr}</c:if>
 	       		<c:if test="${requestScope.order.orderStatus == '4'}"><span style="float:right">${requestScope.order.sureTimeStr}</c:if>
 	       		<c:if test="${requestScope.order.orderStatus == '5'}"><span style="float:right">${requestScope.order.sureTimeStr}</c:if>
+	       		<c:if test="${requestScope.order.orderStatus == '6'}"><span style="float:right">${requestScope.order.sureTimeStr}</c:if>
 	        </span></li>
 	        
 	        <c:if test="${requestScope.order.orderStatus != '1'}">
@@ -104,7 +105,7 @@
 	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u105.png" style="width: 30px;height: 30px;"/></span>
 	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u71.png" /></span>
 	    	</c:if>
-	    	<c:if test="${requestScope.order.orderStatus == '4'}">
+	    	<c:if test="${requestScope.order.orderStatus == '5'}">
 	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u71.png" /></span>
 	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u71.png" /></span>
 	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u71.png" /></span>

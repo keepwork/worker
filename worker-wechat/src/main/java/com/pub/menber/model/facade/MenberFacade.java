@@ -88,6 +88,9 @@ public class MenberFacade {
 		return myMenberBPO.findMenberByLoginName(loginName);
 	}
 
+	public MenberDTO findMenberByMobile(java.lang.String mobile) {
+		return myMenberBPO.findMenberByMobile(mobile);
+	}
 
 	public List list(LimitInfo limit) throws AppException {
 		return myMenberBPO.list(limit);

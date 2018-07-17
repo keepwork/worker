@@ -11,9 +11,12 @@
 	<title>选择产品型号</title>
 	<link rel="stylesheet" href="${ctx}/wap/html/css/Basc.css" />
 	<link rel="stylesheet" href="${ctx}/wap/html/css/demo.css" />
-	<script type="text/javascript" src="${ctx}/wap/html/js/jquery.min.js" charset="UTF-8"></script>
+	<link rel="stylesheet" href="${ctx}/wap/css/jquery.alertable.css">
+	<script src="${ctx}/wap/js/alertable.js"></script>
+	<script src="${ctx}/wap/js/jquery.alertable.min.js"></script>
 	<script type="text/javascript" src="${ctx}/wap/html/js/tytabs.jquery.min.js" charset="UTF-8"></script>
 	<script type="text/javascript">
+
 	<!--
 	$(document).ready(function(){
 		$("#tabsholder").tytabs({
@@ -28,14 +31,15 @@
 				catchget:"tab2",
 				fadespeed:"normal"
 		});
+
 	});
 	-->
 	</script>
 	
-	
 	<link rel="stylesheet" href="${ctx }/common/css/pagination.css" />
     <script src="${ctx }/common/js/jquery.pagination.js" type="text/javascript" charset="UTF-8"></script>
     <script src="${ctx }/common/js/jquery-impromptu.3.2.js" type="text/javascript" charset="UTF-8"></script>
+
 	<script type="text/javascript">
 		function initData(pageIndex,status){
 			var pageCount;
@@ -67,14 +71,22 @@
 						    if(n.orderStatus=='1'){
 		            			orderStatus = "<font color='black'>待派单</font>";
 		            		}else if(n.orderStatus=='2'){
-		            			orderStatus = "<font color='black'>已接单，待确认时间</font>";
+		            			orderStatus = "<font color='black'>待确认时间</font>";
 		            		}else if(n.orderStatus=='3'){
-		            			orderStatus = "<font color='black'>已确认时间，待上门</font>";
+		            			orderStatus = "<font color='black'>待上门服务</font>";
 		            		}else if(n.orderStatus=='4'){
-		            			orderStatus = "<font color='black'>服务完成，待评价</font>";
+		            			orderStatus = "<font color='black'>待完成施工</font>";
 		            		}else if(n.orderStatus=='5'){
-		            			orderStatus = "<font color='#999'>已关闭</font>";
-		            		}
+		            			if(n.payStatus=='1'){
+                                    orderStatus = "<font color='black'>已支付待评价</font>";
+								}else{
+                                    orderStatus = "<font color='black'>已施工待支付</font>";
+								}
+		            		}else if(n.orderStatus=='6'){
+                                orderStatus = "<font color='green'>已评价</font>";
+                            }else if(n.orderStatus=='7'){
+                                orderStatus = "<font color='red'>已取消</font>";
+                            }
 						    trs = trs + "	<h3><span>" +orderStatus+ "</span>订单编号：" + n.orderSn + "</h3>";
 						    trs = trs + "   <img src='${ctx}/wap/html/images/nopic.jpg' class='pic' />";
 						    
@@ -91,9 +103,20 @@
 		            		}
 		            		
 							trs = trs + "下单时间："+n.orderTime+"<br> ";
-							if(n.serviceType=='1'){
-		            			trs = trs + "<font color='red'>￥<span>100</span></font><br /> ";
+							if(n.serviceType!='5'){
+		            			trs = trs + "<font color='red'>￥<span>"+n.totalPrice+"</span></font><br /> ";
 		            		}
+							//alert(n.desc2 == 'null');
+		            		//按钮显示模块
+                            if(n.orderStatus=='1' || n.orderStatus=='2'){
+                                trs = trs + "<a href='#' onclick='newconfirm(event,this)' class='button-info' id='cancelOrder' name='"+n.orderId+"'>取消订单</a>"
+                            }else if(n.orderStatus=='3'){//已确认时间，显示支付已上门按钮
+                                trs = trs + "<a href='#' onclick='newconfirm(event,this)' class='button-info' id='sureArriveHome'  name='"+n.orderId+"'>师傅已到</a>";
+							}else if(n.orderStatus=='5' && n.payStatus=='0'){//已完成施工且未支付，显示支付按钮
+                                trs = trs + "<a href='#' class='button-info' name='"+n.orderId+"'>&emsp;支付&emsp;</a>"
+							}else if(n.payStatus=='1' && n.desc2=='null'){//已支付且未评价，显示评价按钮
+								trs = trs + "<a href='#' class='button-info' name='"+n.orderId+"'>&emsp;评价&emsp;</a>"
+							}
 							trs = trs + "</li>";
     				});
     				trs = trs + "</ul>";
@@ -110,6 +133,9 @@
     				if(status=="3"){
     					$("#content4").append(trs);
     				}
+                    if(status=="4"){
+                        $("#content5").append(trs);
+                    }
     				
 			}
 			});
@@ -123,11 +149,66 @@
 		           num_edge_entries:2//两侧首尾分页条目数
             });
 		}
+
 		function pageselectCallback(page_id,jq) {
            initData(page_id,'${requestScope.status}');
-       }
-  </script>  
-  
+        }
+		//确认弹框
+        function newconfirm(e,obj) {
+            e.stopPropagation();//阻止点击事件向上冒泡
+		    var id = $(obj).attr("id");
+            var orderId = $(obj).attr('name');
+		    if(id == "sureArriveHome"){
+                $.alertable.confirm('确定师傅已上门？').then(function() {
+                    sureArriveHome(orderId);
+                }, function() {
+                    console.log('Confirmation canceled');
+                });
+			}else if(id == "cancelOrder"){
+                $.alertable.confirm('确定取消订单？').then(function() {
+                    cancelOrder(orderId);
+                }, function() {
+                    console.log('Confirmation canceled');
+                });
+			}
+
+
+        }
+        //确认师傅已上门
+        function sureArriveHome(orderId) {
+            $.ajax({
+                url:"${ctx}/pub/order/sureArriveHomeUpdateStatus.do?type=wap&orderId="+orderId,
+                dataType:"text",
+                async:false,
+                success: function(data){
+                    if(data != "success"){
+                        $.alertable.alert('系统异常请重试!').always(function() {
+                            console.log('Alert dismissed');
+                        });
+                    }
+                    window.location.reload();
+                }
+            });
+        }
+
+        //取消订单
+        function cancelOrder(orderId) {
+            $.ajax({
+                url:"${ctx}/pub/order/cancelOrder.do?type=wap&orderId="+orderId,
+                dataType:"text",
+                async:false,
+                success: function(data){
+                    if(data != "success"){
+                        $.alertable.alert('系统异常请重试!').always(function() {
+                            console.log('Alert dismissed');
+                        });
+                    }
+                    window.location.reload();
+                }
+            });
+        }
+
+  </script>
 </head>
 
 <body onload="javascript:initData(0,'${requestScope.status}')" style="background-color: #EEF8E1;">
@@ -141,8 +222,9 @@
 	        <ul class="tabs">
 	            <li id="tab1" onclick="initData(0,'9')" >全部</li>
 	            <li id="tab2" onclick="initData(0,'1')" >进行中</li>
-	            <li id="tab3" onclick="initData(0,'2')" >已完成</li>
-	            <li id="tab4" onclick="initData(0,'3')" >已关闭</li>
+	            <li id="tab3" onclick="initData(0,'2')" >待支付</li>
+	            <li id="tab4" onclick="initData(0,'3')" >待评价</li>
+	            <li id="tab5" onclick="initData(0,'4')" >已完成</li>
 	        </ul>
 	        <div class="contents marginbot">
 		        <div id="content1" class="tabscontent">
@@ -165,12 +247,17 @@
 	            
 				</div>
 	            <div id="content4" class="tabscontent">
-	            
+
 	           	</div>
+				<div id="content5" class="tabscontent">
+
+				</div>
 	        </div>
 	</div>
 	<!-- /Tabs -->
-	
+
+	<!--刷新页面-->
+	<div style="position: fixed;bottom: 50px;right: 10px;margin-bottom: 10px;"><a href="javascript:window.location.reload();"><img src="${ctx}/wap/images/shuaxin.png" width="42px"></a></div>
 	<div id="pagination" class="flickr" style="text-align:right;"></div>
 
 	<table height="150px;"><tr><td >&nbsp;</td></tr></table>
@@ -180,4 +267,5 @@
 		<jsp:param name="menu" value="wd" />
 	</jsp:include>
 </body>
+
 </html>

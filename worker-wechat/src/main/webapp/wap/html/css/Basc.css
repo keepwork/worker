@@ -27,4 +27,45 @@ textarea { outline:none; resize:none; ;overflow:auto;border:none;background: tra
 .show{display:block;}
 .hide{display:none;}
 
+.button-info {
+    background-color: #5bc0de;
+    border: none;
+    color: white;
+    padding: 4px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    float:right;
+}
+
+.button-none {
+    background-color: white;
+    border: solid;
+    border-width:1px;
+    color: #5bc0de;
+    padding: 3px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    float:right;
+}
+
+
+
+.demo--label{margin:20px 20px 0 0;display:inline-block}
+.demo--radio{display:none}
+.demo--radioInput{background-color:#fff;border:2px solid rgba(0,0,0,0.15);border-radius:100%;display:inline-block;height:20px;margin-right:10px;margin-top:-1px;vertical-align:middle;width:20px;line-height:1}
+.demo--radio:checked + .demo--radioInput:after{background-color:#00A1E9;border-radius:100%;content:"";display:inline-block;height:10px;margin-left:5px;margin-top:5px;width:10px}
+.demo--checkbox.demo--radioInput,.demo--radio:checked + .demo--checkbox.demo--radioInput:after{border-radius:0}
+.demo--radio:checked + .demo--radioInput{border:2px solid #00A1E9;}
+
+
 
