@@ -45,6 +45,7 @@ public class LoginOrOutAction extends BaseAdmAction
     Boolean UseIdentify = Boolean.valueOf(Boolean.parseBoolean(identify));
 //    String yzm = request.getParameter("yzm");
     String userName = "admin";
+    //String userName = "test3";
     request.setAttribute("userName", userName);
     String passWord = "test123";
     

@@ -18,6 +18,7 @@ import com.shop.order.model.facade.OrderFacade;
 import com.shop.order.model.facade.OrderItemFacade;
 import com.shop.order.model.facade.ShopCarFacade;
 import com.sinovatech.bms.adm.model.dto.TBmsLocationDTO;
+import com.sinovatech.bms.adm.model.dto.TBmsUserDTO;
 import com.sinovatech.common.config.GlobalConfig;
 import com.sinovatech.common.util.Validate;
 import com.sinovatech.common.web.action.ActionConstent;
@@ -135,6 +136,16 @@ public class OrderAction extends BaseAdmAction
 			order.setWorkerId(workerId);
 		}
 		request.setAttribute("order", order);
+
+		//登录用户权限过滤
+		TBmsUserDTO loginUser = getUser(request);
+		if(!loginUser.getUserLoginName().equals("admin")){
+			String locationId = loginUser.getTbTBmsLocationDTO().getId();
+			TBmsLocationDTO l = new TBmsLocationDTO();
+			l.setId(locationId);
+			order.setTbTBmsLocationDTO(l);
+		}
+
 		limit = this.myOrderFacade.dtoFilterProperty(order, limit);
 		limit.setSortProperty("orderTime");
 		limit.setSortType("desc");

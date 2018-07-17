@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sinovatech.bms.adm.model.dto.TBmsLocationDTO;
+import com.sinovatech.bms.adm.model.dto.TBmsUserDTO;
 import com.sinovatech.bms.adm.model.facade.BmsLocationFacade;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
@@ -89,8 +90,15 @@ public class MenberAction extends BaseAdmAction
 		String type = request.getParameter("type");
 		request.setAttribute("type", type);
 
+		//登录用户权限过滤
+		TBmsUserDTO loginUser = getUser(request);
+		String locationId = "";
+		if(!loginUser.getUserLoginName().equals("admin") && type.equals("2")){
+			locationId = loginUser.getTbTBmsLocationDTO().getId();
+		}
+
 		// 查询
-		List<MenberDTO> list = myMenberFacade.list(limit,type);
+		List<MenberDTO> list = myMenberFacade.list(limit,type,locationId);
 
 		// 设置分页信息
 		limitUtil.setLimitInfo(request, limit);
@@ -410,7 +418,7 @@ public class MenberAction extends BaseAdmAction
 
 		String type =  request.getParameter("type");
 		// 查询
-		List<MenberDTO> list = myMenberFacade.list(limit,type);
+		List<MenberDTO> list = myMenberFacade.list(limit,type,"");
 
 		// 设置分页信息
 		limitUtil.setLimitInfo(request, limit);

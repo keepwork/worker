@@ -123,6 +123,9 @@ public class OrderFacade {
 		if (!StringUtil.stringVerify(order.getWorkerId())) {
 			limit.addFilterProperty(HqlProperty.getEq("workerId",order.getWorkerId()));
 		}
+		if (null != order.getTbTBmsLocationDTO() && !StringUtil.stringVerify(order.getTbTBmsLocationDTO().getId())) {
+			limit.addFilterProperty(HqlProperty.getEq("tbTBmsLocationDTO.id",order.getTbTBmsLocationDTO().getId()));
+		}
 		return limit;
 	}
 	
