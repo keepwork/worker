@@ -11,10 +11,8 @@
 	  <form-bean name="MenberPointDTO" type="com.pub.menber.model.dto.MenberPointDTO" />
 	  <form-bean name="MenberShareDTO" type="com.pub.menber.model.dto.MenberShareDTO" />
 	  <form-bean name="MenberAddrDTO" type="com.pub.menber.model.dto.MenberAddrDTO" />
-
-	  <!--
-      <form-bean name="SeoDTO" type="com.pub.seo.model.dto.SeoDTO" />
-       -->
+	  <form-bean name="AdvertDTO" type="com.pub.advert.model.dto.AdvertDTO" />
+	  <form-bean name="SeoDTO" type="com.pub.seo.model.dto.SeoDTO" />
 </form-beans>
 
 <!-- ========================================= Global Exception Definitions -->
@@ -79,12 +77,22 @@
 			<forward name="list" path="/WEB-INF/jsp/menber/shareList.jsp" />
 		</action>
 
-		<!-- SEO
-		<action path="/pub/seo/*" type="com.pub.seo.action.SeoAction"
-			scope="request" parameter="{1}" name="SeoDTO">
-			<forward name="edit" path="/WEB-INF/jsp/seo/seoUpdate.jsp" />
-		</action>
-		 -->
+	  <!-- 广告 -->
+	  <action path="/pub/advert/*" type="com.pub.advert.action.AdvertAction"
+			  scope="request" parameter="{1}" name="AdvertDTO">
+		  <!-- back -->
+		  <forward name="list" path="/WEB-INF/jsp/advert/advertList.jsp" />
+		  <forward name="add" path="/WEB-INF/jsp/advert/advertAdd.jsp" />
+		  <forward name="edit" path="/WEB-INF/jsp/advert/advertUpdate.jsp" />
+		  <forward name="deleteConfirm" path="/WEB-INF/jsp/advert/advertDeleteConfirm.jsp" />
+	  </action>
+
+
+	  <!-- SEO -->
+	  <action path="/pub/seo/*" type="com.pub.seo.action.SeoAction"
+			  scope="request" parameter="{1}" name="SeoDTO">
+		  <forward name="edit" path="/WEB-INF/jsp/seo/seoUpdate.jsp" />
+	  </action>
 		
   </action-mappings>
   

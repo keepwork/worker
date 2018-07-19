@@ -11,10 +11,8 @@
 		<form-bean name="MenberPointDTO" type="com.pub.menber.model.dto.MenberPointDTO" />
 		<form-bean name="MenberShareDTO" type="com.pub.menber.model.dto.MenberShareDTO" />
 		<form-bean name="MenberAddrDTO" type="com.pub.menber.model.dto.MenberAddrDTO" />
-
-		<!--
-        <form-bean name="SeoDTO" type="com.pub.seo.model.dto.SeoDTO" />
-         -->
+		<form-bean name="AdvertDTO" type="com.pub.advert.model.dto.AdvertDTO" />
+		<form-bean name="SeoDTO" type="com.pub.seo.model.dto.SeoDTO" />
 	</form-beans>
 
 	<!-- ========================================= Global Exception Definitions -->
@@ -105,12 +103,14 @@
 			<forward name="shareList_web" path="/web/userCenter/myShareList.jsp" />
 		</action>
 
-		<!-- SEO
-		<action path="/pub/seo/*" type="com.pub.seo.action.SeoAction"
-				scope="request" parameter="{1}" name="SeoDTO">
-			<forward name="edit" path="/WEB-INF/jsp/seo/seoUpdate.jsp" />
+		<!-- 广告 -->
+		<action path="/pub/advert/*" type="com.pub.advert.action.AdvertAction"
+				scope="request" parameter="{1}" name="AdvertDTO">
+			<!-- front wap -->
+			<forward name="advertList_wap" path="/wap/advertList.jsp" />
+			<!-- front web -->
+			<forward name="advertList_web" path="/web/advertList.jsp" />
 		</action>
-		 -->
 
 	</action-mappings>
 

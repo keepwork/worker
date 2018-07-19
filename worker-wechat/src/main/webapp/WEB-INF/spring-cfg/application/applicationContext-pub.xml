@@ -142,7 +142,28 @@
 	</bean>
 
 
-	<!-- SEO
+	<!-- 广告 -->
+	<bean id="myAdvertDAO" class="com.pub.advert.model.dao.AdvertDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="myAdvertBPO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.pub.advert.model.bpo.AdvertBPO">
+				<property name="myAdvertDAO">
+					<ref local="myAdvertDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="myAdvertFacade" class="com.pub.advert.model.facade.AdvertFacade">
+		<property name="myAdvertBPO">
+			<ref local="myAdvertBPO" />
+		</property>
+	</bean>
+
+	<!-- SEO -->
 	<bean id="mySeoDAO" class="com.pub.seo.model.dao.SeoDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -162,5 +183,4 @@
 			<ref local="mySeoBPO" />
 		</property>
 	</bean>
-	-->
 </beans>
