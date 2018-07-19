@@ -66,6 +66,14 @@ public class ArticleFacade {
 		return myArticleBPO.listForPagination(params);
     }
 
+	/**
+	 * 更新缓存
+	 */
+	public void refreshCache()
+	{
+		myArticleBPO.refreshCache();
+	}
+
 	public ArticleBPO getMyArticleBPO() {
 		return myArticleBPO;
 	}
