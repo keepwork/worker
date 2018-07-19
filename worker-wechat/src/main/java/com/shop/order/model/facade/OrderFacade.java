@@ -79,6 +79,10 @@ public class OrderFacade {
 		return myOrderBPO.listByStatus(status);
 	}
 
+	public int getWorkerOrderTotalNum(String workerId) throws AppException {
+		return myOrderBPO.getWorkerOrderTotalNum(workerId);
+	}
+
 	public OrderBPO getMyOrderBPO() {
 		return myOrderBPO;
 	}

@@ -77,6 +77,10 @@ public class OrderBPO extends BpoSupport {
 	public List listByStatus(String status) throws AppException {
 		return myOrderDAO.listByStatus(status);
 	}
+
+	public int getWorkerOrderTotalNum(String workerId) throws AppException {
+		return myOrderDAO.getWorkerOrderTotalNum(workerId);
+	}
 	
 	public Map<String,Object> listForPagination(Map<String,String> params){
 		return myOrderDAO.listForPagination(params);

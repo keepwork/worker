@@ -149,6 +149,49 @@ public class AppraiseDAO extends DaoSupport
 	{
 		return this.getHibernateTemplate().find("from AppraiseDTO Z where Z.id in (" + ids + ")");
 	}
+
+	/**
+	 * 获取工人的评价/好评|中评|差评的记录数
+	 *
+	 * @param workerId
+	 * @param appraiseState
+	 * @return
+	 */
+	public int getWorkerAppraiseCount(String workerId,String appraiseState)
+	{
+		String where = "";
+		if("1".equals(appraiseState)){//好评
+			where = "((t.score_zhunshi+t.score_taidu+t.score_zhiliang)/3)=5";//5分好评
+		}else if("2".equals(appraiseState)){//中评
+			where = "(((t.score_zhunshi+t.score_taidu+t.score_zhiliang)/3)=3 or ((t.score_zhunshi+t.score_taidu+t.score_zhiliang)/3)=4)";//3、4分中评
+		}else if("3".equals(appraiseState)){//差评
+			where = "(((t.score_zhunshi+t.score_taidu+t.score_zhiliang)/3)=1 or ((t.score_zhunshi+t.score_taidu+t.score_zhiliang)/3)=2)";//1、2分差评
+		}else{//所有评价
+			where = "1=1";
+		}
+		final String sql = "select t.ID from pub_menber_appraise t where t.worker_id='"+workerId+"' and "+where;
+		List list = (List) this.getHibernateTemplate().execute(
+				new HibernateCallback() {
+					@Override
+					public Object doInHibernate(Session arg0)
+							throws HibernateException, SQLException {
+						SQLQuery query = arg0.createSQLQuery(sql);
+						return query.list();
+					}
+				});
+		return list.size();
+	}
+
+
+	public AppraiseDTO getByOrderId(java.lang.String orderId)
+	{
+		String hql = "from AppraiseDTO Z where Z.orderId=?";
+		List list = this.getHibernateTemplate().find(hql, orderId);
+		if (list.size() == 1)
+			return (AppraiseDTO) list.get(0);
+		else
+			return null;
+	}
 	
 
 }

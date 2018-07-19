@@ -5,130 +5,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-	<title>惠达</title>
-	<link rel="stylesheet" href="${ctx}/wap/html/css/Basc.css" />
-	<link rel="stylesheet" href="${ctx}/wap/html/css/demo.css" />
-	
-  	<!-- 公用JS|CSS-->
-	<link href="${ctx}/wap/css/cate.css" rel="stylesheet" type="text/css" />
-	<link href="${ctx}/wap/css/iscroll.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="${ctx}/common/js/jquery-1.4.4.min.js" ></script>
-	
-	<style type="text/css" > 
-		.qrddxxf ul li{height:35px; line-height:35px; font-size:16px;}
-	</style>
-	
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>订单详情</title>
+<link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/base.css">
+<link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/public.css">
+<script type="text/javascript" src="${ctx }/wap/workerCenter/js/jquery.min.js" ></script>
+<script src="${ctx }/wap/workerCenter/js/common.js"></script>
 </head>
 
 <body>
-	<!-- 公用头部-->
-	<jsp:include page="head.jsp"></jsp:include>
-	
-	<div class="qrddxxf" style="margin-top: 70px;">
-	    <h4 style="height:5px;padding:0px;">&nbsp;</h4>
-	    <ul style="padding-bottom: 25px;">
-	        <li>地址</li>
-	        <li><span style="padding-left: 30px;">${requestScope.address.consignee}</span><span style="padding-left: 100px;">${requestScope.address.mobile}</span></li>
-	        <li><span style="padding-left: 30px;">${requestScope.address.province}${requestScope.address.city}${requestScope.address.county}${requestScope.address.street}</span></li>
-	    </ul>
-	</div>
-	
-	<div class="qrddxxf">
-	    <h4 style="height:5px;padding:0px;">&nbsp;</h4>
-	    <ul>
-	        <li>描述<span style="float:right">${requestScope.order.orderDesc}</span></li>
-	        <hr size=1 style="color: black;border-style:dotted;" width="100%">
-	        <li>服务时间
-	       		<c:if test="${requestScope.order.orderStatus == '1'}"><span style="float:right">师傅跟我确认</c:if>
-	       		<c:if test="${requestScope.order.orderStatus == '2'}"><span style="float:right">师傅跟我确认</c:if>
-	       		<c:if test="${requestScope.order.orderStatus == '3'}"><span style="float:right">${requestScope.order.sureTimeStr}</c:if>
-	       		<c:if test="${requestScope.order.orderStatus == '4'}"><span style="float:right">${requestScope.order.sureTimeStr}</c:if>
-	       		<c:if test="${requestScope.order.orderStatus == '5'}"><span style="float:right">${requestScope.order.sureTimeStr}</c:if>
-	       		<c:if test="${requestScope.order.orderStatus == '6'}"><span style="float:right">${requestScope.order.sureTimeStr}</c:if>
-	        </span></li>
-	        
-	        <c:if test="${requestScope.order.orderStatus != '1'}">
-	        	<li>服务师傅<span style="float:right">${requestScope.worker.realName}</span></li>
-	        	<li><span style="float:right">接单数：100&nbsp;满意度：90%</span></li>
-	        	<li><span style="float:right">${requestScope.worker.mobile}</span></li>
-	        	<li style="height: 70px;"><span style="float:right;padding-right: 154px;"><img src="${sessionScope.wxmenber.headimgurl}" width="80" height="80" /></span></li>
-	        </c:if>
-	    </ul>
-	</div> 
-	
-	<div class="qrddxxf">
-	    <h4 style="height:5px;padding:0px;">&nbsp;</h4>
-	    <ul>
-	        <li>预约服务类型<span style="float:right">
-	        	<c:if test="${requestScope.order.serviceType == '1'}">安装</c:if>
-		        <c:if test="${requestScope.order.serviceType == '2'}">维修</c:if>
-		        <c:if test="${requestScope.order.serviceType == '3'}">保养</c:if>
-		        <c:if test="${requestScope.order.serviceType == '4'}">测量</c:if>
-		        <c:if test="${requestScope.order.serviceType == '5'}">咨询</c:if>
-	        </span></li>
-	        <li>预约产品类型<span style="float:right">${requestScope.firstCateName}</span></li>
-	    </ul>
-	</div>
-	
-	<div class="qrddxxf">
-	    <h4 style="height:5px;padding:0px;">&nbsp;</h4>
-	    <ul>
-			<li>服务费用<span style="float:right">0元<br></span></li>
-			<li>&nbsp;<span style="float:right">收费说明</span></li>
-			<hr size=1 style="color: black;border-style:dotted;" width="100%">
-			<li>支付方式<span style="float:right">微信支付</span></li>
-	        <c:if test="${requestScope.order.orderStatus == '4'}"><li>回访结果<span style="float:right">很满意</span></li></c:if>
-	    </ul>
-	</div>
-	
-	<div style="background-color: #E3E3E3;">
-	    <h4 style="height:20px;">&nbsp;</h4>
-	    <span style="padding-left: 37px;">
-	    	<c:if test="${requestScope.order.orderStatus == '1'}">
-	    	<span ><img src="${ctx}/wap/userCenter/images/u105.png" style="width: 30px;height: 30px;"/></span>
-	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u71.png" /></span>
-	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u71.png" /></span>
-	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u71.png" /></span>
-	    	</c:if>
-	    	<c:if test="${requestScope.order.orderStatus == '2'}">
-	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u71.png" /></span>
-	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u105.png" style="width: 30px;height: 30px;"/></span>
-	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u71.png" /></span>
-	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u71.png" /></span>
-	    	</c:if>
-	    	<c:if test="${requestScope.order.orderStatus == '3'}">
-	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u71.png" /></span>
-	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u71.png" /></span>
-	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u105.png" style="width: 30px;height: 30px;"/></span>
-	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u71.png" /></span>
-	    	</c:if>
-	    	<c:if test="${requestScope.order.orderStatus == '5'}">
-	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u71.png" /></span>
-	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u71.png" /></span>
-	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u71.png" /></span>
-	    	<span style="padding-left: 50px;"><img src="${ctx}/wap/userCenter/images/u105.png" style="width: 30px;height: 30px;"/></span>
-	    	</c:if>
-	    </span>
-	    <br><br>
-	    <span style="padding-left: 20px;">
-	    	<span>&nbsp;等待派单&nbsp;</span>
-			<span style="padding-left: 20px;">待确认时间</span>
-			<span style="padding-left: 20px;">待上门服务</span>
-			<span style="padding-left: 20px;">&nbsp;服务完成&nbsp;</span>
-	    </span>
-	</div>
-	
-	<div style="background-color: #E3E3E3;">
-	    <h4 style="height:105px;padding:0px;">&nbsp;</h4>
-	</div>
-	
-	<!-- foot -->
-	<jsp:include page="../public/foot.jsp" flush="false">
-		<jsp:param name="menu" value="wd" />
-	</jsp:include>
-	
+<header class="header" id="header">
+<a href="javascript:history.go(-1)" target=_self class="back">返回</a>
+<h1>订单详情</h1>
+</header>
+<!--header-end-->
+<div class="container" id="container"> 
+<div class="order-schedule-img"><img src="${ctx }/wap/workerCenter/images/1.png"></div>
+<div class="order-confirm">
+  <div class="order-num"><span class="fl">订单号：<em>${requestScope.order.orderSn}</em></span></div>
+  <ul class="order-confirm-list clearfix order-cancel-list">
+    <li><p>订单详情</p></li>
+    <li><h2>客户姓名</h2><span>${requestScope.address.consignee}</span></li>
+    <li><h2>联系电话</h2><span>${requestScope.address.mobile}</span></li>
+    <li><h2>服务地址</h2><span>${requestScope.address.province}${requestScope.address.city}${requestScope.address.county}${requestScope.address.street}</span></li>
+    <li><h2>服务类型</h2>
+      <span>
+        <c:if test="${requestScope.order.serviceType == '1'}">安装</c:if>
+        <c:if test="${requestScope.order.serviceType == '2'}">维修</c:if>
+        <c:if test="${requestScope.order.serviceType == '3'}">保养</c:if>
+        <c:if test="${requestScope.order.serviceType == '4'}">测量</c:if>
+        <c:if test="${requestScope.order.serviceType == '5'}">咨询</c:if>
+      </span>
+    </li>
+    <li><h2>产品类型</h2><span>${requestScope.firstCateName}</span></li>
+    <li><h2>服务时间</h2>
+      <span>
+        <c:if test="${requestScope.order.orderStatus == '1'}">师傅跟我确认</c:if>
+        <c:if test="${requestScope.order.orderStatus == '2'}">师傅跟我确认</c:if>
+        <c:if test="${requestScope.order.orderStatus == '3'}">${requestScope.order.sureTimeStr}</c:if>
+        <c:if test="${requestScope.order.orderStatus == '4'}">${requestScope.order.sureTimeStr}</c:if>
+        <c:if test="${requestScope.order.orderStatus == '5'}">${requestScope.order.sureTimeStr}</c:if>
+        <c:if test="${requestScope.order.orderStatus == '6'}">${requestScope.order.sureTimeStr}</c:if>
+      </span>
+    </li>
+    <li><h2>备注信息</h2><span>${requestScope.order.orderDesc}</span></li>
+	  <li><h2>服务费用</h2><p><em>￥${requestScope.order.totalPrice}</em></p></li>
+  </ul>
+  <div style="margin-bottom: 0.3rem"></div>
+  <ul class="order-confirm-list clearfix order-cancel-list">
+    <li><p>师傅信息</p></li>
+    <li><h2>师傅姓名</h2><span>${requestScope.worker.realName}</span></li>
+    <li><h2>接单数量</h2><span>${requestScope.totalOrderNum}</span></li>
+    <li><h2>好评指数</h2><span>${requestScope.positiveAppraiseRate}%</span></li>
+    <li><h2>师傅头像</h2><span><img src="${sessionScope.worker.headimgurl}" style="width: 120px;height: 180px" /></span></li>
+  </ul>
+</div>
+<!--order-confirm-end-->
+
+</div>
+<!--container-end-->
 </body>
 </html>

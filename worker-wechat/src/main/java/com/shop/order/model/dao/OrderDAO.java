@@ -256,6 +256,20 @@ public class OrderDAO extends DaoSupport
 		        });
 		return list.size();
 	}
+
+	public int getWorkerOrderTotalNum(String workerId){
+		final String sql = "select t.ORDER_ID from pub_order t  where t.order_status<>'7'and t.worker_id='" +workerId+"'";
+		List list = (List) this.getHibernateTemplate().execute(
+				new HibernateCallback() {
+					@Override
+					public Object doInHibernate(Session arg0)
+							throws HibernateException, SQLException {
+						SQLQuery query = arg0.createSQLQuery(sql);
+						return query.list();
+					}
+				});
+		return list.size();
+	}
 	
 	
 

@@ -87,6 +87,7 @@ public class AppraiseAction extends BaseAdmAction
 			dto.setMenName(m.getRealName());
 			dto.setWorkerId(worker.getId());
 			dto.setWorkerName(worker.getRealName());
+			dto.setOrderId(orderId);
 
 			orderDTO.setOrderStatus("6");
 			try {

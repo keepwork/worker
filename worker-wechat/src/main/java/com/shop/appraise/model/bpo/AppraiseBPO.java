@@ -25,7 +25,7 @@ public class AppraiseBPO extends BpoSupport {
 	
 	public boolean saveAppraiseAanUpdateOrderTX(AppraiseDTO dto,OrderDTO orderDTO) throws AppException {
 		myAppraiseDAO.save(dto);
-		myOrderDAO.save(orderDTO);
+		myOrderDAO.update(orderDTO);
 		return true;
 	}
 
@@ -73,6 +73,14 @@ public class AppraiseBPO extends BpoSupport {
 	public Map<String,Object> listForPagination(Map<String,String> params){
 		return myAppraiseDAO.listForPagination(params);
     }
+
+    public int getWorkerAppraiseCount(String workerId,String appraiseState){
+		return myAppraiseDAO.getWorkerAppraiseCount(workerId,appraiseState);
+    }
+
+	public AppraiseDTO getByOrderId(java.lang.String orderId){
+		return myAppraiseDAO.getByOrderId(orderId);
+	}
 
 	public AppraiseDAO getMyAppraiseDAO() {
 		return myAppraiseDAO;
