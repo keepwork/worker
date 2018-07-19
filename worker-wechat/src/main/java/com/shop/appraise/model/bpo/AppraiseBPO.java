@@ -24,7 +24,8 @@ public class AppraiseBPO extends BpoSupport {
 
 	
 	public boolean saveAppraiseAanUpdateOrderTX(AppraiseDTO dto,OrderDTO orderDTO) throws AppException {
-		myAppraiseDAO.save(dto);
+		AppraiseDTO appraiseDTO = myAppraiseDAO.save(dto);
+		orderDTO.setAppraiseId(appraiseDTO.getId());
 		myOrderDAO.update(orderDTO);
 		return true;
 	}

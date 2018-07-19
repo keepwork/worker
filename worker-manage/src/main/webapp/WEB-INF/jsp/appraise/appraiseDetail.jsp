@@ -54,6 +54,15 @@
                     <label class="left pt5">评价内容：</label>
                     <textarea name="content" id="content" cols="80" rows="3" readonly="readonly">${m.content}</textarea>
                  </li>
+                <li class="listyle_4 bordernone">
+                    <label class="left pt5">是否隐藏：</label>
+                    <c:if test="${m.isShow == 1}">
+                        <span style="line-height: 30px">否</span>
+                    </c:if>
+                    <c:if test="${m.isShow == '0'}">
+                        <span style="line-height: 30px">是</span>
+                    </c:if>
+                </li>
                  <%--<li class="listyle_4 bordernone">--%>
                     <%--<label class="left pt5">回复内容：</label>--%>
                     <%--<textarea name="feedback" id="feedback" cols="80" rows="3">${m.feedback}</textarea>--%>
@@ -64,7 +73,9 @@
            
           </div>
       	<div class="toolbar mb10">
-        	<a href="#" class="sexybutton" onclick="location.href='${pageContext.request.contextPath}/pub/appraise/hidden.do'"><span><span>隐藏</span></span></a>
+            <c:if test="${m.isShow == 1}">
+        	    <a href="#" class="sexybutton" onclick="location.href='${pageContext.request.contextPath}/pub/appraise/appraiseHidden.do'"><span><span>隐藏</span></span></a>
+            </c:if>
         	<%--<a href="#" class="sexybutton"  onClick="rbutton()"><span><span>重置 </span></span></a>--%>
         	<a href="#" class="sexybutton" onclick="location.href='${pageContext.request.contextPath}/pub/order/queryList.do'"><span><span>返回</span></span></a>
         </div>

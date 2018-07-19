@@ -28,9 +28,9 @@ import com.sinovatech.common.web.limit.LimitInfo;
  */
 public class AppraiseDAO extends DaoSupport
 {
-	public void save(AppraiseDTO dto)
+	public AppraiseDTO save(AppraiseDTO dto)
 	{
-		this.getHibernateTemplate().save(dto);
+		return (AppraiseDTO)this.getHibernateTemplate().save(dto);
 	}
 
 	public AppraiseDTO get(java.lang.String id)
