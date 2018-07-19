@@ -28,10 +28,15 @@
         document.getElementById("orderId").value=orderId;
         show('cover1','pop_sh','');
     }
+
+    function openDiv2() {
+        show('cover2','pop_sh2','');
+    }
     function updateOrder() {
         var orderId = document.getElementById("orderId");
         var workerId = document.getElementById("workerId");
         var totalPrice = document.getElementById("totalPrice");
+        var cycleInit = document.getElementById("cycleInit");
         if(workerId.value == ''){
             alert("请选择工人");
             workerId.focus();
@@ -42,8 +47,25 @@
             totalPrice.focus();
             return;
         }
+        if(cycleInit.value == ''){
+            alert("周期天数不能为空");
+            cycleInit.focus();
+            return;
+        }
         hide('cover1','pop_sh','');
         document.updateOrderForm.submit();
+
+    }
+
+    function cycleAdd() {
+        var cycleAdd = document.getElementById("cycleAdd");
+        if(cycleAdd.value == ''){
+            alert("周期天数不能为空");
+            cycleAdd.focus();
+            return;
+        }
+        hide('cover1','pop_sh','');
+        document.orderCycleAddForm.submit();
 
     }
 
@@ -221,6 +243,11 @@
 							<span><span>重新派单</span></span>
 						</a>
 					</c:if>
+					<c:if test="${m.orderStatus eq '4'}">
+						<a class="sexybutton" href="javascript:void(0)" onclick="openDiv2()">
+							<span><span>新增周期</span></span>
+						</a>
+					</c:if>
 					<c:if test="${m.orderStatus eq '6'}">
 						<a class="sexybutton" href="${ctx}/pub/appraise/appraiseView.do?appraiseId=${m.appraiseId}">
 							<span><span>评价详情</span></span>
@@ -264,7 +291,13 @@
 					<tr>
 						<td align="right">订单金额：</td>
 						<td align="left">
-							<input type="text" name="totalPrice" id="totalPrice" class="bgw" />
+							<input type="text" name="totalPrice" id="totalPrice" class="bgw" />元
+						</td>
+					</tr>
+					<tr>
+						<td align="right">周期天数：</td>
+						<td align="left">
+							<input type="text" name="cycleInit" id="cycleInit" class="bgw" />天
 						</td>
 					</tr>
 				</table>
@@ -272,8 +305,37 @@
 			</form>
 		</div>
 	</div>
+
+
 </div>
 <!--提示弹出层 结束-->
+<!--提示弹出层2 开始-->
+<div id="cover2"></div>
+<div class="pop_555" id="pop_sh2" style="width: 600px; height: 190px;">
+	<div class="pop_555_t" style="width: 600px;">
+		<!---pop_555_t-->
+		<strong class="fl ml15">新增周期</strong> <span
+			class="fr mr15 pop_close" onclick="hide('cover2','pop_sh2');"></span>
+	</div>
+	<div class="pop_555_m text_c" style="width: 600px; padding-top: 20px">
+		<!---pop_555_m-->
+		<div id="cycle_add_id">
+			<form name="orderCycleAddForm" class="cmxform" action="${ctx}/pub/order/orderCycleAdd.do" target="hideframe" method="post" >
+				<input type="hidden" name="orderId" value="${m.orderId }"/>
+				<table align="center">
+					<tr>
+						<td align="right">周期天数：</td>
+						<td align="left">
+							<input type="text" name="cycleAdd" id="cycleAdd" class="bgw" />天
+						</td>
+					</tr>
+				</table>
+				<input type="button" value="保存" onclick="cycleAdd();" />
+			</form>
+		</div>
+	</div>
+</div>
+<!--提示弹出层2 结束-->
 
 <iframe name="hideframe" id="hideframe" width="0" height="0"></iframe>
 

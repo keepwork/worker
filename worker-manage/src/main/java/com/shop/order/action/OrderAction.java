@@ -461,6 +461,7 @@ public class OrderAction extends BaseAdmAction
 		String orderId = request.getParameter("orderId");
 		String workerId = request.getParameter("workerId");
 		String totalPrice = request.getParameter("totalPrice");
+		Integer cycleInit = Integer.parseInt(request.getParameter("cycleInit"));
 
 		MenberDTO menber = myMenberFacade.get(workerId);
 
@@ -470,9 +471,35 @@ public class OrderAction extends BaseAdmAction
 		order.setTotalPrice(new BigDecimal(totalPrice));
 		order.setOrderStatus("2");
 		order.setTakeTime(new Date());
+		order.setCycleInit(cycleInit);
 		order.setTbTBmsLocationDTO(menber.getTbTBmsLocationDTO());
 		myOrderFacade.update(order);
 
+		CommonMapping mping = new CommonMapping("保存成功!", getRealUri(mapping,"order/queryList"), ActionConstent.ALERT);
+		request.setAttribute("mping", mping);
+		return mapping.findForward(ActionConstent.COMMON_MAPPING);
+	}
+
+	/**
+	 * 任务周期新增
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward orderCycleAdd(ActionMapping mapping,
+			  ActionForm form, HttpServletRequest request,
+			  HttpServletResponse response) throws Exception
+	{
+		String orderId = request.getParameter("orderId");
+		Integer cycleAdd = Integer.parseInt(request.getParameter("cycleAdd"));
+
+		OrderDTO order = myOrderFacade.get(orderId);
+		order.setCycleAdd(cycleAdd);
+		myOrderFacade.update(order);
 		CommonMapping mping = new CommonMapping("保存成功!", getRealUri(mapping,"order/queryList"), ActionConstent.ALERT);
 		request.setAttribute("mping", mping);
 		return mapping.findForward(ActionConstent.COMMON_MAPPING);

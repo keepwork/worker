@@ -11,17 +11,33 @@
 		<link rel="stylesheet" type="text/css" href="${ctx}/common/css/public2.css"/>
 		<link rel="stylesheet" type="text/css" href="${ctx}/common/css/style2.css" />
 		<link href="${ctx}/sys/css/public.css" rel="stylesheet" type="text/css">
+		<script src="${ctx}/common/js/jquery.min.js"></script>
+		<script src="${ctx}/common/js/jquery.myProgress.js"></script>
+		<link rel="stylesheet" href="${ctx}/common/css/myProgress.css">
 	</head>
+	<script>
+        $(function () {
+            $("#div3").myProgress({speed: 500, percent: 50,width: "90%"});
+        })
+	</script>
 
-<body class="t2">
+	<body class="t2">
 <!--主体 开始-->
 <div class="breadcrumbs"><span>当前位置：</span><span>订单管理</span> &gt;&gt; <span>订单查看</span></div>
 <div class="count"> 
 	<div class="right_cont">
 		<div id="leftTab1_Content0" class="">
-				
-				<!-- 订单基本信息 -->
-				<div class="flex_box_top"><strong class="fl ml10 font14">订单基本信息</strong></div>
+
+			<!-- 施工进度 -->
+			<div class="flex_box_top"><strong class="fl ml10 font14">施工进度</strong></div>
+			<div style="margin: 20px 0">
+				<div class="progress-out" id="div3">
+					<div class="percent-show"><span>0</span>%</div>
+					<div class="progress-in"></div>
+				</div>
+			</div>
+			<!-- 订单基本信息 -->
+			<div class="flex_box_top"><strong class="fl ml10 font14">订单基本信息</strong></div>
 			 	<table width="100%" cellspacing="0" cellpadding="0" border="0" align="center" class="table001 text_l  mt5">
 					<tr>
 						<th width="12%" align="right">订单ID：</th>

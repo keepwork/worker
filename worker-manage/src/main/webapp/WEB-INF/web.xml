@@ -32,7 +32,7 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
 	<!-- 图形验证码 -->
 	<servlet>
 		<servlet-name>sinoDefaultCaptcha</servlet-name>

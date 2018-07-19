@@ -16,7 +16,6 @@ import com.shop.order.model.dto.OrderDTO;
 import com.shop.order.model.facade.OrderFacade;
 import com.sinovatech.common.util.Validate;
 import com.sinovatech.common.web.action.ActionConstent;
-import javafx.concurrent.Worker;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;

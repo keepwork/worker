@@ -2,8 +2,9 @@
 Use: Reset Styles for all browsers
 ***********************************/
 html,body{margin:0px;padding:0px;border:0px;}
-*{ font-family:"ËÎÌå";} 
-body, p, div {border:0;	margin: 0;padding: 0;font-size: 12px;background: #fff;}
+*{ font-family:"ï¿½ï¿½ï¿½ï¿½";} 
+body, p, div {border:0;	margin: 0;padding: 0;font-size: 12px;}
+
 input,h1, h2, h3, h4, h5, h6 {margin: 0;padding: 0;font-size: 100%;}	
 ol li img {margin:0px 10px;padding:0px;list-style:none;}
 h1,h3{font-size:14px;text-align:center;}
@@ -54,7 +55,7 @@ select { padding: 0; }
 #cms_moreEditor .tb{text-align: center; background: #f0f0f0;}
 #cms_tools{display: none;}
 .colblue{color:#09F;}
-/*  ³£ÓÃ¹¤¾ß  */
+/*  ï¿½ï¿½ï¿½Ã¹ï¿½ï¿½ï¿½  */
 #tools{list-style: none;list-style-position:outside;z-index:1000;position: absolute;width: 120px;background: #f0f0f0;display: none;border-bottom: 2px solid #DDDDDD; border-right: 3px solid #DFDFDF;}
 #tools li{margin-left: 10px;display: block;	float: none;}
 .boxTitle{font-size: 14px; text-align: center;height: 25px; line-height: 25px; background: #6699cc; color: #fff;font-weight: bold;}
@@ -66,7 +67,7 @@ ol li img{margin:0px 10px;}
 .spancont2{display:inline;margin:0px 0px 10px 0px;}
 .spancont1{display:block;margin:0px 0px 10px 0px;float:left;}
 .labletitle{height:40px;float:left;	margin-right:10px;}
-/*±í¸ñÑùÊ½*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½Ê½*/
 .eXtremeTable {margin: 0;padding: 0;text-align:center;}
 .menujuli{display:inline-block;overflow:hidden;margin:0px 5px;}
 .eXtremeTable select{font-family: verdana, arial, helvetica, sans-serif;font-size: 12px;border: solid 1px #EEE;width: 75px;}
@@ -101,7 +102,7 @@ background-repeat: no-repeat;}
 .eXtremeTable .calcRow {background-color: #F4F4F4;}
 .eXtremeTable .calcTitle {background-color: #F4F4F4;color: black;font-family: verdana, arial, helvetica, sans-serif;font-weight: bold;font-size: 12px;}
 .eXtremeTable .calcResult {background-color: #F4F4F4;color: black;font-family: verdana, arial, helvetica, sans-serif;}
-/*±íµ¥ÑùÊ½*/
+/*ï¿½ï¿½ï¿½ï¿½Ê½*/
 .cmxform {font-size: 12px;color: #333;}
 .cmxform fieldset{margin-bottom:0px;}
 .cmxform label{	display:inline-block;line-height:1.8;vertical-align:top;width: 150px;text-align: right;	padding-right: 10px;}
@@ -122,7 +123,7 @@ background-repeat: no-repeat;}
 .cmxform input.gray {background: #dedede; }
 .cmxform .cmxformh1{margin:0px;padding:0px;float:left;overflow:hidden;width:70%;text-align:left;font-size:12px;}
 .cmxform .cmxformspan{display:block;margin-top:5px;float:left;}
-/*°´Å¥ÑùÊ½*/
+/*ï¿½ï¿½Å¥ï¿½ï¿½Ê½*/
 .sexybutton {display: inline-block;	margin: 0px 2px 0px 0px;padding: 0;	text-decoration: none;background: none;border: none;white-space: nowrap;cursor: pointer;user-select: none;	-moz-user-select: none;	_width: 0;overflow: visible;}
 .sexybutton span {display: block;height: 24px;padding-right: 12px;background-repeat: no-repeat;	background-position: right top;}
 .sexybutton span span {padding-right: 0;padding-left: 12px;	line-height: 24px;background-position: left top;}
@@ -240,21 +241,21 @@ _background-image: none;display: -moz-inline-stack;	display: inline-block;vertic
 .sexybutton span.wrench			{ background-image: url(images/icons/silk/wrench.png); }
 .sexybutton span.up				{ background-image: url(images/icons/silk/arrow_up.png); }
 .sexybutton span.down			{ background-image: url(images/icons/silk/arrow_down.png); }
-/*×ó±ß²Ëµ¥*/
+/*ï¿½ï¿½ß²Ëµï¿½*/
 #columnLeftPane {MIN-WIDTH: 100px;PADDING-BOTTOM: 4px;PADDING-LEFT: 4px;WIDTH: 200px;PADDING-RIGHT: 4px;OVERFLOW: auto;PADDING-TOP: 4px;display:block; float:left;height:70%;}
 #infoRightPane {MIN-WIDTH: 700px;PADDING-BOTTOM: 4px;PADDING-LEFT: 4px;PADDING-RIGHT: 4px;OVERFLOW: auto;PADDING-TOP: 4px;}
 #container .vsplitbar {WIDTH: 6px;BACKGROUND: url(../images/spitterDragger.gif) #f0f0f0 no-repeat center 50%;}
 #container .active.vsplitbar{BACKGROUND: url(../images/spitterDragger.gif) #e88 no-repeat center 50%;}
 #container .vsplitbar:hover{BACKGROUND: url(../images/spitterDragger.gif) #e88 no-repeat center 50%;}
 #tree_area{margin-top:0px;height:70%;}
-.dtree {font-family: "ËÎÌå";font-size: 12px;color: #000;white-space: nowrap;margin:0px;padding:0;margin-top: -20px;}
+.dtree {font-family: "ï¿½ï¿½ï¿½ï¿½";font-size: 12px;color: #000;white-space: nowrap;margin:0px;padding:0;margin-top: -20px;}
 .dtree img{border: 0px;vertical-align: middle;}
 .dtree a{color: #000;text-decoration: none;}
 .dtree a.node, .dtree a.nodeSel {white-space: nowrap;padding: 1px 2px 1px 2px;}
 .dtree a.node:hover, .dtree a.nodeSel:hover {color: #000;text-decoration: underline;}
 .dtree a.nodeSel{background-color: #c0d2ec;}
 .dtree .clip {overflow: hidden;}
-/*Ê×Ò³ÑùÊ½*/
+/*ï¿½ï¿½Ò³ï¿½ï¿½Ê½*/
 .iframebox{display:block;height:auto;overflow:auto;}
 .ifamestyle{padding:0px;margin:0px;height:100%;}
 .cmstd{color:#f0f0f0; overflow:hidden;}
@@ -343,7 +344,7 @@ a.af0f0f0{color:#f0f0f0;font-size:12px; text-decoration:none;}
 .mr10{margin-right:10px}
 
 
-/** µ¯³öÌáÊ¾¿òÑùÊ½ start*/
+/** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ê½ start*/
  .jqifade{ position: absolute; background-color: #aaaaaa; }
  div.jqi{ width: 400px; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; position: absolute; background-color: #ffffff; font-size: 11px; text-align: left; border: solid 1px #eeeeee; border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; padding: 7px; }
  div.jqi .jqicontainer{ font-weight: bold; }
@@ -354,4 +355,4 @@ a.af0f0f0{color:#f0f0f0;font-size:12px; text-decoration:none;}
  div.jqi button:hover{ background-color: #728A8C; }
  div.jqi button.jqidefaultbutton{ background-color: #BF5E26; }
  .jqiwarning .jqi .jqibuttons{ background-color: #BF5E26;}
-/** µ¯³öÌáÊ¾¿òÑùÊ½ end*/
+/** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ê½ end*/
