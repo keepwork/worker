@@ -177,6 +177,11 @@
 				<comment>描述2</comment>
 			</column>
 		</property>
+		<property name="appraiseId" type="java.lang.String">
+			<column name="APPRAISE_ID" length="32">
+				<comment>评价ID</comment>
+			</column>
+		</property>
 
 		<many-to-one name="tbTBmsLocationDTO"
 					 class="com.sinovatech.bms.adm.model.dto.TBmsLocationDTO"

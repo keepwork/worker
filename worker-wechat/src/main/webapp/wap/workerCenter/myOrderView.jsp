@@ -28,6 +28,7 @@
 <div class="order-confirm">
 <div class="order-num"><span class="fl">订单号：<em>${requestScope.order.orderSn}</em></span></div>
 <ul class="order-confirm-list clearfix order-cancel-list">
+  <li><P>订单内容</P></li>
   <li>
     <h2>服务类型</h2>
     <span>
@@ -53,6 +54,17 @@
   <li><h2>客户评价</h2><span>${requestScope.order.desc2}</span></li>
   <li><p>金额<em>￥100.00</em></p></li>
 </ul>
+  <c:if test="${requestScope.appraise != null}">
+    <div style="margin-bottom: 0.3rem"></div>
+    <ul class="order-confirm-list clearfix order-cancel-list">
+      <li><p>订单评价</p></li>
+      <li><h2>服务质量</h2><span>${requestScope.appraise.scoreZhiLiang}分</span></li>
+      <li><h2>服务态度</h2><span>${requestScope.appraise.scoreTaiDu}分</span></li>
+      <li><h2>准时情况</h2><span>${requestScope.appraise.scoreZhunShi}分</span></li>
+      <li><h2>评价内容</h2><span>${requestScope.appraise.content}</span></li>
+    </ul>
+  </c:if>
+
 </div>
 <!--order-confirm-end-->
 

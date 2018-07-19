@@ -31,8 +31,6 @@
 				catchget:"tab2",
 				fadespeed:"normal"
 		});
-
-
 	});
 	-->
 	</script>
@@ -63,7 +61,9 @@
 					document.getElementById("content1").innerHTML="";
 					document.getElementById("content2").innerHTML="";
 					document.getElementById("content3").innerHTML="";
-    				
+					document.getElementById("content4").innerHTML="";
+					document.getElementById("content5").innerHTML="";
+
 					if(returnData==""){
 	                    return false;
 	                }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.shop.appraise.model.dto.AppraiseDTO"
+		table="pub_menber_appraise">
+		<comment>评价</comment>
+		<id name="id" type="java.lang.String">
+			<column name="ID" length="32" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="orderId" type="java.lang.String">
+			<column name="ORDER_ID" length="32">
+				<comment>订单编号</comment>
+			</column>
+		</property>
+		<property name="menId" type="java.lang.String">
+			<column name="MEN_ID" length="32">
+				<comment>会员编号</comment>
+			</column>
+		</property>
+		<property name="menName" type="java.lang.String">
+			<column name="MEN_NAME" length="100">
+				<comment>客户名称</comment>
+			</column>
+		</property>
+		<property name="workerId" type="java.lang.String">
+			<column name="WORKER_ID" length="32">
+				<comment>师傅id</comment>
+			</column>
+		</property>
+		<property name="workerName" type="java.lang.String">
+			<column name="WORKER_NAME" length="100">
+				<comment>师傅名称</comment>
+			</column>
+		</property>
+		<property name="scoreZhunShi" type="java.lang.String">
+			<column name="SCORE_ZHUNSHI" length="1">
+				<comment>评分准时</comment>
+			</column>
+		</property>
+		<property name="scoreTaiDu" type="java.lang.String">
+			<column name="SCORE_TAIDU" length="1">
+				<comment>评分态度</comment>
+			</column>
+		</property>
+		<property name="scoreZhiLiang" type="java.lang.String">
+			<column name="SCORE_ZHILIANG" length="32">
+				<comment>评分质量</comment>
+			</column>
+		</property>
+		<property name="isShow" type="java.lang.String">
+			<column name="IS_SHOW" length="1">
+				<comment>是否显示</comment>
+			</column>
+		</property>
+		<property name="content" type="java.lang.String">
+			<column name="CONTENT" length="400">
+				<comment>评价内容</comment>
+			</column>
+		</property>
+		<property name="cFrom" type="java.lang.String">
+			<column name="CFROM" length="1">
+				<comment>评价来源渠道</comment>
+			</column>
+		</property>
+
+		<property name="createTime" type="java.util.Date">
+			<column name="CREATE_TIME">
+				<comment>评价时间</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

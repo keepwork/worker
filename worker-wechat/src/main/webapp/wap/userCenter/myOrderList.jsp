@@ -57,7 +57,8 @@
 					document.getElementById("content2").innerHTML="";
 					document.getElementById("content3").innerHTML="";
 					document.getElementById("content4").innerHTML="";
-    				
+					document.getElementById("content5").innerHTML="";
+
 					if(returnData==""){
 	                    return false;
 	                }
@@ -114,8 +115,8 @@
                                 trs = trs + "<a href='#' onclick='newconfirm(event,this)' class='button-info' id='sureArriveHome'  name='"+n.orderId+"'>师傅已到</a>";
 							}else if(n.orderStatus=='5' && n.payStatus=='0'){//已完成施工且未支付，显示支付按钮
                                 trs = trs + "<a href='#' class='button-info' name='"+n.orderId+"'>&emsp;支付&emsp;</a>"
-							}else if(n.payStatus=='1' && n.desc2=='null'){//已支付且未评价，显示评价按钮
-								trs = trs + "<a href='#' class='button-info' name='"+n.orderId+"'>&emsp;评价&emsp;</a>"
+							}else if(n.orderStatus=='5' && n.payStatus=='1'){//已支付且未评价，显示评价按钮
+								trs = trs + "<a href='#' onclick='goAppraise(event,this)'class='button-info' name='"+n.orderId+"'>&emsp;评价&emsp;</a>"
 							}
 							trs = trs + "</li>";
     				});
@@ -206,6 +207,13 @@
                     window.location.reload();
                 }
             });
+        }
+
+        //去评价
+        function goAppraise(e,obj) {
+            e.stopPropagation();//阻止点击事件向上冒泡
+            var orderId = $(obj).attr('name');
+            window.location.href='${ctx}/wap/appraiseWrite.jsp?type=wap&orderId='+orderId;
         }
 
   </script>

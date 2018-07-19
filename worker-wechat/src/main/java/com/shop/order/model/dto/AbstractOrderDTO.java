@@ -49,6 +49,7 @@ public abstract class AbstractOrderDTO extends DtoSupport
 	private Date endTime;//订单结束时间
 	private String desc1;//描述
 	private String desc2;//描述
+	private String appraiseId;//评价ID
 
 	//所属地区或团队
 	private TBmsLocationDTO tbTBmsLocationDTO;
@@ -265,5 +266,13 @@ public abstract class AbstractOrderDTO extends DtoSupport
 
 	public void setTbTBmsLocationDTO(TBmsLocationDTO tbTBmsLocationDTO) {
 		this.tbTBmsLocationDTO = tbTBmsLocationDTO;
+	}
+
+	public String getAppraiseId() {
+		return appraiseId;
+	}
+
+	public void setAppraiseId(String appraiseId) {
+		this.appraiseId = appraiseId;
 	}
 }

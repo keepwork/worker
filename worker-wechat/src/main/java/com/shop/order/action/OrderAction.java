@@ -11,6 +11,8 @@ import com.pub.menber.model.dto.MenberPointDTO;
 import com.pub.menber.model.facade.MenberAddrFacade;
 import com.pub.menber.model.facade.MenberFacade;
 import com.pub.menber.model.facade.MenberPointFacade;
+import com.shop.appraise.model.dto.AppraiseDTO;
+import com.shop.appraise.model.facade.AppraiseFacade;
 import com.shop.good.model.dto.GoodCategoryDTO;
 import com.shop.good.model.facade.GoodCategoryFacade;
 import com.shop.order.model.dto.OrderDTO;
@@ -58,6 +60,7 @@ public class OrderAction extends BaseAdmAction
 //	private ShopCarFacade myShopCarFacade;
 	private MenberAddrFacade myMenberAddrFacade;
 	private MenberPointFacade myMenberPointFacade;
+	private AppraiseFacade myAppraiseFacade;
 	
 	public void init(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
@@ -70,6 +73,7 @@ public class OrderAction extends BaseAdmAction
 //		this.myShopCarFacade = (ShopCarFacade) this.getBeanContext().getBean("myShopCarFacade");
 		this.myMenberAddrFacade = (MenberAddrFacade) this.getBeanContext().getBean("myMenberAddrFacade");
 		this.myMenberPointFacade = (MenberPointFacade) this.getBeanContext().getBean("myMenberPointFacade");
+		this.myAppraiseFacade = (AppraiseFacade) this.getBeanContext().getBean("myAppraiseFacade");
 	}
 	
 	/**
@@ -442,7 +446,7 @@ public class OrderAction extends BaseAdmAction
     
     
     /**
-     * 订单详情查看
+     * 订单详情查看(客户端)
      * @param request
      * @return
      */
@@ -479,8 +483,15 @@ public class OrderAction extends BaseAdmAction
         	
         	MenberDTO worker = myMenberFacade.get(order.getWorkerId());
         	request.setAttribute("worker", worker);
-        	
-        	MenberAddrDTO address = myMenberAddrFacade.get(order.getAddrId());
+
+        	int totalOrderNum = myOrderFacade.getWorkerOrderTotalNum(order.getWorkerId());
+			request.setAttribute("totalOrderNum", totalOrderNum);//订单总数
+
+			String positiveAppraiseRate = myAppraiseFacade.getAppraiseRate(order.getWorkerId(),"1");
+			request.setAttribute("positiveAppraiseRate", positiveAppraiseRate);//好评率
+
+
+			MenberAddrDTO address = myMenberAddrFacade.get(order.getAddrId());
         	request.setAttribute("address", address);
         	
         	GoodCategoryDTO firstCate = myGoodCategoryFacade.get(order.getFirstCate());
@@ -492,10 +503,11 @@ public class OrderAction extends BaseAdmAction
         }
     	return null;
 	}
-    
-    
-    
-    /**
+
+
+
+
+	/**
      * 修改订单状态
      * 
      * @param mapping
@@ -851,6 +863,8 @@ public class OrderAction extends BaseAdmAction
 //			GoodCategoryDTO secondCate = myGoodCategoryFacade.get(order.getSecondCate());
 			request.setAttribute("firstCateName", firstCate.getName());
 //	    	request.setAttribute("secondCateName", secondCate.getName());
+			AppraiseDTO appraise = myAppraiseFacade.getByOrderId(orderId);
+			request.setAttribute("appraise", appraise);
 
 			return mapping.findForward(returnPage);
 		}
