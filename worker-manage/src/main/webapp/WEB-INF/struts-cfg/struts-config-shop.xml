@@ -9,6 +9,7 @@
 		<form-bean name="GoodDTO" type="com.shop.good.model.dto.GoodDTO" />
 		<form-bean name="ComplaintDTO" type="com.shop.complaint.model.dto.ComplaintDTO" />
 		<form-bean name="OrderDTO" type="com.shop.order.model.dto.OrderDTO" />
+		<form-bean name="AppraiseDTO" type="com.shop.appraise.model.dto.AppraiseDTO" />
 	  <!--
 		<form-bean name="ShopCarDTO" type="com.shop.order.model.dto.ShopCarDTO" />
 		-->
@@ -65,6 +66,12 @@
 			<forward name="view" path="/WEB-INF/jsp/order/orderView.jsp" />
 			<forward name="addExpInfo" path="/WEB-INF/jsp/order/addExpInfo.jsp" />
 		</action>
+
+	  <!-- 评价 -->
+	  <action path="/pub/appraise/*" type="com.shop.appraise.action.AppraiseAction"
+			  scope="request" parameter="{1}" name="AppraiseDTO">
+		  <forward name="view" path="/WEB-INF/jsp/appraise/appraiseDetail.jsp" />
+	  </action>
 
   </action-mappings>
   

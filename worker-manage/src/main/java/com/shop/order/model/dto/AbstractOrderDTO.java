@@ -49,6 +49,11 @@ public abstract class AbstractOrderDTO extends DtoSupport
 	private Date endTime;//订单结束时间
 	private String desc1;//描述
 	private String desc2;//描述
+	private String appraiseId;//评价ID
+	private Date actualTime;//实际上门时间
+	private Date finishTime;//施工完成时间
+	private Integer cycleInit;//完成施工周期(天)
+	private Integer cycleAdd;//完成施工补充周期(天)
 
 	//所属地区或团队
 	private TBmsLocationDTO tbTBmsLocationDTO;
@@ -265,5 +270,45 @@ public abstract class AbstractOrderDTO extends DtoSupport
 
 	public void setTbTBmsLocationDTO(TBmsLocationDTO tbTBmsLocationDTO) {
 		this.tbTBmsLocationDTO = tbTBmsLocationDTO;
+	}
+
+	public String getAppraiseId() {
+		return appraiseId;
+	}
+
+	public void setAppraiseId(String appraiseId) {
+		this.appraiseId = appraiseId;
+	}
+
+	public Date getActualTime() {
+		return actualTime;
+	}
+
+	public void setActualTime(Date actualTime) {
+		this.actualTime = actualTime;
+	}
+
+	public Date getFinishTime() {
+		return finishTime;
+	}
+
+	public void setFinishTime(Date finishTime) {
+		this.finishTime = finishTime;
+	}
+
+	public Integer getCycleInit() {
+		return cycleInit;
+	}
+
+	public void setCycleInit(Integer cycleInit) {
+		this.cycleInit = cycleInit;
+	}
+
+	public Integer getCycleAdd() {
+		return cycleAdd;
+	}
+
+	public void setCycleAdd(Integer cycleAdd) {
+		this.cycleAdd = cycleAdd;
 	}
 }

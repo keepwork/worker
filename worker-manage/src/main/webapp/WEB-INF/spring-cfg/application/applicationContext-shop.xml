@@ -115,5 +115,26 @@
 			<ref local="myComplaintBPO" />
 		</property>
 	</bean>
-	
+
+
+	<!-- 评价 -->
+	<bean id="myAppraiseDAO" class="com.shop.appraise.model.dao.AppraiseDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="myAppraiseBPO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.shop.appraise.model.bpo.AppraiseBPO">
+				<property name="myAppraiseDAO">
+					<ref local="myAppraiseDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="myAppraiseFacade" class="com.shop.appraise.model.facade.AppraiseFacade">
+		<property name="myAppraiseBPO">
+			<ref local="myAppraiseBPO" />
+		</property>
+	</bean>
 </beans>

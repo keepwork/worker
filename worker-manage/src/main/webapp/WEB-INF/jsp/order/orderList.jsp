@@ -221,6 +221,11 @@
 							<span><span>重新派单</span></span>
 						</a>
 					</c:if>
+					<c:if test="${m.orderStatus eq '6'}">
+						<a class="sexybutton" href="${ctx}/pub/appraise/appraiseView.do?appraiseId=${m.appraiseId}">
+							<span><span>评价详情</span></span>
+						</a>
+					</c:if>
 				</ec:column>
 			</ec:row>
 		</ec:table>

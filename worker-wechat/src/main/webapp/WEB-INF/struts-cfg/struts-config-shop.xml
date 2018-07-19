@@ -87,7 +87,7 @@
 		</action>
 		-->
 
-		<!-- 订单 -->
+		<!-- 评价 -->
 		<action path="/pub/appraise/*" type="com.shop.appraise.action.AppraiseAction"
 				scope="request" parameter="{1}" name="AppraiseDTO">
 		</action>

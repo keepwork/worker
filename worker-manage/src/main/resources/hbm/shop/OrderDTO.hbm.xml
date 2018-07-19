@@ -177,6 +177,31 @@
 				<comment>描述2</comment>
 			</column>
 		</property>
+		<property name="appraiseId" type="java.lang.String">
+			<column name="APPRAISE_ID" length="32">
+				<comment>评价ID</comment>
+			</column>
+		</property>
+		<property name="actualTime" type="java.util.Date">
+			<column name="ACTUAL_TIME">
+				<comment>实际上门时间</comment>
+			</column>
+		</property>
+		<property name="finishTime" type="java.util.Date">
+			<column name="FINISH_TIME" >
+				<comment>施工完成时间</comment>
+			</column>
+		</property>
+		<property name="cycleInit" type="java.lang.Integer">
+			<column name="CYCLE_INIT" length="3">
+				<comment>初始确认的工作周期</comment>
+			</column>
+		</property>
+		<property name="cycleAdd" type="java.lang.Integer">
+			<column name="CYCLE_ADD" length="3">
+				<comment>补充的工作周期</comment>
+			</column>
+		</property>
 
 		<many-to-one name="tbTBmsLocationDTO"
 					 class="com.sinovatech.bms.adm.model.dto.TBmsLocationDTO"
