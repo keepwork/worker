@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import com.pub.article.model.dao.ArticleCategoryDAO;
 import com.pub.article.model.dao.ArticleDAO;
+import com.pub.article.model.dto.ArticleCategoryDTO;
 import com.pub.article.model.dto.ArticleDTO;
 import com.sinovatech.common.exception.AppException;
 import com.sinovatech.common.model.bpo.BpoSupport;
@@ -82,6 +83,51 @@ public class ArticleBPO extends BpoSupport {
 		return myArticleDAO.listForPagination(params);
     }
 
+	/**
+	 * 更新缓存
+	 */
+	@SuppressWarnings("unchecked")
+	public void refreshCache()
+	{
+//		List<ArticleDTO> articleList4 = myArticleDAO.listByCateCode("4",5);//公告
+//		cache.set("cache_articleList4", articleList4);
+
+		//公司简介
+		ArticleDTO article_1 = myArticleDAO.get("101");
+		cache.set("cache_article_1", article_1);
+
+		//联系我们
+		ArticleDTO article_2 = myArticleDAO.get("102");
+		cache.set("cache_article_2", article_2);
+
+		//小广播通知
+		ArticleDTO article_108 = myArticleDAO.get("108");
+		cache.set("cache_article_108", article_108);
+
+		//常见问题
+//		List<ArticleCategoryDTO> cateList = myArticleCategoryDAO.listByParent("36");
+//		String cates = "";
+//		for (ArticleCategoryDTO cate : cateList) {
+//			cates += "'"+cate.getCode() + "',";
+//		}
+//		if(cates.length()>0){
+//			cates = cates.substring(0, cates.length()-1);
+//			List<ArticleDTO> articleList36 = myArticleDAO.listByCateCodes(cates,8);
+//			cache.set("cache_articleList36", articleList36);
+//		}
+//
+//		List<ArticleDTO> articleList32 = myArticleDAO.listByCateCode("32",8);//媒体报道
+//		List<ArticleDTO> articleList33 = myArticleDAO.listByCateCode("33",8);//捐助单位
+//		List<ArticleDTO> articleList34 = myArticleDAO.listByCateCode("34",8);//风险观念
+//		List<ArticleDTO> articleList35 = myArticleDAO.listByCateCode("35",8);//保险知识
+//		List<ArticleDTO> articleList39 = myArticleDAO.listByCateCode("39",8);//抢购快讯
+//
+//		cache.set("cache_articleList32", articleList32);
+//		cache.set("cache_articleList33", articleList33);
+//		cache.set("cache_articleList34", articleList34);
+//		cache.set("cache_articleList35", articleList35);
+//		cache.set("cache_articleList39", articleList39);
+	}
 
 	public ArticleDAO getMyArticleDAO() {
 		return myArticleDAO;

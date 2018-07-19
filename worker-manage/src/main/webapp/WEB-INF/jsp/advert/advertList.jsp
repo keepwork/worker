@@ -88,6 +88,9 @@
 					<c:if test="${m.type eq '1'}">wap广告</c:if>
 					<c:if test="${m.type eq '2'}">web广告</c:if>
 				</ec:column>
+				<ec:column title="图片" property="pic">
+					<c:if test="${null!=m.pic}"><img src="${pageContext.request.contextPath}/${m.pic}" style="width: 30px;height: 30px;"/></c:if>
+				</ec:column>
 				<ec:column title="点击次数" property="count" filterable="false"></ec:column>
 				<ec:column title="排序" property="orderNum" filterable="false"></ec:column>
 				<ec:column title="操作" property="EEE" sortable="false"

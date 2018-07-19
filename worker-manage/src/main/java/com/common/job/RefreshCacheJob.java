@@ -1,8 +1,9 @@
 package com.common.job;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.TimerTask;
+
+import com.pub.article.model.bpo.ArticleBPO;
+import com.pub.seo.model.bpo.SeoBPO;
 import com.sinovatech.bms.adm.model.facade.BmsLogOpFacade;
 import com.sinovatech.bms.domain.model.bpo.BmsDomainBPO;
 import com.sinovatech.framework.log.SinoLogger;
@@ -19,6 +20,8 @@ public class RefreshCacheJob extends TimerTask{
 
     private BmsDomainBPO myBmsDomainBPO;
     private BmsLogOpFacade myBmsLogOpFacade;
+	private SeoBPO mySeoBPO;
+	private ArticleBPO myArticleBPO;
 	
 	@Override
 	public void run() {
@@ -32,6 +35,10 @@ public class RefreshCacheJob extends TimerTask{
 	{
 		//刷新缓存（将字典表信息放入缓存中）
 		myBmsDomainBPO.refreshCache();
+		//刷新缓存（同步SEO信息到缓存中）
+		mySeoBPO.refreshCache();
+		//刷新缓存（首页文章）
+		myArticleBPO.refreshCache();
 		
 		//将当天操作日志入库
 //		myBmsLogOpFacade.importTodayLogs();
@@ -51,12 +58,18 @@ public class RefreshCacheJob extends TimerTask{
 	public void setMyBmsLogOpFacade(BmsLogOpFacade myBmsLogOpFacade) {
 		this.myBmsLogOpFacade = myBmsLogOpFacade;
 	}
-//	public ArticleBPO getMyArticleBPO() {
-//		return myArticleBPO;
-//	}
-//	public void setMyArticleBPO(ArticleBPO myArticleBPO) {
-//		this.myArticleBPO = myArticleBPO;
-//	}
+	public SeoBPO getMySeoBPO() {
+		return mySeoBPO;
+	}
+	public void setMySeoBPO(SeoBPO mySeoBPO) {
+		this.mySeoBPO = mySeoBPO;
+	}
+	public ArticleBPO getMyArticleBPO() {
+		return myArticleBPO;
+	}
+	public void setMyArticleBPO(ArticleBPO myArticleBPO) {
+		this.myArticleBPO = myArticleBPO;
+	}
 	
 	
 //    public static void main（String[] args） {
