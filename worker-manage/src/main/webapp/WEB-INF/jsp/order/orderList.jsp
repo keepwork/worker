@@ -29,7 +29,8 @@
         show('cover1','pop_sh','');
     }
 
-    function openDiv2() {
+    function openDiv2(orderId) {
+        document.getElementById("orderId2").value=orderId;
         show('cover2','pop_sh2','');
     }
     function updateOrder() {
@@ -57,14 +58,14 @@
 
     }
 
-    function cycleAdd() {
+    function addCycle() {
         var cycleAdd = document.getElementById("cycleAdd");
         if(cycleAdd.value == ''){
             alert("周期天数不能为空");
             cycleAdd.focus();
             return;
         }
-        hide('cover1','pop_sh','');
+        hide('cover2','pop_sh2','');
         document.orderCycleAddForm.submit();
 
     }
@@ -231,7 +232,9 @@
 				</ec:column>
 				--%>
 				<ec:column title="下单时间" property="orderTimeStr" filterable="false" width="15%"></ec:column>
-				<ec:column title="操作" property="EEE" sortable="false" filterable="false" width="25%">
+				<ec:column title="计划周期" property="cycleInit" filterable="false" width="7%"></ec:column>
+				<ec:column title="新增周期" property="cycleAdd" filterable="false" width="7%"></ec:column>
+				<ec:column title="操作" property="EEE" sortable="false" filterable="false" width="24%">
 					<a class="sexybutton" href="${ctx}/pub/order/beforeView.do?orderId=${m.orderId}"><span><span>查看</span></span></a>
 					<c:if test="${m.orderStatus eq '1'}">
 						<a class="sexybutton" href="javascript:void(0)" onclick="openDiv('${m.orderId }')">
@@ -244,7 +247,7 @@
 						</a>
 					</c:if>
 					<c:if test="${m.orderStatus eq '4'}">
-						<a class="sexybutton" href="javascript:void(0)" onclick="openDiv2()">
+						<a class="sexybutton" href="javascript:void(0)" onclick="openDiv2('${m.orderId }')">
 							<span><span>新增周期</span></span>
 						</a>
 					</c:if>
@@ -320,8 +323,8 @@
 	<div class="pop_555_m text_c" style="width: 600px; padding-top: 20px">
 		<!---pop_555_m-->
 		<div id="cycle_add_id">
-			<form name="orderCycleAddForm" class="cmxform" action="${ctx}/pub/order/orderCycleAdd.do" target="hideframe" method="post" >
-				<input type="hidden" name="orderId" value="${m.orderId }"/>
+			<form name="orderCycleAddForm" class="cmxform" action="${ctx}/pub/order/orderCycleAdd.do" target="hideframe1" method="post" >
+				<input type="hidden" name="orderId" id="orderId2"/>
 				<table align="center">
 					<tr>
 						<td align="right">周期天数：</td>
@@ -330,7 +333,7 @@
 						</td>
 					</tr>
 				</table>
-				<input type="button" value="保存" onclick="cycleAdd();" />
+				<input type="button" id="orderCycleAdd" value="保存" onclick="addCycle();" />
 			</form>
 		</div>
 	</div>
@@ -338,6 +341,7 @@
 <!--提示弹出层2 结束-->
 
 <iframe name="hideframe" id="hideframe" width="0" height="0"></iframe>
+<iframe name="hideframe1" id="hideframe1" width="0" height="0"></iframe>
 
 
 

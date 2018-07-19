@@ -17,7 +17,7 @@
 	</head>
 	<script>
         $(function () {
-            $("#div3").myProgress({speed: 500, percent: 50,width: "90%"});
+            $("#div3").myProgress({speed: 500, percent: ${projectProgress},width: "90%"});
         })
 	</script>
 

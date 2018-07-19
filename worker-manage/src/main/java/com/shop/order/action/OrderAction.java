@@ -1,6 +1,5 @@
 package com.shop.order.action;
 
-import com.common.util.DateUtil;
 import com.common.util.ImitateUUID;
 import com.common.util.ServletUtil;
 import com.common.util.date.DatePaltUtil;
@@ -20,6 +19,7 @@ import com.shop.order.model.facade.ShopCarFacade;
 import com.sinovatech.bms.adm.model.dto.TBmsLocationDTO;
 import com.sinovatech.bms.adm.model.dto.TBmsUserDTO;
 import com.sinovatech.common.config.GlobalConfig;
+import com.sinovatech.common.util.DateUtil;
 import com.sinovatech.common.util.Validate;
 import com.sinovatech.common.web.action.ActionConstent;
 import com.sinovatech.common.web.action.BaseAdmAction;
@@ -229,7 +229,20 @@ public class OrderAction extends BaseAdmAction
 		if(null!=m.getEndTime()){
 			m.setEndTimeStr(format.format(m.getEndTime()));
 		}
-		
+
+
+		String projectProgress = "0";//项目进度
+		if("4".equals(m.getOrderStatus())){//已上门，施工进行中
+			Integer totalCycle = m.getCycleInit()+(m.getCycleAdd()==null?0:m.getCycleAdd());
+			long totalUseTime =  totalCycle*24*3600000;//总工期毫秒数
+			long usedTime =new Date().getTime()-m.getActualTime().getTime();//已使用工期毫秒数
+			String r = ((double) usedTime/totalUseTime)*100 + "";
+			projectProgress = new BigDecimal(r).setScale(0, BigDecimal.ROUND_HALF_UP).toString();
+		}else if("5".equals(m.getOrderStatus())){//已完成施工
+			projectProgress = "100";
+		}
+		request.setAttribute("projectProgress", projectProgress);
+
 		MenberDTO menber = myMenberFacade.get(m.getMenId());
 		m.setMenName(menber.getRealName());
 		m.setMenMobile(menber.getMobile());

@@ -733,6 +733,7 @@ public class OrderAction extends BaseAdmAction
 		String orderId = request.getParameter("orderId");
 
 		OrderDTO order = myOrderFacade.get(orderId);
+		order.setActualTime(new Date());
 		order.setOrderStatus("4");//3已上门
 		myOrderFacade.update(order);
 		try
@@ -804,6 +805,7 @@ public class OrderAction extends BaseAdmAction
 			order.setDesc1(workContent);
 		}
 		order.setOrderStatus("5");//已完成施工
+		order.setFinishTime(new Date());
 		myOrderFacade.update(order);
 		try
 		{
