@@ -187,32 +187,42 @@ public class ArticleAction extends BaseAdmAction
 	{
     	String type = request.getParameter("type");
     	String id = request.getParameter("id");
-        ArticleDTO a = myArticleFacade.get(id);
-    	a.setUpdateTimeStr(a.getUpdateTime() == null ? "" : (DateUtil.format(a.getUpdateTime(), "yyyy-MM-dd HH:ss:mm")));
-    	request.setAttribute("article", a);
+//        ArticleDTO a = myArticleFacade.get(id);
+//    	a.setUpdateTimeStr(a.getUpdateTime() == null ? "" : (DateUtil.format(a.getUpdateTime(), "yyyy-MM-dd HH:ss:mm")));
+//    	request.setAttribute("article", a);
 
-    	if(a.getId().equals("101")){
+		String cacheStr = "";
+    	if(id.equals("101")){
 			request.setAttribute("title", "公司简介");
-		}else if(a.getId().equals("102")){
+			cacheStr = "cache_article_101";
+		}else if(id.equals("102")){
 			request.setAttribute("title", "联系我们");
-		}else if(a.getId().equals("103")){
+			cacheStr = "cache_article_102";
+		}else if(id.equals("103")){
 			request.setAttribute("title", "报价说明");
-		}else if(a.getId().equals("104")){
+			cacheStr = "cache_article_103";
+		}else if(id.equals("104")){
 			request.setAttribute("title", "师傅招聘");
-		}else if(a.getId().equals("105")){
+			cacheStr = "cache_article_104";
+		}else if(id.equals("105")){
 			request.setAttribute("title", "保修说明");
-		}else if(a.getId().equals("106")){
+			cacheStr = "cache_article_105";
+		}else if(id.equals("106")){
 			request.setAttribute("title", "材料说明");
-		}else if(a.getId().equals("107")){
+			cacheStr = "cache_article_106";
+		}else if(id.equals("107")){
 			request.setAttribute("title", "扫码支付");
-		}else if(a.getId().equals("108")){
+			cacheStr = "cache_article_107";
+		}else if(id.equals("108")){
 			request.setAttribute("title", "小广播通知");
+			cacheStr = "cache_article_108";
 		}
+		ArticleDTO dto = (ArticleDTO)cache.get(cacheStr);
         
-    	request.setAttribute("pageTitle", a.getTitle());
+    	request.setAttribute("pageTitle", dto.getTitle());
         if(type.equals("wap")){
-        	if(a.getTitle().length()>12){
-        		a.setTitle(a.getTitle().substring(0,12) + " . . .");
+        	if(dto.getTitle().length()>12){
+				dto.setTitle(dto.getTitle().substring(0,12) + " . . .");
         	}
         	return mapping.findForward("articleDetail_wap");
     	}else if(type.equals("web")){

@@ -5,12 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-	<title>首页</title>
-	<link rel="stylesheet" href="${ctx}/wap/html/css/Basc.css" />
-	<link rel="stylesheet" href="${ctx}/wap/html/css/demo.css" />
+	<jsp:include page="public/common.jsp"></jsp:include>
 
 	<style type="text/css">
 		.m_dibu {
@@ -74,11 +69,13 @@
 
 		<br/>
 
+		<!--
 		<ul style="margin-top: 13px;margin-left: 5px;">
 			<li style="margin-left: 15px;">©2018-2019 惠修房屋快修版权所有，并保留所有权利</li>
 			<li style="margin-left: 85px;margin-top: 10px;">ICP备1111111-1号</li>
 		</ul>
 		<br/><br/>
+		-->
 
 		<!--置顶-->
 		<div style="position: fixed;bottom: 50px;right: 10px;margin-bottom: 10px;"><a href="javascript:window.scrollTo(0,0);"><img src="${ctx}/wap/images/fanhui.png" width="42px"></a></div>

@@ -16,10 +16,10 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="format-detection" content="telephone=no">
 
-<link rel="stylesheet" href="${ctx}/wap/css/style.css">
-<link rel="stylesheet" href="${ctx}/common/css/public.css">
+<link rel="stylesheet" href="${ctx}/wap/html/css/Basc.css" />
+<link rel="stylesheet" href="${ctx}/wap/html/css/demo.css" />
+
 <script type="text/javascript" charset="UTF-8" src="${ctx}/common/js/jquery-1.9.1.min.js" ></script>
-<script type="text/javascript" src="${ctx}/wap/js/modernizr.custom.js"></script>
 
 
 <!--在线帮助 Start

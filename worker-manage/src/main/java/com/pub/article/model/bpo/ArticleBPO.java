@@ -93,12 +93,12 @@ public class ArticleBPO extends BpoSupport {
 //		cache.set("cache_articleList4", articleList4);
 
 		//公司简介
-		ArticleDTO article_1 = myArticleDAO.get("101");
-		cache.set("cache_article_1", article_1);
+		ArticleDTO article_101 = myArticleDAO.get("101");
+		cache.set("cache_article_101", article_101);
 
 		//联系我们
-		ArticleDTO article_2 = myArticleDAO.get("102");
-		cache.set("cache_article_2", article_2);
+		ArticleDTO article_102 = myArticleDAO.get("102");
+		cache.set("cache_article_102", article_102);
 
 		//小广播通知
 		ArticleDTO article_108 = myArticleDAO.get("108");
