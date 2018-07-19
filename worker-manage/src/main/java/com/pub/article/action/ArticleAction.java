@@ -232,4 +232,24 @@ public class ArticleAction extends BaseAdmAction
 		return mapping.findForward(ActionConstent.COMMON_MAPPING);
 	}
 
+	/**
+	 * 同步到缓存
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	public ActionForward synRedis(ActionMapping mapping, ActionForm form,
+								  HttpServletRequest request, HttpServletResponse response)
+			throws Exception
+	{
+		myArticleFacade.refreshCache();
+		CommonMapping mping = new CommonMapping("同步成功!", getRealUri(mapping,"article/queryList"), ActionConstent.ALERT);
+		request.setAttribute("mping", mping);
+		return mapping.findForward(ActionConstent.COMMON_MAPPING);
+	}
 }

@@ -100,9 +100,17 @@ public class ArticleBPO extends BpoSupport {
 		ArticleDTO article_102 = myArticleDAO.get("102");
 		cache.set("cache_article_102", article_102);
 
+		//师傅招聘
+		ArticleDTO article_104 = myArticleDAO.get("104");
+		cache.set("cache_article_104", article_104);
+
 		//小广播通知
 		ArticleDTO article_108 = myArticleDAO.get("108");
 		cache.set("cache_article_108", article_108);
+
+		//收费查询
+//		List<ArticleDTO> articlePriceList = myArticleDAO.listByCateCode("3");
+//		cache.set("cache_article_priceList", articlePriceList);
 
 		//常见问题
 //		List<ArticleCategoryDTO> cateList = myArticleCategoryDAO.listByParent("36");

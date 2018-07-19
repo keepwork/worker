@@ -218,6 +218,7 @@ public class ArticleAction extends BaseAdmAction
 			cacheStr = "cache_article_108";
 		}
 		ArticleDTO dto = (ArticleDTO)cache.get(cacheStr);
+		request.setAttribute("article", dto);
         
     	request.setAttribute("pageTitle", dto.getTitle());
         if(type.equals("wap")){
@@ -227,15 +228,15 @@ public class ArticleAction extends BaseAdmAction
         	return mapping.findForward("articleDetail_wap");
     	}else if(type.equals("web")){
     		//查出指定主分类下所有子分类
-        	String rootCate = request.getParameter("rootCate");
-        	if(null!=rootCate && !rootCate.equals("")){
-        		List<ArticleCategoryDTO> cateList = myArticleCategoryFacade.listByParent(rootCate);
-            	request.setAttribute("cateList", cateList);
-        	}
+//        	String rootCate = request.getParameter("rootCate");
+//        	if(null!=rootCate && !rootCate.equals("")){
+//        		List<ArticleCategoryDTO> cateList = myArticleCategoryFacade.listByParent(rootCate);
+//            	request.setAttribute("cateList", cateList);
+//        	}
         	//菜单选中
-        	String menu = request.getParameter("menu");
-        	request.setAttribute("menu", menu);
-    		return mapping.findForward("articleDetail_web");
+//        	String menu = request.getParameter("menu");
+//        	request.setAttribute("menu", menu);
+//    		return mapping.findForward("articleDetail_web");
     	}
         return null;
     }
@@ -247,28 +248,28 @@ public class ArticleAction extends BaseAdmAction
      * @param request
      * @return
      */
-    public ActionForward aboutUs(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-    	String id = request.getParameter("id");
-    	ArticleDTO article = myArticleFacade.get(id);
-    	request.setAttribute("article", article);
-    	request.setAttribute("pageTitle", article.getTitle());
-    	
-    	String type = request.getParameter("type");//类型：wap,web
-    	if(type.equals("wap")){
-    		return mapping.findForward("aboutUs_wap");
-    	}else if(type.equals("web")){
-    		
-    		//菜单选中
-        	String menu = request.getParameter("menu");
-        	request.setAttribute("menu", menu);
-        	
-        	return mapping.findForward("aboutUs_web");
-    	}
-    	return null;
-	}
+//    public ActionForward aboutUs(ActionMapping mapping,
+//			ActionForm form, HttpServletRequest request,
+//			HttpServletResponse response) throws Exception
+//	{
+//    	String id = request.getParameter("id");
+//    	ArticleDTO article = myArticleFacade.get(id);
+//    	request.setAttribute("article", article);
+//    	request.setAttribute("pageTitle", article.getTitle());
+//
+//    	String type = request.getParameter("type");//类型：wap,web
+//    	if(type.equals("wap")){
+//    		return mapping.findForward("aboutUs_wap");
+//    	}else if(type.equals("web")){
+//
+//    		//菜单选中
+//        	String menu = request.getParameter("menu");
+//        	request.setAttribute("menu", menu);
+//
+//        	return mapping.findForward("aboutUs_web");
+//    	}
+//    	return null;
+//	}
     
     
     
@@ -279,71 +280,41 @@ public class ArticleAction extends BaseAdmAction
      * @param request
      * @return
      */
-    public ActionForward questionList(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-    	String type = request.getParameter("type");
-    	String returnStr = "";
-    	if(type.equals("wap")){
-    		returnStr = "questionList_wap";
-    	}else if(type.equals("web")){
-    		returnStr = "questionList_web";
-    		String rootCate = request.getParameter("rootCate");
-        	List<ArticleCategoryDTO> cateList = myArticleCategoryFacade.listByParent(rootCate);
-        	request.setAttribute("cateList", cateList);
-        	
-        	//已选中的文章分类
-        	String cateCode = request.getParameter("cateCode");
-        	if(null != cateCode && !cateCode.equals("")){
-        		ArticleCategoryDTO cate = myArticleCategoryFacade.get(cateCode);
-        		request.setAttribute("cateCode", cateCode);
-        		request.setAttribute("cateName", cate.getName());
-        	}else{
-        		request.setAttribute("cateCode", "");
-        	}
-    	}
-    	
-    	String rootCate = request.getParameter("rootCate");
-    	request.setAttribute("rootCate", rootCate);
-    	request.setAttribute("pageTitle", "常见问题");
-    	
-    	return mapping.findForward(returnStr);
-	}
+//    public ActionForward questionList(ActionMapping mapping,
+//			ActionForm form, HttpServletRequest request,
+//			HttpServletResponse response) throws Exception
+//	{
+//    	String type = request.getParameter("type");
+//    	String returnStr = "";
+//    	if(type.equals("wap")){
+//    		returnStr = "questionList_wap";
+//    	}else if(type.equals("web")){
+//    		returnStr = "questionList_web";
+//    		String rootCate = request.getParameter("rootCate");
+//        	List<ArticleCategoryDTO> cateList = myArticleCategoryFacade.listByParent(rootCate);
+//        	request.setAttribute("cateList", cateList);
+//
+//        	//已选中的文章分类
+//        	String cateCode = request.getParameter("cateCode");
+//        	if(null != cateCode && !cateCode.equals("")){
+//        		ArticleCategoryDTO cate = myArticleCategoryFacade.get(cateCode);
+//        		request.setAttribute("cateCode", cateCode);
+//        		request.setAttribute("cateName", cate.getName());
+//        	}else{
+//        		request.setAttribute("cateCode", "");
+//        	}
+//    	}
+//
+//    	String rootCate = request.getParameter("rootCate");
+//    	request.setAttribute("rootCate", rootCate);
+//    	request.setAttribute("pageTitle", "常见问题");
+//
+//    	return mapping.findForward(returnStr);
+//	}
     /**
      * @method 常见详情页面 - 前台
      * @return 
      */
-    public ActionForward questionDetail(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-    	String type = request.getParameter("type");
-    	String id = request.getParameter("id");
-        ArticleDTO a = myArticleFacade.get(id);
-    	a.setUpdateTimeStr(a.getUpdateTime() == null ? "" : (DateUtil.format(a.getUpdateTime(), "yyyy-MM-dd HH:ss:mm")));
-    	request.setAttribute("article", a);
-        
-    	request.setAttribute("pageTitle", a.getTitle());
-        if(type.equals("wap")){
-        	if(a.getTitle().length()>12){
-        		a.setTitle(a.getTitle().substring(0,12) + " . . .");
-        	}
-        	return mapping.findForward("questionDetail_wap");
-    	}else if(type.equals("web")){
-    		//查出指定主分类下所有子分类
-        	String rootCate = request.getParameter("rootCate");
-        	if(null!=rootCate && !rootCate.equals("")){
-        		List<ArticleCategoryDTO> cateList = myArticleCategoryFacade.listByParent(rootCate);
-            	request.setAttribute("cateList", cateList);
-        	}
-        	//菜单选中
-//        	String menu = request.getParameter("menu");
-//        	request.setAttribute("menu", menu);
-    		return mapping.findForward("questionDetail_web");
-    	}
-        return null;
-    }
     /**
      * 查询分类 
      * 
