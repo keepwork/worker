@@ -16,8 +16,11 @@ public class OrderDTO extends AbstractOrderDTO
 	private String menName = "";
 	private String menMobile = "";
 	private String orderTimeStr = "";
-	private String sureTimeStr = "";
 	private String takeTimeStr = "";
+	private String sureTimeStr = "";
+	private String actualTimeStr = "";
+	private String finishTimeStr = "";
+
 	private String payTimeStr = "";
 	
 	private String resultCode;
@@ -150,6 +153,19 @@ public class OrderDTO extends AbstractOrderDTO
 		this.takeTimeStr = takeTimeStr;
 	}
 
-	
-	
+	public String getActualTimeStr() {
+		return actualTimeStr;
+	}
+
+	public void setActualTimeStr(String actualTimeStr) {
+		this.actualTimeStr = actualTimeStr;
+	}
+
+	public String getFinishTimeStr() {
+		return finishTimeStr;
+	}
+
+	public void setFinishTimeStr(String finishTimeStr) {
+		this.finishTimeStr = finishTimeStr;
+	}
 }

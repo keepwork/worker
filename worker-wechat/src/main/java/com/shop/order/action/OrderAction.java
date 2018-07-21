@@ -468,9 +468,21 @@ public class OrderAction extends BaseAdmAction
         	String orderId = request.getParameter("orderId");
         	OrderDTO order = myOrderFacade.get(orderId);
         	order.setOrderTimeStr(format.format(order.getOrderTime()));
+			if(null!=order.getTakeTime()){
+				order.setTakeTimeStr(format.format(order.getTakeTime()));
+			}
         	if(null!=order.getSureTime()){
         		order.setSureTimeStr(format.format(order.getSureTime()));
         	}
+			if(null!=order.getActualTime()){
+				order.setActualTimeStr(format.format(order.getActualTime()));
+			}
+			if(null!=order.getFinishTime()){
+				order.setFinishTimeStr(format.format(order.getFinishTime()));
+			}
+			if(null!=order.getPayTime()){
+				order.setPayTimeStr(format.format(order.getPayTime()));
+			}
         	request.setAttribute("order", order);
 //        	if(null!=order.getExpTime()){
 //        		request.setAttribute("expTimeStr", format.format(order.getExpTime()));
@@ -847,15 +859,30 @@ public class OrderAction extends BaseAdmAction
 			String orderId = request.getParameter("orderId");
 			OrderDTO order = myOrderFacade.get(orderId);
 			order.setOrderTimeStr(format.format(order.getOrderTime()));
-			if(null!=order.getSureTime()){//确认时间
-				order.setSureTimeStr(format.format(order.getSureTime()));
-			}
-			if(null!=order.getEndTime()){//完成时间
-				order.setEndTimeStr(format.format(order.getEndTime()));
-			}
-			if(null!=order.getTakeTime()){//接单时间
+			if(null!=order.getTakeTime()){
 				order.setTakeTimeStr(format.format(order.getTakeTime()));
 			}
+			if(null!=order.getSureTime()){
+				order.setSureTimeStr(format.format(order.getSureTime()));
+			}
+			if(null!=order.getActualTime()){
+				order.setActualTimeStr(format.format(order.getActualTime()));
+			}
+			if(null!=order.getFinishTime()){
+				order.setFinishTimeStr(format.format(order.getFinishTime()));
+			}
+			if(null!=order.getPayTime()){
+				order.setPayTimeStr(format.format(order.getPayTime()));
+			}
+//			if(null!=order.getSureTime()){//确认时间
+//				order.setSureTimeStr(format.format(order.getSureTime()));
+//			}
+//			if(null!=order.getEndTime()){//完成时间
+//				order.setEndTimeStr(format.format(order.getEndTime()));
+//			}
+//			if(null!=order.getTakeTime()){//接单时间
+//				order.setTakeTimeStr(format.format(order.getTakeTime()));
+//			}
 			request.setAttribute("order", order);
 
 			MenberAddrDTO address = myMenberAddrFacade.get(order.getAddrId());

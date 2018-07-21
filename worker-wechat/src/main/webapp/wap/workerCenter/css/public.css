@@ -128,7 +128,7 @@ ul.order-price li p em{ color:#fa4b28;}
 a.pay,span.cancel,.submit-btn,.confirm-payment,.order,.sure-order,.tjxx{ border:none !important; padding:0 !important; display:block; width:90%; height:2.1rem; line-height:2.1rem; margin:0.6rem auto; background-color:#ff731c; color:#fff; text-align:center; -moz-border-radius:0.2rem; -webkit-border-radius:0.2rem; border-radius:0.2rem; font-size:0.8rem; }
 /*----订单详情-订单取消------*/
 .order-num span.state{ color:#1a85f9; font-size:0.6rem; }
-ul.order-cancel-list li:first-child{ height:2rem; line-height:2rem; padding:0 0.5rem; border-bottom:1px solid #e5e5e5;  }
+ul.order-cancel-list li:first-child{ height:2rem; line-height:2rem; padding:0 0.5rem; border-bottom:1px solid #e5e5e5;background:#71c3f530 }
 ul.order-cancel-list li p { width: 100%; font-size: 0.7rem; color: #181818; text-align:left;}
 ul.order-cancel-list li p em { color: #fa4b28; }
 span.cancel{ color:#ff731c; background-color:transparent; border:1px solid #ff731c; }

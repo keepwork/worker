@@ -11,6 +11,8 @@
 <meta content="black" name="apple-mobile-web-app-status-bar-style" />
 <meta content="telephone=no" name="format-detection" />
 <title>订单详情</title>
+<link rel="stylesheet" type="text/css" href="${ctx }/wap/css/processmain.css">
+<link rel="stylesheet" type="text/css" href="${ctx }/wap/css/process.css">
 <link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/base.css">
 <link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/public.css">
 <script type="text/javascript" src="${ctx }/wap/workerCenter/js/jquery.min.js" ></script>
@@ -24,7 +26,7 @@
 </header>
 <!--header-end-->
 <div class="container" id="container"> 
-<div class="order-schedule-img"><img src="${ctx }/wap/workerCenter/images/1.png"></div>
+<%--<div class="order-schedule-img"><img src="${ctx }/wap/workerCenter/images/1.png"></div>--%>
 <div class="order-confirm">
 <div class="order-num"><span class="fl">订单号：<em>${requestScope.order.orderSn}</em></span></div>
 <ul class="order-confirm-list clearfix order-cancel-list">
@@ -64,6 +66,108 @@
       <li><h2>评价内容</h2><span>${requestScope.appraise.content}</span></li>
     </ul>
   </c:if>
+  <div style="margin-bottom: 0.3rem"></div>
+  <ul class="order-confirm-list clearfix order-cancel-list">
+    <li><p>订单进度</p></li>
+    <div>
+      <section id="cd-timeline" class="cd-container">
+        <div class="cd-timeline-block">
+          <div class="cd-timeline-img cd-movie">
+          </div>
+          <div class="cd-timeline-content">
+            <p>接单</p>
+            <span class="cd-date">${requestScope.order.takeTimeStr}</span>
+          </div>
+        </div>
+
+        <c:if test="${requestScope.order.actualTimeStr ne ''}">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-movie">
+            </div>
+            <div class="cd-timeline-content">
+              <p>已上门</p>
+              <span class="cd-date">${requestScope.order.actualTimeStr}</span>
+            </div>
+          </div>
+        </c:if>
+        <c:if test="${requestScope.order.actualTimeStr eq ''}">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-picture">
+            </div>
+            <div class="cd-timeline-content">
+              <p>已上门</p>
+              <span class="cd-date">&emsp;</span>
+            </div>
+          </div>
+        </c:if>
+
+        <c:if test="${requestScope.order.finishTimeStr ne ''}">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-movie">
+            </div>
+            <div class="cd-timeline-content">
+              <p>已完工</p>
+              <span class="cd-date">${requestScope.order.finishTimeStr}</span>
+            </div>
+          </div>
+        </c:if>
+        <c:if test="${requestScope.order.finishTimeStr eq ''}">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-picture">
+            </div>
+            <div class="cd-timeline-content">
+              <p>已完工</p>
+              <span class="cd-date">&emsp;</span>
+            </div>
+          </div>
+        </c:if>
+
+        <c:if test="${requestScope.order.payTimeStr ne ''}">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-movie">
+            </div>
+            <div class="cd-timeline-content">
+              <p>已支付</p>
+              <span class="cd-date">${requestScope.order.payTimeStr}</span>
+            </div>
+          </div>
+        </c:if>
+        <c:if test="${requestScope.order.payTimeStr eq ''}">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-picture">
+            </div>
+            <div class="cd-timeline-content">
+              <p>已支付</p>
+              <span class="cd-date">&emsp;</span>
+            </div>
+          </div>
+        </c:if>
+
+        <c:choose>
+          <c:when test="${requestScope.order.orderStatus eq '6'}">
+            <div class="cd-timeline-block">
+              <div class="cd-timeline-img cd-movie">
+              </div>
+              <div class="cd-timeline-content">
+                <p>已评价</p>
+                <span class="cd-date">&emsp;</span>
+              </div>
+            </div>
+          </c:when>
+          <c:otherwise>
+            <div class="cd-timeline-block">
+              <div class="cd-timeline-img cd-picture">
+              </div>
+              <div class="cd-timeline-content">
+                <p>已评价</p>
+                <span class="cd-date">&emsp;</span>
+              </div>
+            </div>
+          </c:otherwise>
+        </c:choose>
+      </section>
+    </div>
+  </ul>
 
 </div>
 <!--order-confirm-end-->

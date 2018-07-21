@@ -11,20 +11,22 @@
 <meta content="black" name="apple-mobile-web-app-status-bar-style" />
 <meta content="telephone=no" name="format-detection" />
 <title>订单详情</title>
+<link rel="stylesheet" type="text/css" href="${ctx }/wap/css/processmain.css">
+<link rel="stylesheet" type="text/css" href="${ctx }/wap/css/process.css">
 <link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/base.css">
 <link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/public.css">
 <script type="text/javascript" src="${ctx }/wap/workerCenter/js/jquery.min.js" ></script>
 <script src="${ctx }/wap/workerCenter/js/common.js"></script>
 </head>
 
-<body>
+<body style="overflow-x:hidden">
 <header class="header" id="header">
 <a href="javascript:history.go(-1)" target=_self class="back">返回</a>
 <h1>订单详情</h1>
 </header>
 <!--header-end-->
-<div class="container" id="container"> 
-<div class="order-schedule-img"><img src="${ctx }/wap/workerCenter/images/1.png"></div>
+<div class="container" id="container" style="padding-top:0px">
+<%--<div class="order-schedule-img"><img src="${ctx }/wap/workerCenter/images/1.png"></div>--%>
 <div class="order-confirm">
   <div class="order-num"><span class="fl">订单号：<em>${requestScope.order.orderSn}</em></span></div>
   <ul class="order-confirm-list clearfix order-cancel-list">
@@ -42,15 +44,16 @@
       </span>
     </li>
     <li><h2>产品类型</h2><span>${requestScope.firstCateName}</span></li>
-    <li><h2>服务时间</h2>
-      <span>
-        <c:if test="${requestScope.order.orderStatus == '1'}">师傅跟我确认</c:if>
-        <c:if test="${requestScope.order.orderStatus == '2'}">师傅跟我确认</c:if>
-        <c:if test="${requestScope.order.orderStatus == '3'}">${requestScope.order.sureTimeStr}</c:if>
-        <c:if test="${requestScope.order.orderStatus == '4'}">${requestScope.order.sureTimeStr}</c:if>
-        <c:if test="${requestScope.order.orderStatus == '5'}">${requestScope.order.sureTimeStr}</c:if>
-        <c:if test="${requestScope.order.orderStatus == '6'}">${requestScope.order.sureTimeStr}</c:if>
-      </span>
+    <li><h2>下单时间</h2>
+      <span>${requestScope.order.orderTimeStr}</span>
+      <%--<span>--%>
+        <%--<c:if test="${requestScope.order.orderStatus == '1'}">师傅跟我确认</c:if>--%>
+        <%--<c:if test="${requestScope.order.orderStatus == '2'}">师傅跟我确认</c:if>--%>
+        <%--<c:if test="${requestScope.order.orderStatus == '3'}">${requestScope.order.sureTimeStr}</c:if>--%>
+        <%--<c:if test="${requestScope.order.orderStatus == '4'}">${requestScope.order.sureTimeStr}</c:if>--%>
+        <%--<c:if test="${requestScope.order.orderStatus == '5'}">${requestScope.order.sureTimeStr}</c:if>--%>
+        <%--<c:if test="${requestScope.order.orderStatus == '6'}">${requestScope.order.sureTimeStr}</c:if>--%>
+      <%--</span>--%>
     </li>
     <li><h2>备注信息</h2><span>${requestScope.order.orderDesc}</span></li>
 	  <li><h2>服务费用</h2><p><em>￥${requestScope.order.totalPrice}</em></p></li>
@@ -61,7 +64,129 @@
     <li><h2>师傅姓名</h2><span>${requestScope.worker.realName}</span></li>
     <li><h2>接单数量</h2><span>${requestScope.totalOrderNum}</span></li>
     <li><h2>好评指数</h2><span>${requestScope.positiveAppraiseRate}%</span></li>
-    <li><h2>师傅头像</h2><span><img src="${sessionScope.worker.headimgurl}" style="width: 120px;height: 180px" /></span></li>
+    <li><h2>师傅头像</h2><span><img src="${sessionScope.worker.headimgurl}" style="width: 80px;height: 100px" /></span></li>
+  </ul>
+  <div style="margin-bottom: 0.3rem"></div>
+  <ul class="order-confirm-list clearfix order-cancel-list">
+    <li><p>订单进度</p></li>
+    <div>
+      <section id="cd-timeline" class="cd-container">
+        <div class="cd-timeline-block">
+          <div class="cd-timeline-img cd-movie">
+          </div>
+          <div class="cd-timeline-content">
+            <p>已下单</p>
+            <span class="cd-date">${requestScope.order.orderTimeStr}</span>
+          </div>
+        </div>
+        <c:if test="${requestScope.order.takeTimeStr ne ''}">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-movie">
+            </div>
+            <div class="cd-timeline-content">
+              <p>已派单</p>
+              <span class="cd-date">${requestScope.order.takeTimeStr}</span>
+            </div>
+          </div>
+        </c:if>
+        <c:if test="${requestScope.order.takeTimeStr eq ''}">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-picture">
+            </div>
+            <div class="cd-timeline-content">
+              <p>已派单</p>
+              <span class="cd-date">&emsp;</span>
+            </div>
+          </div>
+        </c:if>
+
+        <c:if test="${requestScope.order.actualTimeStr ne ''}">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-movie">
+            </div>
+            <div class="cd-timeline-content">
+              <p>已上门</p>
+              <span class="cd-date">${requestScope.order.actualTimeStr}</span>
+            </div>
+          </div>
+        </c:if>
+        <c:if test="${requestScope.order.actualTimeStr eq ''}">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-picture">
+            </div>
+            <div class="cd-timeline-content">
+              <p>已上门</p>
+              <span class="cd-date">&emsp;</span>
+            </div>
+          </div>
+        </c:if>
+
+        <c:if test="${requestScope.order.finishTimeStr ne ''}">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-movie">
+            </div>
+            <div class="cd-timeline-content">
+              <p>已完工</p>
+              <span class="cd-date">${requestScope.order.finishTimeStr}</span>
+            </div>
+          </div>
+        </c:if>
+        <c:if test="${requestScope.order.finishTimeStr eq ''}">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-picture">
+            </div>
+            <div class="cd-timeline-content">
+              <p>已完工</p>
+              <span class="cd-date">&emsp;</span>
+            </div>
+          </div>
+        </c:if>
+
+        <c:if test="${requestScope.order.payTimeStr ne ''}">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-movie">
+            </div>
+            <div class="cd-timeline-content">
+              <p>已支付</p>
+              <span class="cd-date">${requestScope.order.payTimeStr}</span>
+            </div>
+          </div>
+        </c:if>
+        <c:if test="${requestScope.order.payTimeStr eq ''}">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-picture">
+            </div>
+            <div class="cd-timeline-content">
+              <p>已支付</p>
+              <span class="cd-date">&emsp;</span>
+            </div>
+          </div>
+        </c:if>
+
+        <c:choose>
+          <c:when test="${requestScope.order.orderStatus eq '6'}">
+            <div class="cd-timeline-block">
+              <div class="cd-timeline-img cd-movie">
+              </div>
+              <div class="cd-timeline-content">
+                <p>已评价</p>
+                <span class="cd-date">&emsp;</span>
+              </div>
+            </div>
+          </c:when>
+          <c:otherwise>
+            <div class="cd-timeline-block">
+              <div class="cd-timeline-img cd-picture">
+              </div>
+              <div class="cd-timeline-content">
+                <p>已评价</p>
+                <span class="cd-date">&emsp;</span>
+              </div>
+            </div>
+          </c:otherwise>
+        </c:choose>
+      </section>
+    </div>
   </ul>
 </div>
 <!--order-confirm-end-->
