@@ -1,7 +1,9 @@
 package com.shop.order.model.facade;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
@@ -250,6 +252,24 @@ public class OrderFacade {
 			e.printStackTrace();
 		}
 	}
-	
+
+
+	public String getprojectProgress(OrderDTO m){
+		String projectProgress = "0";//项目进度
+		if("4".equals(m.getOrderStatus())){//已上门，施工进行中
+			Integer totalCycle = m.getCycleInit()+(m.getCycleAdd()==null?0:m.getCycleAdd());
+			long totalUseTime =  totalCycle*24*3600000;//总工期毫秒数
+			long usedTime =new Date().getTime()-m.getActualTime().getTime();//已使用工期毫秒数
+			String r = ((double) usedTime/totalUseTime)*100 + "";
+			projectProgress = new BigDecimal(r).setScale(0, BigDecimal.ROUND_HALF_UP).toString();
+		}else if("5".equals(m.getOrderStatus())){//已完成施工
+			projectProgress = "100";
+		}
+		return projectProgress;
+	}
+
+	public int getWorkerOrderTotalNum(String workerId) throws AppException {
+		return myOrderBPO.getWorkerOrderTotalNum(workerId);
+	}
 	
 }

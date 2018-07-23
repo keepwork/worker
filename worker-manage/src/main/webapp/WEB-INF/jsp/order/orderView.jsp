@@ -62,48 +62,60 @@
 							<c:if test="${m.orderStatus eq '6'}">已评价</c:if>
 							<c:if test="${m.orderStatus eq '7'}"><font color="#999">已取消</font></c:if>
 						</td>
-						
-					</tr>
-					<tr>
-						<th width="12%" align="right">下单时间：</th>
-						<td>${m.orderTimeStr}</td>
-						<th width="12%" align="right">接单时间：</th>
-						<td>${m.takeTimeStr}</td>
-						<th width="12%" align="right">确认时间：</th>
-						<td>${m.sureTimeStr}</td>
-					</tr>
-					<tr>
-						<th width="12%" align="right">结单时间：</th>
-						<td>${m.endTimeStr}</td>
-						<th width="12%" align="right">服务时间：</th>
-						<td>
-							<c:if test="${m.orderStatus == '1'}">师傅跟我确认</c:if>
-				       		<c:if test="${m.orderStatus == '2'}">师傅跟我确认</c:if>
-				       		<c:if test="${m.orderStatus == '3'}">${m.sureTimeStr}</c:if>
-				       		<c:if test="${m.orderStatus == '4'}">${m.sureTimeStr}</c:if>
-				       		<c:if test="${m.orderStatus == '5'}">${m.sureTimeStr}</c:if>
-						</td>
-						<th width="12%" align="right">支付方式：</th>
-						<td>
-							<c:if test="${m.payType eq '1'}">余额支付</c:if>
-							<c:if test="${m.payType eq '2'}">积分支付</c:if>
-							<c:if test="${m.payType eq '3'}">微信支付</c:if>
-						</td>
 					</tr>
 					<tr>
 						<th width="12%" align="right">预约服务类型：</th>
 						<td>
 							<c:if test="${m.serviceType == '1'}">预约安装</c:if>
-					        <c:if test="${m.serviceType == '2'}">预约维修</c:if>
-					        <c:if test="${m.serviceType == '3'}">预约保养</c:if>
-					        <c:if test="${m.serviceType == '4'}">预约测量</c:if>
-					        <c:if test="${m.serviceType == '5'}">预约咨询</c:if>
+							<c:if test="${m.serviceType == '2'}">预约维修</c:if>
+							<c:if test="${m.serviceType == '3'}">预约保养</c:if>
+							<c:if test="${m.serviceType == '4'}">预约测量</c:if>
+							<c:if test="${m.serviceType == '5'}">预约咨询</c:if>
 						</td>
 						<th width="12%" align="right">预约产品类型：</th>
 						<td>${m.firstCateName}</td>
 						<th width="12%" align="right">预约产品型号：</th>
 						<td>${m.secondCateName}</td>
 					</tr>
+					<tr>
+						<th width="12%" align="right">下单时间：</th>
+						<td>${m.orderTimeStr}</td>
+						<th width="12%" align="right">派单时间：</th>
+						<td>${m.takeTimeStr}</td>
+						<th width="12%" align="right">确认时间：</th>
+						<td>${m.sureTimeStr}</td>
+					</tr>
+					<tr>
+						<th width="12%" align="right">实际上门时间：</th>
+						<td>${m.actualTimeStr}</td>
+						<th width="12%" align="right">施工完成时间：</th>
+						<td>${m.finishTimeStr}</td>
+						<th width="12%" align="right">支付时间：</th>
+						<td>${m.payTimeStr}</td>
+					</tr>
+					<tr>
+						<th width="12%" align="right">支付方式：</th>
+						<td>
+							<c:if test="${m.payType eq '1'}">余额支付</c:if>
+							<c:if test="${m.payType eq '2'}">积分支付</c:if>
+							<c:if test="${m.payType eq '3'}">微信支付</c:if>
+						</td>
+						<%--<th width="12%" align="right">服务时间：</th>--%>
+						<%--<td>--%>
+							<%--<c:if test="${m.orderStatus == '1'}">师傅跟我确认</c:if>--%>
+				       		<%--<c:if test="${m.orderStatus == '2'}">师傅跟我确认</c:if>--%>
+				       		<%--<c:if test="${m.orderStatus == '3'}">${m.sureTimeStr}</c:if>--%>
+				       		<%--<c:if test="${m.orderStatus == '4'}">${m.sureTimeStr}</c:if>--%>
+				       		<%--<c:if test="${m.orderStatus == '5'}">${m.sureTimeStr}</c:if>--%>
+						<%--</td>--%>
+						<th width="12%" align="right">计划工期(天)：</th>
+						<td>
+							${m.cycleInit}
+						</td>
+						<th width="12%" align="right">新增工期(天)：</th>
+						<td>${m.cycleAdd}</td>
+					</tr>
+
 				</table>
 				
 				<!-- 服务师傅信息 -->
@@ -119,9 +131,9 @@
 					</tr>
 					<tr>
 						<th width="12%" align="right">接单数：</th>
-						<td>100</td>
+						<td>${totalOrderNum}</td>
 						<th width="12%" align="right">满意度：</th>
-						<td>90%</td>
+						<td>${positiveAppraiseRate}%</td>
 						<th width="12%" align="right">&nbsp;</th>
 						<td>&nbsp;</td>
 					</tr>

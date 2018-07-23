@@ -10,6 +10,7 @@ import com.pub.menber.model.dto.MenberPointDTO;
 import com.pub.menber.model.facade.MenberAddrFacade;
 import com.pub.menber.model.facade.MenberFacade;
 import com.pub.menber.model.facade.MenberPointFacade;
+import com.shop.appraise.model.facade.AppraiseFacade;
 import com.shop.good.model.dto.GoodCategoryDTO;
 import com.shop.good.model.facade.GoodCategoryFacade;
 import com.shop.order.model.dto.OrderDTO;
@@ -59,6 +60,7 @@ public class OrderAction extends BaseAdmAction
 //	private ShopCarFacade myShopCarFacade;
 	private MenberAddrFacade myMenberAddrFacade;
 	private MenberPointFacade myMenberPointFacade;
+	private AppraiseFacade myAppraiseFacade;
 	
 	public void init(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
@@ -71,6 +73,7 @@ public class OrderAction extends BaseAdmAction
 //		this.myShopCarFacade = (ShopCarFacade) this.getBeanContext().getBean("myShopCarFacade");
 		this.myMenberAddrFacade = (MenberAddrFacade) this.getBeanContext().getBean("myMenberAddrFacade");
 		this.myMenberPointFacade = (MenberPointFacade) this.getBeanContext().getBean("myMenberPointFacade");
+		this.myAppraiseFacade = (AppraiseFacade) this.getBeanContext().getBean("myAppraiseFacade");
 	}
 	
 	/**
@@ -180,6 +183,11 @@ public class OrderAction extends BaseAdmAction
 			}else{
 				o.setLocationName("未指派");
 			}
+			String projectProgress = myOrderFacade.getprojectProgress(o);
+			if(!projectProgress.equals("0")){
+				projectProgress = projectProgress + "%";
+			}
+			o.setProjectProgress(projectProgress);
 			orderList.add(o);
 		}
 		request.setAttribute("list", orderList);
@@ -226,21 +234,21 @@ public class OrderAction extends BaseAdmAction
 		if(null!=m.getSureTime()){
 			m.setSureTimeStr(format.format(m.getSureTime()));
 		}
+		if(null!=m.getActualTime()){
+			m.setActualTimeStr(format.format(m.getActualTime()));
+		}
+		if(null!=m.getFinishTime()){
+			m.setFinishTimeStr(format.format(m.getFinishTime()));
+		}
+		if(null!=m.getPayTime()){
+			m.setPayTimeStr(format.format(m.getPayTime()));
+		}
 		if(null!=m.getEndTime()){
 			m.setEndTimeStr(format.format(m.getEndTime()));
 		}
 
 
-		String projectProgress = "0";//项目进度
-		if("4".equals(m.getOrderStatus())){//已上门，施工进行中
-			Integer totalCycle = m.getCycleInit()+(m.getCycleAdd()==null?0:m.getCycleAdd());
-			long totalUseTime =  totalCycle*24*3600000;//总工期毫秒数
-			long usedTime =new Date().getTime()-m.getActualTime().getTime();//已使用工期毫秒数
-			String r = ((double) usedTime/totalUseTime)*100 + "";
-			projectProgress = new BigDecimal(r).setScale(0, BigDecimal.ROUND_HALF_UP).toString();
-		}else if("5".equals(m.getOrderStatus())){//已完成施工
-			projectProgress = "100";
-		}
+		String projectProgress = myOrderFacade.getprojectProgress(m);//项目进度
 		request.setAttribute("projectProgress", projectProgress);
 
 		MenberDTO menber = myMenberFacade.get(m.getMenId());
@@ -254,7 +262,13 @@ public class OrderAction extends BaseAdmAction
 		MenberAddrDTO addr = myMenberAddrFacade.get(m.getAddrId());
 		addr.setStreet(addr.getProvince()+addr.getCity()+addr.getStreet());//全地址=省+市+街道
 		request.setAttribute("addr", addr);
-		
+
+		int totalOrderNum = myOrderFacade.getWorkerOrderTotalNum(m.getWorkerId());
+		request.setAttribute("totalOrderNum", totalOrderNum);//订单总数
+
+		String positiveAppraiseRate = myAppraiseFacade.getAppraiseRate(m.getWorkerId(),"1");
+		request.setAttribute("positiveAppraiseRate", positiveAppraiseRate);//好评率
+
 //		List<OrderItemDTO> items = myOrderItemFacade.listByOrderId(m.getOrderId());
 //		request.setAttribute("items", items);
 		

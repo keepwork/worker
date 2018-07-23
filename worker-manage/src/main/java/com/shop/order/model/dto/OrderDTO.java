@@ -19,6 +19,8 @@ public class OrderDTO extends AbstractOrderDTO
 	private String sureTimeStr = "";
 	private String takeTimeStr = "";
 	private String payTimeStr = "";
+	private String actualTimeStr = "";
+	private String finishTimeStr = "";
 	
 	private String resultCode;
 	private String workerName = "";
@@ -31,6 +33,8 @@ public class OrderDTO extends AbstractOrderDTO
 	private Date endTime;
 
 	private String locationName = "";//所属地区或团队
+
+	private String projectProgress = "";//项目进度
 
 	
 	public OrderDTO()
@@ -159,5 +163,29 @@ public class OrderDTO extends AbstractOrderDTO
 
 	public void setLocationName(String locationName) {
 		this.locationName = locationName;
+	}
+
+	public String getProjectProgress() {
+		return projectProgress;
+	}
+
+	public void setProjectProgress(String projectProgress) {
+		this.projectProgress = projectProgress;
+	}
+
+	public String getActualTimeStr() {
+		return actualTimeStr;
+	}
+
+	public void setActualTimeStr(String actualTimeStr) {
+		this.actualTimeStr = actualTimeStr;
+	}
+
+	public String getFinishTimeStr() {
+		return finishTimeStr;
+	}
+
+	public void setFinishTimeStr(String finishTimeStr) {
+		this.finishTimeStr = finishTimeStr;
 	}
 }

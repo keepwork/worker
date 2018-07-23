@@ -192,7 +192,7 @@
 					<c:if test="${m.serviceType eq '5'}">咨询</c:if>
 				</ec:column>
 				<ec:column title="会员姓名" property="menName" width="7%"></ec:column>
-				<ec:column title="手机" property="menMobile" width="7%"></ec:column>
+				<%--<ec:column title="手机" property="menMobile" width="7%"></ec:column>--%>
 				<ec:column title="订单总额" property="totalPrice" filterable="false" width="7%"></ec:column>
 				<%-- 
 				<ec:column title="订单总额" property="totalPoint" filterable="false">
@@ -232,8 +232,9 @@
 				</ec:column>
 				--%>
 				<ec:column title="下单时间" property="orderTimeStr" filterable="false" width="15%"></ec:column>
-				<ec:column title="计划周期" property="cycleInit" filterable="false" width="7%"></ec:column>
-				<ec:column title="新增周期" property="cycleAdd" filterable="false" width="7%"></ec:column>
+				<ec:column title="计划工期(天)" property="cycleInit" filterable="false" width="7%"></ec:column>
+				<ec:column title="新增工期(天)" property="cycleAdd" filterable="false" width="7%"></ec:column>
+				<ec:column title="项目进度" property="projectProgress" filterable="false" width="7%"></ec:column>
 				<ec:column title="操作" property="EEE" sortable="false" filterable="false" width="24%">
 					<a class="sexybutton" href="${ctx}/pub/order/beforeView.do?orderId=${m.orderId}"><span><span>查看</span></span></a>
 					<c:if test="${m.orderStatus eq '1'}">
@@ -248,7 +249,7 @@
 					</c:if>
 					<c:if test="${m.orderStatus eq '4'}">
 						<a class="sexybutton" href="javascript:void(0)" onclick="openDiv2('${m.orderId }')">
-							<span><span>新增周期</span></span>
+							<span><span>新增工期</span></span>
 						</a>
 					</c:if>
 					<c:if test="${m.orderStatus eq '6'}">
@@ -298,7 +299,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td align="right">周期天数：</td>
+						<td align="right">工期天数：</td>
 						<td align="left">
 							<input type="text" name="cycleInit" id="cycleInit" class="bgw" />天
 						</td>
@@ -327,7 +328,7 @@
 				<input type="hidden" name="orderId" id="orderId2"/>
 				<table align="center">
 					<tr>
-						<td align="right">周期天数：</td>
+						<td align="right">工期天数：</td>
 						<td align="left">
 							<input type="text" name="cycleAdd" id="cycleAdd" class="bgw" />天
 						</td>

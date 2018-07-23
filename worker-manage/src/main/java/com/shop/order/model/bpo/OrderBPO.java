@@ -81,7 +81,10 @@ public class OrderBPO extends BpoSupport {
 	public Map<String,Object> listForPagination(Map<String,String> params){
 		return myOrderDAO.listForPagination(params);
     }
-	
+
+	public int getWorkerOrderTotalNum(String workerId) throws AppException {
+		return myOrderDAO.getWorkerOrderTotalNum(workerId);
+	}
 
 	public OrderDAO getMyOrderDAO() {
 		return myOrderDAO;
@@ -89,7 +92,5 @@ public class OrderBPO extends BpoSupport {
 	public void setMyOrderDAO(OrderDAO myOrderDAO) {
 		this.myOrderDAO = myOrderDAO;
 	}
-
-	
 
 }
