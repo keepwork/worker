@@ -508,7 +508,7 @@ public class OrderAction extends BaseAdmAction
 	}
 
 	/**
-	 * 任务周期新增
+	 * 工期新增
 	 *
 	 * @param mapping
 	 * @param form
@@ -526,6 +526,31 @@ public class OrderAction extends BaseAdmAction
 
 		OrderDTO order = myOrderFacade.get(orderId);
 		order.setCycleAdd(cycleAdd);
+		myOrderFacade.update(order);
+		CommonMapping mping = new CommonMapping("保存成功!", getRealUri(mapping,"order/queryList"), ActionConstent.ALERT);
+		request.setAttribute("mping", mping);
+		return mapping.findForward(ActionConstent.COMMON_MAPPING);
+	}
+
+	/**
+	 * 成本修改
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward editCost(ActionMapping mapping,
+				   ActionForm form, HttpServletRequest request,
+				   HttpServletResponse response) throws Exception
+	{
+		String orderId = request.getParameter("orderId");
+		String cost = request.getParameter("cost");
+
+		OrderDTO order = myOrderFacade.get(orderId);
+		order.setCost(cost);
 		myOrderFacade.update(order);
 		CommonMapping mping = new CommonMapping("保存成功!", getRealUri(mapping,"order/queryList"), ActionConstent.ALERT);
 		request.setAttribute("mping", mping);

@@ -54,6 +54,7 @@ public abstract class AbstractOrderDTO extends DtoSupport
 	private Date finishTime;//施工完成时间
 	private Integer cycleInit;//完成施工周期(天)
 	private Integer cycleAdd;//完成施工补充周期(天)
+	private String cost;//成本
 
 	//所属地区或团队
 	private TBmsLocationDTO tbTBmsLocationDTO;
@@ -310,5 +311,13 @@ public abstract class AbstractOrderDTO extends DtoSupport
 
 	public void setCycleAdd(Integer cycleAdd) {
 		this.cycleAdd = cycleAdd;
+	}
+
+	public String getCost() {
+		return cost;
+	}
+
+	public void setCost(String cost) {
+		this.cost = cost;
 	}
 }
