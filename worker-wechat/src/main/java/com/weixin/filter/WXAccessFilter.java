@@ -80,7 +80,9 @@ public class WXAccessFilter implements Filter
 //					log.info("WXAccessFilter ============= 微信访问");
 				
 				////////////////////////////////////////////////测试用，生产上要去掉
-				if ("/worker-wechat/weixin/index.do".equals(uri))
+				if ("/worker-wechat/weixin/index.do".equals(uri)
+						|| "/worker-wechat/pub/menber/myAccount.do".equals(uri)
+						|| "/worker-wechat/pub/menber/workApply.do".equals(uri))
 				{
 					String openID = request.getParameter("openID");
 					request.getSession().setAttribute("openID", openID);

@@ -55,6 +55,7 @@
 		<action path="/pub/menber/*" type="com.pub.menber.action.MenberAction"
 				scope="request" parameter="{1}" name="MenberDTO">
 			<!-- front wap -->
+			<forward name="index" path="/wap/index.jsp" />
 			<forward name="sign_wap" path="/wap/indexWap.jsp" />
 			<forward name="planDetail_wap" path="/wap/planDetail.jsp" />
 			<forward name="center_wap" path="/wap/userCenter/center.jsp" />
@@ -66,6 +67,7 @@
 			<forward name="myInvitationPage2View_wap" path="/wap/userCenter/myInvitationPage2View.jsp" />
 			<forward name="invitation_wap" path="/wap/invitation.jsp" />
 			<forward name="recharge_wap" path="/wap/userCenter/recharge.jsp" />
+			<forward name="workApply_wap" path="/wap/workApply.jsp" />
 			<!-- front web -->
 			<forward name="sign_web" path="/web/index.jsp" />
 			<forward name="planDetail_web" path="/web/planDetail.jsp" />
