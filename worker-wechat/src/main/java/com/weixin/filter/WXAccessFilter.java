@@ -85,13 +85,16 @@ public class WXAccessFilter implements Filter
 						|| "/worker-wechat/pub/menber/workApply.do".equals(uri))
 				{
 					String openID = request.getParameter("openID");
-					request.getSession().setAttribute("openID", openID);
-	                MenberDTO sessionMenber1 = myMenberFacade.findMenberByOpenId(openID);
+					if(null!=openID && !openID.equals("")){
+						request.getSession().setAttribute("openID", openID);
+						MenberDTO sessionMenber1 = myMenberFacade.findMenberByOpenId(openID);
 //	                request.getSession().setAttribute("openID", "o7Jq2wIeiWcLoA7UCQL5VhAa118M");
 //	                MenberDTO sessionMenber1 = myMenberFacade.findMenberByOpenId("o7Jq2wIeiWcLoA7UCQL5VhAa118M");
-                	request.getSession().setAttribute("wxmenber", sessionMenber1);
-                	request.getSession().setAttribute("wxmenberId", sessionMenber1.getId());
-                	request.getSession().setAttribute("jsapi_ticket", "");
+						request.getSession().setAttribute("wxmenber", sessionMenber1);
+						request.getSession().setAttribute("wxmenberId", sessionMenber1.getId());
+						request.getSession().setAttribute("jsapi_ticket", "");
+					}
+
             		filterchain.doFilter(request, response);
 	                if(1==1){return;}
 				//////////////////////////////////////////////测试用，生产上要去掉
