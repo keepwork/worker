@@ -124,7 +124,7 @@
 					<tr>
 						<td width="30%">*真实姓名：</td>
 						<td width="70%" align="left">
-							<input name="realName" class="input_text" id="realName" value="" placeholder="请输入真实姓名，必填" type="text"></td>
+							<input name="realName" class="input_text" id="realName" value="" placeholder="请输入真实姓名，必填" type="text" maxlength="50"></td>
 					</tr>
 				</table>
 			</li>
@@ -133,7 +133,7 @@
 					<tr>
 						<td width="30%">*身份证号：</td>
 						<td width="70%" align="left">
-							<input name="pid" class="input_text" id="pid" value="" placeholder="请输入身份证号，必填" type="text"></td>
+							<input name="pid" class="input_text" id="pid" value="" placeholder="请输入身份证号，必填" type="text" maxlength="50"></td>
 					</tr>
 				</table>
 			</li>
@@ -142,7 +142,7 @@
 					<tr>
 						<td width="30%">*手机号码：</td>
 						<td width="70%" align="left">
-							<input name="mobile" class="input_text" id="mobile" value="" placeholder="请输入手机号码，必填" type="text"
+							<input name="mobile" class="input_text" id="mobile" value="" placeholder="请输入手机号码，必填" type="text" maxlength="50"
 									onkeyup='this.value=this.value.replace(/[^0-9]/gi,""); '
 									onafterpaste='this.value=this.value.replace(/[^0-9]/gi,"")'>
 						</td>
@@ -154,7 +154,7 @@
 					<tr>
 						<td width="30%">*服务区域：</td>
 						<td width="70%" align="left">
-							<input name="areaCode" class="input_text" id="areaCode" value="" placeholder="请输入服务区域，必填" type="text"></td>
+							<input name="areaCode" class="input_text" id="areaCode" value="" placeholder="请输入服务区域，必填" type="text" maxlength="100"></td>
 					</tr>
 				</table>
 			</li>
@@ -163,7 +163,7 @@
 					<tr>
 						<td width="30%">&nbsp;电子邮箱：</td>
 						<td width="70%" align="left">
-							<input name="email" class="input_text" id="email" value="" placeholder="请输入电子邮箱，非必填" type="text"></td>
+							<input name="email" class="input_text" id="email" value="" placeholder="请输入电子邮箱，非必填" type="text" maxlength="50"></td>
 					</tr>
 				</table>
 			</li>
@@ -172,7 +172,7 @@
 					<tr>
 						<td width="30%">*技能描述：</td>
 						<td width="70%" align="left">
-						<textarea name="detailAddr" id="detailAddr" rows="8" style="border: 1px solid #e1e1e1;height: 190px;width: 100%;" type="text"
+						<textarea name="detailAddr" id="detailAddr" rows="8" style="border: 1px solid #e1e1e1;height: 190px;width: 100%;" type="text" maxlength="400"
 								  placeholder="请填写您擅长的技能，我们会根据此项来准确为您派单，必填"></textarea>
 						</td>
 					</tr>

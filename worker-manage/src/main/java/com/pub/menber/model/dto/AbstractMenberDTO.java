@@ -16,7 +16,7 @@ public abstract class AbstractMenberDTO extends DtoSupport
 { 
 	private String id;//会员ID
 	private String salesMenId;//推荐人id
-	private String familyMenId;//托管人id
+
 	private String loginName;//登录名
 	private String password;//密码
 	private String email;//电子邮箱
@@ -25,25 +25,29 @@ public abstract class AbstractMenberDTO extends DtoSupport
 	private String serviceType;//服务类型：1-安装,2-维修,3-保养,4-测量,5-咨询
 	private String postCode;//邮编
 	private String tel;//座机
-	private String fax;//传真
 	private String mobile;//手机
-	private String detailAddr;//详细地址
+	private String detailAddr;//技能描述
 	private String pid;//身份证
 	private Integer point;//会员积分
-	private Integer type;//1-微信客户，2-安装工
+	private Integer type;//1-微信客户，2-安装工，3-工人申请中
 	private Integer status;//0-正常（已关注），1-停用（未关注）
-	private Integer isjoin;//是否加入了计划(0-未加入，1-已加入但未过等待期，2-已过等待期)
 	private Integer remind;//是否需要提醒充值(0-余额不足（账户小于10元需要提醒），1-余额充足（不需要提醒）)
 	private BigDecimal balanceFee;//可提现余额
 	private BigDecimal rightFee;//权利金
 	private BigDecimal contributeFee;//贡献金
 	private Date regTime;//注册时间
-	private Date joinTime;//加入计划时间
-	private Date effectTime;//计划生效时间
 	private Date lastTime;//最后一次登录时间
 	private Integer sign;//用于保存推荐人是否已经奖励过积分（1已奖励，0未奖励）
 	private String realNameEmergency;//紧急联系人姓名
 	private String mobileEmergency;//紧急联系人电话
+
+	//工人申请审核
+	private String fax;//（工人申请审核说明）
+	private Integer isjoin;//工人申请审核结果（1批准，0拒绝）
+	private Date joinTime;//（工人申请时间）
+	private Date effectTime;//（工人申请通过时间）
+	private String familyMenId;//工人申请审核人id
+
 	//微信资料 
     private String openId;//微信用户id
     private String sex;//微信性别

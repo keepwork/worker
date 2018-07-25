@@ -50,6 +50,7 @@
 			  scope="request" parameter="{1}" name="MenberDTO">
 		  <!-- back -->
 		  <forward name="list" path="/WEB-INF/jsp/menber/menberList.jsp" />
+          <forward name="auditList" path="/WEB-INF/jsp/menber/menberAuditList.jsp" />
 		  <forward name="add" path="/WEB-INF/jsp/menber/menberAdd.jsp" />
 		  <forward name="edit" path="/WEB-INF/jsp/menber/menberUpdate.jsp" />
 		  <forward name="deleteConfirm" path="/WEB-INF/jsp/menber/menberDeleteConfirm.jsp" />
