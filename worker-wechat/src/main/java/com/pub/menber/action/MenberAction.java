@@ -1,6 +1,7 @@
 package com.pub.menber.action;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -883,7 +884,98 @@ public class MenberAction extends BaseAdmAction
 		response.getWriter().flush();
 		return null;
 	}
-	
+
+
+	/**
+	 * 工人申请 - 前台
+	 * 测试地址：http://127.0.0.1:8080/worker-wechat/pub/menber/workApply.do?type=wap&openID=o7Jq2wIeiWcLoA7UCQL5VhAa118M
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward workApply(ActionMapping mapping,
+									ActionForm form, HttpServletRequest request,
+									HttpServletResponse response) throws Exception
+	{
+		String type = request.getParameter("type");//类型：wap,web
+		String returnPage = "";
+		MenberDTO menber = null;
+		if(type.equals("wap")){
+			menber = (MenberDTO)request.getSession().getAttribute("wxmenber");
+			returnPage = "workApply_wap";
+		}
+//		else if(type.equals("web")){
+//			menber = (MenberDTO)request.getSession().getAttribute("pcmenber");
+//			returnPage = "workApply_web";
+//			request.setAttribute("leftMenu", "grsq");
+//		}
+		if(null != menber && menber.getType()==2){
+			response.setContentType("text/html; charset=UTF-8"); //转码
+			PrintWriter writer = response.getWriter();
+			writer.flush();
+			writer.println("<script>");
+			writer.println("alert('您已经是工人了，不用再申请！');");
+			writer.println("</script>");
+			return mapping.findForward("index");
+		}else if(null != menber && menber.getType()==3){
+			response.setContentType("text/html; charset=UTF-8"); //转码
+			PrintWriter writer = response.getWriter();
+			writer.flush();
+			writer.println("<script>");
+			writer.println("alert('您已经提交过申请，请耐心等待审核结果！');");
+			writer.println("</script>");
+			return mapping.findForward("index");
+		}else{
+			return mapping.findForward(returnPage);
+		}
+	}
+
+
+	/**
+	 * 保存工人申请
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward workApplySave(ActionMapping mapping, ActionForm form,
+							  HttpServletRequest request, HttpServletResponse response)
+			throws Exception
+	{
+		String type = request.getParameter("type");//类型：wap,web
+		MenberDTO dto = (MenberDTO) form;
+
+
+		MenberDTO menber = null;
+		if(type.equals("wap")){
+			menber = (MenberDTO)request.getSession().getAttribute("wxmenber");
+		}else if(type.equals("web")){
+			menber = (MenberDTO)request.getSession().getAttribute("pcmenber");
+		}
+		if(null != menber)
+		{
+			menber.setJoinTime(new Date());
+			menber.setType(3);//工人申请
+			menber.setRealName(dto.getRealName());
+			menber.setPid(dto.getPid());
+			menber.setMobile(dto.getMobile());
+			menber.setAreaCode(dto.getAreaCode());
+			menber.setEmail(dto.getEmail());
+			menber.setDetailAddr(dto.getDetailAddr());
+			this.myMenberFacade.update(menber);
+		}
+
+		CommonMapping mping = new CommonMapping("保存成功!", getRealUri(mapping,"menber/index") + "?type=" + type, ActionConstent.ALERT);
+		request.setAttribute("mping", mping);
+		return mapping.findForward(ActionConstent.COMMON_MAPPING);
+	}
 	
 	public static void main(String[] ages){
 //		String acColor = "%25E7%259A%2593%25E6%259C%2588%25E7%2599%25BD";

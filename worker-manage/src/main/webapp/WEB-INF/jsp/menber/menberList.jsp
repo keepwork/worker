@@ -7,12 +7,15 @@
 	<TITLE>后台管理系统</TITLE>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+	<meta name=generator content="MSHTML 8.00.6001.18939">
+
 	<link href="${ctx}/sys/css/public.css" rel="stylesheet" type="text/css">
 	<link href="${ctx}/sys/css/style.css" rel="stylesheet" type="text/css">
+
 	<script type="text/javascript" src="${ctx}/common/js/calendar/WdatePicker.js"></script>
 	<script type="text/javascript" src="${ctx}/common/js/jquery-1.8.0.min.js" charset="utf-8"></script>
 	<script type="text/javascript" src="${ctx}/js/mootools-release-1.11.js"></script>
-	<meta name=generator content="MSHTML 8.00.6001.18939">
+
 	<script type="text/javascript">
 			function getChecks(name)
 			{
@@ -190,7 +193,7 @@
 					<c:if test="${m.type eq '2'}">安装工</c:if>
 				</ec:column>
 				--%>
-				<ec:column title="区域" property="locationName"  width="10%"></ec:column>
+				<ec:column title="区域1" property="locationName"  width="10%"></ec:column>
 	        	<ec:column title="手机" property="mobile"  width="7%"></ec:column>
 	        	<ec:column title="身份证" property="pid"  width="15%"></ec:column>
 				<ec:column title="注册时间" property="regTimeStr" filterable="false"  width="15%"></ec:column>
@@ -200,7 +203,7 @@
 					<c:if test="${m.status eq '0'}"><font color="green">正常</font></c:if>
 					<c:if test="${m.status eq '1'}"><font color="red">停用</font></c:if>
 				</ec:column>
-				
+
 				<ec:column title="操作" property="EEE" sortable="false" filterable="false" width="20%">
 					<%--
 					<a class="sexybutton" href="${ctx}/pub/family/queryList.do?familyMenId=${m.id}"><span><span>托管</span></span></a>
@@ -243,6 +246,7 @@
 </div>
 
 <iframe name="hideframe" id="hideframe" width="0" height="0"></iframe>
+
 </body>
 </html>
 

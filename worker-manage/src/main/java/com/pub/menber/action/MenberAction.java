@@ -86,7 +86,7 @@ public class MenberAction extends BaseAdmAction
 		limit.setSortProperty("regTime");
 		limit.setSortType("desc");
 
-		//1：微信客户，2：工人
+		//1：微信客户，2：工人，3-工人申请中
 		String type = request.getParameter("type");
 		request.setAttribute("type", type);
 
@@ -113,6 +113,9 @@ public class MenberAction extends BaseAdmAction
 			if(null != menber.getLastTime()){
 				menber.setLastTimeStr(format.format(menber.getLastTime()));
 			}
+			if(null != menber.getJoinTime()){
+				menber.setJoinTimeStr(format.format(menber.getJoinTime()));
+			}
 			if(null != menber.getTbTBmsLocationDTO()){
 				menber.setLocationName( menber.getTbTBmsLocationDTO().getName());
 			}else{
@@ -126,7 +129,11 @@ public class MenberAction extends BaseAdmAction
 		String listShowType = request.getParameter("listShowType");
 		request.setAttribute("listShowType", listShowType);
 		
-		return mapping.findForward("list");
+		if(type.equals("3")){
+			return mapping.findForward("auditList");
+		}else{
+			return mapping.findForward("list");
+		}
 	}
 
 	/**
@@ -439,5 +446,36 @@ public class MenberAction extends BaseAdmAction
 		return mapping.findForward("list");
 	}
 
+
+	/**
+	 * 工人申请审核  - 后台
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward workAudit(ActionMapping mapping,
+							   ActionForm form, HttpServletRequest request,
+							   HttpServletResponse response) throws Exception
+	{
+		MenberDTO men = (MenberDTO) form;
+		MenberDTO old = this.myMenberFacade.get(men.getId());
+		old.setIsjoin(men.getIsjoin());
+		old.setEffectTime(new Date());
+		old.setFax(men.getFax());
+		TBmsUserDTO user = getUser(request);
+		old.setFamilyMenId(user.getId());
+
+		if(men.getIsjoin()==1){
+			old.setType(2);
+		}
+		this.myMenberFacade.update(old);
+
+		CommonMapping mping = new CommonMapping("审核成功!", getRealUri(mapping,"menber/queryList") + "?type=3", ActionConstent.ALERT);
+		request.setAttribute("mping", mping);
+		return mapping.findForward(ActionConstent.COMMON_MAPPING);
+	}
 
 }

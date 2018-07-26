@@ -67,7 +67,7 @@
 		</property>
 		<property name="detailAddr" type="java.lang.String">
 			<column name="DETAIL_ADDR" length="400">
-				<comment>详细地址</comment>
+				<comment>技能描述</comment>
 			</column>
 		</property>
 		<property name="pid" type="java.lang.String">
