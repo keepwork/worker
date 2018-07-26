@@ -317,7 +317,22 @@
         	</form>
         </div>
         <!--searchForm 结束-->
-        
+
+		<!--统计开始 -->
+		<table border="1" style="margin-top: 10px; margin-bottom: 2px;border-collapse:collapse;" width="100%">
+			<tr>
+				<th>订单总金额</th>
+				<th>订单总成本</th>
+				<th>订单总利润</th>
+			</tr>
+			<tr>
+				<td align="center">${statistics.sumTotalPrice}</td>
+				<td align="center">${statistics.sumCost}</td>
+				<td align="center">${statistics.sumProfit}</td>
+			</tr>
+		</table>
+		<!--统计结束 -->
+
         <!--CmsSiteList 开始-->
         <div class="eXtremeTable">
             <ec:table tableId="OrderList" items="list" method="post" var="m" action=""
@@ -418,7 +433,7 @@
 		</ec:table>
         </div>
     	<!--CmsSiteList 结束-->
-    	
+
     </div>
     <!--主体 结束-->
 </div>
