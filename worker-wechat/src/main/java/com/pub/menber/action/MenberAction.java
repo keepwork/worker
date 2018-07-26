@@ -979,7 +979,6 @@ public class MenberAction extends BaseAdmAction
 	
 	public static void main(String[] ages){
 //		String acColor = "%25E7%259A%2593%25E6%259C%2588%25E7%2599%25BD";
-//		try {
 //			acColor = java.net.URLDecoder.decode(acColor,"UTF-8");
 //			System.out.println("acColor2:"+acColor);
 //	    	acColor = java.net.URLDecoder.decode(acColor,"UTF-8"); 
