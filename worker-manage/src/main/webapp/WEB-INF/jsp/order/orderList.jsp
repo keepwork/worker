@@ -12,11 +12,141 @@
 	<link href="${ctx}/sys/css/style.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" type="text/css" href="${ctx}/common/css/showhide.css"/>
 
+	<script type="text/javascript" src="${ctx}/common/js/calendar/WdatePicker.js"></script>
 	<script type="text/javascript" src="${ctx}/js/mootools-release-1.11.js"></script>
 	<script type="text/javascript" src="${ctx}/common/js/jquery-1.4.4.min.js" ></script>
 	<script type="text/javascript" src="${ctx}/common/js/showhide.js"></script>
 
 	<script type="text/javascript">
+	var currUserLevel = '${currUserLevel}';//当前用户等级
+	var currLocationId = '${currLocationId}';//当前用户部门ID
+	var provinceId = '${order.province}';//省份ID
+	var cityId = '${order.city}';//城市ID
+	var teamId = '${order.team}';//队ID
+	$(function() {
+	    //根据用户等级初始化部门选择框
+        var tdHtml = "";
+        if(currUserLevel == "1"){ //管理员
+            tdHtml = "<td>&emsp;&emsp;省份：<select id='province_select' name='province' class='select_2 va_mid' style='width: 100px;' onchange='provinceSelect()'><option value=''>-请选择-</option></select></td>" +
+                "<td>&emsp;&emsp;&emsp;&emsp;地市：<select id='city_select' name='city' class='select_2 va_mid' style='width: 100px;' onchange='citySelect()'><option value=''>-请选择-</option></select></td></td>" +
+                "<td>&emsp;&emsp;&emsp;&emsp;工队：<select id='team_select' name='team' class='select_2 va_mid' style='width: 100px;'><option value=''>-请选择-</option></select></td></td>";
+        }else if(currUserLevel == "2"){
+            tdHtml = "<td>&emsp;&emsp;&emsp;&emsp;城市：<select id='city_select' name='city' class='select_2 va_mid' style='width: 100px;' onchange='citySelect()'><option value=''>-请选择-</option></select></td>" +
+                "<td>&emsp;&emsp;&emsp;&emsp;工队：<select id='team_select' name='team' class='select_2 va_mid' style='width: 100px;'><option value=''>-请选择-</option></select></td></td>";
+        }else if(currUserLevel == "3"){
+            tdHtml = "<td>&emsp;&emsp;&emsp;&emsp;工队：<select id='team_select' name='team' class='select_2 va_mid' style='width: 100px;'><option value=''>-请选择-</option></select></td>" ;
+        }
+        $("#location_tr").html(tdHtml);
+
+
+		if(provinceId != "" || cityId !="" || teamId !=""){//判断查询时是否有部门条件
+            //有部门查询条件，需初始化已选择部门的对应兄弟部门列表
+			if(provinceId != ""){
+                var optionHtml = getBrotherLocation(provinceId);
+                $("#province_select").html(optionHtml);
+                if(cityId == ""){//当只选择的省份这一级时，需要把当前选择省份对应的城市列表也初始化
+                    var optionHtml = getChildLocation(provinceId);
+                    $("#city_select").html(optionHtml);
+				}
+			}
+			if(cityId != ""){
+                var optionHtml = getBrotherLocation(cityId);
+                $("#city_select").html(optionHtml);
+                if(teamId == ""){//当只选择的城市这一级时，需要把当前选择城市对应的工队列表也初始化
+                    var optionHtml = getChildLocation(cityId);
+                    $("#team_select").html(optionHtml);
+                }
+			}
+			if(teamId != ""){
+                var optionHtml = getBrotherLocation(teamId);
+                $("#team_select").html(optionHtml);
+			}
+		}else{
+		    //无部门查询条件，只需初始化当前用户部门的子部门列表
+            if(currUserLevel == "1"){ //管理员
+				var optionHtml = getChildLocation(currLocationId);
+				$("#province_select").html(optionHtml);
+            }else if(currUserLevel == "2"){//省
+                var optionHtml = getChildLocation(currLocationId);
+                $("#city_select").html(optionHtml);
+            }else if(currUserLevel == "3"){//市
+                var optionHtml = getChildLocation(currLocationId);
+                $("#team_select").html(optionHtml);
+            }
+		}
+	});
+
+    //获取兄弟部门列表选择项
+	function getBrotherLocation(locationId) {
+        var optionHtml = optionHtml = "<option value=''>-请选择-</option>";
+        $.ajax({
+            url:"${ctx}/pub/order/getBrotherLocation.do",
+            data:{locationId:locationId},
+            type:"post",
+            dataType:"json",
+            async:false,
+            success: function(data){
+				var returnData = data.pageData;
+				$.each(returnData, function (idx, obj) {
+					if(obj.id == locationId){
+						optionHtml += "<option value='" + obj.id + "' selected='selected'>" + obj.name + "</option>";
+					}else{
+						optionHtml += "<option value='" + obj.id + "'>" + obj.name + "</option>";
+					}
+				});
+            }
+        });
+        return optionHtml;
+    }
+
+    //获取子部门列表选择项
+    function getChildLocation(locationId) {
+        var optionHtml = "<option value=''>-请选择-</option>";
+        $.ajax({
+            url:"${ctx}/pub/order/getChildLocation.do",
+            data:{locationId:locationId},
+            type:"post",
+            dataType:"json",
+            async:false,
+            success: function(data){
+                var returnData = data.pageData;
+				$.each(returnData, function (idx, obj) {
+						optionHtml += "<option value='" + obj.id + "'>" + obj.name + "</option>";
+				});
+            }
+        });
+        return optionHtml;
+
+    }
+
+    //点击省份选择项事件
+    function provinceSelect(){
+	    var selectLocationId = $('#province_select option:selected') .val();
+		if(selectLocationId == ""){
+		    $("#city_select").html("<option value=''>-请选择-</option>");
+		    $("#team_select").html("<option value=''>-请选择-</option>");
+		}else{
+            var optionHtml = getChildLocation(selectLocationId);
+            $("#city_select").html(optionHtml);
+            $("#team_select").html("<option value=''>-请选择-</option>");
+		}
+	}
+
+    //点击地市选择项事件
+    function citySelect(){
+        var selectLocationId = $('#city_select option:selected') .val();
+        if(selectLocationId == ""){
+            $("#team_select").html("<option value=''>-请选择-</option>");
+        }else{
+            var optionHtml = getChildLocation(selectLocationId);
+            $("#team_select").html(optionHtml);
+        }
+    }
+
+
+
+
+
 	function submitQuery(){
 		document.getElementById("searchForm").submit();
 	};
@@ -105,12 +235,12 @@
         
         <div class="select_box">
         	<form id="searchForm" action="${ctx}/pub/order/queryList.do" method="post" onsubmit="">
-			<table border="0" cellspacing="0" cellpadding="5" class="tb_ie6" style="font-size: 12px;">
+			<table border="0" cellspacing="0" cellpadding="5" class="tb_ie6" style="font-size: 12px; width: 100%">
 				<tr bgcolor="#f7f7f7">
 					<td width="25%">
-						&nbsp;&nbsp;订单编号：
+						订单编号：
 						<input class="text_1 va_mid" type="text" id="orderSn"
-							name="orderSn" maxlength="32" value="${order.orderSn}" style="width: 250px;"/>
+							name="orderSn" maxlength="32" value="${order.orderSn}" style="width: 150px;"/>
 					</td>
 					<td>
 						下单开始时间：
@@ -128,41 +258,36 @@
 						<img src="${ctx}/common/images/time.gif" style="vertical-align: middle"
 							 onclick="WdatePicker({el:'endTime_',dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
 					</td>
-					<td>
-						订单状态：
-						<select id="orderStatus" name="orderStatus" class="select_2 va_mid" style="width: 100px;">
-							<option value="" <c:if test = "${order.orderStatus eq ''}">selected='selected'</c:if> >-请选择-</option>
-							<option value="1" <c:if test = "${order.orderStatus eq '1'}">selected='selected'</c:if> >待派单</option>
-							<option value="2" <c:if test = "${order.orderStatus eq '2'}">selected='selected'</c:if> >已派单</option>
-							<option value="3" <c:if test = "${order.orderStatus eq '3'}">selected='selected'</c:if> >已确认时间</option>
-							<option value="4" <c:if test = "${order.orderStatus eq '4'}">selected='selected'</c:if> >已上门</option>
-							<option value="5" <c:if test = "${order.orderStatus eq '5'}">selected='selected'</c:if> >已完成施工</option>
-							<option value="6" <c:if test = "${order.orderStatus eq '6'}">selected='selected'</c:if> >已评价</option>
-							<option value="7" <c:if test = "${order.orderStatus eq '7'}">selected='selected'</c:if> >已取消</option>
-						</select>
-					</td>
+
 				</tr>
 				<tr bgcolor="#f7f7f7">
-					<td>
-						&nbsp;&nbsp;区域：
-						<select id="shippingStatus" name="shippingStatus" class="select_2 va_mid" style="width: 100px;">
-							<option value=""  <c:if test = "${order.shippingStatus eq ''}">selected='selected'</c:if> >-请选择-</option>
-							<option value="0" <c:if test = "${order.shippingStatus eq '0'}">selected='selected'</c:if> >未配送</option>
-							<option value="1" <c:if test = "${order.shippingStatus eq '1'}">selected='selected'</c:if> >已配送</option>
-							<option value="1" <c:if test = "${order.shippingStatus eq '1'}">selected='selected'</c:if> >已送达</option>
-						</select>
-					</td>
-
 				<td>
-					支付方式：
-					<select id="payType" name="payType" class="select_2 va_mid" style="width: 100px;">
-						<option value="" <c:if test = "${order.payType eq ''}">selected='selected'</c:if> >-请选择-</option>
-						<option value="1" <c:if test = "${order.payType eq '1'}">selected='selected'</c:if> >支付宝</option>
-						<option value="2" <c:if test = "${order.payType eq '3'}">selected='selected'</c:if> >微信</option>
+					服务类型：
+					<select id="payType" name="serviceType" class="select_2 va_mid" style="width: 100px;">
+						<option value="" <c:if test = "${order.serviceType eq ''}">selected='selected'</c:if> >-请选择-</option>
+						<option value="1" <c:if test = "${order.serviceType eq '1'}">selected='selected'</c:if> >安装</option>
+						<option value="2" <c:if test = "${order.serviceType eq '2'}">selected='selected'</c:if> >维修</option>
+						<option value="3" <c:if test = "${order.serviceType eq '3'}">selected='selected'</c:if> >保养</option>
+						<option value="3" <c:if test = "${order.serviceType eq '4'}">selected='selected'</c:if> >测量</option>
+						<option value="3" <c:if test = "${order.serviceType eq '5'}">selected='selected'</c:if> >咨询</option>
 					</select>
 				</td>
 				<td>
-					支付状态：
+					订单状态：
+					<select id="orderStatus" name="orderStatus" class="select_2 va_mid" style="width: 100px;">
+						<option value="" <c:if test = "${order.orderStatus eq ''}">selected='selected'</c:if> >-请选择-</option>
+						<option value="1" <c:if test = "${order.orderStatus eq '1'}">selected='selected'</c:if> >待派单</option>
+						<option value="2" <c:if test = "${order.orderStatus eq '2'}">selected='selected'</c:if> >已派单</option>
+						<option value="3" <c:if test = "${order.orderStatus eq '3'}">selected='selected'</c:if> >已确认时间</option>
+						<option value="4" <c:if test = "${order.orderStatus eq '4'}">selected='selected'</c:if> >已上门</option>
+						<option value="5" <c:if test = "${order.orderStatus eq '5'}">selected='selected'</c:if> >已完成施工</option>
+						<option value="6" <c:if test = "${order.orderStatus eq '6'}">selected='selected'</c:if> >已评价</option>
+						<option value="7" <c:if test = "${order.orderStatus eq '7'}">selected='selected'</c:if> >已取消</option>
+					</select>
+				</td>
+
+				<td>
+					&emsp;&emsp;支付状态：
 					<select id="payStatus" name="payStatus" class="select_2 va_mid" style="width: 100px;">
 						<option value="" <c:if test = "${order.payStatus eq ''}">selected='selected'</c:if> >-请选择-</option>
 						<option value="1" <c:if test = "${order.payStatus eq '0'}">selected='selected'</c:if> >已支付定金</option>
@@ -170,16 +295,24 @@
 						<option value="3" <c:if test = "${order.payStatus eq '1'}">selected='selected'</c:if> >已支付尾款</option>
 					</select>
 				</td>
-				<td >
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a class="sexybutton" onclick="submitQuery();return false;"><span><span>查询</span></span></a>
-					<a class="sexybutton" onclick="resetQuery();"><span><span>清空</span></span></a>
-					<%--<span class="fillet_btn_01 mr20">--%>
-					<%--<span class="fillet_btn_01_left" onclick="exportData_();return false;">导出</span>--%>
-					<%--</span>--%>
-					<input type="hidden" id="exportParams_" name="exportParams" value="${exportParams}" />
-				</td>
+
 				</tr>
+				<tr id="location_tr" bgcolor="#f7f7f7">
+				</tr>
+				<tr bgcolor="#f7f7f7">
+					<td>&emsp;</td>
+					<td>&emsp;</td>
+					<td align="center">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a class="sexybutton" onclick="submitQuery();return false;"><span><span>查询</span></span></a>
+						<a class="sexybutton" onclick="resetQuery();"><span><span>清空</span></span></a>
+						<%--<span class="fillet_btn_01 mr20">--%>
+						<%--<span class="fillet_btn_01_left" onclick="exportData_();return false;">导出</span>--%>
+						<%--</span>--%>
+						<%--<input type="hidden" id="exportParams_" name="exportParams" value="${exportParams}" />--%>
+					</td>
+				</tr>
+
         	</table>
         	</form>
         </div>

@@ -3,9 +3,13 @@ package com.shop.order.model.facade;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import com.sinovatech.bms.adm.model.bpo.BmsLocationBPO;
+import com.sinovatech.bms.adm.model.dto.TBmsLocationDTO;
 import org.apache.log4j.Logger;
 import net.sf.json.JSONObject;
 import com.baidu.yun.push.exception.PushClientException;
@@ -31,7 +35,8 @@ public class OrderFacade {
 	private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static Logger log = Logger.getLogger(OrderFacade.class);
 	private OrderBPO myOrderBPO;
-	
+	private BmsLocationBPO myBmsLocationBPO;
+
 	public String save(OrderDTO dto) throws AppException {
 		return myOrderBPO.saveTX(dto);
 	}
@@ -62,6 +67,10 @@ public class OrderFacade {
 
 	public List list(LimitInfo limit) throws AppException {
 		return myOrderBPO.list(limit);
+	}
+
+	public OrderDTO getStatistics(LimitInfo limit)throws AppException {
+		return myOrderBPO.getStatistics(limit);
 	}
 
 	
@@ -97,7 +106,7 @@ public class OrderFacade {
 	 * @throws ParseException
 	 */
 	public LimitInfo dtoFilterProperty(OrderDTO order, LimitInfo limit)
-		throws ParseException {
+		throws ParseException,AppException{
 		if (!StringUtil.stringVerify(order.getOrderSn())) {
 			limit.addFilterProperty(HqlProperty.getEq("orderSn",order.getOrderSn()));
 		}
@@ -113,22 +122,82 @@ public class OrderFacade {
 		if (!StringUtil.stringVerify(order.getShippingStatus())) {
 			limit.addFilterProperty(HqlProperty.getEq("shippingStatus",order.getShippingStatus()));
 		}
-		if (!StringUtil.stringVerify(order.getBeginTime())) {
+		if (!StringUtil.stringVerify(order.getBeginTime()) && StringUtil.stringVerify(order.getEndTimeStr())) {
 			limit.addFilterProperty(HqlProperty.getCompare("orderTime", null,order.getBeginTime()));
-		}
-		if (!StringUtil.stringVerify(order.getEndTime())) {
+		}else if (StringUtil.stringVerify(order.getBeginTime()) && !StringUtil.stringVerify(order.getEndTime())) {
 			limit.addFilterProperty(HqlProperty.getCompare("orderTime", order.getEndTime(), null));
+		}else if (!StringUtil.stringVerify(order.getBeginTime()) && !StringUtil.stringVerify(order.getEndTime())) {
+			limit.addFilterProperty(HqlProperty.getCompare("orderTime", order.getEndTime(), order.getBeginTime()));
 		}
+
 		if (!StringUtil.stringVerify(order.getMenId())) {
 			limit.addFilterProperty(HqlProperty.getEq("menId",order.getMenId()));
 		}
 		if (!StringUtil.stringVerify(order.getWorkerId())) {
 			limit.addFilterProperty(HqlProperty.getEq("workerId",order.getWorkerId()));
 		}
-		if (null != order.getTbTBmsLocationDTO() && !StringUtil.stringVerify(order.getTbTBmsLocationDTO().getId())) {
-			limit.addFilterProperty(HqlProperty.getEq("tbTBmsLocationDTO.id",order.getTbTBmsLocationDTO().getId()));
+		if (!StringUtil.stringVerify(order.getServiceType())) {
+			limit.addFilterProperty(HqlProperty.getEq("serviceType",order.getServiceType()));
 		}
+//		if (null != order.getTbTBmsLocationDTO() && !StringUtil.stringVerify(order.getTbTBmsLocationDTO().getId())) {
+//			limit.addFilterProperty(HqlProperty.getEq("tbTBmsLocationDTO.id",order.getTbTBmsLocationDTO().getId()));
+//		}
+		if(!StringUtil.stringVerify(order.getTeam())){//查询条件为工队ID
+			limit.addFilterProperty(HqlProperty.getEq("tbTBmsLocationDTO.id",order.getTeam()));
+		}else if(!StringUtil.stringVerify(order.getCity())){//查询条件为城市ID
+			LimitInfo locationLimit = new LimitInfo();
+			locationLimit.addFilterProperty(HqlProperty.getEq("parentid",order.getCity()));
+			List<TBmsLocationDTO> bmsLocationDTOList = myBmsLocationBPO.list(locationLimit);//查询出城市下面所有工队ID
+			List<String> idList = getLocationIdList(bmsLocationDTOList);
+			limit.addFilterProperty(HqlProperty.getIn("tbTBmsLocationDTO.id",idList));//查询出所有工队下的所有订单
+		}else if(!StringUtil.stringVerify(order.getProvince())){//查询条件为省份ID
+			LimitInfo locationLimit1 = new LimitInfo();
+			locationLimit1.addFilterProperty(HqlProperty.getEq("parentid",order.getProvince()));
+			List<TBmsLocationDTO> bmsLocationDTOList1 = myBmsLocationBPO.list(locationLimit1);//查询出省份下面所有城市ID
+			LimitInfo locationLimit2 = new LimitInfo();
+			List<String> idList1 = getLocationIdList(bmsLocationDTOList1);
+			locationLimit2.addFilterProperty(HqlProperty.getIn("parentid",idList1));//查询出所有城市下面所有工队ID
+			List<TBmsLocationDTO> bmsLocationDTOList2 = myBmsLocationBPO.list(locationLimit2);
+			List<String> idList2 = getLocationIdList(bmsLocationDTOList2);
+			limit.addFilterProperty(HqlProperty.getIn("tbTBmsLocationDTO.id",idList2));//查询出所有工队下的所有订单
+		}else if(order.getUserLevel().equals("2")){//省级部门
+			String locationId = order.getTbTBmsLocationDTO().getId();//省级部门ID
+			LimitInfo locationLimit1 = new LimitInfo();
+			locationLimit1.addFilterProperty(HqlProperty.getEq("parentid",locationId));
+			List<TBmsLocationDTO> bmsLocationDTOList1 = myBmsLocationBPO.list(locationLimit1);//查询出省份下面所有城市ID
+			LimitInfo locationLimit2 = new LimitInfo();
+			List<String> idList1 = getLocationIdList(bmsLocationDTOList1);
+			locationLimit2.addFilterProperty(HqlProperty.getIn("parentid",idList1));//查询出所有城市下面所有工队ID
+			List<TBmsLocationDTO> bmsLocationDTOList2 = myBmsLocationBPO.list(locationLimit2);
+			List<String> idList2 = getLocationIdList(bmsLocationDTOList2);
+			limit.addFilterProperty(HqlProperty.getIn("tbTBmsLocationDTO.id",idList2));//查询出所有工队下的所有订单
+		}else if(order.getUserLevel().equals("3")){//市级部门
+			String locationId = order.getTbTBmsLocationDTO().getId();//市级部门ID
+			LimitInfo locationLimit = new LimitInfo();
+			locationLimit.addFilterProperty(HqlProperty.getEq("parentid",locationId));
+			List<TBmsLocationDTO> bmsLocationDTOList = myBmsLocationBPO.list(locationLimit);//查询出城市下面所有工队ID
+			List<String> idList = getLocationIdList(bmsLocationDTOList);
+			limit.addFilterProperty(HqlProperty.getIn("tbTBmsLocationDTO.id",idList));//查询出所有工队下的所有订单
+		}else if(order.getUserLevel().equals("4")){//工队级别部门
+			String locationId = order.getTbTBmsLocationDTO().getId();//工队ID
+			limit.addFilterProperty(HqlProperty.getEq("tbTBmsLocationDTO.id",locationId));//查询出工队下的所有订单
+		}
+
 		return limit;
+	}
+
+	/**
+	 * 获取部门ID列表
+	 *
+	 * @param bmsLocationDTOList
+	 * @return
+	 */
+	public List<String> getLocationIdList(List<TBmsLocationDTO> bmsLocationDTOList){
+		List<String> idList = new ArrayList<String>();
+		for(TBmsLocationDTO tBmsLocationDTO : bmsLocationDTOList){
+			idList.add(tBmsLocationDTO.getId());
+		}
+		return idList;
 	}
 	
 	
@@ -271,5 +340,12 @@ public class OrderFacade {
 	public int getWorkerOrderTotalNum(String workerId) throws AppException {
 		return myOrderBPO.getWorkerOrderTotalNum(workerId);
 	}
-	
+
+	public BmsLocationBPO getMyBmsLocationBPO() {
+		return myBmsLocationBPO;
+	}
+
+	public void setMyBmsLocationBPO(BmsLocationBPO myBmsLocationBPO) {
+		this.myBmsLocationBPO = myBmsLocationBPO;
+	}
 }

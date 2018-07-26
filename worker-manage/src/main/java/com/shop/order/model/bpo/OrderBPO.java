@@ -59,6 +59,10 @@ public class OrderBPO extends BpoSupport {
 		return myOrderDAO.list(limit);
 	}
 
+	public OrderDTO getStatistics(LimitInfo limit)throws AppException {
+		return myOrderDAO.getStatistics(limit);
+	}
+
 	
 	public List listByIds(String ids) throws AppException {
 		ids = "'" + ids.replaceAll(",", "','") + "'";

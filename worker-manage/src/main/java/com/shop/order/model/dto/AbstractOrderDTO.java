@@ -39,7 +39,7 @@ public abstract class AbstractOrderDTO extends DtoSupport
 	private Date expTime;//快递发货时间
 	
 	private String workerId;//安装工ID
-	private String serviceType;//服务类型：1-预约安装,2-预约维修,3-预约保养,4-预约测量,5-预约咨询
+	private String serviceType = "";//服务类型：1-预约安装,2-预约维修,3-预约保养,4-预约测量,5-预约咨询
 	private String firstCate;//产品分类
 	private String firstCateName;//产品分类名称
 	private String secondCate;//产品型号
@@ -54,7 +54,7 @@ public abstract class AbstractOrderDTO extends DtoSupport
 	private Date finishTime;//施工完成时间
 	private Integer cycleInit;//完成施工周期(天)
 	private Integer cycleAdd;//完成施工补充周期(天)
-	private String cost;//成本
+	private BigDecimal cost;//成本
 
 	//所属地区或团队
 	private TBmsLocationDTO tbTBmsLocationDTO;
@@ -313,11 +313,11 @@ public abstract class AbstractOrderDTO extends DtoSupport
 		this.cycleAdd = cycleAdd;
 	}
 
-	public String getCost() {
+	public BigDecimal getCost() {
 		return cost;
 	}
 
-	public void setCost(String cost) {
+	public void setCost(BigDecimal cost) {
 		this.cost = cost;
 	}
 }

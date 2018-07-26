@@ -99,6 +99,27 @@ public class OrderDAO extends DaoSupport
 		}
 	}
 
+	/**
+	 * 统计查询出的订单金额和成本
+	 *
+	 * @param limit
+	 * @return
+	 */
+	public OrderDTO getStatistics(LimitInfo limit)
+	{
+		String hql = "select sum(Z.totalPrice),sum(Z.cost) from OrderDTO Z "
+				+ "left join Z.tbTBmsLocationDTO B  ";
+		Object[] param = limit.getWhereHQL("Z");
+		List list = this.listWithNamePrams(hql + " where 1=1 " + param[0] + " "
+					+ limit.getOrder("Z"), (Map) param[1]);
+		Object o[] = (Object[])(list.get(0));
+		OrderDTO temp = new OrderDTO();
+		temp.setSumTotalPrice((BigDecimal)o[0]);
+		temp.setSumCost((BigDecimal)o[1]);
+		temp.setSumProfit(((BigDecimal)o[0]).subtract((BigDecimal)o[1]));//利润登录总订单额-总成本相减
+		return temp;
+	}
+
 	public List listByIds(String ids)
 	{
 		return this.getHibernateTemplate().find("from OrderDTO Z where Z.orderId in (" + ids + ")");

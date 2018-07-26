@@ -202,8 +202,8 @@
 				<comment>补充的工作周期</comment>
 			</column>
 		</property>
-		<property name="cost" type="java.lang.String">
-			<column name="COST" length="50">
+		<property name="cost" type="java.math.BigDecimal">
+			<column name="COST" length="10">
 				<comment>成本</comment>
 			</column>
 		</property>

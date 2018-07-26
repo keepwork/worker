@@ -19,6 +19,7 @@ import com.shop.order.model.facade.OrderItemFacade;
 import com.shop.order.model.facade.ShopCarFacade;
 import com.sinovatech.bms.adm.model.dto.TBmsLocationDTO;
 import com.sinovatech.bms.adm.model.dto.TBmsUserDTO;
+import com.sinovatech.bms.adm.model.facade.BmsLocationFacade;
 import com.sinovatech.common.config.GlobalConfig;
 import com.sinovatech.common.util.DateUtil;
 import com.sinovatech.common.util.Validate;
@@ -26,8 +27,10 @@ import com.sinovatech.common.web.action.ActionConstent;
 import com.sinovatech.common.web.action.BaseAdmAction;
 import com.sinovatech.common.web.action.CommonMapping;
 import com.sinovatech.common.web.limit.ExLimitUtil;
+import com.sinovatech.common.web.limit.HqlProperty;
 import com.sinovatech.common.web.limit.ILimitUtil;
 import com.sinovatech.common.web.limit.LimitInfo;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
@@ -61,6 +64,7 @@ public class OrderAction extends BaseAdmAction
 	private MenberAddrFacade myMenberAddrFacade;
 	private MenberPointFacade myMenberPointFacade;
 	private AppraiseFacade myAppraiseFacade;
+	private BmsLocationFacade myBmsLocationFacade;
 	
 	public void init(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
@@ -74,6 +78,7 @@ public class OrderAction extends BaseAdmAction
 		this.myMenberAddrFacade = (MenberAddrFacade) this.getBeanContext().getBean("myMenberAddrFacade");
 		this.myMenberPointFacade = (MenberPointFacade) this.getBeanContext().getBean("myMenberPointFacade");
 		this.myAppraiseFacade = (AppraiseFacade) this.getBeanContext().getBean("myAppraiseFacade");
+		this.myBmsLocationFacade = (BmsLocationFacade) this.getBeanContext().getBean("myBmsLocationFacade");
 	}
 	
 	/**
@@ -92,6 +97,7 @@ public class OrderAction extends BaseAdmAction
 	{
 		// 列表控件的TableId值
 		String tableId = "OrderList";
+
 		// 获取分页信息
 		ILimitUtil limitUtil = new ExLimitUtil();
 		LimitInfo limit = limitUtil.getLimitInfo(request, tableId, 10);
@@ -138,22 +144,67 @@ public class OrderAction extends BaseAdmAction
 		if (!StringUtil.stringVerify(workerId)) {
 			order.setWorkerId(workerId);
 		}
-		request.setAttribute("order", order);
+		String serviceType = request.getParameter("serviceType");
+		if (!StringUtil.stringVerify(serviceType)) {
+			order.setServiceType(serviceType);
+		}
+		String province = request.getParameter("province");
+		if (!StringUtil.stringVerify(province)) {
+			order.setProvince(province);
+		}
+		String city = request.getParameter("city");
+		if (!StringUtil.stringVerify(city)) {
+			order.setCity(city);
+		}
+		String team = request.getParameter("team");
+		if (!StringUtil.stringVerify(team)) {
+			order.setTeam(team);
+		}
+
 
 		//登录用户权限过滤
 		TBmsUserDTO loginUser = getUser(request);
+		String currUserLevel = "1";//用户等级（1管理员，2省，3市，4队）
 		if(!loginUser.getUserLoginName().equals("admin")){
 			String locationId = loginUser.getTbTBmsLocationDTO().getId();
 			TBmsLocationDTO l = new TBmsLocationDTO();
 			l.setId(locationId);
 			order.setTbTBmsLocationDTO(l);
+
+			//判断当前用户等级
+			TBmsLocationDTO locationDTO1 = myBmsLocationFacade.get(locationId);
+			TBmsLocationDTO locationDTO2 = myBmsLocationFacade.get(locationDTO1.getParentid());
+			if(null == locationDTO2.getParentid() || "".equals(locationDTO2.getParentid())){
+				currUserLevel = "2";
+			}else{
+				TBmsLocationDTO locationDTO3 = myBmsLocationFacade.get(locationDTO2.getParentid());
+				if(null == locationDTO3.getParentid() || "".equals(locationDTO3.getParentid())){
+					currUserLevel = "3";
+				}else{
+					currUserLevel = "4";
+				}
+			}
 		}
+		order.setUserLevel(currUserLevel);
+		request.setAttribute("order", order);
+		request.setAttribute("currUserLevel", currUserLevel);
+		request.setAttribute("currLocationId", loginUser.getTbTBmsLocationDTO().getId());//当前用户部门ID
 
 		limit = this.myOrderFacade.dtoFilterProperty(order, limit);
 		limit.setSortProperty("orderTime");
 		limit.setSortType("desc");
 		// 过滤的条件  结束
-		
+
+//		String locationId = loginUser.getTbTBmsLocationDTO().getId();
+//		LimitInfo locationLimit = new LimitInfo();
+//		locationLimit.addFilterProperty(HqlProperty.getEq("parentId",locationId));
+//		List<TBmsLocationDTO> locationList = myBmsLocationFacade.list(locationLimit);
+//
+//		request.setAttribute("locationList", locationList);
+		LimitInfo limitInfo = new LimitInfo();
+		limitInfo = this.myOrderFacade.dtoFilterProperty(order, limitInfo);
+		OrderDTO statistics = myOrderFacade.getStatistics(limitInfo);//统计总成本、总订单金额、总利润
+		request.setAttribute("statistics", statistics);
 
 		// 查询
 		List<OrderDTO> list = myOrderFacade.list(limit);
@@ -550,11 +601,105 @@ public class OrderAction extends BaseAdmAction
 		String cost = request.getParameter("cost");
 
 		OrderDTO order = myOrderFacade.get(orderId);
-		order.setCost(cost);
+		order.setCost(new BigDecimal(cost));
 		myOrderFacade.update(order);
 		CommonMapping mping = new CommonMapping("保存成功!", getRealUri(mapping,"order/queryList"), ActionConstent.ALERT);
 		request.setAttribute("mping", mping);
 		return mapping.findForward(ActionConstent.COMMON_MAPPING);
 	}
+
+	/**
+	 * 获取兄弟部门列表
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param req
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward getBrotherLocation(ActionMapping mapping,
+				 ActionForm form, HttpServletRequest req,
+				 HttpServletResponse response) throws Exception
+	{
+		String locationId = req.getParameter("locationId");
+
+		TBmsLocationDTO dto = myBmsLocationFacade.get(locationId);
+		LimitInfo limit = new LimitInfo();
+		limit.addFilterProperty(HqlProperty.getEq("parentid",dto.getParentid()));
+		List<TBmsLocationDTO> bmsLocationDTOList = myBmsLocationFacade.list(limit);
+		StringBuilder sb = new StringBuilder();
+		int i = 0;
+		sb.append("{\"pageData\":[");
+		for (TBmsLocationDTO locationDTO : bmsLocationDTOList)
+		{
+			if (i > 0)
+			{
+				sb.append(",");
+			}
+			sb.append("{");
+			sb.append("\"id\":\"" + locationDTO.getId() + "\",");
+			sb.append("\"name\":\"" + locationDTO.getName() + "\",");
+			sb.append("\"parentId\":\"" + locationDTO.getParentid() + "\"}");
+			i++;
+		}
+		sb.append("]}");
+		try
+		{
+			ServletUtil.outputXML(response, sb.toString());
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 获取子部门列表
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param req
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward getChildLocation(ActionMapping mapping,
+											ActionForm form, HttpServletRequest req,
+											HttpServletResponse response) throws Exception
+	{
+		String locationId = req.getParameter("locationId");
+		LimitInfo limit = new LimitInfo();
+		limit.addFilterProperty(HqlProperty.getEq("parentid",locationId));
+		List<TBmsLocationDTO> bmsLocationDTOList = myBmsLocationFacade.list(limit);
+		StringBuilder sb = new StringBuilder();
+		int i = 0;
+		sb.append("{\"pageData\":[");
+		for (TBmsLocationDTO locationDTO : bmsLocationDTOList)
+		{
+			if (i > 0)
+			{
+				sb.append(",");
+			}
+			sb.append("{");
+			sb.append("\"id\":\"" + locationDTO.getId() + "\",");
+			sb.append("\"name\":\"" + locationDTO.getName() + "\",");
+			sb.append("\"parentId\":\"" + locationDTO.getParentid() + "\"}");
+			i++;
+		}
+		sb.append("]}");
+		try
+		{
+			ServletUtil.outputXML(response, sb.toString());
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
 
 }

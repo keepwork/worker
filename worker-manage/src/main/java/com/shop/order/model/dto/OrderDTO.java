@@ -1,5 +1,6 @@
 package com.shop.order.model.dto;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -35,6 +36,14 @@ public class OrderDTO extends AbstractOrderDTO
 	private String locationName = "";//所属地区或团队
 
 	private String projectProgress = "";//项目进度
+
+	private String province = "";//省份
+	private String city = "";//城市
+	private String team = "";//队
+	private String userLevel = "";//用户等级
+	private BigDecimal sumTotalPrice;//总订单金额
+	private BigDecimal sumCost;//总成本
+	private BigDecimal sumProfit;//总成本
 
 	
 	public OrderDTO()
@@ -187,5 +196,61 @@ public class OrderDTO extends AbstractOrderDTO
 
 	public void setFinishTimeStr(String finishTimeStr) {
 		this.finishTimeStr = finishTimeStr;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getTeam() {
+		return team;
+	}
+
+	public void setTeam(String team) {
+		this.team = team;
+	}
+
+	public String getUserLevel() {
+		return userLevel;
+	}
+
+	public void setUserLevel(String userLevel) {
+		this.userLevel = userLevel;
+	}
+
+	public BigDecimal getSumTotalPrice() {
+		return sumTotalPrice;
+	}
+
+	public void setSumTotalPrice(BigDecimal sumTotalPrice) {
+		this.sumTotalPrice = sumTotalPrice;
+	}
+
+	public BigDecimal getSumCost() {
+		return sumCost;
+	}
+
+	public void setSumCost(BigDecimal sumCost) {
+		this.sumCost = sumCost;
+	}
+
+	public BigDecimal getSumProfit() {
+		return sumProfit;
+	}
+
+	public void setSumProfit(BigDecimal sumProfit) {
+		this.sumProfit = sumProfit;
 	}
 }
