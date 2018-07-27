@@ -19,24 +19,36 @@ public abstract class AbstractOrderDTO extends DtoSupport
 	private String menId;//会员id
 	private String userId;//管理员ID
 	private String openId;//微信ID
-	private String addrId;//配送地址
-	private String invoice;//发票号
-	private BigDecimal totalPrice;//订单总金额
-	private BigDecimal shippingPrice;//运费
-	private Integer totalPoint;//订单总积分
-	private String orderStatus;//订单状态：1-待派单，2-已派单，3-已确认时间，4-已上门，5-已完成施工，6-已评价，7-已取消订单
-	private String shippingStatus;//配送状态：0-未配送,1-已配送,2-已送达
-	private String payStatus;//支付状态：0-未支付,1-已支付
-	private String payType;//支付类型：1-余额支付,2-积分支付,3-微信支付
-	private String orderType;//订单类型：1-微信订单,2-网页订单
-	private String orderDesc = "";//订单描述
-	private Integer amount;//数量
+
+	//订单流程
 	private Date orderTime;//下单时间
-	private Date payTime;//支付时间
-	
-	private String expName;//快递名称
-	private String expNumber;//快递单号
-	private Date expTime;//快递发货时间
+	private String orderStatus;//订单状态：1-待派单，2-已派单，3-已确认时间，4-已上门，5-开始施工，6-已完成施工，7-已评价，8-已取消订单
+	private String orderDesc = "";//订单描述
+	private BigDecimal totalPrice;//订单总金额
+	private String addrId;//配送地址
+	private String payType;//支付类型：1-一次休支付,2-分期支付（定金、中期、尾款）
+	private String invoice;//发票号
+	private BigDecimal payPrice1;//支付金额1
+	private BigDecimal payPrice2;//支付金额2
+	private BigDecimal payPrice3;//支付金额3
+	private String payWay1;//支付方式1：1-微信支付,2-支付宝支付,3-银行转账，4-现金支付
+	private String payWay2;//支付方式2：1-微信支付,2-支付宝支付,3-银行转账，4-现金支付
+	private String payWay3;//支付方式3：1-微信支付,2-支付宝支付,3-银行转账，4-现金支付
+	private Date payTime1;//支付时间1
+	private Date payTime2;//支付时间2
+	private Date payTime3;//支付时间3
+
+	//暂时废弃
+	private BigDecimal shippingPrice;//运费(废弃)
+	private Integer totalPoint;//订单总积分(废弃)
+	private String shippingStatus;//配送状态：0-未配送,1-已配送,2-已送达(废弃)
+	private String payStatus;//支付状态：0-未支付,1-已支付(废弃)
+	private String orderType;//订单类型：1-微信订单,2-网页订单(废弃)
+	private Integer amount;//数量(废弃)
+	private Date payTime;//支付时间(废弃)
+	private String expName;//快递名称(废弃)
+	private String expNumber;//快递单号(废弃)
+	private Date expTime;//快递发货时间(废弃)
 	
 	private String workerId;//安装工ID
 	private String serviceType = "";//服务类型：1-预约安装,2-预约维修,3-预约保养,4-预约测量,5-预约咨询
@@ -319,5 +331,77 @@ public abstract class AbstractOrderDTO extends DtoSupport
 
 	public void setCost(BigDecimal cost) {
 		this.cost = cost;
+	}
+
+	public BigDecimal getPayPrice1() {
+		return payPrice1;
+	}
+
+	public void setPayPrice1(BigDecimal payPrice1) {
+		this.payPrice1 = payPrice1;
+	}
+
+	public BigDecimal getPayPrice2() {
+		return payPrice2;
+	}
+
+	public void setPayPrice2(BigDecimal payPrice2) {
+		this.payPrice2 = payPrice2;
+	}
+
+	public BigDecimal getPayPrice3() {
+		return payPrice3;
+	}
+
+	public void setPayPrice3(BigDecimal payPrice3) {
+		this.payPrice3 = payPrice3;
+	}
+
+	public String getPayWay1() {
+		return payWay1;
+	}
+
+	public void setPayWay1(String payWay1) {
+		this.payWay1 = payWay1;
+	}
+
+	public String getPayWay2() {
+		return payWay2;
+	}
+
+	public void setPayWay2(String payWay2) {
+		this.payWay2 = payWay2;
+	}
+
+	public String getPayWay3() {
+		return payWay3;
+	}
+
+	public void setPayWay3(String payWay3) {
+		this.payWay3 = payWay3;
+	}
+
+	public Date getPayTime1() {
+		return payTime1;
+	}
+
+	public void setPayTime1(Date payTime1) {
+		this.payTime1 = payTime1;
+	}
+
+	public Date getPayTime2() {
+		return payTime2;
+	}
+
+	public void setPayTime2(Date payTime2) {
+		this.payTime2 = payTime2;
+	}
+
+	public Date getPayTime3() {
+		return payTime3;
+	}
+
+	public void setPayTime3(Date payTime3) {
+		this.payTime3 = payTime3;
 	}
 }
