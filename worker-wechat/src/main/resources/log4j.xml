@@ -21,11 +21,11 @@
 	</appender>
 	
 	<appender name="log_file" class="org.apache.log4j.DailyRollingFileAppender">
-		<!-- 
-		<param name="File" value="/chenxin/tomcat/logs/worker_info.log" />
+		<!--
+		<param name="File" value="/usr/local/tomcat/logs/worker_info.log" />
 		-->
 		<param name="File" value="D:/logs/worker/worker_info.log" />
-		
+
 		<param name="append" value="true" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %-5p [%t] %C{2} (%F:%L) - %m%n" />
@@ -33,11 +33,11 @@
 	</appender>
 
 	<appender name="log_file_error" class="org.apache.log4j.RollingFileAppender">
-		<!-- 
-		<param name="File" value="/chenxin/tomcat/logs/worker_error.log" />
+		<!--
+		<param name="File" value="/usr/local/tomcat/logs/worker_error.log" />
 		-->
 		<param name="File" value="D:/logs/worker/worker_error.log" />
-		
+
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d{yyy-MM-dd HH:mm:ss} [%-5p] %c {%F:%L}  - %m%n" />
 		</layout>
