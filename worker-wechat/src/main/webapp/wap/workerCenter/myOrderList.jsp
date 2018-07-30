@@ -75,20 +75,18 @@
 						    
 						    var orderStatus = "";
 						    if(n.orderStatus=='2'){
-		            			orderStatus = "<font color='black'>待确认时间</font>";
+		            			orderStatus = "<font color='black'>已接单</font>";
 		            		}else if(n.orderStatus=='3'){
-		            			orderStatus = "<font color='black'>待上门服务</font>";
+		            			orderStatus = "<font color='black'>已确认时间</font>";
 		            		}else if(n.orderStatus=='4'){
-		            			orderStatus = "<font color='black'>待完成施工</font>";
+		            			orderStatus = "<font color='black'>已上门</font>";
 		            		}else if(n.orderStatus=='5'){
-                                if(n.payStatus=='1'){
-                                    orderStatus = "<font color='black'>已支付待评价</font>";
-                                }else{
-                                    orderStatus = "<font color='black'>已施工待支付</font>";
-                                }
+                                orderStatus = "<font color='black'>已开始施工</font>";
 		            		}else if(n.orderStatus=='6'){
-                                orderStatus = "<font color='green'>已评价</font>";
+                                orderStatus = "<font color='green'>已完成施工</font>";
                             }else if(n.orderStatus=='7'){
+                                orderStatus = "<font color='green'>已评价</font>";
+                            }else if(n.orderStatus=='8'){
                                 orderStatus = "<font color='red'>已取消</font>";
                             }
 						    trs = trs + "	<h3><span>" +orderStatus+ "</span>订单编号：" + n.orderSn + "</h3>";
@@ -115,7 +113,10 @@
 							}else if(n.orderStatus=='3'){//已确认时间
                                 trs = trs + "<a href='#' class='button-info' id='sureTime' name='"+n.orderId+"'>调整时间</a><a href='tel:"+n.mobile+"' id='lxyz' class='button-none'id='' >联系业主</a>"
 							}else if(n.orderStatus=='4'){//已上门
-                                trs = trs + "<a href='javascript:window.location.href=\"${ctx}/wap/workerCenter/workContentSubmit.jsp?type=wap&orderId=" + n.orderId + "\"' class='button-info' name='"+n.orderId+"'>施工完成</a>"
+                                trs = trs + "<a href='#' onclick='goAppraise(event,this)'class='button-info' name='"+n.orderId+"'>开始施工</a>"
+                            }else if(n.orderStatus=='5'){//已上门
+                                <%--trs = trs + "<a href='javascript:window.location.href=\"${ctx}/wap/workerCenter/workContentSubmit.jsp?type=wap&orderId=" + n.orderId + "\"' class='button-info' name='"+n.orderId+"'>施工完成</a>"--%>
+                                trs = trs + "<a href='#' onclick='goAppraise(event,this)'class='button-info' name='"+n.orderId+"'>完成施工</a>"
                             }
 							trs = trs + "</li>";
     				});

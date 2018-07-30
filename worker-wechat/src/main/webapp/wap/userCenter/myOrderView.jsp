@@ -17,6 +17,33 @@
 <link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/public.css">
 <script type="text/javascript" src="${ctx }/wap/workerCenter/js/jquery.min.js" ></script>
 <script src="${ctx }/wap/workerCenter/js/common.js"></script>
+<style>
+  .button-info {
+    background-color: #5bc0de;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0.4rem 3rem;
+    cursor: pointer;
+    border-radius: 4px;
+    float:right;
+    line-height: 1.5rem;
+  }
+
+  .pay-state {
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    margin: 0.4rem 3.6rem;
+    cursor: pointer;
+    border-radius: 4px;
+    float:right;
+    line-height: 1.5rem;
+  }
+</style>
 </head>
 
 <body style="overflow-x:hidden">
@@ -27,7 +54,8 @@
 <!--header-end-->
 <div class="container" id="container" style="padding-top:0px">
 <%--<div class="order-schedule-img"><img src="${ctx }/wap/workerCenter/images/1.png"></div>--%>
-<div class="order-confirm">
+
+<div class="order-confirm" style="padding: 0 0;">
   <div class="order-num"><span class="fl">订单号：<em>${requestScope.order.orderSn}</em></span></div>
   <ul class="order-confirm-list clearfix order-cancel-list">
     <li><p>订单详情</p></li>
@@ -55,8 +83,59 @@
         <%--<c:if test="${requestScope.order.orderStatus == '6'}">${requestScope.order.sureTimeStr}</c:if>--%>
       <%--</span>--%>
     </li>
-    <li><h2>备注信息</h2><span>${requestScope.order.orderDesc}</span></li>
-	  <li><h2>服务费用</h2><p><em>￥${requestScope.order.totalPrice}</em></p></li>
+    <li style="border-bottom: 1px solid #e5e5e5;"><h2>备注信息</h2><span>${requestScope.order.orderDesc}</span></li>
+    <li style="height: 2.4rem;line-height: 2.4rem;padding: 0 0.5rem; border-bottom: 1px solid #e5e5e5;">
+      <h2>订单金额</h2>
+      <p>
+        <em>￥${requestScope.order.totalPrice}</em>
+        <c:if test="${requestScope.order.payType eq '1'}">
+          <c:if test="${requestScope.order.payTime1 eq '' || requestScope.order.payTime1 eq null}">
+            <a href="${ctx}/pub/order/toPaymentPage.do?type=wap&payState=0&orderId=${requestScope.order.orderId}" class="button-info">&emsp;支付&emsp;</a>
+          </c:if>
+          <c:if test="${requestScope.order.payTime1 ne '' && requestScope.order.payTime1 ne null}">
+            <span class="pay-state">已支付</span>
+          </c:if>
+        </c:if>
+      </p>
+    </li>
+    <c:if test="${requestScope.order.payType eq '2'}">
+      <li style="height: 2.4rem;line-height: 2.4rem;padding: 0 0.5rem; border-bottom: 1px solid #e5e5e5;">
+        <h2>定金金额</h2>
+        <p>
+          <em>￥${requestScope.order.payPrice1}</em>
+          <c:if test="${requestScope.order.payTime1 eq '' || requestScope.order.payTime1 eq null}">
+            <a href="${ctx}/pub/order/toPaymentPage.do?type=wap&payState=1&orderId=${requestScope.order.orderId}" class="button-info">&emsp;支付&emsp;</a>
+          </c:if>
+          <c:if test="${requestScope.order.payTime1 ne '' && requestScope.order.payTime1 ne null}">
+            <span class="pay-state">已支付</span>
+          </c:if>
+        </p>
+      </li>
+      <li style="height: 2.4rem;line-height: 2.4rem;padding: 0 0.5rem; border-bottom: 1px solid #e5e5e5;">
+        <h2>中期金额</h2>
+        <p>
+          <em>￥${requestScope.order.payPrice2}</em>
+          <c:if test="${requestScope.order.payTime2 eq '' || requestScope.order.payTime2 eq null}">
+            <a href="${ctx}/pub/order/toPaymentPage.do?type=wap&payState=2&orderId=${requestScope.order.orderId}" class="button-info">&emsp;支付&emsp;</a>
+          </c:if>
+          <c:if test="${requestScope.order.payTime2 ne '' && requestScope.order.payTime2 ne null}">
+            <span class="pay-state">已支付</span>
+          </c:if>
+        </p>
+      </li>
+      <li style="height: 2.4rem;line-height: 2.4rem;padding: 0 0.5rem; border-bottom: 1px solid #e5e5e5;">
+        <h2>尾款金额</h2>
+        <p>
+          <em>￥${requestScope.order.payPrice3}</em>
+          <c:if test="${requestScope.order.payTime3 eq '' || requestScope.order.payTime3 eq null}">
+            <a href="${ctx}/pub/order/toPaymentPage.do?type=wap&payState=3&orderId=${requestScope.order.orderId}" class="button-info">&emsp;支付&emsp;</a>
+          </c:if>
+          <c:if test="${requestScope.order.payTime3 ne '' && requestScope.order.payTime3 ne null}">
+            <span class="pay-state">已支付</span>
+          </c:if>
+        </p>
+      </li>
+    </c:if>
   </ul>
   <div style="margin-bottom: 0.3rem"></div>
   <ul class="order-confirm-list clearfix order-cancel-list">

@@ -195,7 +195,8 @@ public class OrderAction extends BaseAdmAction
 //            	String secondCateCode = request.getParameter("scCode");
 //            	String secondCateName = request.getParameter("scName");
             	String orderDesc = request.getParameter("orderDesc");
-            	
+            	String payType = request.getParameter("payType");
+
             	OrderDTO order = new OrderDTO();
                 order.setOpenId(menber.getOpenId());
 
@@ -211,11 +212,12 @@ public class OrderAction extends BaseAdmAction
             	order.setTotalPrice(new BigDecimal(0.00));
                 order.setTotalPoint(0);
                 order.setOrderDesc(orderDesc);
-                
-                if(serviceType.equals("1")){
-                	String payType = request.getParameter("payType");
-                	order.setPayType(payType);
-                }
+                order.setPayType(payType);
+
+//                if(serviceType.equals("1")){
+//                	String payType = request.getParameter("payType");
+//                	order.setPayType(payType);
+//                }
                 
                 order.setOrderTime(new Timestamp(System.currentTimeMillis()));// 下单时间
                 if(!addressId.equals("")){
@@ -898,6 +900,39 @@ public class OrderAction extends BaseAdmAction
 			return mapping.findForward(returnPage);
 		}
 		return null;
+	}
+
+	/**
+	 * 去支付
+	 * @param request
+	 * @return
+	 */
+	public ActionForward toPaymentPage(ActionMapping mapping,
+			 ActionForm form, HttpServletRequest request,
+			 HttpServletResponse response) throws Exception
+	{
+		String orderId = request.getParameter("orderId");
+		String payState = request.getParameter("payState");
+		OrderDTO order = myOrderFacade.get(orderId);
+		String payTitle = "";
+		String payPrice = "";
+		if(payState.equals("0")){
+			payTitle = "订单总金额支付";
+			payPrice = order.getPayPrice1().toString();
+		}else if(payState.equals("1")){
+			payTitle = "定金金额支付";
+			payPrice = order.getPayPrice1().toString();
+		}else if(payState.equals("2")){
+			payTitle = "中期款金额支付";
+			payPrice = order.getPayPrice2().toString();
+		}else if(payState.equals("3")){
+			payTitle = "尾款金额支付";
+			payPrice = order.getPayPrice3().toString();
+		}
+		request.setAttribute("payTitle",payTitle);
+		request.setAttribute("payPrice",payPrice);
+		request.setAttribute("order",order);
+		return mapping.findForward("paymentPage_wap");
 	}
     
 

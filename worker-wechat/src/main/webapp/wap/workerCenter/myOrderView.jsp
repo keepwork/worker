@@ -17,6 +17,18 @@
 <link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/public.css">
 <script type="text/javascript" src="${ctx }/wap/workerCenter/js/jquery.min.js" ></script>
 <script src="${ctx }/wap/workerCenter/js/common.js"></script>
+  <style>
+    .pay-state {
+      border: none;
+      text-align: center;
+      text-decoration: none;
+      margin: 0.4rem 3.6rem;
+      cursor: pointer;
+      border-radius: 4px;
+      float:right;
+      line-height: 1.5rem;
+    }
+  </style>
 </head>
 
 <body>
@@ -52,9 +64,62 @@
   <li><h2>客户姓名</h2><span>${requestScope.address.consignee}</span></li>
   <li><h2>联系电话</h2><span>${requestScope.address.mobile}</span></li>
   <li><h2>服务地址</h2><span>${requestScope.address.province}${requestScope.address.city}${requestScope.address.county}${requestScope.address.street}</span></li>
-  <li><h2>备注留言</h2><span>${requestScope.order.orderDesc}</span></li>
-  <li><h2>客户评价</h2><span>${requestScope.order.desc2}</span></li>
-  <li><p>金额<em>￥100.00</em></p></li>
+  <%--<li><h2>备注留言</h2><span>${requestScope.order.orderDesc}</span></li>--%>
+  <%--<li><h2>客户评价</h2><span>${requestScope.order.desc2}</span></li>--%>
+  <%--<li><p>金额<em>￥100.00</em></p></li>--%>
+  <li style="border-bottom: 1px solid #e5e5e5;"><h2>备注信息</h2><span>${requestScope.order.orderDesc}</span></li>
+  <li style="height: 2.4rem;line-height: 2.4rem;padding: 0 0.5rem; border-bottom: 1px solid #e5e5e5;">
+    <h2>订单金额</h2>
+    <p>
+      <em>￥${requestScope.order.totalPrice}</em>
+      <c:if test="${requestScope.order.payType eq '1'}">
+        <c:if test="${requestScope.order.payTime1 eq '' || requestScope.order.payTime1 eq null}">
+          <span class="pay-state" style="color:#fa4b28">未支付</span>
+        </c:if>
+        <c:if test="${requestScope.order.payTime1 ne '' && requestScope.order.payTime1 ne null}">
+          <span class="pay-state" style="color:#2abf3e">已支付</span>
+        </c:if>
+      </c:if>
+    </p>
+  </li>
+  <c:if test="${requestScope.order.payType eq '2'}">
+    <li style="height: 2.4rem;line-height: 2.4rem;padding: 0 0.5rem; border-bottom: 1px solid #e5e5e5;">
+      <h2>定金金额</h2>
+      <p>
+        <em>￥${requestScope.order.payPrice1}</em>
+        <c:if test="${requestScope.order.payTime1 eq '' || requestScope.order.payTime1 eq null}">
+          <span class="pay-state" style="color:#fa4b28">未支付</span>
+        </c:if>
+        <c:if test="${requestScope.order.payTime1 ne '' && requestScope.order.payTime1 ne null}">
+          <span class="pay-state" style="color:#2abf3e">已支付</span>
+        </c:if>
+      </p>
+    </li>
+    <li style="height: 2.4rem;line-height: 2.4rem;padding: 0 0.5rem; border-bottom: 1px solid #e5e5e5;">
+      <h2>中期金额</h2>
+      <p>
+        <em>￥${requestScope.order.payPrice2}</em>
+        <c:if test="${requestScope.order.payTime2 eq '' || requestScope.order.payTime2 eq null}">
+          <span class="pay-state" style="color:#fa4b28">未支付</span>
+        </c:if>
+        <c:if test="${requestScope.order.payTime2 ne '' && requestScope.order.payTime2 ne null}">
+          <span class="pay-state" style="color:#2abf3e">已支付</span>
+        </c:if>
+      </p>
+    </li>
+    <li style="height: 2.4rem;line-height: 2.4rem;padding: 0 0.5rem; border-bottom: 1px solid #e5e5e5;">
+      <h2>尾款金额</h2>
+      <p>
+        <em>￥${requestScope.order.payPrice3}</em>
+        <c:if test="${requestScope.order.payTime3 eq '' || requestScope.order.payTime3 eq null}">
+          <span class="pay-state" style="color:#fa4b28">未支付</span>
+        </c:if>
+        <c:if test="${requestScope.order.payTime3 ne '' && requestScope.order.payTime3 ne null}">
+          <span class="pay-state" style="color:#2abf3e">已支付</span>
+        </c:if>
+      </p>
+    </li>
+  </c:if>
 </ul>
   <c:if test="${requestScope.appraise != null}">
     <div style="margin-bottom: 0.3rem"></div>

@@ -8,7 +8,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-	<title>惠达</title>
+	<title>智修</title>
 	<link rel="stylesheet" href="${ctx}/wap/html/css/Basc.css" />
 	<link rel="stylesheet" href="${ctx}/wap/html/css/demo.css" />
 	
@@ -26,12 +26,20 @@
 		.aabbcc input{border-radius:5px; width:30%; font-size:16px; margin:5px 1%;}
 		.qrddxxf ul li{height:35px; line-height:35px; font-size:16px; }
 		.bg{background: url(${ctx}/wap/userCenter/images/go.png) no-repeat 98% 13px;}
+
+	/*单选*/
+	.radio_box{ display:inline-block; position:relative;margin-left: 15px;}
+	.radio_box label{ width:15px; height:15px; position:absolute; top:0; left:0; border:2px solid #ef4949; border-radius:50%; background:#fff; cursor:pointer;}
+	.radio_box input:checked + label:after{ content:''; width:9px; height:9px; position:absolute; top:3px; left:3px; background:#ef4949; border-radius:50%;}
+	.radio_box em{ margin:0 0 0 10px;}
+	.radio_box input{ float:none;}
 	</style>
+
 	
 	<script type="text/javascript">
-		  function init(){
-		  		document.getElementById("payType").value="2"; 
-		  }
+//		  function init(){
+//		  		document.getElementById("payType").value="2";
+//		  }
 		  
 		  //保存订单
 		  function saveOrder(serviceType,firstCate,firstCateName)
@@ -42,11 +50,13 @@
 				    return;
 		  		}
 		  		
-		  		var payType = "";
-		  		if(serviceType=='1'){
-		  			var payTypeObj = document.getElementById("payType");
-		  			payType = payTypeObj.value;
-		  		}
+//		  		var payType = "";
+//		  		if(serviceType=='1'){
+//		  			var payTypeObj = document.getElementById("payType");
+//		  			payType = payTypeObj.value;
+//		  		}
+
+              	var payType = $("input[name='payType']:checked").val();
 		  		
 		  		var orderDesc = document.getElementById("orderDesc");
 	  			
@@ -236,9 +246,9 @@
 		  }
 		  
 		  
-		  function init(){
-		  		document.getElementById("payType").value="3"; 
-		  }
+//		  function init(){
+//		  		document.getElementById("payType").value="3";
+//		  }
 		  //选择支付方式
 		  function choosePayMode(type,imageName){
 				var selectPayMode2 = document.getElementById('payMode_2');
@@ -256,7 +266,8 @@
 	</script>  
 </head>
 
-<body onload="init()">
+<%--<body onload="init()">--%>
+<body>
 	<input type="hidden" id="shipFee" />
 	<input type="hidden" id="totalFee" />
 	
@@ -363,18 +374,7 @@
 	        <li>服务项目<span style="float:right">${firstCate.name}</span></li>
 	    </ul>
 	</div>
-	
-	<c:if test="${serviceType=='1'}">
-	<div class="qrddxxf">
-	    <h4>支付方式</h4>
-	    <ul>
-	        <!-- <li><input type="submit" name="payMode" id="payMode_2" value="" onclick="choosePayMode('2','point')"  style="cursor:pointer;border-color: red;border-width: 2;background-image:url('${ctx}/wap/images/point.png');width:160px; height:40px;" checked="checked" /></li> -->
-	        <li><input type="submit" name="payMode" id="payMode_3" value="" onclick="choosePayMode('3','weixin')" style="cursor:pointer;border-color: red;border-width: 2;background-image:url('${ctx}/wap/images/weixin.png');width:160px; height:40px;" checked="checked"/></li>
-	        <input type="hidden" id="payType" value="3"/>
-	    </ul>
-	</div>
-	</c:if>
-	
+
 	<div class="qrddxxf">
 	    <h4 style="height:5px;padding:0px;">&nbsp;</h4>
 	    <ul>
@@ -382,7 +382,48 @@
 			<li>&nbsp;<span style="float:right">（预约后我们会主动跟您联系）</span></li>
 	    </ul>
 	</div>
-	
+
+	<div class="qrddxxf">
+		<h4 style="height:5px;padding:0px;">&nbsp;</h4>
+		<ul>
+			<li>支付类型</li>
+		</ul>
+		<span class="radio_box" >
+			<input type="radio" id="radio_1" name="payType" checked value="1">
+		   <label for="radio_1"></label>
+		   <em>一次性支付</em>
+		</span>
+		<span class="radio_box">
+		   <input type="radio" id="radio_2" name="payType" value="2">
+		   <label for="radio_2"></label>
+		   <em>分期支付</em>
+		</span>
+
+		<ul>
+			<li style="font-size:10px">*注：小金额请选择一次性支付，一次性支付可在施工完成后再进行支付；分期支付需在师傅上门后支付定金，工程中期支付中期金额，工程尾期需支付尾款。</li>
+		</ul>
+		<br>
+		<br>
+		<%--<span class="radio_box">--%>
+			<%--*注：小金额请选择一次性支付，一次性支付可在施工完成后再进行支付；分期支付需在师傅上门后支付定金，工程中期支付中期金额，工程尾期需支付尾款。--%>
+		<%--</span>--%>
+	</div>
+
+	<%--<div class="qrddxxf">--%>
+		<%--<h4>支付类型</h4>--%>
+		<%--<ul>--%>
+			<%--<span class="radio_box">--%>
+			   <%--<input type="radio" id="radio_1" name="radio" checked>--%>
+			   <%--<label for="radio_1"></label>--%>
+			   <%--<em>一次性支付</em>--%>
+	 		<%--</span>--%>
+			<%--<span class="radio_box">--%>
+			   <%--<input type="radio" id="radio_2" name="radio">--%>
+			   <%--<label for="radio_2"></label>--%>
+			   <%--<em>分期支付</em>--%>
+	 		<%--</span>--%>
+		<%--</ul>--%>
+	<%--</div>--%>
 	<div class="qrddxxf">
 	    <h4 style="height:5px;padding:0px;">&nbsp;</h4>
 	</div>

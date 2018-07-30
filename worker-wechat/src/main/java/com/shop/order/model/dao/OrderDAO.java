@@ -144,13 +144,13 @@ public class OrderDAO extends DaoSupport
 
 		if(null != status && !status.equals("")){
 			if (status.equals("1")) {
-				where += " and t.ORDER_STATUS in('1','2','3','4') ";//进行中状态
-			} else if (status.equals("2")) {
-				where += " and t.ORDER_STATUS = '5' and t.PAY_STATUS = '0' ";//待支付（已完成施工且未支付）
+				where += " and t.ORDER_STATUS in('1','2','3','4','5') ";//进行中状态
+			} else if (status.equals("2")) {//待支付（两种支付类型里面只要最后一次支付未完成的）；4状态以后才可支付（需要确认最终金额）；5状态也可以支付；只有最后一次支付完成师傅端才能点完成施工变成6
+				where += " and t.ORDER_STATUS in('4','5') and if(t.PAY_TYPE='2',t.PAY_TIME1 IS NULL OR t.PAY_TIME2 IS NULL OR t.PAY_TIME3 IS NULL,t.PAY_TIME1 IS NULL) ";//if(条件,true执行,false执行),2:分期支付
 			} else if (status.equals("3")) {
-				where += " and t.ORDER_STATUS = '5' and t.PAY_STATUS = '1' ";//待评价（已完成施工且已支付）
+				where += " and t.ORDER_STATUS = '6' ";//待评价（已完成施工且）
 			}else if (status.equals("4")) {
-				where += " and t.ORDER_STATUS in('6','7') ";//已完成（包括已评价和已取消）
+				where += " and t.ORDER_STATUS in('7','8') ";//已完成（包括已评价和已取消）
 			}
 		}
 
@@ -193,7 +193,7 @@ public class OrderDAO extends DaoSupport
 		final String sql = "select t.ORDER_ID,t.ORDER_SN,t.MEN_ID,t.USER_ID,t.OPEN_ID,t.ADDR_ID," +
 				"t.INVOICE,t.TOTAL_PRICE,t.SHIPPING_PRICE,t.TOTAL_POINT,t.ORDER_STATUS,t.SHIPPING_STATUS," +
 				"t.PAY_STATUS,t.PAY_TYPE,t.ORDER_TYPE,t.AMOUNT,t.ORDER_TIME,t.PAY_TIME,t.TAKE_TIME,t.SURE_TIME,t.END_TIME,t.SERVICE_TYPE,"+
-				"t.FIRST_CATE_NAME,t.SECOND_CATE_NAME,t.DESC1,t.DESC2 from pub_order t  " + where +
+				"t.FIRST_CATE_NAME,t.SECOND_CATE_NAME,t.DESC1,t.DESC2,t.PAY_PRICE1,t.PAY_PRICE2,t.PAY_PRICE3,t.PAY_WAY1,t.PAY_WAY2,t.PAY_WAY3,t.PAY_TIME1,t.PAY_TIME2,t.PAY_TIME3 from pub_order t  " + where +
 				" order by t.ORDER_TIME  desc " +
 				" LIMIT "+params.get("start")+","+params.get("size")+" ";
 
@@ -238,6 +238,22 @@ public class OrderDAO extends DaoSupport
 			temp.setSecondCateName((String) map.get("SECOND_CATE_NAME"));
 			temp.setDesc1((String) map.get("DESC1"));
 			temp.setDesc2((String) map.get("DESC2"));
+			String pay1Price1 = (String) map.get("PAY_PRICE1");
+			temp.setPayPrice1(new BigDecimal(pay1Price1));
+			temp.setPayWay1((String) map.get("PAY_WAY1"));
+			temp.setPayTime1((Date) map.get("PAY_TIME1"));
+			if(temp.getPayType().equals("2")){
+				String pay1Price2 = (String) map.get("PAY_PRICE2");
+				String pay1Price3 = (String) map.get("PAY_PRICE3");
+				temp.setPayPrice2(new BigDecimal(pay1Price2));
+				temp.setPayPrice3(new BigDecimal(pay1Price3));
+				temp.setPayWay2((String) map.get("PAY_WAY2"));
+				temp.setPayWay3((String) map.get("PAY_WAY3"));
+				temp.setPayTime2((Date) map.get("PAY_TIME2"));
+				temp.setPayTime3((Date) map.get("PAY_TIME3"));
+			}
+
+
 			result.add(temp);
 		}
 		return result;

@@ -72,20 +72,18 @@
 						    if(n.orderStatus=='1'){
 		            			orderStatus = "<font color='black'>待派单</font>";
 		            		}else if(n.orderStatus=='2'){
-		            			orderStatus = "<font color='black'>待确认时间</font>";
+		            			orderStatus = "<font color='black'>已派单</font>";
 		            		}else if(n.orderStatus=='3'){
-		            			orderStatus = "<font color='black'>待上门服务</font>";
+		            			orderStatus = "<font color='black'>已确认时间</font>";
 		            		}else if(n.orderStatus=='4'){
-		            			orderStatus = "<font color='black'>待完成施工</font>";
+		            			orderStatus = "<font color='black'>已上门</font>";
 		            		}else if(n.orderStatus=='5'){
-		            			if(n.payStatus=='1'){
-                                    orderStatus = "<font color='black'>已支付待评价</font>";
-								}else{
-                                    orderStatus = "<font color='black'>已施工待支付</font>";
-								}
-		            		}else if(n.orderStatus=='6'){
+                                orderStatus = "<font color='black'>已开始施工</font>";
+                            }else if(n.orderStatus=='6'){
+                                orderStatus = "<font color='black'>已完成施工</font>";
+		            		}else if(n.orderStatus=='7'){
                                 orderStatus = "<font color='green'>已评价</font>";
-                            }else if(n.orderStatus=='7'){
+                            }else if(n.orderStatus=='8'){
                                 orderStatus = "<font color='red'>已取消</font>";
                             }
 						    trs = trs + "	<h3><span>" +orderStatus+ "</span>订单编号：" + n.orderSn + "</h3>";
@@ -109,32 +107,28 @@
 		            		}
 							//alert(n.desc2 == 'null');
 		            		//按钮显示模块
-                            if(n.orderStatus=='1' || n.orderStatus=='2'){
-                                trs = trs + "<a href='#' onclick='newconfirm(event,this)' class='button-info' id='cancelOrder' name='"+n.orderId+"'>取消订单</a>"
-                            }else if(n.orderStatus=='3'){//已确认时间，显示支付已上门按钮
+                            if(n.orderStatus=='3'){//已确认时间，显示已上门按钮
                                 trs = trs + "<a href='#' onclick='newconfirm(event,this)' class='button-info' id='sureArriveHome'  name='"+n.orderId+"'>师傅已到</a>";
-							}else if(n.orderStatus=='5' && n.payStatus=='0'){//已完成施工且未支付，显示支付按钮
-                                trs = trs + "<a href='#' class='button-info' name='"+n.orderId+"'>&emsp;支付&emsp;</a>"
-							}else if(n.orderStatus=='5' && n.payStatus=='1'){//已支付且未评价，显示评价按钮
+							}else if(n.orderStatus=='6'){//已完成施工，显示评价按钮
 								trs = trs + "<a href='#' onclick='goAppraise(event,this)'class='button-info' name='"+n.orderId+"'>&emsp;评价&emsp;</a>"
 							}
 							trs = trs + "</li>";
     				});
     				trs = trs + "</ul>";
     				
-    				if(status=="9"){
+    				if(status=="9"){//全部
     					$("#content1").append(trs);
     				}
-    				if(status=="1"){
-    					$("#content2").append(trs);
+    				if(status=="1"){//进行中
+    					$("#content2").append(trs);//（除已完成施工的）
     				}
-    				if(status=="2"){
+    				if(status=="2"){//待支付（未完成最后一次支付的）
     					$("#content3").append(trs);
     				}
-    				if(status=="3"){
+    				if(status=="3"){//待评价（已完成施工的）
     					$("#content4").append(trs);
     				}
-                    if(status=="4"){
+                    if(status=="4"){//已完成(已评价和已取消的)
                         $("#content5").append(trs);
                     }
     				

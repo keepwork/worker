@@ -66,6 +66,7 @@
 			<forward name="orderResult_wap" path="/wap/orderResult.jsp" />
 			<forward name="myOrderList_wap" path="/wap/userCenter/myOrderList.jsp" />
 			<forward name="myOrderView_wap" path="/wap/userCenter/myOrderView.jsp" />
+			<forward name="paymentPage_wap" path="/wap/userCenter/orderPayment.jsp" />
 
 			<!-- front wap 工人端-->
 			<forward name="workerOrderList_wap" path="/wap/workerCenter/myOrderList.jsp" />

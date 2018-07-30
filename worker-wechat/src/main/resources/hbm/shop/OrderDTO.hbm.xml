@@ -213,7 +213,7 @@
 			</column>
 		</property>
 		<property name="payPrice2" type="java.math.BigDecimal">
-			<column name="PAY_PRICE1" length="10">
+			<column name="PAY_PRICE2" length="10">
 				<comment>支付金额2</comment>
 			</column>
 		</property>
@@ -223,32 +223,32 @@
 			</column>
 		</property>
 		<property name="payWay1" type="java.lang.String">
-			<column name="PAY_WAY" length="1">
+			<column name="PAY_WAY1" length="1">
 				<comment>支付方式1：1-微信支付,2-支付宝支付,3-银行转账，4-现金支付</comment>
 			</column>
 		</property>
 		<property name="payWay2" type="java.lang.String">
-			<column name="PAY_WAY" length="1">
+			<column name="PAY_WAY2" length="1">
 				<comment>支付方式2：1-微信支付,2-支付宝支付,3-银行转账，4-现金支付</comment>
 			</column>
 		</property>
 		<property name="payWay3" type="java.lang.String">
-			<column name="PAY_WAY" length="1">
+			<column name="PAY_WAY3" length="1">
 				<comment>支付方式3：1-微信支付,2-支付宝支付,3-银行转账，4-现金支付</comment>
 			</column>
 		</property>
 		<property name="payTime1" type="java.util.Date">
-			<column name="PAY_TIEM1" length="1">
+			<column name="PAY_TIME1">
 				<comment>支付时间1</comment>
 			</column>
 		</property>
 		<property name="payTime2" type="java.util.Date">
-			<column name="PAY_TIEM2" length="1">
+			<column name="PAY_TIME2">
 				<comment>支付时间2</comment>
 			</column>
 		</property>
 		<property name="payTime3" type="java.util.Date">
-			<column name="PAY_TIEM3" length="1">
+			<column name="PAY_TIME3">
 				<comment>支付时间3</comment>
 			</column>
 		</property>
