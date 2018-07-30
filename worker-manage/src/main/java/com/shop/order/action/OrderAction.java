@@ -32,6 +32,7 @@ import com.sinovatech.common.web.limit.ILimitUtil;
 import com.sinovatech.common.web.limit.LimitInfo;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -539,17 +540,29 @@ public class OrderAction extends BaseAdmAction
 		String orderId = request.getParameter("orderId");
 		String workerId = request.getParameter("workerId");
 		String totalPrice = request.getParameter("totalPrice");
+		String payType = request.getParameter("payType");
 		Integer cycleInit = Integer.parseInt(request.getParameter("cycleInit"));
+		BigDecimal totalPriceBd = new BigDecimal(totalPrice);
 
 		MenberDTO menber = myMenberFacade.get(workerId);
 
 		OrderDTO order = myOrderFacade.get(orderId);
 		order.setWorkerId(workerId);
 		order.setWorkerName(menber.getRealName());
-		order.setTotalPrice(new BigDecimal(totalPrice));
+		order.setTotalPrice(totalPriceBd);
 		order.setOrderStatus("2");
 		order.setTakeTime(new Date());
 		order.setCycleInit(cycleInit);
+		order.setPayType(payType);
+		order.setPayPrice1(totalPriceBd);
+		if(payType.equals("2")){//分期支付
+			String proportion1 = GlobalConfig.getProperty("redis", "payPrice1.proportion");//定金比例
+			String proportion2 = GlobalConfig.getProperty("redis", "payPrice2.proportion");//中期款比例
+			String proportion3 = GlobalConfig.getProperty("redis", "payPrice3.proportion");//尾款比例
+			order.setPayPrice1(totalPriceBd.multiply(new BigDecimal(proportion1)));
+			order.setPayPrice2(totalPriceBd.multiply(new BigDecimal(proportion2)));
+			order.setPayPrice3(totalPriceBd.multiply(new BigDecimal(proportion3)));
+		}
 		order.setTbTBmsLocationDTO(menber.getTbTBmsLocationDTO());
 		myOrderFacade.update(order);
 
@@ -700,6 +713,142 @@ public class OrderAction extends BaseAdmAction
 		return null;
 	}
 
+	/**
+	 * 取消订单
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward cancelOrder(ActionMapping mapping,
+			   ActionForm form, HttpServletRequest request,
+	HttpServletResponse response) throws Exception
+	{
+		String orderId = request.getParameter("orderId");
 
+		OrderDTO order = myOrderFacade.get(orderId);
+		order.setOrderStatus("8");
+		myOrderFacade.update(order);
+		CommonMapping mping = new CommonMapping("取消成功!", getRealUri(mapping,"order/queryList"), ActionConstent.ALERT);
+		request.setAttribute("mping", mping);
+		return mapping.findForward(ActionConstent.COMMON_MAPPING);
+//		return null;
+	}
+
+	/**
+	 * 修改初始化 - 后台
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward beforeUpdate(ActionMapping mapping,
+				ActionForm form, HttpServletRequest request,
+				HttpServletResponse response) throws Exception
+	{
+		String orderId = request.getParameter("orderId");
+		// 验证方法， 如果为null或者为空则直接返回异常
+		Validate.notBlank(orderId, "common", "errorparameter");
+		setActionAttribute(request, "beforeEdit.id", orderId);
+		OrderDTO o = myOrderFacade.get(orderId);
+		o.setOrderTimeStr(format.format(o.getOrderTime()));
+		if(null != o.getPayTime()){
+			o.setPayTimeStr(format.format(o.getPayTime()));
+		}
+		MenberDTO menber = myMenberFacade.get(o.getMenId());
+		if(null!=menber){
+			o.setMenName(menber.getRealName());
+			o.setMenMobile(menber.getMobile());
+		}
+		if(null != o.getPayTime1())
+			o.setPayTime1Str(format.format(o.getPayTime1()));
+		if(null != o.getPayTime2())
+			o.setPayTime2Str(format.format(o.getPayTime2()));
+		if(null != o.getPayTime3())
+			o.setPayTime3Str(format.format(o.getPayTime3()));
+//		MenberDTO worker = myMenberFacade.get(o.getWorkerId());
+//		if(null!=worker){
+//			o.setWorkerName(worker.getRealName());
+//		}
+//		if(null != o.getTbTBmsLocationDTO()){
+//			o.setLocationName( o.getTbTBmsLocationDTO().getName());
+//		}else{
+//			o.setLocationName("未指派");
+//		}
+		String proportion1 = GlobalConfig.getProperty("redis", "payPrice1.proportion");//定金比例
+		String proportion2 = GlobalConfig.getProperty("redis", "payPrice2.proportion");//中期款比例
+		String proportion3 = GlobalConfig.getProperty("redis", "payPrice3.proportion");//尾款比例
+		request.setAttribute("proportion1", proportion1);
+		request.setAttribute("proportion2", proportion2);
+		request.setAttribute("proportion3", proportion3);
+		request.setAttribute("m", o);
+		return mapping.findForward("beforeUpdate");
+	}
+
+	/**
+	 * 修改 - 后台
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward orderUpdate(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception
+	{
+		String totalPrice = request.getParameter("totalPrice");
+		String payTime1Str = request.getParameter("payTime1Str");
+		String payTime2Str = request.getParameter("payTime2Str");
+		String payTime3Str = request.getParameter("payTime3Str");
+		String cycleAdd = request.getParameter("cycleAdd");
+		String cost = request.getParameter("cost");
+
+		String orderId = (String)getActionAttribute(request, "beforeEdit.id");
+		OrderDTO orderDTO = myOrderFacade.get(orderId);
+
+		if(!totalPrice.equals(orderDTO.getTotalPrice().toString())){//订单总价已修改
+			BigDecimal totalPriceBd = new BigDecimal(totalPrice);
+			if(orderDTO.getPayType().equals("2")){
+				String proportion1 = GlobalConfig.getProperty("redis", "payPrice1.proportion");//定金比例
+				String proportion2 = GlobalConfig.getProperty("redis", "payPrice1.proportion");//中期款比例
+				String proportion3 = GlobalConfig.getProperty("redis", "payPrice1.proportion");//尾款比例
+				orderDTO.setPayPrice1(totalPriceBd.multiply(new BigDecimal(proportion1)));
+				orderDTO.setPayPrice2(totalPriceBd.multiply(new BigDecimal(proportion2)));
+				orderDTO.setPayPrice3(totalPriceBd.multiply(new BigDecimal(proportion3)));
+			}else{
+				orderDTO.setPayPrice1(totalPriceBd);
+			}
+		}
+
+		if(!StringUtil.stringVerify(payTime1Str)){
+			orderDTO.setPayTime1(DatePaltUtil.parseDate(payTime1Str,"yyyy-MM-dd HH:mm:ss"));
+		}
+		if(!StringUtil.stringVerify(payTime2Str)){
+			orderDTO.setPayTime2(DatePaltUtil.parseDate(payTime2Str,"yyyy-MM-dd HH:mm:ss"));
+		}
+		if(!StringUtil.stringVerify(payTime3Str)){
+			orderDTO.setPayTime3(DatePaltUtil.parseDate(payTime3Str,"yyyy-MM-dd HH:mm:ss"));
+		}
+		if(!StringUtil.stringVerify(cycleAdd)){
+			orderDTO.setCycleAdd(Integer.parseInt(cycleAdd));
+		}
+		if(!StringUtil.stringVerify(cost)){
+			orderDTO.setCost(new BigDecimal(cost));
+		}
+
+		myOrderFacade.update(orderDTO);
+		CommonMapping mping = new CommonMapping("保存成功!", getRealUri(mapping,"order/queryList"), ActionConstent.ALERT);
+		request.setAttribute("mping", mping);
+		return mapping.findForward(ActionConstent.COMMON_MAPPING);
+	}
 
 }

@@ -154,8 +154,14 @@
 		document.getElementById("searchForm").reset();
 	};
 
-    function openDiv(orderId) {
+    function openDiv(orderId,payType) {
         document.getElementById("orderId").value=orderId;
+        //弹出框显示客户已选择的支付类型
+		if(payType == "1"){
+		   $("#customerPayType").text("一次性支付");
+		}else{
+            $("#customerPayType").text("分期支付");
+		}
         show('cover1','pop_sh','');
     }
 
@@ -172,12 +178,18 @@
     function updateOrder() {
         var orderId = document.getElementById("orderId");
         var workerId = document.getElementById("workerId");
+        var payType = document.getElementById("payType_id");
         var totalPrice = document.getElementById("totalPrice");
         var cost = document.getElementById("cost");
         var cycleInit = document.getElementById("cycleInit");
         if(workerId.value == ''){
             alert("请选择工人");
             workerId.focus();
+            return;
+        }
+        if(payType.value == ''){
+            alert("请选择支付类型");
+            payType.focus();
             return;
         }
         if(totalPrice.value == ''){
@@ -224,6 +236,12 @@
 
     }
 
+    function cancelOrder(orderId) {
+		if(confirm("确定取消订单？")){
+			window.location.href="${ctx}/pub/order/cancelOrder.do?orderId="+orderId;
+		}
+    }
+
 	</script>
 <body class="overfwidth">
 
@@ -263,7 +281,7 @@
 				<tr bgcolor="#f7f7f7">
 				<td>
 					服务类型：
-					<select id="payType" name="serviceType" class="select_2 va_mid" style="width: 100px;">
+					<select id="serviceType" name="serviceType" class="select_2 va_mid" style="width: 100px;">
 						<option value="" <c:if test = "${order.serviceType eq ''}">selected='selected'</c:if> >-请选择-</option>
 						<option value="1" <c:if test = "${order.serviceType eq '1'}">selected='selected'</c:if> >安装</option>
 						<option value="2" <c:if test = "${order.serviceType eq '2'}">selected='selected'</c:if> >维修</option>
@@ -280,9 +298,10 @@
 						<option value="2" <c:if test = "${order.orderStatus eq '2'}">selected='selected'</c:if> >已派单</option>
 						<option value="3" <c:if test = "${order.orderStatus eq '3'}">selected='selected'</c:if> >已确认时间</option>
 						<option value="4" <c:if test = "${order.orderStatus eq '4'}">selected='selected'</c:if> >已上门</option>
-						<option value="5" <c:if test = "${order.orderStatus eq '5'}">selected='selected'</c:if> >已完成施工</option>
-						<option value="6" <c:if test = "${order.orderStatus eq '6'}">selected='selected'</c:if> >已评价</option>
-						<option value="7" <c:if test = "${order.orderStatus eq '7'}">selected='selected'</c:if> >已取消</option>
+						<option value="5" <c:if test = "${order.orderStatus eq '5'}">selected='selected'</c:if> >已开始施工</option>
+						<option value="6" <c:if test = "${order.orderStatus eq '6'}">selected='selected'</c:if> >已完成施工</option>
+						<option value="7" <c:if test = "${order.orderStatus eq '7'}">selected='selected'</c:if> >已评价</option>
+						<option value="8" <c:if test = "${order.orderStatus eq '8'}">selected='selected'</c:if> >已取消</option>
 					</select>
 				</td>
 
@@ -290,9 +309,10 @@
 					&emsp;&emsp;支付状态：
 					<select id="payStatus" name="payStatus" class="select_2 va_mid" style="width: 100px;">
 						<option value="" <c:if test = "${order.payStatus eq ''}">selected='selected'</c:if> >-请选择-</option>
-						<option value="1" <c:if test = "${order.payStatus eq '0'}">selected='selected'</c:if> >已支付定金</option>
-						<option value="2" <c:if test = "${order.payStatus eq '1'}">selected='selected'</c:if> >已支付中期</option>
-						<option value="3" <c:if test = "${order.payStatus eq '1'}">selected='selected'</c:if> >已支付尾款</option>
+						<option value="0" <c:if test = "${order.payStatus eq '0'}">selected='selected'</c:if> >已一次性支付</option>
+						<option value="1" <c:if test = "${order.payStatus eq '1'}">selected='selected'</c:if> >已支付定金</option>
+						<option value="2" <c:if test = "${order.payStatus eq '2'}">selected='selected'</c:if> >已支付中期</option>
+						<option value="3" <c:if test = "${order.payStatus eq '3'}">selected='selected'</c:if> >已支付尾款</option>
 					</select>
 				</td>
 
@@ -378,8 +398,9 @@
 					<c:if test="${m.orderStatus eq '4'}">已上门</c:if>
 					<c:if test="${m.orderStatus eq '5' && m.payStatus eq '0'}"><font color="red">待支付</font></c:if>
 					<c:if test="${m.orderStatus eq '5' && m.payStatus eq '1'}"><font color="red">已支付</font></c:if>
-					<c:if test="${m.orderStatus eq '6'}">已评价</c:if>
-					<c:if test="${m.orderStatus eq '7'}"><font color="#999">已取消</font></c:if>
+					<c:if test="${m.orderStatus eq '6'}">已完成施工</c:if>
+					<c:if test="${m.orderStatus eq '7'}"><font color="#999">已评价</font></c:if>
+					<c:if test="${m.orderStatus eq '8'}"><font color="#999">已取消</font></c:if>
 				</ec:column>
 				<%-- 
 				<ec:column title="支付方式" property="payType" filterable="false">
@@ -403,26 +424,34 @@
 				<ec:column title="项目进度" property="projectProgress" filterable="false" width="7%"></ec:column>
 				<ec:column title="操作" property="EEE" sortable="false" filterable="false" width="24%">
 					<a class="sexybutton" href="${ctx}/pub/order/beforeView.do?orderId=${m.orderId}"><span><span>查看</span></span></a>
+					<c:if test="${m.orderStatus ne '1'}">
+						<a class="sexybutton" href="${ctx}/pub/order/beforeUpdate.do?orderId=${m.orderId}"><span><span>修改</span></span></a>
+					</c:if>
 					<c:if test="${m.orderStatus eq '1'}">
-						<a class="sexybutton" href="javascript:void(0)" onclick="openDiv('${m.orderId }')">
+						<a class="sexybutton" href="javascript:void(0)" onclick="openDiv('${m.orderId}','${m.payType}')">
 							<span><span>派单</span></span>
 						</a>
 					</c:if>
 					<c:if test="${m.orderStatus eq '2' || m.orderStatus eq '3'}">
-						<a class="sexybutton" href="javascript:void(0)" onclick="openDiv('${m.orderId }')">
+						<a class="sexybutton" href="javascript:void(0)" onclick="openDiv('${m.orderId }','${m.payType}')">
 							<span><span>重新派单</span></span>
 						</a>
 					</c:if>
-					<c:if test="${m.orderStatus eq '2' || m.orderStatus eq '3' || m.orderStatus eq '4'}">
-						<a class="sexybutton" href="javascript:void(0)" onclick="openDiv3('${m.orderId }')">
-							<span><span>修改成本</span></span>
-						</a>
-					</c:if>
-					<c:if test="${m.orderStatus eq '4'}">
-						<a class="sexybutton" href="javascript:void(0)" onclick="openDiv2('${m.orderId }')">
-							<span><span>新增工期</span></span>
-						</a>
-					</c:if>
+					<%--<c:if test="${m.orderStatus eq '1' || m.orderStatus eq '2' || m.orderStatus eq '3' || m.orderStatus eq '4'}">--%>
+						<%--<a class="sexybutton" href="javascript:void(0)" onclick="cancelOrder('${m.orderId }')">--%>
+							<%--<span><span>取消订单</span></span>--%>
+						<%--</a>--%>
+					<%--</c:if>--%>
+					<%--<c:if test="${m.orderStatus eq '2' || m.orderStatus eq '3' || m.orderStatus eq '4'}">--%>
+						<%--<a class="sexybutton" href="javascript:void(0)" onclick="openDiv3('${m.orderId }')">--%>
+							<%--<span><span>修改成本</span></span>--%>
+						<%--</a>--%>
+					<%--</c:if>--%>
+					<%--<c:if test="${m.orderStatus eq '4'}">--%>
+						<%--<a class="sexybutton" href="javascript:void(0)" onclick="openDiv2('${m.orderId }')">--%>
+							<%--<span><span>新增工期</span></span>--%>
+						<%--</a>--%>
+					<%--</c:if>--%>
 					<c:if test="${m.orderStatus eq '6'}">
 						<a class="sexybutton" href="${ctx}/pub/appraise/appraiseView.do?appraiseId=${m.appraiseId}">
 							<span><span>评价详情</span></span>
@@ -460,6 +489,22 @@
 								<c:forEach var="a" items="${requestScope.workerList}" varStatus="status">
 									<option value="${a.id}"  >${a.realName}</option>
 								</c:forEach>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">客户选择支付类型：</td>
+						<td align="left">
+							<div id="customerPayType"></div>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">支付类型：</td>
+						<td align="left">
+							<select name="payType" id="payType_id">
+								<option value="" >===请选择===</option>
+								<option value="1" >一次性支付</option>
+								<option value="2" >分期支付</option>
 							</select>
 						</td>
 					</tr>

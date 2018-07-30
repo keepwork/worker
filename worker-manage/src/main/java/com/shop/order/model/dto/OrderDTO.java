@@ -22,7 +22,10 @@ public class OrderDTO extends AbstractOrderDTO
 	private String payTimeStr = "";
 	private String actualTimeStr = "";
 	private String finishTimeStr = "";
-	
+	private String payTime1Str = "";
+	private String payTime2Str = "";
+	private String payTime3Str = "";
+
 	private String resultCode;
 	private String workerName = "";
 	
@@ -196,6 +199,30 @@ public class OrderDTO extends AbstractOrderDTO
 
 	public void setFinishTimeStr(String finishTimeStr) {
 		this.finishTimeStr = finishTimeStr;
+	}
+
+	public String getPayTime1Str() {
+		return payTime1Str;
+	}
+
+	public void setPayTime1Str(String payTime1Str) {
+		this.payTime1Str = payTime1Str;
+	}
+
+	public String getPayTime2Str() {
+		return payTime2Str;
+	}
+
+	public void setPayTime2Str(String payTime2Str) {
+		this.payTime2Str = payTime2Str;
+	}
+
+	public String getPayTime3Str() {
+		return payTime3Str;
+	}
+
+	public void setPayTime3Str(String payTime3Str) {
+		this.payTime3Str = payTime3Str;
 	}
 
 	public String getProvince() {

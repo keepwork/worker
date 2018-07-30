@@ -348,4 +348,9 @@ public class OrderFacade {
 	public void setMyBmsLocationBPO(BmsLocationBPO myBmsLocationBPO) {
 		this.myBmsLocationBPO = myBmsLocationBPO;
 	}
+
+	public static void main(String[] args) {
+		//new BigDecimal("320").multiply(new BigDecimal("0.05"));
+		System.out.println(new BigDecimal("320").multiply(new BigDecimal("0.45")).toString());
+	}
 }

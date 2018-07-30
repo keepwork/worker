@@ -110,7 +110,7 @@ public class OrderDAO extends DaoSupport
 		String hql = "select sum(Z.totalPrice),sum(Z.cost) from OrderDTO Z "
 				+ "left join Z.tbTBmsLocationDTO B  ";
 		Object[] param = limit.getWhereHQL("Z");
-		List list = this.listWithNamePrams(hql + " where 1=1 " + param[0] + " "
+		List list = this.listWithNamePrams(hql + " where 1=1 AND Z.workerId IS NOT NULL " + param[0] + " "
 					+ limit.getOrder("Z"), (Map) param[1]);
 		Object o[] = (Object[])(list.get(0));
 		OrderDTO temp = new OrderDTO();
