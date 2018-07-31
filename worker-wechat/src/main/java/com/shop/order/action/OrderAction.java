@@ -748,7 +748,7 @@ public class OrderAction extends BaseAdmAction
 
 		OrderDTO order = myOrderFacade.get(orderId);
 		order.setActualTime(new Date());
-		order.setOrderStatus("4");//3已上门
+		order.setOrderStatus("4");//4已上门
 		myOrderFacade.update(order);
 		try
 		{
@@ -781,7 +781,7 @@ public class OrderAction extends BaseAdmAction
 		MenberDTO menber = (MenberDTO)request.getSession().getAttribute("wxmenber");
         if(null != menber){
 			OrderDTO order = myOrderFacade.get(orderId);
-			order.setOrderStatus("7");//7取消订单
+			order.setOrderStatus("8");//8取消订单
 			myOrderFacade.update(order);
 			try
 			{
@@ -793,6 +793,103 @@ public class OrderAction extends BaseAdmAction
 			{
 				e.printStackTrace();
 			}
+		}
+		return null;
+	}
+
+	/**
+	 * 开始施工
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward startWorkUpdateStatus(ActionMapping mapping,
+					ActionForm form, HttpServletRequest request,
+					HttpServletResponse response) throws Exception
+	{
+		String orderId = request.getParameter("orderId");
+		String result = "success";
+		OrderDTO order = myOrderFacade.get(orderId);
+		if(order.getPayType().equals("2") && null != order.getPayTime1()){//订单为分期支付类型时，开始施工前必须先支付定金
+			order.setActualTime(new Date());
+			order.setOrderStatus("5");//5已开始施工
+			myOrderFacade.update(order);
+		}else{
+			result = "unPay1";//定金未支付
+		}
+		try
+		{
+			PrintWriter out = response.getWriter();
+			out.print(result);
+			out.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 完成施工
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward finishWorkUpdateStatus(ActionMapping mapping,
+			   ActionForm form, HttpServletRequest request,
+			   HttpServletResponse response) throws Exception
+	{
+		String orderId = request.getParameter("orderId");
+		String result = "success";
+		OrderDTO order = myOrderFacade.get(orderId);
+//		if(order.getPayType().equals("2") && null != order.getPayTime1() &&
+//				null != order.getPayTime2() && null != order.getPayTime3()){//订单为分期支付类型时，完成施工前必须全部支付完成
+//			order.setActualTime(new Date());
+//			order.setOrderStatus("5");//5已开始施工
+//			myOrderFacade.update(order);
+//		}else if(order.getPayType().equals("1") && null != order.getPayTime1()){//订单为一次性支付类型时，完成施工前必须支付完成
+//			order.setActualTime(new Date());
+//			order.setOrderStatus("5");//5已开始施工
+//			myOrderFacade.update(order);
+//		}else{
+//			result = "unPay";//未完成支付
+//		}
+		if(order.getPayType().equals("2")){//分期支付
+			if(null == order.getPayTime1()){
+				result = "unPay1";//定金未支付
+			}else if(null == order.getPayTime2()){
+				result = "unPay2";//中期款未支付
+			}else if(null == order.getPayTime3()){
+				result = "unPay3";//尾款未支付
+			}
+		}else{//一次性支付
+			if(null == order.getPayTime1()){
+				result = "unPay";//未支付
+			}
+		}
+		if(result.equals("success")){
+			order.setActualTime(new Date());
+			order.setOrderStatus("6");//6已开始施工
+			myOrderFacade.update(order);
+		}
+		try
+		{
+			PrintWriter out = response.getWriter();
+			out.print(result);
+			out.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
 		}
 		return null;
 	}

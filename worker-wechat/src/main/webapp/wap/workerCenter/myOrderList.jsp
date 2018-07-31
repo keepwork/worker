@@ -11,9 +11,11 @@
 	<title>订单中心</title>
 	<link rel="stylesheet" href="${ctx}/wap/html/css/Basc.css" />
 	<link rel="stylesheet" href="${ctx}/wap/html/css/demo.css" />
+	<%--确认框开始--%>
 	<link rel="stylesheet" href="${ctx}/wap/css/jquery.alertable.css">
 	<script src="${ctx}/wap/js/alertable.js"></script>
 	<script src="${ctx}/wap/js/jquery.alertable.min.js"></script>
+	<%--确认框结束--%>
 	<script type="text/javascript" src="${ctx}/wap/html/js/tytabs.jquery.min.js" charset="UTF-8"></script>
 
 	<script type="text/javascript">
@@ -39,11 +41,11 @@
 	<link rel="stylesheet" href="${ctx }/common/css/pagination.css" />
     <script src="${ctx }/common/js/jquery.pagination.js" type="text/javascript" charset="UTF-8"></script>
     <script src="${ctx }/common/js/jquery-impromptu.3.2.js" type="text/javascript" charset="UTF-8"></script>
-	<%--日期控件相关--%>
+	<%--日期控件开始--%>
 	<link href="${ctx }/wap/workerCenter/css/common.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="${ctx }/wap/workerCenter/js/date.js" ></script>
 	<script type="text/javascript" src="${ctx }/wap/workerCenter/js/iscroll.js" ></script>
-
+	<%--日期控件结束--%>
 	<script type="text/javascript">
 		function initData(pageIndex,status){
 			var pageCount;
@@ -111,12 +113,12 @@
 							if(n.orderStatus=='2'){//已派单
                                 trs = trs + "<a href='#' class='button-info' id='sureTime' name='"+n.orderId+"'>确定时间</a><a href='tel:"+n.mobile+"' id='lxyz' class='button-none' >联系业主</a>";
 							}else if(n.orderStatus=='3'){//已确认时间
-                                trs = trs + "<a href='#' class='button-info' id='sureTime' name='"+n.orderId+"'>调整时间</a><a href='tel:"+n.mobile+"' id='lxyz' class='button-none'id='' >联系业主</a>"
+                                trs = trs + "<a href='#' class='button-info' id='sureTime' name='"+n.orderId+"'>调整时间</a><a href='tel:"+n.mobile+"' id='lxyz' class='button-none'id='' >联系业主</a>";
 							}else if(n.orderStatus=='4'){//已上门
-                                trs = trs + "<a href='#' onclick='goAppraise(event,this)'class='button-info' name='"+n.orderId+"'>开始施工</a>"
+                                trs = trs + "<a href='#' onclick='newconfirm(event,this)' class='button-info' id='startWork'  name='"+n.orderId+"'>开始施工</a>";
                             }else if(n.orderStatus=='5'){//已开始施工
                                 <%--trs = trs + "<a href='javascript:window.location.href=\"${ctx}/wap/workerCenter/workContentSubmit.jsp?type=wap&orderId=" + n.orderId + "\"' class='button-info' name='"+n.orderId+"'>施工完成</a>"--%>
-                                trs = trs + "<a href='#' onclick='goAppraise(event,this)'class='button-info' name='"+n.orderId+"'>完成施工</a>"
+                                trs = trs + "<a href='#' onclick='newconfirm(event,this)' class='button-info' id='finishWork'  name='"+n.orderId+"'>完成施工</a>";
                             }
 							trs = trs + "</li>";
     				});
@@ -192,7 +194,69 @@
 //            });
 //        }
 
+        //确认弹框
+        function newconfirm(e,obj) {
+            e.stopPropagation();//阻止点击事件向上冒泡
+            var id = $(obj).attr("id");
+            var orderId = $(obj).attr('name');
+            if(id == "startWork"){
+                $.alertable.confirm('确定已开始施工？').then(function() {
+                    startWork(orderId);
+                }, function() {
+                    console.log('Confirmation canceled');
+                });
+            }else if(id == "finishWork"){
+                $.alertable.confirm('确定已完成施工？').then(function() {
+                    finishWork(orderId);
+                }, function() {
+                    console.log('Confirmation canceled');
+                });
+            }
 
+
+        }
+        //开始施工
+        function startWork(orderId) {
+            $.ajax({
+                url:"${ctx}/pub/order/startWorkUpdateStatus.do?type=wap&orderId="+orderId,
+                dataType:"text",
+                async:false,
+                success: function(data){
+                    if(data == "unPay1"){
+                        $.alertable.alert('请提醒客户支付定金').always(function() {
+                            console.log('定金未支付，无法开始施工');
+                        });
+                    }else if(data == "success"){
+                        window.location.reload();
+					}
+                }
+            });
+        }
+        //完成施工
+        function finishWork(orderId) {
+            $.ajax({
+                url:"${ctx}/pub/order/finishWorkUpdateStatus.do?type=wap&orderId="+orderId,
+                dataType:"text",
+                async:false,
+                success: function(data){
+                    if(data == "unPay1"){
+                        $.alertable.alert('请提醒客户支付定金！').always(function() {
+                        });
+                    }else if(data == "unPay2"){
+                        $.alertable.alert('请提醒客户支付中期款！').always(function() {
+                        });
+                    }else if(data == "unPay3"){
+                        $.alertable.alert('请提醒客户支付尾款！').always(function() {
+                        });
+                    }else if(data == "unPay"){
+                        $.alertable.alert('请提醒客户支付订单金额').always(function() {
+                        });
+                    }else if(data == "success"){
+                        window.location.reload();
+                    }
+                }
+            });
+        }
 	</script>
   
 </head>
