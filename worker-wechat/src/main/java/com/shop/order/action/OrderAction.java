@@ -814,12 +814,12 @@ public class OrderAction extends BaseAdmAction
 		String orderId = request.getParameter("orderId");
 		String result = "success";
 		OrderDTO order = myOrderFacade.get(orderId);
-		if(order.getPayType().equals("2") && null != order.getPayTime1()){//订单为分期支付类型时，开始施工前必须先支付定金
+		if(order.getPayType().equals("2") && null == order.getPayTime1()){//订单为分期支付类型时，开始施工前必须先支付定金
+			result = "unPay1";//定金未支付
+		}else{
 			order.setActualTime(new Date());
 			order.setOrderStatus("5");//5已开始施工
 			myOrderFacade.update(order);
-		}else{
-			result = "unPay1";//定金未支付
 		}
 		try
 		{
