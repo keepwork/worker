@@ -26,10 +26,10 @@ a { color:#000000; text-decoration: none; }
 .wdddr .sl{ width:45%; text-align:center;}
 .wdddr .dj{ width:20%; color:#999; text-align:center;}
 .wdddr .bz{ width:15%; color:#ff4400; text-align:center;}
-.hyzx1{ border-top:solid #CCC 1px; position:relative; z-index:1; clear:both; margin:20px 0 0 0;}
+.hyzx1{ border-top:solid #CCC 1px; position:relative; z-index:1; clear:both; margin:0 0 0 0;}
 .hyzx1 li{ height:55px; line-height:55px;font-size:16px;border-bottom:solid #CCC 1px; background:#FFF url(../images/go.png) no-repeat 98% 13px; padding:0 15px 0 15px;}
 .hyzx1 li img{vertical-align:middle; margin:0 15px 0 0;}
-.notes{ background:#fff3b9; padding:5px; color:#666; font-size:13px}
+.notes{ background:#fff3b9; padding:15px; color:#666; font-size:13px}
 .notes img{ float:left; margin:0 10px 0 0;}
 .rsgxql{ background:#008fcb; height:auto; overflow:hidden; padding:10px 0;}
 .rsgxql li{ float:left; text-align:center; font-size:18px; color:#FFF; width:33%;}

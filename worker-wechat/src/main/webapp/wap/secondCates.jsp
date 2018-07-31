@@ -30,9 +30,14 @@
 				<c:if test="${requestScope.serviceType eq '3'}">保养</c:if>
 				<c:if test="${requestScope.serviceType eq '4'}">测量</c:if>
 				<c:if test="${requestScope.serviceType eq '5'}">咨询</c:if>
-				</strong><br/>
-				<br/>&nbsp;&nbsp;&nbsp;&nbsp;已选服务项目：<strong> ${firstCate.name}</strong>
-				<br/><br/>
+				</strong><br/><br/>
+		</ul>
+		<br/>
+
+		<ul style="font-size: 18px;margin-top: 10px;background: #71c3f530;">
+
+			<br/>&nbsp;&nbsp;&nbsp;&nbsp;已选服务项目：<strong> ${firstCate.name}</strong>
+			<br/><br/>
 		</ul>
 		<br/>
 

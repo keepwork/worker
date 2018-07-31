@@ -20,7 +20,12 @@
 	<!-- 公用头部-->
 	<jsp:include page="head.jsp"></jsp:include>
 
-	<ul class="hyzx1" style="margin-top: 75px;">
+	<div class="notes" style="margin-top: 17%;">
+		<img src="${ctx}/wap/images/notes.png" width="25" height="20" />
+		<font size="4">年终奖提前发，80元现金拿回家!</font>
+	</div>
+
+	<ul class="hyzx1" >
 	    <li onclick="javascript:window.location.href='${ctx}/pub/order/myOrderList.do?type=wap'" style="cursor:pointer;">
 	    	<img src="${ctx}/wap/html/images/tx_07.png" />全部订单</li>
 	    <li onclick="javascript:window.location.href='#'" style="cursor:pointer;">
