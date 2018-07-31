@@ -23,20 +23,20 @@
 	</header>
 
 	<div class="xzxh">
-		<ul style="font-size: 18px;margin-top: 10px;">
-				<br/>&nbsp;&nbsp;&nbsp;&nbsp;已选服务类型：
+		<ul style="font-size: 18px;margin-top: 10px;background: #71c3f530;">
+				<br/>&nbsp;&nbsp;&nbsp;&nbsp;已选服务类型：<strong>
 				<c:if test="${requestScope.serviceType eq '1'}">安装</c:if>
 				<c:if test="${requestScope.serviceType eq '2'}">维修</c:if>
 				<c:if test="${requestScope.serviceType eq '3'}">保养</c:if>
 				<c:if test="${requestScope.serviceType eq '4'}">测量</c:if>
 				<c:if test="${requestScope.serviceType eq '5'}">咨询</c:if>
-				<br/>
-				<br/>&nbsp;&nbsp;&nbsp;&nbsp;已选服务项目： ${firstCate.name}
+				</strong><br/>
+				<br/>&nbsp;&nbsp;&nbsp;&nbsp;已选服务项目：<strong> ${firstCate.name}</strong>
 				<br/><br/>
 		</ul>
 		<br/>
 
-	  <ul style="margin-top: 10px;">
+	  <ul style="margin-top: 10px;background: #71c3f530;">
 		<%--
 	  	<c:forEach var="a" items="${requestScope.secondCateList}">
 	         <li class="l" onclick="javascript:window.location.href='${ctx}/pub/order/orderWrite.do?type=wap&serviceType=${requestScope.serviceType}&firstCateCode=${requestScope.firstCateCode}&secondCateCode=${a.code}'">

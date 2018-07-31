@@ -283,8 +283,8 @@
 	  </ul>
 	</header>
 	
-	<div class="qrddxxo" style="margin: 0px 0 0;" id="addressListDiv">
-	    <h4>地址</h4>
+	<div class="qrddxxo" style="margin: 0px 0 0;font-size: 16px;" id="addressListDiv">
+	    <h4 style="background: #71c3f530;">地址</h4>
 	    <c:forEach items="${requestScope.addressList}" var="addr" varStatus="status">
 			<c:if test="${status.index==0}">
 				<input style="display: none;" name="selectAddress" value="${addr.id}" checked="checked" type="radio" />
@@ -334,60 +334,51 @@
 							<br><font size="2" color="red">地址格式：**路**号</font> 
 						</td>
 					</tr>
-					<tr>
-						<td height="10"></td>
-					</tr>
+					<tr><td height="10"></td></tr>
 				</table>
 	</ul>
 	
 	<ul class="qrddxxt" id="addNewButton">
-	<li><input class="submit" style="padding: 5px 11px;" type="button" name="newAdd" id="newAdd" value="新增地址" onclick="addNewAddressInit()"/></li>		
+		<li><input class="submit" style="padding: 5px 11px;" type="button" name="newAdd" id="newAdd" value="新增地址" onclick="addNewAddressInit()"/></li>
 	</ul>
 	<ul class="qrddxxt" id="saveNewButton" style="display: none;">
-	<li style="margin-left: 10px;">
-		<div class="aabbcc">
-		<input class="submit" style="padding: 2px 11px;" type="button" name="newAdd" id="newAdd" value="保存" onclick="saveNewAddress('','add')"/>
-		<input class="submit" style="padding: 2px 11px;" type="button" name="newCancel" id="newCancel" value="取消" onclick="cancelNewAddressInit()"/>
-		</div>
-	</li>		
+		<li style="margin-left: 10px;"><div class="aabbcc">
+			<input class="submit" style="padding: 2px 11px;" type="button" name="newAdd" id="newAdd" value="保存" onclick="saveNewAddress('','add')"/>
+			<input class="submit" style="padding: 2px 11px;" type="button" name="newCancel" id="newCancel" value="取消" onclick="cancelNewAddressInit()"/>
+		</div></li>
 	</ul>
 
-	<div class="qrddxxf">
-	    <h4 style="height:5px;padding:0px;">&nbsp;</h4>
-	    <ul>
-	        <li style="line-height: 11px;">描述<span style="float:right">
-	        	<input name="orderDesc" class="px" id="orderDesc" value="" style="margin: -5px;width: 250px;" maxlength="20"></span></li>
-	        <li>服务时间<span style="float:right">师傅跟我确认</span></li>
-	    </ul>
+	<div class="qrddxxo">
+	    <h4 style="background: #71c3f530;font-size: 16px;">服务</h4>
 	</div>
-	
+
 	<div class="qrddxxf">
-	    <h4 style="height:5px;padding:0px;">&nbsp;</h4>
 	    <ul>
-	        <li>服务类型<span style="float:right">
+	        <li>服务类型：<span style="float:right">
 		        <c:if test="${serviceType=='1'}">预约安装</c:if>
 		        <c:if test="${serviceType=='2'}">预约维修</c:if>
 		        <c:if test="${serviceType=='3'}">预约保养</c:if>
 		        <c:if test="${serviceType=='4'}">预约测量</c:if>
 		        <c:if test="${serviceType=='5'}">预约咨询</c:if>
 	        </span></li>
-	        <li>服务项目<span style="float:right">${firstCate.name}</span></li>
+	        <li>服务项目：<span style="float:right">${firstCate.name}</span></li>
+			<li>服务时间：<span style="float:right">师傅跟我确认</span></li>
+			<li>服务费用：<span style="float:right">预约后我们会主动跟您联系</span></li>
+			<li style="height: 100px;">服务描述：
+				<!--
+	        	<input name="orderDesc" class="px" id="orderDesc" value="" style="margin: -5px;width: 250px;" maxlength="20" placeholder="请简单描述你要做什么？">
+	        	-->
+				<textarea name="orderDesc" id="orderDesc" rows="8" class="px" style="border: 2px solid #71c3f530;height: 75px;width: 100%;" type="text" maxlength="400"
+						  placeholder="请简单描述您的要求？"></textarea>
+			</li>
 	    </ul>
 	</div>
 
-	<div class="qrddxxf">
-	    <h4 style="height:5px;padding:0px;">&nbsp;</h4>
-	    <ul>
-	        <li>服务费用<span style="float:right">0元</span></li>
-			<li>&nbsp;<span style="float:right">（预约后我们会主动跟您联系）</span></li>
-	    </ul>
+	<div class="qrddxxo">
+		<h4 style="background: #71c3f530;font-size: 16px;">支付</h4>
 	</div>
 
-	<div class="qrddxxf">
-		<h4 style="height:5px;padding:0px;">&nbsp;</h4>
-		<ul>
-			<li>支付类型</li>
-		</ul>
+	<div class="qrddxxf" style="font-size: 16px;margin-top: 10px;">
 		<span class="radio_box" >
 			<input type="radio" id="radio_1" name="payType" checked value="1">
 		   <label for="radio_1"></label>

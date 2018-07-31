@@ -207,7 +207,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=
 .newso li{height:35px;line-height:35px; border-bottom: dashed #dedede 1px; font-size:12px; padding:0 10px;}
 .newso li span{ float:right; color:#999;}
 
-.qrddxxo{ margin:60px 0 0 0;}
+.qrddxxo{ margin:28px 0 0 0;}
 .qrddxxo h4{height:20px; line-height:20px; padding:10px;background:#efefef; border-top:solid #dedede 1px; border-bottom:solid #dedede 1px;}
 .qrddxxo_o{ padding:15px; line-height:22px; font-size:14px;border-radius:5px; border:solid #ff4400 1px; margin:10px;}
 .qrddxxo b{ color:#999999; font-weight:normal;}
@@ -236,7 +236,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=
 .qrddxxh h4{height:20px; line-height:20px; padding:10px;background:#efefef; border-top:solid #dedede 1px; border-bottom:solid #dedede 1px;}
 .qrddxxh ul{ padding:15px;}
 .qrddxxh ul li input{ margin:5px 5px 0 0;}
-.qrddxxf{ margin:10px 0 0 0; height:auto; overflow:hidden;}
+.qrddxxf{ margin:0 0 0 0; height:auto; overflow:hidden;}
 .qrddxxf h4{height:20px; line-height:20px; padding:10px;background:#efefef; border-top:solid #dedede 1px; border-bottom:solid #dedede 1px;}
 .qrddxxf ul{ padding:15px;}
 .qrddxxf ul li input{border-radius:5px; border:solid #ccc 1px;width:50%; height:35px; line-height:35px; font-size:16px; margin:5px 25%;

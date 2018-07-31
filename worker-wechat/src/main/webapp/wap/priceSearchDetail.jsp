@@ -36,7 +36,7 @@
 	  </ul>
 	</header>
 
-	<img src="${ctx}/wap/images/hyzx_wddd_bg2.jpg">
+	<img src="${ctx}/wap/images/hyzx_wddd_bg2.jpg" style="height: 92px;">
 
 	<div class="Z_con2_2" style="height: 33.825em;">
 			<div class="F_wd_top_con2_l" id="wrapper" style="height: 628.6em;">

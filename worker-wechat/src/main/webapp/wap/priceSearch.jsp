@@ -17,7 +17,7 @@
 	<header>
 	  <ul>
 	    <li class="back"><a href="${ctx}/weixin/index.do?type=wx"><img src="${ctx}/wap/html/images/back.png" width="40" height="50" /></a></li>
-	    <li class="logo">选择服务项目</li>
+	    <li class="logo">收费查询</li>
 	    <li class="more">
 			<%--
 			<a href="${ctx}/pub/menber/centerInit.do?type=wap"><img src="${ctx}/wap/html/images/more.png" alt="" width="40" height="50" /></a>
@@ -25,7 +25,14 @@
 		</li>
 	  </ul>
 	</header>
-	
+
+	<div >
+		<ul style="font-size: 18px;background: #71c3f530;">
+			<br/>&nbsp;&nbsp;&nbsp;&nbsp;请选要查询的项目：
+			<br/><br/>
+		</ul>
+	</div>
+
 	<div class="xzfl">
 	  <ul>
 	  	<c:forEach var="a" items="${requestScope.cateList}">

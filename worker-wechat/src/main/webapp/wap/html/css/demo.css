@@ -44,7 +44,7 @@ footer ul li a:hover,.top_menu li a:active{}
 .xzfl{ height:auto; overflow:hidden; padding:10px; margin:0 0 70px 0;}
 .xzfl h3{ height:50; line-height:60px; font-size:20px; font-weight:normal; text-align:left;margin-left: 5px;}
 .xzfl ul{ height:auto; overflow:hidden;border-radius:10px; border:solid #dedede 1px; background:#FFF;}
-.xzfl ul li{ float:left; width:49%;width: -moz-calc(50% - 1px);width: -webkit-calc(50% - 1px);width: calc(50% - 1px);background-color:rgba(255, 255, 255, 0.3);}
+.xzfl ul li{ float:left; width:49%;width: -moz-calc(50% - 1px);width: -webkit-calc(50% - 1px);width: calc(50% - 1px);}
 .xzfl ul li p { text-align:center; display:block; margin:0px 0;}
 .xzfl ul li a { display:block;text-align:center; overflow:hidden;}
 .xzfl ul li a img {margin:20px 0 20px 0; }
