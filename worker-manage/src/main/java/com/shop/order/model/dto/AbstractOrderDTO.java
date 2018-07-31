@@ -8,12 +8,12 @@ import com.sinovatech.common.model.dto.DtoSupport;
 
 /**
  * 实体对象，请勿做客户化操作， 对应表:PUB_ORDER 订单
- * 
+ *
  * @author kevin(keepwork512@163.com)
  * @date Dec 28, 2015 12:39:58 PM
  */
 public abstract class AbstractOrderDTO extends DtoSupport
-{ 
+{
 	private String orderId;//订单ID
 	private String orderSn;//订单序列号
 	private String menId;//会员id
@@ -49,7 +49,7 @@ public abstract class AbstractOrderDTO extends DtoSupport
 	private String expName;//快递名称(废弃)
 	private String expNumber;//快递单号(废弃)
 	private Date expTime;//快递发货时间(废弃)
-	
+
 	private String workerId;//安装工ID
 	private String serviceType = "";//服务类型：1-预约安装,2-预约维修,3-预约保养,4-预约测量,5-预约咨询
 	private String firstCate;//产品分类
@@ -63,6 +63,7 @@ public abstract class AbstractOrderDTO extends DtoSupport
 	private String desc2;//描述
 	private String appraiseId;//评价ID
 	private Date actualTime;//实际上门时间
+	private Date startTime;//开始施工时间
 	private Date finishTime;//施工完成时间
 	private Integer cycleInit;//完成施工周期(天)
 	private Integer cycleAdd;//完成施工补充周期(天)
@@ -403,5 +404,13 @@ public abstract class AbstractOrderDTO extends DtoSupport
 
 	public void setPayTime3(Date payTime3) {
 		this.payTime3 = payTime3;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
 	}
 }

@@ -187,6 +187,11 @@
 				<comment>实际上门时间</comment>
 			</column>
 		</property>
+		<property name="startTime" type="java.util.Date">
+			<column name="START_TIME">
+				<comment>开始施工时间</comment>
+			</column>
+		</property>
 		<property name="finishTime" type="java.util.Date">
 			<column name="FINISH_TIME" >
 				<comment>施工完成时间</comment>

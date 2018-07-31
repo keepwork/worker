@@ -21,6 +21,7 @@ public class OrderDTO extends AbstractOrderDTO
 	private String takeTimeStr = "";
 	private String payTimeStr = "";
 	private String actualTimeStr = "";
+	private String startTimeStr = "";
 	private String finishTimeStr = "";
 	private String payTime1Str = "";
 	private String payTime2Str = "";
@@ -279,5 +280,13 @@ public class OrderDTO extends AbstractOrderDTO
 
 	public void setSumProfit(BigDecimal sumProfit) {
 		this.sumProfit = sumProfit;
+	}
+
+	public String getStartTimeStr() {
+		return startTimeStr;
+	}
+
+	public void setStartTimeStr(String startTimeStr) {
+		this.startTimeStr = startTimeStr;
 	}
 }

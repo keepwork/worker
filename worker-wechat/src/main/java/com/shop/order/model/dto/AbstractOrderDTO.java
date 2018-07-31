@@ -63,6 +63,7 @@ public abstract class AbstractOrderDTO extends DtoSupport
 	private String desc2;//描述
 	private String appraiseId;//评价ID
 	private Date actualTime;//实际上门时间
+	private Date startTime;//开始施工时间
 	private Date finishTime;//施工完成时间
 	private Integer cycleInit;//完成施工周期(天)
 	private Integer cycleAdd;//完成施工补充周期(天)
@@ -403,5 +404,13 @@ public abstract class AbstractOrderDTO extends DtoSupport
 
 	public void setPayTime3(Date payTime3) {
 		this.payTime3 = payTime3;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
 	}
 }
