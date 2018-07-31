@@ -238,21 +238,22 @@ public class OrderDAO extends DaoSupport
 			temp.setSecondCateName((String) map.get("SECOND_CATE_NAME"));
 			temp.setDesc1((String) map.get("DESC1"));
 			temp.setDesc2((String) map.get("DESC2"));
-			String pay1Price1 = (String) map.get("PAY_PRICE1");
-			temp.setPayPrice1(new BigDecimal(pay1Price1));
-			temp.setPayWay1((String) map.get("PAY_WAY1"));
-			temp.setPayTime1((Date) map.get("PAY_TIME1"));
-			if(temp.getPayType().equals("2")){
-				String pay1Price2 = (String) map.get("PAY_PRICE2");
-				String pay1Price3 = (String) map.get("PAY_PRICE3");
-				temp.setPayPrice2(new BigDecimal(pay1Price2));
-				temp.setPayPrice3(new BigDecimal(pay1Price3));
-				temp.setPayWay2((String) map.get("PAY_WAY2"));
-				temp.setPayWay3((String) map.get("PAY_WAY3"));
-				temp.setPayTime2((Date) map.get("PAY_TIME2"));
-				temp.setPayTime3((Date) map.get("PAY_TIME3"));
+			if(!temp.getOrderStatus().equals("1") && !temp.getOrderStatus().equals("8")) {
+				String pay1Price1 = (String) map.get("PAY_PRICE1");
+				temp.setPayPrice1(new BigDecimal(pay1Price1));
+				temp.setPayWay1((String) map.get("PAY_WAY1"));
+				temp.setPayTime1((Date) map.get("PAY_TIME1"));
+				if (temp.getPayType().equals("2")) {
+					String pay1Price2 = (String) map.get("PAY_PRICE2");
+					String pay1Price3 = (String) map.get("PAY_PRICE3");
+					temp.setPayPrice2(new BigDecimal(pay1Price2));
+					temp.setPayPrice3(new BigDecimal(pay1Price3));
+					temp.setPayWay2((String) map.get("PAY_WAY2"));
+					temp.setPayWay3((String) map.get("PAY_WAY3"));
+					temp.setPayTime2((Date) map.get("PAY_TIME2"));
+					temp.setPayTime3((Date) map.get("PAY_TIME3"));
+				}
 			}
-
 
 			result.add(temp);
 		}

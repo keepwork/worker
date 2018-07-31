@@ -86,28 +86,33 @@
     <li style="border-bottom: 1px solid #e5e5e5;"><h2>备注信息</h2><span>${requestScope.order.orderDesc}</span></li>
     <li style="height: 2.4rem;line-height: 2.4rem;padding: 0 0.5rem; border-bottom: 1px solid #e5e5e5;">
       <h2>订单金额</h2>
-      <p>
-        <em>￥${requestScope.order.totalPrice}</em>
-        <c:if test="${requestScope.order.payType eq '1'}">
-          <c:if test="${requestScope.order.payTime1 eq '' || requestScope.order.payTime1 eq null}">
-            <a href="${ctx}/pub/order/toPaymentPage.do?type=wap&payState=0&orderId=${requestScope.order.orderId}" class="button-info">&emsp;支付&emsp;</a>
+      <c:if test="${requestScope.order.totalPrice ne 0}">
+        <p>
+          <em>￥${requestScope.order.totalPrice}</em>
+          <c:if test="${requestScope.order.payType eq '1'}">
+            <c:if test="${requestScope.order.payTime1 eq null && (requestScope.order.orderStatus eq '4' || requestScope.order.orderStatus eq '5')}">
+              <a href="${ctx}/pub/order/toPaymentPage.do?type=wap&payState=0&orderId=${requestScope.order.orderId}" class="button-info">&emsp;支付&emsp;</a>
+            </c:if>
+            <c:if test="${requestScope.order.payTime1 ne '' && requestScope.order.payTime1 ne null}">
+              <span class="pay-state" style="color:#2abf3e">已支付</span>
+            </c:if>
           </c:if>
-          <c:if test="${requestScope.order.payTime1 ne '' && requestScope.order.payTime1 ne null}">
-            <span class="pay-state">已支付</span>
-          </c:if>
-        </c:if>
-      </p>
+        </p>
+      </c:if>
+      <c:if test="${requestScope.order.totalPrice eq 0}">
+        <span>客服会跟您联系确定金额</span>
+      </c:if>
     </li>
     <c:if test="${requestScope.order.payType eq '2'}">
       <li style="height: 2.4rem;line-height: 2.4rem;padding: 0 0.5rem; border-bottom: 1px solid #e5e5e5;">
         <h2>定金金额</h2>
         <p>
           <em>￥${requestScope.order.payPrice1}</em>
-          <c:if test="${requestScope.order.payTime1 eq '' || requestScope.order.payTime1 eq null}">
+          <c:if test="${requestScope.order.payTime1 eq null && (requestScope.order.orderStatus eq '4' || requestScope.order.orderStatus eq '5')}">
             <a href="${ctx}/pub/order/toPaymentPage.do?type=wap&payState=1&orderId=${requestScope.order.orderId}" class="button-info">&emsp;支付&emsp;</a>
           </c:if>
           <c:if test="${requestScope.order.payTime1 ne '' && requestScope.order.payTime1 ne null}">
-            <span class="pay-state">已支付</span>
+            <span class="pay-state" style="color:#2abf3e">已支付</span>
           </c:if>
         </p>
       </li>
@@ -115,11 +120,11 @@
         <h2>中期金额</h2>
         <p>
           <em>￥${requestScope.order.payPrice2}</em>
-          <c:if test="${requestScope.order.payTime2 eq '' || requestScope.order.payTime2 eq null}">
+          <c:if test="${requestScope.order.payTime2 eq null && (requestScope.order.orderStatus eq '4' || requestScope.order.orderStatus eq '5')}">
             <a href="${ctx}/pub/order/toPaymentPage.do?type=wap&payState=2&orderId=${requestScope.order.orderId}" class="button-info">&emsp;支付&emsp;</a>
           </c:if>
           <c:if test="${requestScope.order.payTime2 ne '' && requestScope.order.payTime2 ne null}">
-            <span class="pay-state">已支付</span>
+            <span class="pay-state" style="color:#2abf3e">已支付</span>
           </c:if>
         </p>
       </li>
@@ -127,11 +132,11 @@
         <h2>尾款金额</h2>
         <p>
           <em>￥${requestScope.order.payPrice3}</em>
-          <c:if test="${requestScope.order.payTime3 eq '' || requestScope.order.payTime3 eq null}">
+          <c:if test="${requestScope.order.payTime3 eq null && (requestScope.order.orderStatus eq '4' || requestScope.order.orderStatus eq '5')}">
             <a href="${ctx}/pub/order/toPaymentPage.do?type=wap&payState=3&orderId=${requestScope.order.orderId}" class="button-info">&emsp;支付&emsp;</a>
           </c:if>
           <c:if test="${requestScope.order.payTime3 ne '' && requestScope.order.payTime3 ne null}">
-            <span class="pay-state">已支付</span>
+            <span class="pay-state" style="color:#2abf3e">已支付</span>
           </c:if>
         </p>
       </li>

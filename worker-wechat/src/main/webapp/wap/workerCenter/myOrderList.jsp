@@ -114,7 +114,7 @@
                                 trs = trs + "<a href='#' class='button-info' id='sureTime' name='"+n.orderId+"'>调整时间</a><a href='tel:"+n.mobile+"' id='lxyz' class='button-none'id='' >联系业主</a>"
 							}else if(n.orderStatus=='4'){//已上门
                                 trs = trs + "<a href='#' onclick='goAppraise(event,this)'class='button-info' name='"+n.orderId+"'>开始施工</a>"
-                            }else if(n.orderStatus=='5'){//已上门
+                            }else if(n.orderStatus=='5'){//已开始施工
                                 <%--trs = trs + "<a href='javascript:window.location.href=\"${ctx}/wap/workerCenter/workContentSubmit.jsp?type=wap&orderId=" + n.orderId + "\"' class='button-info' name='"+n.orderId+"'>施工完成</a>"--%>
                                 trs = trs + "<a href='#' onclick='goAppraise(event,this)'class='button-info' name='"+n.orderId+"'>完成施工</a>"
                             }

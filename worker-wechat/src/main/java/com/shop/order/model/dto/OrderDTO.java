@@ -1,5 +1,6 @@
 package com.shop.order.model.dto;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -7,7 +8,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * 表PUB_ORDER的映射类，可在本类中过客户化操作
- * 
+ *
  * @author kevin(keepwork512@163.com)
  * @date Dec 28, 2015 12:41:58 PM
  */
@@ -16,23 +17,38 @@ public class OrderDTO extends AbstractOrderDTO
 	private String menName = "";
 	private String menMobile = "";
 	private String orderTimeStr = "";
-	private String takeTimeStr = "";
 	private String sureTimeStr = "";
+	private String takeTimeStr = "";
+	private String payTimeStr = "";
 	private String actualTimeStr = "";
 	private String finishTimeStr = "";
+	private String payTime1Str = "";
+	private String payTime2Str = "";
+	private String payTime3Str = "";
 
-	private String payTimeStr = "";
-	
 	private String resultCode;
 	private String workerName = "";
-	
+
 	//查询条件
 	private String beginTimeStr = "";
 	private String endTimeStr = "";
-	
+
 	private Date beginTime;
 	private Date endTime;
-	
+
+	private String locationName = "";//所属地区或团队
+
+	private String projectProgress = "";//项目进度
+
+	private String province = "";//省份
+	private String city = "";//城市
+	private String team = "";//队
+	private String userLevel = "";//用户等级
+	private BigDecimal sumTotalPrice;//总订单金额
+	private BigDecimal sumCost;//总成本
+	private BigDecimal sumProfit;//总成本
+
+
 	public OrderDTO()
 	{
 		super();
@@ -153,6 +169,22 @@ public class OrderDTO extends AbstractOrderDTO
 		this.takeTimeStr = takeTimeStr;
 	}
 
+	public String getLocationName() {
+		return locationName;
+	}
+
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
+	}
+
+	public String getProjectProgress() {
+		return projectProgress;
+	}
+
+	public void setProjectProgress(String projectProgress) {
+		this.projectProgress = projectProgress;
+	}
+
 	public String getActualTimeStr() {
 		return actualTimeStr;
 	}
@@ -167,5 +199,85 @@ public class OrderDTO extends AbstractOrderDTO
 
 	public void setFinishTimeStr(String finishTimeStr) {
 		this.finishTimeStr = finishTimeStr;
+	}
+
+	public String getPayTime1Str() {
+		return payTime1Str;
+	}
+
+	public void setPayTime1Str(String payTime1Str) {
+		this.payTime1Str = payTime1Str;
+	}
+
+	public String getPayTime2Str() {
+		return payTime2Str;
+	}
+
+	public void setPayTime2Str(String payTime2Str) {
+		this.payTime2Str = payTime2Str;
+	}
+
+	public String getPayTime3Str() {
+		return payTime3Str;
+	}
+
+	public void setPayTime3Str(String payTime3Str) {
+		this.payTime3Str = payTime3Str;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getTeam() {
+		return team;
+	}
+
+	public void setTeam(String team) {
+		this.team = team;
+	}
+
+	public String getUserLevel() {
+		return userLevel;
+	}
+
+	public void setUserLevel(String userLevel) {
+		this.userLevel = userLevel;
+	}
+
+	public BigDecimal getSumTotalPrice() {
+		return sumTotalPrice;
+	}
+
+	public void setSumTotalPrice(BigDecimal sumTotalPrice) {
+		this.sumTotalPrice = sumTotalPrice;
+	}
+
+	public BigDecimal getSumCost() {
+		return sumCost;
+	}
+
+	public void setSumCost(BigDecimal sumCost) {
+		this.sumCost = sumCost;
+	}
+
+	public BigDecimal getSumProfit() {
+		return sumProfit;
+	}
+
+	public void setSumProfit(BigDecimal sumProfit) {
+		this.sumProfit = sumProfit;
 	}
 }

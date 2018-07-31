@@ -541,6 +541,7 @@ public class OrderAction extends BaseAdmAction
 		String workerId = request.getParameter("workerId");
 		String totalPrice = request.getParameter("totalPrice");
 		String payType = request.getParameter("payType");
+		String cost = request.getParameter("cost");
 		Integer cycleInit = Integer.parseInt(request.getParameter("cycleInit"));
 		BigDecimal totalPriceBd = new BigDecimal(totalPrice);
 
@@ -555,6 +556,7 @@ public class OrderAction extends BaseAdmAction
 		order.setCycleInit(cycleInit);
 		order.setPayType(payType);
 		order.setPayPrice1(totalPriceBd);
+		order.setCost(new BigDecimal(cost));
 		if(payType.equals("2")){//分期支付
 			String proportion1 = GlobalConfig.getProperty("redis", "payPrice1.proportion");//定金比例
 			String proportion2 = GlobalConfig.getProperty("redis", "payPrice2.proportion");//中期款比例
@@ -815,7 +817,7 @@ public class OrderAction extends BaseAdmAction
 		String orderId = (String)getActionAttribute(request, "beforeEdit.id");
 		OrderDTO orderDTO = myOrderFacade.get(orderId);
 
-		if(!totalPrice.equals(orderDTO.getTotalPrice().toString())){//订单总价已修改
+		if(!StringUtil.stringVerify(totalPrice) && !totalPrice.equals(orderDTO.getTotalPrice().toString())){//订单总价已修改
 			BigDecimal totalPriceBd = new BigDecimal(totalPrice);
 			if(orderDTO.getPayType().equals("2")){
 				String proportion1 = GlobalConfig.getProperty("redis", "payPrice1.proportion");//定金比例

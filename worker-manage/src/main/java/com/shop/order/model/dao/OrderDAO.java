@@ -114,9 +114,11 @@ public class OrderDAO extends DaoSupport
 					+ limit.getOrder("Z"), (Map) param[1]);
 		Object o[] = (Object[])(list.get(0));
 		OrderDTO temp = new OrderDTO();
-		temp.setSumTotalPrice((BigDecimal)o[0]);
-		temp.setSumCost((BigDecimal)o[1]);
-		temp.setSumProfit(((BigDecimal)o[0]).subtract((BigDecimal)o[1]));//利润登录总订单额-总成本相减
+		BigDecimal sumTotalPrice = (BigDecimal)o[0]==null?BigDecimal.ZERO:(BigDecimal)o[0];
+		BigDecimal sumCost = (BigDecimal)o[0]==null?BigDecimal.ZERO:(BigDecimal)o[1];
+		temp.setSumTotalPrice(sumTotalPrice);
+		temp.setSumCost(sumCost);
+		temp.setSumProfit((sumTotalPrice).subtract(sumCost));//利润登录总订单额-总成本相减
 		return temp;
 	}
 
