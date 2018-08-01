@@ -131,8 +131,12 @@ public class MenberAction extends BaseAdmAction
 		
 		if(type.equals("3")){
 			return mapping.findForward("auditList");
-		}else{
-			return mapping.findForward("list");
+		} else if(type.equals("1")){
+			return mapping.findForward("customerlist");
+		} else if(type.equals("2")){
+			return mapping.findForward("menberlist");
+		} else{
+			return null;
 		}
 	}
 
@@ -230,6 +234,7 @@ public class MenberAction extends BaseAdmAction
 		// 验证方法， 如果为null或者为空则直接返回异常
 		Validate.notBlank(id, "common", "errorparameter");
 		MenberDTO m = this.myMenberFacade.get(id);
+		m.setRegTimeStr(format.format(m.getRegTime()));
 		// 将当前编辑的数据中的不需要用户修改的数据保存的ActionContext中
 		// 如主键等,代替使用隐藏域发送，更安全
 		setActionAttribute(request, "beforeEdit.id", id);
