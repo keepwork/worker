@@ -5,12 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-	<title>选择产品型号</title>
-	<link rel="stylesheet" href="${ctx}/wap/html/css/Basc.css" />
-	<link rel="stylesheet" href="${ctx}/wap/html/css/demo.css" />
+	<jsp:include page="../public/common.jsp"></jsp:include>
 	<link rel="stylesheet" href="${ctx}/wap/css/jquery.alertable.css">
 	<script src="${ctx}/wap/js/alertable.js"></script>
 	<script src="${ctx}/wap/js/jquery.alertable.min.js"></script>
@@ -262,7 +257,7 @@
 	<div style="position: fixed;bottom: 50px;right: 10px;margin-bottom: 10px;"><a href="javascript:window.location.reload();"><img src="${ctx}/wap/images/shuaxin.png" width="42px"></a></div>
 	<div id="pagination" class="flickr" style="text-align:right;"></div>
 
-	<table height="150px;"><tr><td >&nbsp;</td></tr></table>
+	<table style="height:10rem"><tr><td >&nbsp;</td></tr></table>
   
 	<!-- foot -->
 	<jsp:include page="../public/foot.jsp" flush="false">

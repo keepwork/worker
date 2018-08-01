@@ -25,13 +25,13 @@ header ul .more{ width:30%; text-align:right;}
 .mainmenu li { border:solid #dedede 1px; overflow: hidden; }
 .mainmenu li p {margin:0;}
 .mainmenu li a img {margin:40px 0 20px 0; width:41%; height:11%;}
-.mainmenu li a span { display:block;  padding:0px 0 30px 0;  line-height:30px; font-size:20px; overflow:hidden;text-overflow:ellipsis; white-space:nowrap; text-align:center   }
+.mainmenu li a span { display:block;  padding:0px 0 30px 0;  line-height:30px; font-size:1rem;color:#222222; overflow:hidden;text-overflow:ellipsis; white-space:nowrap; text-align:center   }
 .mainmenu li:nth-child(6n+1){ background-color:#fff}
 .mainmenu li:nth-child(6n+2){ background-color:#fff}
 .mainmenu li:nth-child(6n+3){ background-color:#fff}
 .mainmenu li:nth-child(6n+4){ background-color:#fff}
 
-/* 底部菜单 */
+/* 底部菜单
 footer {width:100%;height:50px;margin:0; padding:5px 0 0 0;position:fixed;z-index:900;bottom:0;left:0;right:0; background:#FFF; border-top:solid #dedede 1px;}
 footer ul{}
 footer ul li{position:relative;text-align:center;display:inline-block;width:33%; line-height:25px;float:left;}
@@ -39,6 +39,7 @@ footer ul li a label{font-size:16px;overflow:hidden; margin:0; padding:0;}
 footer ul li a{display:block;text-align:center;}
 footer ul li a img{vertical-align:middle; margin:0; padding:0;}
 footer ul li a:hover,.top_menu li a:active{}
+*/
 
 /* 选择分类 */
 .xzfl{ height:auto; overflow:hidden; padding:10px; margin:0 0 70px 0;}
@@ -190,7 +191,7 @@ footer ul li a:hover,.top_menu li a:active{}
 .spacing{ margin:0 0 70px 0; clear:both;}
 
 /*切换*/
-#tabsholder{ margin:10px;margin-top: 70px;}
+#tabsholder{ margin:0.24rem;margin-top: 5.1rem;}
 .marginbot {}
 ul.list li {list-style-type:none;margin-left:20px;}
 ul.tabs {width:100%;overflow:hidden;}
@@ -199,7 +200,7 @@ ul.tabs li.current {background: url(../images/tab.png) bottom center no-repeat; 
 .tabscontent {display:none;width:100%;text-align:justify;}
 .hzjh{}
 .hzjh h4{height:40px; line-height:45px; font-size:16px; color:#666; padding:0 15px;background:#efefef; border-top:solid #dedede 1px; border-bottom:solid #dedede 1px;}
-.hzjh li{ height: auto; overflow:hidden; border-radius:10px; border:solid #dedede 1px; margin:10px 0; padding:10px; line-height:30px; font-size:14px; color:#666; background:#FFF url(../images/dz_10.png) no-repeat 97% 90px; background-size:9px 16px;}
+.hzjh li{ height: auto; overflow:hidden; border-radius:10px; border:solid #dedede 1px; margin:0.24rem 0; padding:10px; line-height:30px; font-size:14px; color:#666; background:#FFF url(../images/dz_10.png) no-repeat 97% 90px; background-size:9px 16px;}
 .hzjh li h3{ background:url(../images/tx_16.png) no-repeat 0 11px; background-size:11px 16px; font-size:14px; padding:0 0 0 20px; border-bottom:solid #dedede 1px; height:40px; line-height:40px; margin:0 0 10px 0;}
 .hzjh li h3 span{ float:right;font-size:14px;}
 .hzjh li .pic{ width:3rem; height:4rem; float:left; margin:0 10px 0 0;}

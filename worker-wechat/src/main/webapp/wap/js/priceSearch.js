@@ -1,16 +1,16 @@
 $(function(){
 		
 		//算高度-无头无尾
- 		$(".Z_con").css("height",($(window).height()/16-3.3)+"em");
-		$(".Z_con2").css("height",($(window).height()/16-5.8)+"em");
-		$(".Z_con2_2").css("height",($(window).height()/16-5.8)+"em");
-		
-		
-		$(".F_wd_top_con2_l").css("height",($(window).height()-5.4)+"em");
-		$(".F_wd_top_con2_r").css("height",($(window).height()/16-5.4)+"em");
-		
-		$(".F_wd_top_con2_l_2").css("height",($(window).height()/16-8.6)+"em");
-		$(".F_wd_top_con2_r_2").css("height",($(window).height()/16-8.6)+"em");
+ 		// $(".Z_con").css("height",($(window).height()/16-3.3)+"em");
+		// $(".Z_con2").css("height",($(window).height()/16-5.8)+"em");
+		// $(".Z_con2_2").css("height",($(window).height()/16-5.8)+"em");
+		//
+		//
+		// $(".F_wd_top_con2_l").css("height",($(window).height()-5.4)+"em");
+		// $(".F_wd_top_con2_r").css("height",($(window).height()/16-5.4)+"em");
+		//
+		// $(".F_wd_top_con2_l_2").css("height",($(window).height()/16-8.6)+"em");
+		// $(".F_wd_top_con2_r_2").css("height",($(window).height()/16-8.6)+"em");
 		
 	
 		

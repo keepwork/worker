@@ -18,8 +18,12 @@
 
 <link rel="stylesheet" href="${ctx}/wap/html/css/Basc.css" />
 <link rel="stylesheet" href="${ctx}/wap/html/css/demo.css" />
+<link rel="stylesheet" href="${ctx}/wap/css/footer.css" />
 
-<script type="text/javascript" charset="UTF-8" src="${ctx}/common/js/jquery-1.9.1.min.js" ></script>
+
+<%--<script type="text/javascript" charset="UTF-8" src="${ctx}/common/js/jquery-1.9.1.min.js" ></script>--%>
+<script type="text/javascript" charset="UTF-8" src="${ctx}/wap/js/jquery.min.1.js" ></script>
+<script type="text/javascript" charset="UTF-8" src="${ctx}/wap/js/rem.js" ></script>
 
 
 <!--在线帮助 Start

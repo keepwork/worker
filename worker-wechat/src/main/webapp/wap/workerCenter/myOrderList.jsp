@@ -2,15 +2,8 @@
 <%@ taglib prefix="c" uri="/WEB-INF/tld/c.tld" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
-<!DOCTYPE html>
-<html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0,user-scalable=no"/>
-	<title>订单中心</title>
-	<link rel="stylesheet" href="${ctx}/wap/html/css/Basc.css" />
-	<link rel="stylesheet" href="${ctx}/wap/html/css/demo.css" />
+	<jsp:include page="../public/common.jsp"></jsp:include>
 	<%--确认框开始--%>
 	<link rel="stylesheet" href="${ctx}/wap/css/jquery.alertable.css">
 	<script src="${ctx}/wap/js/alertable.js"></script>

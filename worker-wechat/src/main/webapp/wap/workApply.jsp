@@ -7,7 +7,6 @@
 <head>
 	<jsp:include page="public/common.jsp"></jsp:include>
 	<link rel="stylesheet" href="${ctx}/wap/userCenter/css/style.css">
-
 	<script type="text/javascript">
 		function isCardNo(card)  
 		{  
@@ -119,29 +118,29 @@
 	    <form name="frmApply" class="cmxform" action="${ctx}/pub/menber/workApplySave.do?type=wap" target="hideframe" method="post" >
 			<input type="hidden" name="salesMenId" id="salesMenId" value="${sessionScope.wxmenber.id}" />
 			<li class="title"><a href="${ctx}/pub/menber/centerInit.do?type=wap">首页</a>在此申请成为工人</li>
-			<li class="nob" style="height: 50px;font-size: 16px;">
+			<li class="nob" style="height: 3rem;font-size: 16px;">
 				<table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td width="30%">*真实姓名：</td>
-						<td width="70%" align="left">
+						<td width="32%" ><em style="color: red;">*</em>真实姓名：</td>
+						<td width="68%" align="left">
 							<input name="realName" class="input_text" id="realName" value="" placeholder="请输入真实姓名，必填" type="text" maxlength="50"></td>
 					</tr>
 				</table>
 			</li>
-			<li class="nob" style="height: 50px;font-size: 16px;">
+			<li class="nob" style="height: 3rem;font-size: 16px;">
 				<table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td width="30%">*身份证号：</td>
-						<td width="70%" align="left">
+						<td width="32%"><em style="color: red;">*</em>身份证号：</td>
+						<td width="68%" align="left">
 							<input name="pid" class="input_text" id="pid" value="" placeholder="请输入身份证号，必填" type="text" maxlength="50"></td>
 					</tr>
 				</table>
 			</li>
-			<li class="nob" style="height: 50px;font-size: 16px;">
+			<li class="nob" style="height: 3rem;font-size: 16px;">
 				<table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td width="30%">*手机号码：</td>
-						<td width="70%" align="left">
+						<td width="32%"><em style="color: red;">*</em>手机号码：</td>
+						<td width="68%" align="left">
 							<input name="mobile" class="input_text" id="mobile" value="" placeholder="请输入手机号码，必填" type="text" maxlength="50"
 									onkeyup='this.value=this.value.replace(/[^0-9]/gi,""); '
 									onafterpaste='this.value=this.value.replace(/[^0-9]/gi,"")'>
@@ -149,30 +148,30 @@
 					</tr>
 				</table>
 			</li>
-			<li class="nob" style="height: 50px;font-size: 16px;">
+			<li class="nob" style="height: 3rem;font-size: 16px;">
 				<table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td width="30%">*服务区域：</td>
-						<td width="70%" align="left">
+						<td width="32%"><em style="color: red;">*</em>服务区域：</td>
+						<td width="68%" align="left">
 							<input name="areaCode" class="input_text" id="areaCode" value="" placeholder="请输入服务区域，必填" type="text" maxlength="100"></td>
 					</tr>
 				</table>
 			</li>
-			<li class="nob" style="height: 50px;font-size: 16px;">
+			<li class="nob" style="height: 3rem;font-size: 16px;">
 				<table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td width="30%">&nbsp;电子邮箱：</td>
-						<td width="70%" align="left">
+						<td width="32%">&nbsp;电子邮箱：</td>
+						<td width="68%" align="left">
 							<input name="email" class="input_text" id="email" value="" placeholder="请输入电子邮箱，非必填" type="text" maxlength="50"></td>
 					</tr>
 				</table>
 			</li>
-			<li class="nob" style="height: 222px;font-size: 16px;">
+			<li class="nob" style="height: 12rem;font-size: 16px;">
 				<table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td width="30%">*技能描述：</td>
-						<td width="70%" align="left">
-						<textarea name="detailAddr" id="detailAddr" rows="8" style="border: 1px solid #e1e1e1;height: 190px;width: 100%;" type="text" maxlength="400"
+						<td width="32%" valign="top"><em style="color: red;">*</em>技能描述：</td>
+						<td width="68%" align="left">
+						<textarea name="detailAddr" id="detailAddr" rows="8" style="border: 1px solid #e1e1e1;height: 8rem;width: 100%;" type="text" maxlength="400"
 								  placeholder="请填写您擅长的技能，我们会根据此项来准确为您派单，必填"></textarea>
 						</td>
 					</tr>
@@ -181,14 +180,15 @@
 	    </form>
 	</ul>
 	</div>
-	
+
+
 	<input class="submit" value="提交申请" type="button" onclick="beforeSubmit();return false" />
 	
 	<br><br><br>
 
 	<!-- 公用底部 -->
 	<jsp:include page="public/foot.jsp" flush="false">
-		<jsp:param name="menu" value="fw" />
+		<jsp:param name="menu" value="workApply" />
 	</jsp:include>
 	
 	<iframe name="hideframe" id="hideframe" width="0" height="0"></iframe>

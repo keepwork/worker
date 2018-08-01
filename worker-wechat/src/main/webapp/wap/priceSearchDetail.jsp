@@ -4,19 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="Keywords" content="咨询诊断价格">
-	<meta name="Description" content="">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0">
-	<meta name="apple-touch-fullscreen" content="yes">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="format-detection" content="telephone=no">
-
-	<title>惠修</title>
-
-	<link rel="stylesheet" href="${ctx}/wap/html/css/Basc.css" />
-	<link rel="stylesheet" href="${ctx}/wap/html/css/demo.css" />
+	<jsp:include page="public/common.jsp"></jsp:include>
 	<link rel="stylesheet" href="${ctx}/wap/css/priceSearch.css" />
 
 	<script src="${ctx}/common/js/jQuery/jquery-1.7.2.min.js" type="text/javascript" charset="UTF-8"></script>
@@ -36,10 +24,10 @@
 	  </ul>
 	</header>
 
-	<img src="${ctx}/wap/images/hyzx_wddd_bg2.jpg" style="height: 92px;">
+	<img src="${ctx}/wap/images/hyzx_wddd_bg2.jpg" style="height: 6rem;width: 100%;">
 
-	<div class="Z_con2_2" style="height: 33.825em;">
-			<div class="F_wd_top_con2_l" id="wrapper" style="height: 628.6em;">
+	<div class="Z_con2_2" style="height:auto">
+			<div class="F_wd_top_con2_l" id="wrapper" style="height:auto">
 				<ul class="sy">
 					<c:forEach var="a" items="${requestScope.priceList}" varStatus="status">
 						<li <c:if test="${status.index==0}">class="current"</c:if> >
@@ -48,7 +36,7 @@
 					</c:forEach>
 				</ul>
 			</div>
-			<div class="F_wd_top_con2_r" id="wrapper1" >
+			<div class="F_wd_top_con2_r" id="wrapper1" style="height:auto">
 
 				<c:forEach var="a" items="${requestScope.priceList}" varStatus="status">
 					<div class="content">
@@ -61,8 +49,9 @@
 						</ul>
 					</div>
 				</c:forEach>
-
+				<div style="height: 5rem;">&nbsp;</div>
 			</div>
+
 
 	</div>
   
@@ -70,7 +59,7 @@
 	
 	<!-- 公用底部 -->
 	<jsp:include page="public/foot.jsp" flush="false">
-		<jsp:param name="menu" value="fw" />
+		<jsp:param name="menu" value="priceSearch" />
 	</jsp:include>
 </body>
 </html>

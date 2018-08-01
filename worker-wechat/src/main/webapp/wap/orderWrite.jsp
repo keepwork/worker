@@ -5,12 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-	<title>智修</title>
-	<link rel="stylesheet" href="${ctx}/wap/html/css/Basc.css" />
-	<link rel="stylesheet" href="${ctx}/wap/html/css/demo.css" />
+	<jsp:include page="public/common.jsp"></jsp:include>
+
 	
   	<!-- 公用JS|CSS-->
 	<link rel="stylesheet" href="${ctx}/wap/css/style.css">
@@ -34,7 +30,6 @@
 	.radio_box em{ margin:0 0 0 10px;}
 	.radio_box input{ float:none;}
 	</style>
-
 	
 	<script type="text/javascript">
 //		  function init(){

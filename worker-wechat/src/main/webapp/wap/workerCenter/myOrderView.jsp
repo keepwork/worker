@@ -13,10 +13,12 @@
 <title>订单详情</title>
 <link rel="stylesheet" type="text/css" href="${ctx }/wap/css/processmain.css">
 <link rel="stylesheet" type="text/css" href="${ctx }/wap/css/process.css">
-<link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/base.css">
+<%--footer 开始--%>
+<link rel="stylesheet" type="text/css" href="${ctx }/wap/css/footer.css">
 <link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/public.css">
 <script type="text/javascript" src="${ctx }/wap/workerCenter/js/jquery.min.js" ></script>
-<script src="${ctx }/wap/workerCenter/js/common.js"></script>
+<script src="${ctx }/wap/js/rem.js"></script>
+<%--footer 结束--%>
   <style>
     .pay-state {
       border: none;

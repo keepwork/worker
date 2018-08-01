@@ -817,7 +817,7 @@ public class OrderAction extends BaseAdmAction
 		if(order.getPayType().equals("2") && null == order.getPayTime1()){//订单为分期支付类型时，开始施工前必须先支付定金
 			result = "unPay1";//定金未支付
 		}else{
-			order.setActualTime(new Date());
+			order.setStartTime(new Date());
 			order.setOrderStatus("5");//5已开始施工
 			myOrderFacade.update(order);
 		}
@@ -851,18 +851,6 @@ public class OrderAction extends BaseAdmAction
 		String orderId = request.getParameter("orderId");
 		String result = "success";
 		OrderDTO order = myOrderFacade.get(orderId);
-//		if(order.getPayType().equals("2") && null != order.getPayTime1() &&
-//				null != order.getPayTime2() && null != order.getPayTime3()){//订单为分期支付类型时，完成施工前必须全部支付完成
-//			order.setActualTime(new Date());
-//			order.setOrderStatus("5");//5已开始施工
-//			myOrderFacade.update(order);
-//		}else if(order.getPayType().equals("1") && null != order.getPayTime1()){//订单为一次性支付类型时，完成施工前必须支付完成
-//			order.setActualTime(new Date());
-//			order.setOrderStatus("5");//5已开始施工
-//			myOrderFacade.update(order);
-//		}else{
-//			result = "unPay";//未完成支付
-//		}
 		if(order.getPayType().equals("2")){//分期支付
 			if(null == order.getPayTime1()){
 				result = "unPay1";//定金未支付
@@ -877,7 +865,7 @@ public class OrderAction extends BaseAdmAction
 			}
 		}
 		if(result.equals("success")){
-			order.setActualTime(new Date());
+			order.setFinishTime(new Date());
 			order.setOrderStatus("6");//6已开始施工
 			myOrderFacade.update(order);
 		}

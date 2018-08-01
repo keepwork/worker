@@ -5,12 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-	<title>惠修</title>
-	<link rel="stylesheet" href="${ctx}/wap/html/css/Basc.css" />
-	<link rel="stylesheet" href="${ctx}/wap/html/css/demo.css" />
+	<jsp:include page="public/common.jsp"></jsp:include>
 </head>
 
 <body>
@@ -77,7 +72,7 @@
 	
 	<!-- 公用底部 -->
 	<jsp:include page="public/foot.jsp" flush="false">
-		<jsp:param name="menu" value="fw" />
+		<jsp:param name="menu" value="priceSearch" />
 	</jsp:include>
 </body>
 </html>

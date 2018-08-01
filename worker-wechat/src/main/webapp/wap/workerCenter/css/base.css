@@ -180,7 +180,7 @@ img {
 .header-save h1{ margin-right:0; }
 .header-save button{ color:#fff; padding-left: 0.625rem; margin:0 0.625rem;font-size: 0.7rem;}
 /*-------------footer-----------*/
-/*footer*/
+/*footer
 .footer {position:fixed;bottom:0;left:0;width:100%;border-top:1px solid #e9e9e9;background:rgba(255, 255, 255, 1);z-index:9999;}
 .footnav{width:100%;}
 .footnav li {-moz-box-flex:1;-webkit-box-flex:1; box-flex:1;}
@@ -196,3 +196,4 @@ img {
 .footnav li.on .foot-worker i{background-image:url(../images/worker-on.png);}
 .footnav li.on .foot-order i{background-image:url(../images/order-on.png);}
 .footnav li.on .my i{background-image:url(../images/my-on.png);}
+*/

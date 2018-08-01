@@ -2,7 +2,7 @@
 /* CSS Document */
 /* reset 默认样式重置 */
 html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, q, em, ul, li, ol, dl, dt, dd, form, article, aside, embed, table, td, th, input, button, legend, fieldlset, blockquote, textarea, label, strong, img, cite { margin: 0; padding: 0; outline: none; }
-body { font-family:"Microsoft YaHei", "微软雅黑"; font-size: 14px; line-height: 1;  margin: 0 auto; background:#f0f0f0;color:#666;}
+/*body { font-family:"Microsoft YaHei", "微软雅黑"; font-size: 14px;   margin: 0 auto; background:#f0f0f0;color:#666;}*/
 h1, h2, h3, h4, h5, h6 { font-weight: normal; font-size: 100%; }
 table { border-collapse: collapse; }
 ul, li , ol, li{ list-style: none; }

@@ -1,20 +1,11 @@
 <%@ page language="java" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="/WEB-INF/tld/c.tld" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-<meta content="yes" name="apple-mobile-web-app-capable" />
-<meta content="black" name="apple-mobile-web-app-status-bar-style" />
-<meta content="telephone=no" name="format-detection" />
-<title>订单支付</title>
-  <link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/base.css">
-  <link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/public.css">
-
-  <script type="text/javascript" src="${ctx }/wap/workerCenter/js/jquery.min.js" ></script>
-  <script src="${ctx }/wap/workerCenter/js/common.js"></script>
+  <jsp:include page="../public/common.jsp"></jsp:include>
   <script src="${ctx }/wap/js/clipboard.min.js"></script>
   <script>
 //      var clipboard = new ClipboardJS('.btn');
@@ -91,6 +82,7 @@
       </li>
     </ul>
   </div>
+</div>
 </div>
 <!--order-payment-end-->
 <!--container-end-->

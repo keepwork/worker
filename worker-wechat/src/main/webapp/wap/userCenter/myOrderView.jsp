@@ -3,7 +3,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
-<html>
+<html >
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
@@ -13,10 +13,13 @@
 <title>订单详情</title>
 <link rel="stylesheet" type="text/css" href="${ctx }/wap/css/processmain.css">
 <link rel="stylesheet" type="text/css" href="${ctx }/wap/css/process.css">
-<link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/base.css">
+<%--<link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/base.css">--%>
+<%--footer开始--%>
+<link rel="stylesheet" type="text/css" href="${ctx }/wap/css/footer.css">
 <link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/public.css">
 <script type="text/javascript" src="${ctx }/wap/workerCenter/js/jquery.min.js" ></script>
-<script src="${ctx }/wap/workerCenter/js/common.js"></script>
+<script src="${ctx }/wap/js/rem.js"></script>
+<%--foote结束r--%>
 <style>
   .button-info {
     background-color: #5bc0de;
@@ -163,7 +166,9 @@
             <span class="cd-date">${requestScope.order.orderTimeStr}</span>
           </div>
         </div>
+
         <c:if test="${requestScope.order.takeTimeStr ne ''}">
+          <%--已派单选中状态--%>
           <div class="cd-timeline-block">
             <div class="cd-timeline-img cd-movie">
             </div>
@@ -174,6 +179,7 @@
           </div>
         </c:if>
         <c:if test="${requestScope.order.takeTimeStr eq ''}">
+          <%--已派单选未状态--%>
           <div class="cd-timeline-block">
             <div class="cd-timeline-img cd-picture">
             </div>
@@ -205,6 +211,75 @@
           </div>
         </c:if>
 
+        <c:if test="${requestScope.order.startTimeStr ne ''}">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-movie">
+            </div>
+            <div class="cd-timeline-content">
+              <p>施工中</p>
+              <span class="cd-date">${requestScope.order.startTimeStr}</span>
+            </div>
+          </div>
+        </c:if>
+        <c:if test="${requestScope.order.startTimeStr eq ''}">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-picture">
+            </div>
+            <div class="cd-timeline-content">
+              <p>施工中</p>
+              <span class="cd-date">&emsp;</span>
+            </div>
+          </div>
+        </c:if>
+
+        <%--一次性支付--%>
+        <c:if test="${requestScope.order.payType eq '1'}">
+          <c:if test="${requestScope.order.payTime1Str ne ''}">
+            <div class="cd-timeline-block">
+              <div class="cd-timeline-img cd-movie">
+              </div>
+              <div class="cd-timeline-content">
+                <p>已支付</p>
+                <span class="cd-date">${requestScope.order.payTime1Str}</span>
+              </div>
+            </div>
+          </c:if>
+          <c:if test="${requestScope.order.payTime1Str eq ''}">
+            <div class="cd-timeline-block">
+              <div class="cd-timeline-img cd-picture">
+              </div>
+              <div class="cd-timeline-content">
+                <p>已支付</p>
+                <span class="cd-date">&emsp;</span>
+              </div>
+            </div>
+          </c:if>
+        </c:if>
+
+        <%--分期支付--%>
+        <c:if test="${requestScope.order.payType eq '2'}">
+          <c:if test="${requestScope.order.payTime1Str ne '' && requestScope.order.payTime2Str ne '' && requestScope.order.payTime3Str ne ''}">
+            <div class="cd-timeline-block">
+              <div class="cd-timeline-img cd-movie">
+              </div>
+              <div class="cd-timeline-content">
+                <p>已支付</p>
+                <span class="cd-date">${requestScope.order.payTime1Str}</span>
+              </div>
+            </div>
+          </c:if>
+          <c:if test="${requestScope.order.payTime1Str eq ''|| requestScope.order.payTime2Str eq '' || requestScope.order.payTime2Str eq ''}">
+            <div class="cd-timeline-block">
+              <div class="cd-timeline-img cd-picture">
+              </div>
+              <div class="cd-timeline-content">
+                <p>已支付</p>
+                <span class="cd-date">&emsp;</span>
+              </div>
+            </div>
+          </c:if>
+        </c:if>
+
         <c:if test="${requestScope.order.finishTimeStr ne ''}">
           <div class="cd-timeline-block">
             <div class="cd-timeline-img cd-movie">
@@ -221,27 +296,6 @@
             </div>
             <div class="cd-timeline-content">
               <p>已完工</p>
-              <span class="cd-date">&emsp;</span>
-            </div>
-          </div>
-        </c:if>
-
-        <c:if test="${requestScope.order.payTimeStr ne ''}">
-          <div class="cd-timeline-block">
-            <div class="cd-timeline-img cd-movie">
-            </div>
-            <div class="cd-timeline-content">
-              <p>已支付</p>
-              <span class="cd-date">${requestScope.order.payTimeStr}</span>
-            </div>
-          </div>
-        </c:if>
-        <c:if test="${requestScope.order.payTimeStr eq ''}">
-          <div class="cd-timeline-block">
-            <div class="cd-timeline-img cd-picture">
-            </div>
-            <div class="cd-timeline-content">
-              <p>已支付</p>
               <span class="cd-date">&emsp;</span>
             </div>
           </div>
@@ -277,5 +331,10 @@
 
 </div>
 <!--container-end-->
+
+<!-- foot -->
+<jsp:include page="../public/foot.jsp" flush="false">
+  <jsp:param name="menu" value="wd" />
+</jsp:include>
 </body>
 </html>

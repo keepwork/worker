@@ -5,12 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-	<title>惠修</title>
-	<link rel="stylesheet" href="${ctx}/wap/html/css/Basc.css" />
-	<link rel="stylesheet" href="${ctx}/wap/html/css/demo.css" />
+	<jsp:include page="public/common.jsp"></jsp:include>
 </head>
 
 <body>
@@ -24,13 +19,13 @@
 
 	<div class="xzxh">
 		<ul style="font-size: 18px;margin-top: 10px;background: #71c3f530;">
-				<br/>&nbsp;&nbsp;&nbsp;&nbsp;已选服务类型：<strong>
+				<br/>&nbsp;&nbsp;&nbsp;&nbsp;已选服务类型：<em style="color: #222222;font-size: 0.6rem">
 				<c:if test="${requestScope.serviceType eq '1'}">安装</c:if>
 				<c:if test="${requestScope.serviceType eq '2'}">维修</c:if>
 				<c:if test="${requestScope.serviceType eq '3'}">保养</c:if>
 				<c:if test="${requestScope.serviceType eq '4'}">测量</c:if>
 				<c:if test="${requestScope.serviceType eq '5'}">咨询</c:if>
-				</strong><br/><br/>
+				</em><br/><br/>
 		</ul>
 		<br/>
 
