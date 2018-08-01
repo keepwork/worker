@@ -181,6 +181,12 @@
                       <input type="text" id="postCode" name="postCode"  class="bgw" value="${m.postCode}"/>
                     </span></h1>
                   </li>
+                    <li class="listyle_4">
+                        <label class="left pt5">注册时间：</label>
+                        <h1 class="cmxformh1"> <span class="cmxformspan">
+                    	${m.regTimeStr}
+                    </span></h1>
+                    </li>
                   <li class="listyle_4">
                     <label class="left pt5">详细地址：</label>
                     <h1 class="cmxformh1"> <span class="cmxformspan">

@@ -98,7 +98,7 @@
 <body class="overfwidth">
 
 <c:if test="${null eq listShowType}">
-	<div class="barnavtop">您所在的位置：会员管理 > 会员列表</div>
+	<div class="barnavtop">您所在的位置：会员管理 > 客户列表</div>
 </c:if>
 
 <div id="workspace">
@@ -122,22 +122,13 @@
 			</c:if>
 			<c:if test="${null eq listShowType}">
 	      
-	        	<span class="left ml10"><a href="#" onclick="btn_delete_click()" class="sexybutton"><span><span>批量删除</span></span></a>  </span>  
-	        
+	        	<span class="left ml10"><a href="#" onclick="btn_delete_click()" class="sexybutton"><span><span>批量删除</span></span></a>  </span>
+
 	        	
 	        	<form id="exportFm_" action="${pageContext.request.contextPath}/pub/menber/exportMenbers.do" method="post" onsubmit="" target="hideframe"/>
 				<input type="hidden" id="exportParam_" name="exportParam"/>
 				<input type="hidden" id="exBeginTime_" name="exBeginTime"/>
 				<input type="hidden" id="exEndTime_" name="exEndTime"/>
-
-     			<span class="left ml10"><span><span>会员状态：
-				<select id="isjoin" name="isjoin" class="select_2 va_mid" style="width: 100px;">
-					<option value=""  selected="selected" >-全部-</option>
-					<option value="0" >未加入</option>
-					<option value="1" >已加入但未过等待期</option>
-					<option value="2" >已过等待期</option>
-				</select>
-				&nbsp;</span></span></span>
 				
 				<span class="left ml10"><span><span>注册开始时间：
 				<input id="beginTime_" type="text" name="beginTimeStr" 
@@ -157,10 +148,6 @@
 				
 	        	<span class="left ml10"><a class="sexybutton" href="#" onclick="_exportData()"><span><span>导&nbsp;出</span></span></a></span> 
 	        	</form>
-	        	
-	        	<span class="left ml10"><a class="sexybutton" href="#" onclick="btn_add_click()"><span><span>新增会员</span></span></a></span> 
-	        	
-	        	
 	        </c:if>
         </div>
          --%>
@@ -187,17 +174,6 @@
 				<ec:column title="真实姓名" property="realName" width="7%"></ec:column>
 	        	<ec:column title="微信名" property="loginName"  width="7%"></ec:column>
 				<ec:column title="手机" property="mobile"  width="7%"></ec:column>
-				<%--
-	        	<ec:column title="会员类型" property="type" filterable="false">
-					<c:if test="${m.type eq '1'}">微信客户</c:if>
-					<c:if test="${m.type eq '2'}">安装工</c:if>
-				</ec:column>
-				--%>
-				<ec:column title="服务地区" property="locationName"  width="10%"></ec:column>
-				<ec:column title="工种" property="locationName"  width="5%"></ec:column>
-				<ec:column title="工龄（年）" property="locationName"  width="5%"></ec:column>
-				<ec:column title="好评率" property="locationName"  width="5%"></ec:column>
-	        	<ec:column title="擅长技能" property="detailAddr"  width="20%"></ec:column>
 				<%--<ec:column title="余额" property="balanceFee" filterable="false"></ec:column>
 				<ec:column title="积分" property="point" filterable="false"></ec:column> --%>
 				<ec:column title="状态" property="status" filterable="false" width="5%">
@@ -206,32 +182,11 @@
 				</ec:column>
 
 				<ec:column title="操作" property="EEE" sortable="false" filterable="false" width="20%">
-					<%--
-					<a class="sexybutton" href="${ctx}/pub/family/queryList.do?familyMenId=${m.id}"><span><span>托管</span></span></a>
-					<a class="sexybutton" href="${ctx}/pub/point/queryList.do?menId=${m.id}"><span><span>积分</span></span></a>
-					<a class="sexybutton" href="${ctx}/pub/charge/queryList.do?menId=${m.id}"><span><span>充值</span></span></a>
-					<a class="sexybutton" href="${ctx}/pub/cut/queryList.do?menId=${m.id}"><span><span>扣款</span></span></a>
-					<a class="sexybutton" href="${ctx}/pub/cash/queryList.do?menId=${m.id}"><span><span>提现</span></span></a>
-					<a class="sexybutton" href="${ctx}/pub/share/queryList.do?menId=${m.id}"><span><span>好友</span></span></a>
-					--%>
-					<a class="sexybutton" href="${ctx}/pub/order/queryList.do?workerId=${m.id}"><span><span>我的订单</span></span></a>
-					<a class="sexybutton" href="${ctx}/pub/menber/beforeEdit.do?id=${m.id}"><span><span>修改</span></span></a>
-					<a class="sexybutton" href="javascript:btn_delete_click('${m.id}')"><span><span>删除</span></span></a>
+					<a class="sexybutton" href="${ctx}/pub/order/queryList.do?menId=${m.id}"><span><span>我的订单</span></span></a>
 				</ec:column>
-				
-				
 			</ec:row>
 		</ec:table>
         </div>
-        
-        <!--
-		<c:if test="${null eq listShowType}">					
-        	<div class="toolbar">
-	        	<a href="#" onClick="btn_delete_click()" class="sexybutton"><span><span>批量删除</span></span></a>    
-	        </div>
-        </c:if>
-        -->
-        
     <!--CmsSiteList 结束-->
     </div>
     <!--主体 结束-->
