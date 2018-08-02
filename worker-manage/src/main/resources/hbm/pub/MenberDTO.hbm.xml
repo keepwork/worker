@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+		"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
 	<class name="com.pub.menber.model.dto.MenberDTO"
-		table="pub_menber">
+		   table="pub_menber">
 		<comment>会员</comment>
 		<id name="id" type="java.lang.String">
 			<column name="ID" length="32" />
@@ -67,7 +67,7 @@
 		</property>
 		<property name="detailAddr" type="java.lang.String">
 			<column name="DETAIL_ADDR" length="400">
-				<comment>详细地址</comment>
+				<comment>技能描述</comment>
 			</column>
 		</property>
 		<property name="pid" type="java.lang.String">
@@ -75,7 +75,7 @@
 				<comment>身份证</comment>
 			</column>
 		</property>
-		
+
 		<property name="point" type="java.lang.Integer">
 			<column name="POINT" length="10">
 				<comment>会员积分</comment>
@@ -141,7 +141,7 @@
 				<comment>最后一次登录时间</comment>
 			</column>
 		</property>
-		
+
 		<property name="realNameEmergency" type="java.lang.String">
 			<column name="REAL_NAME_EMERGENCY" length="100">
 				<comment>紧急联系人姓名</comment>
@@ -152,7 +152,7 @@
 				<comment>紧急联系人电话</comment>
 			</column>
 		</property>
-		
+
 		<property name="openId" type="java.lang.String">
 			<column name="OPEN_ID" length="100">
 				<comment>微信用户id</comment>
@@ -176,6 +176,16 @@
 		<property name="serviceType" type="java.lang.String">
 			<column name="SERVICE_TYPE" length="100">
 				<comment>服务类型：1-安装,2-维修,3-保养,4-测量,5-咨询</comment>
+			</column>
+		</property>
+		<property name="workYears" type="java.lang.String">
+			<column name="WORK_YEARS" length="3">
+				<comment>工龄</comment>
+			</column>
+		</property>
+		<property name="workType" type="java.lang.String">
+			<column name="WORK_TYPE" length="3">
+				<comment>工种</comment>
 			</column>
 		</property>
 

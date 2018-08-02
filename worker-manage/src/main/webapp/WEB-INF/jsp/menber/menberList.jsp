@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="/WEB-INF/tld/extremecomponents.tld" prefix="ec"%>
 <%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c"%>
+<%@ taglib uri="/WEB-INF/tld/domain.tld" prefix="domain"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <HTML>
 <HEAD>
@@ -194,9 +195,12 @@
 				</ec:column>
 				--%>
 				<ec:column title="服务地区" property="locationName"  width="10%"></ec:column>
-				<ec:column title="工种" property="locationName"  width="5%"></ec:column>
-				<ec:column title="工龄（年）" property="locationName"  width="5%"></ec:column>
-				<ec:column title="好评率" property="locationName"  width="5%"></ec:column>
+				<%--<ec:column title="工种" property="workType"  width="5%"></ec:column>--%>
+				<ec:column title="工种" property="workType" filterCell="droplist" filterOptions="BMSDOMAIN.workType">
+					<domain:viewDomain domain="workType" value="${m.workType}"/>
+				</ec:column>
+				<ec:column title="工龄（年）" property="workYears"  width="5%"></ec:column>
+				<ec:column title="好评率" property="positiveAppraiseRate"  width="5%"></ec:column>
 	        	<ec:column title="擅长技能" property="detailAddr"  width="20%"></ec:column>
 				<%--<ec:column title="余额" property="balanceFee" filterable="false"></ec:column>
 				<ec:column title="积分" property="point" filterable="false"></ec:column> --%>

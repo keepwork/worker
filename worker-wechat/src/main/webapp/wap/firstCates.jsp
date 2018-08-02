@@ -20,13 +20,13 @@
 	<div class="xzfl">
 		<ul style="background: #71c3f530;">
 				<li style="margin-left: 20px;font-size: 18px; ">
-					<br/>已选服务类型：<strong>
+					<br/>已选服务类型：
 					<c:if test="${requestScope.serviceType eq '1'}">安装</c:if>
 					<c:if test="${requestScope.serviceType eq '2'}">维修</c:if>
 					<c:if test="${requestScope.serviceType eq '3'}">保养</c:if>
 					<c:if test="${requestScope.serviceType eq '4'}">测量</c:if>
 					<c:if test="${requestScope.serviceType eq '5'}">咨询</c:if>
-					</strong><br/><br/>
+					<br/><br/>
 				</li>
 		</ul>
 		<br/>

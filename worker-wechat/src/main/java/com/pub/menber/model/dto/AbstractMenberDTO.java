@@ -44,6 +44,8 @@ public abstract class AbstractMenberDTO extends DtoSupport
 	private Integer sign;//用于保存推荐人是否已经奖励过积分（1已奖励，0未奖励）
 	private String realNameEmergency;//紧急联系人姓名
 	private String mobileEmergency;//紧急联系人电话
+	private String workYears;//工龄
+	private String workType;//工种
 	//微信资料
 	private String openId;//微信用户id
 	private String sex;//微信性别
@@ -265,6 +267,22 @@ public abstract class AbstractMenberDTO extends DtoSupport
 	}
 	public void setServiceType(String serviceType) {
 		this.serviceType = serviceType;
+	}
+
+	public String getWorkYears() {
+		return workYears;
+	}
+
+	public void setWorkYears(String workYears) {
+		this.workYears = workYears;
+	}
+
+	public String getWorkType() {
+		return workType;
+	}
+
+	public void setWorkType(String workType) {
+		this.workType = workType;
 	}
 
 	public TBmsLocationDTO getTbTBmsLocationDTO() {

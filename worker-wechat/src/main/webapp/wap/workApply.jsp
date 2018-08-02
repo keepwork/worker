@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="/WEB-INF/tld/c.tld" %>
+<%@ taglib uri="/WEB-INF/tld/domain.tld" prefix="domain"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
@@ -100,6 +101,34 @@
     font-size: .85rem;
     font-family: inherit;
 }
+	/*下拉框样式*/
+	.divselect{
+		width: 95%;
+		height: 99%;
+		border-radius: 5px;
+		box-shadow: 0 0 5px #ccc;
+		position: relative;
+	}
+	select{
+		border: none;
+		outline: none;
+		line-height: 2rem;
+		appearance: none;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		padding-left: 60px;
+	}
+
+	.divselect:after{
+		  content: "∨";
+		  width: 1rem;
+		  height: 0.6rem;
+		  <%--background: url(${ctx}/wap/images/xiala.png) no-repeat center;--%>
+		  position: absolute;
+		  right: 0.4rem;
+		  top: 26%;
+	  pointer-events: none;
+	}
 	</style>
 </head>
 
@@ -141,9 +170,18 @@
 					<tr>
 						<td width="32%"><em style="color: red;">*</em>手机号码：</td>
 						<td width="68%" align="left">
-							<input name="mobile" class="input_text" id="mobile" value="" placeholder="请输入手机号码，必填" type="text" maxlength="50"
-									onkeyup='this.value=this.value.replace(/[^0-9]/gi,""); '
-									onafterpaste='this.value=this.value.replace(/[^0-9]/gi,"")'>
+							<input name="mobile" class="input_text" id="mobile" value="" placeholder="请输入手机号码，必填" type="text" maxlength="50"></td>
+					</tr>
+				</table>
+			</li>
+			<li class="nob" style="height: 3rem;font-size: 16px;">
+				<table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
+					<tr>
+						<td width="32%"><em style="color: red;">*</em>工作种类：</td>
+						<td width="68%" align="left">
+							<div class="divselect">
+								<domain:selectDomain name="workType" uid="workType_" domain="workType" />
+							</div>
 						</td>
 					</tr>
 				</table>
@@ -151,9 +189,9 @@
 			<li class="nob" style="height: 3rem;font-size: 16px;">
 				<table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td width="32%"><em style="color: red;">*</em>服务区域：</td>
+						<td width="32%"><em style="color: red;">*</em>工作年限：</td>
 						<td width="68%" align="left">
-							<input name="areaCode" class="input_text" id="areaCode" value="" placeholder="请输入服务区域，必填" type="text" maxlength="100"></td>
+							<input name="workYears" class="input_text" id="workYears" value="" placeholder="请输入工作年限，必填" type="text" maxlength="100"></td>
 					</tr>
 				</table>
 			</li>

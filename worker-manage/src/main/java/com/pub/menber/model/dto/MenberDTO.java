@@ -23,6 +23,7 @@ public class MenberDTO extends AbstractMenberDTO
 	private long days = 0;//加入时长（天）
 	
 	private String resultCode = "";
+	private String positiveAppraiseRate= "";//好评率
 
 
 
@@ -105,6 +106,14 @@ public class MenberDTO extends AbstractMenberDTO
 
 	public void setJoinTimeStr(String joinTimeStr) {
 		this.joinTimeStr = joinTimeStr;
+	}
+
+	public String getPositiveAppraiseRate() {
+		return positiveAppraiseRate;
+	}
+
+	public void setPositiveAppraiseRate(String positiveAppraiseRate) {
+		this.positiveAppraiseRate = positiveAppraiseRate;
 	}
 
 	/**

@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.shop.appraise.model.facade.AppraiseFacade;
 import com.sinovatech.bms.adm.model.dto.TBmsLocationDTO;
 import com.sinovatech.bms.adm.model.dto.TBmsUserDTO;
 import com.sinovatech.bms.adm.model.facade.BmsLocationFacade;
@@ -49,6 +50,7 @@ public class MenberAction extends BaseAdmAction
 	private SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
 	
 	private MenberFacade myMenberFacade;
+	private AppraiseFacade myAppraiseFacade;
 //	private BmsLocationFacade myBmsLocationFacade;
 //	private MenberPointFacade myMenberPointFacade;
 //	private MenberShareFacade myMenberShareFacade;
@@ -58,6 +60,7 @@ public class MenberAction extends BaseAdmAction
 			throws Exception
 	{
 		this.myMenberFacade = (MenberFacade) this.getBeanContext().getBean("myMenberFacade");
+		this.myAppraiseFacade = (AppraiseFacade) this.getBeanContext().getBean("myAppraiseFacade");
 //		this.myBmsLocationFacade = ((BmsLocationFacade)getBeanContext().getBean("myBmsLocationFacade"));
 //		this.myMenberPointFacade = (MenberPointFacade) this.getBeanContext().getBean("myMenberPointFacade");
 //		this.myMenberShareFacade = (MenberShareFacade) this.getBeanContext().getBean("myMenberShareFacade");
@@ -106,6 +109,7 @@ public class MenberAction extends BaseAdmAction
 		// 查询过滤、分页状态保留
 		this.setActionAttribute(request, "backUrlStore", this.getActionContext(request).getCurentURL());
 
+
 		List menberlist = new ArrayList();
 		for (Iterator iterator = list.iterator(); iterator.hasNext();) {
 			MenberDTO menber = (MenberDTO) iterator.next();
@@ -121,7 +125,10 @@ public class MenberAction extends BaseAdmAction
 			}else{
 				menber.setLocationName("未指派");
 			}
-
+			if(type.equals("2")) {
+				String positiveAppraiseRate = myAppraiseFacade.getAppraiseRate(menber.getId(), "1")+"%";
+				menber.setPositiveAppraiseRate(positiveAppraiseRate);
+			}
 			menberlist.add(menber);
 		}
 		request.setAttribute("list", menberlist);

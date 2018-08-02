@@ -968,6 +968,8 @@ public class MenberAction extends BaseAdmAction
 			menber.setMobile(dto.getMobile());
 			menber.setAreaCode(dto.getAreaCode());
 			menber.setEmail(dto.getEmail());
+			menber.setWorkType(dto.getWorkType());
+			menber.setWorkYears(dto.getWorkYears());
 			menber.setDetailAddr(dto.getDetailAddr());
 			this.myMenberFacade.update(menber);
 		}

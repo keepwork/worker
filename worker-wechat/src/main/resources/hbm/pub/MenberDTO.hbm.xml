@@ -178,6 +178,16 @@
 				<comment>服务类型：1-安装,2-维修,3-保养,4-测量,5-咨询</comment>
 			</column>
 		</property>
+		<property name="workYears" type="java.lang.String">
+			<column name="WORK_YEARS" length="3">
+				<comment>工龄</comment>
+			</column>
+		</property>
+		<property name="workType" type="java.lang.String">
+			<column name="WORK_TYPE" length="3">
+				<comment>工种</comment>
+			</column>
+		</property>
 
 		<many-to-one name="tbTBmsLocationDTO"
 					 class="com.sinovatech.bms.adm.model.dto.TBmsLocationDTO"
