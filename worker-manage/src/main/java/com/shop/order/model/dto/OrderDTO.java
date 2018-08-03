@@ -1,6 +1,7 @@
 package com.shop.order.model.dto;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -48,6 +49,11 @@ public class OrderDTO extends AbstractOrderDTO
 	private BigDecimal sumTotalPrice;//总订单金额
 	private BigDecimal sumCost;//总成本
 	private BigDecimal sumProfit;//总成本
+	private BigDecimal historyOutputValue;//历史产值
+	private BigInteger totalOrderNum;//总订单数
+	private BigDecimal monthOutputValue;//本月产值
+	private BigInteger monthOrderNum;//本月订单数
+	private String month;//月份
 
 
 	public OrderDTO()
@@ -288,5 +294,45 @@ public class OrderDTO extends AbstractOrderDTO
 
 	public void setStartTimeStr(String startTimeStr) {
 		this.startTimeStr = startTimeStr;
+	}
+
+	public BigDecimal getHistoryOutputValue() {
+		return historyOutputValue;
+	}
+
+	public void setHistoryOutputValue(BigDecimal historyOutputValue) {
+		this.historyOutputValue = historyOutputValue;
+	}
+
+	public BigDecimal getMonthOutputValue() {
+		return monthOutputValue;
+	}
+
+	public void setMonthOutputValue(BigDecimal monthOutputValue) {
+		this.monthOutputValue = monthOutputValue;
+	}
+
+	public BigInteger getTotalOrderNum() {
+		return totalOrderNum;
+	}
+
+	public void setTotalOrderNum(BigInteger totalOrderNum) {
+		this.totalOrderNum = totalOrderNum;
+	}
+
+	public BigInteger getMonthOrderNum() {
+		return monthOrderNum;
+	}
+
+	public void setMonthOrderNum(BigInteger monthOrderNum) {
+		this.monthOrderNum = monthOrderNum;
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
 	}
 }

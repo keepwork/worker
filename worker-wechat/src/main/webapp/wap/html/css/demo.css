@@ -42,7 +42,7 @@ footer ul li a:hover,.top_menu li a:active{}
 */
 
 /* 选择分类 */
-.xzfl{ height:auto; overflow:hidden; padding:10px; margin:0 0 70px 0;}
+.xzfl{ height:auto; overflow:hidden; padding:0.2rem; margin:0 0 70px 0;}
 .xzfl h3{ height:50; line-height:60px; font-size:20px; font-weight:normal; text-align:left;margin-left: 5px;}
 .xzfl ul{ height:auto; overflow:hidden;border-radius:10px; border:solid #dedede 1px; background:#f0f0f0;}
 .xzfl ul li{ float:left; width:49%;width: -moz-calc(50% - 1px);width: -webkit-calc(50% - 1px);width: calc(50% - 1px);}

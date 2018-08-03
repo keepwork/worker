@@ -29,13 +29,19 @@
 </head>
 
 <body>
-	<header>
+	<!--<header>
 	  <ul>
 	    <li class="back">&nbsp;</li>
 	    <li class="logo">服务</li>
 	    <li class="more">&nbsp;</li>
 	  </ul>
 	</header>
+	-->
+	<header class="header" id="header">
+		<a href="javascript:history.go(-1)" target=_self class="back">返回</a>
+		<h1>订单填写</h1>
+	</header>
+	<div style="margin-top: 2rem"></div>
 	        
 	<div class="main">
 	  <ul class="banner clearfix">

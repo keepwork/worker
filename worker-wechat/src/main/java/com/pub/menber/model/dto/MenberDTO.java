@@ -15,6 +15,7 @@ public class MenberDTO extends AbstractMenberDTO
 	private String regTimeStr;//注册时间
 	private String lastTimeStr;//最后一次登录时间
 	private String tixian = "";//是否有提现申请页面显示用
+	private String locationName = "";//所属地区或团队
 	
 	private long days = 0;//加入时长（天）
 	
@@ -84,5 +85,11 @@ public class MenberDTO extends AbstractMenberDTO
 		this.resultCode = resultCode;
 	}
 
-	
+	public String getLocationName() {
+		return locationName;
+	}
+
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
+	}
 }

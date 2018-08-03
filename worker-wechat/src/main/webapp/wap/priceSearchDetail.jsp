@@ -12,7 +12,7 @@
 </head>
 
 <body>
-	<header>
+	<!--<header>
 	  <ul>
 	    <li class="back"><a href="${ctx}/pub/articleCate/articleCateList.do?parentCode=3&type=wap"><img src="${ctx}/wap/html/images/back.png" width="40" height="50" /></a></li>
 	    <li class="logo">选择服务项目</li>
@@ -23,7 +23,12 @@
 		  </li>
 	  </ul>
 	</header>
-
+	-->
+	<header class="header" id="header">
+		<a href="${ctx}/weixin/index.do?type=wap" target="_self" class="back">返回</a>
+		<h1>收费查询</h1>
+	</header>
+	<div style="margin-top: 2rem"></div>
 	<img src="${ctx}/wap/images/hyzx_wddd_bg2.jpg" style="height: 6rem;width: 100%;">
 
 	<div class="Z_con2_2" style="height:auto">
@@ -39,7 +44,7 @@
 			<div class="F_wd_top_con2_r" id="wrapper1" style="height:auto">
 
 				<c:forEach var="a" items="${requestScope.priceList}" varStatus="status">
-					<div class="content">
+					<div class="content" style="font-size: 0.8rem;color:#333">
 						<ul class="by nav-main"  <c:if test="${status.index==0}">style="display: block;"</c:if>  <c:if test="${status.index!=0}">style="display: none;"</c:if>  >
 								<c:set var="newVariable" scope="page" value="${a.content}"/>
 								<%

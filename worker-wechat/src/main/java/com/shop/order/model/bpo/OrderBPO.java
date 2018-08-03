@@ -81,7 +81,19 @@ public class OrderBPO extends BpoSupport {
 	public int getWorkerOrderTotalNum(String workerId) throws AppException {
 		return myOrderDAO.getWorkerOrderTotalNum(workerId);
 	}
-	
+
+	public OrderDTO historyoutputAndNum(String workerId) throws AppException {
+		return myOrderDAO.historyoutputAndNum(workerId);
+	}
+
+	public OrderDTO monthOutputAndNum(String workerId) throws AppException {
+		return myOrderDAO.monthOutputAndNum(workerId);
+	}
+
+	public List<OrderDTO> outputAndNumByMonth(final String workerId,String beginTime,String endTime) throws AppException {
+		return myOrderDAO.outputAndNumByMonth(workerId,beginTime,endTime);
+	}
+
 	public Map<String,Object> listForPagination(Map<String,String> params){
 		return myOrderDAO.listForPagination(params);
     }

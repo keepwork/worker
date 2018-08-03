@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.common.util.RegexCheckUtil;
+import com.shop.appraise.model.facade.AppraiseFacade;
+import com.shop.order.model.dto.OrderDTO;
+import com.shop.order.model.facade.OrderFacade;
 import com.sms.SmsUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
@@ -52,6 +55,8 @@ public class MenberAction extends BaseAdmAction
 	private SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
 	
 	private MenberFacade myMenberFacade;
+	private OrderFacade myOrderFacade;
+	private AppraiseFacade myAppraiseFacade;
 //	private MenberPointFacade myMenberPointFacade;
 //	private MenberShareFacade myMenberShareFacade;
 	private static ICache cache = CacheFactory.newCache();
@@ -61,6 +66,8 @@ public class MenberAction extends BaseAdmAction
 			throws Exception
 	{
 		this.myMenberFacade = (MenberFacade) this.getBeanContext().getBean("myMenberFacade");
+		this.myOrderFacade = (OrderFacade) this.getBeanContext().getBean("myOrderFacade");
+		this.myAppraiseFacade = (AppraiseFacade) this.getBeanContext().getBean("myAppraiseFacade");
 //		this.myMenberPointFacade = (MenberPointFacade) this.getBeanContext().getBean("myMenberPointFacade");
 //		this.myMenberShareFacade = (MenberShareFacade) this.getBeanContext().getBean("myMenberShareFacade");
 	}
@@ -138,7 +145,21 @@ public class MenberAction extends BaseAdmAction
 		MenberDTO menber = null;
 		if(type.equals("wap")){
 			menber = (MenberDTO)request.getSession().getAttribute("wxmenber");
-			returnPage = "center_wap";
+			if(null != menber) {
+				if ("1".equals(menber.getType())) {
+					returnPage = "userCenter_wap";
+				} else {
+					OrderDTO order1 = myOrderFacade.historyoutputAndNum(menber.getId());
+					OrderDTO order2 = myOrderFacade.monthOutputAndNum(menber.getId());//查询本月
+					order1.setMonthOrderNum(order2.getTotalOrderNum());
+					order1.setMonthOutputValue(order2.getHistoryOutputValue());
+					request.setAttribute("order",order1);
+					String positiveAppraiseRate = myAppraiseFacade.getAppraiseRate(menber.getId(),"1");//1:好评
+					request.setAttribute("positiveAppraiseRate", positiveAppraiseRate);//好评率
+					returnPage = "workCenter_wap";
+				}
+			}
+
     	}else if(type.equals("web")){
     		
     	}
@@ -977,6 +998,44 @@ public class MenberAction extends BaseAdmAction
 		CommonMapping mping = new CommonMapping("保存成功!", getRealUri(mapping,"menber/index") + "?type=" + type, ActionConstent.ALERT);
 		request.setAttribute("mping", mping);
 		return mapping.findForward(ActionConstent.COMMON_MAPPING);
+	}
+
+	/**
+	 * 个人信息
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward personalInfo(ActionMapping mapping,
+			   ActionForm form, HttpServletRequest request,
+			   HttpServletResponse response) throws Exception
+	{
+		String type = request.getParameter("type");//类型：wap,web
+		String returnPage = "";
+		MenberDTO menber = null;
+		if(type.equals("wap")){
+			menber = (MenberDTO)request.getSession().getAttribute("wxmenber");
+			if(menber.getType().equals("1")){
+				returnPage = "personalInfo_wap";
+			}else{
+				if(null != menber.getTbTBmsLocationDTO()){
+					menber.setLocationName( menber.getTbTBmsLocationDTO().getName());
+				}else{
+					menber.setLocationName("未指派");
+				}
+				returnPage = "workPersonalInfo_wap";
+			}
+			request.setAttribute("m",menber);
+		}else if(type.equals("web")){
+		}
+		if(null != menber){
+			return mapping.findForward(returnPage);
+		}
+		return null;
 	}
 	
 	public static void main(String[] ages){

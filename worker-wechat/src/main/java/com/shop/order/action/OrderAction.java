@@ -1019,6 +1019,40 @@ public class OrderAction extends BaseAdmAction
 		request.setAttribute("order",order);
 		return mapping.findForward("paymentPage_wap");
 	}
-    
+
+	/**
+	 * 根据时间按月统计产值和订单数
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward outputAndNumList(ActionMapping mapping,
+				ActionForm form, HttpServletRequest request,
+				HttpServletResponse response) throws Exception
+	{
+		String type = request.getParameter("type");//类型：wap,web
+		String beginTime = request.getParameter("beginTime");
+		String endTime = request.getParameter("endTime");
+		String returnPage = "";
+		MenberDTO menber = null;
+		if(type.equals("wap")){
+			menber = (MenberDTO)request.getSession().getAttribute("wxmenber");
+				request.setAttribute("beginTime", beginTime);
+				request.setAttribute("endTime", endTime);
+				List<OrderDTO> list = myOrderFacade.outputAndNumByMonth(menber.getId(),beginTime,endTime);
+				request.setAttribute("list",list);
+				returnPage = "outputAndNumList_wap";
+		}else if(type.equals("web")){
+
+		}
+		if(null != menber)
+		{
+			return mapping.findForward(returnPage);
+		}
+		return null;
+	}
 
 }

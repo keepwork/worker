@@ -11,11 +11,12 @@
 <body>
 
 	<!-- 公用头部-->
-	<jsp:include page="head.jsp"></jsp:include>
+	<jsp:include page="../public/head.jsp"></jsp:include>
 
-	<div class="notes" style="margin-top: 4.9rem;">
-		<img src="${ctx}/wap/images/notes.png" width="25" height="20" />
-		<font size="4">年终奖提前发，80元现金拿回家!</font>
+	<div class="notes" style="margin-top: 3.2rem;">
+		<img src="${ctx}/wap/images/notes.png" width="1.2rem" height="1rem" />
+		<%--<font size="2">年终奖提前发，80元现金拿回家!</font>--%>
+		年终奖提前发，80元现金拿回家!
 	</div>
 
 	<ul class="hyzx1" >
@@ -23,6 +24,8 @@
 	    	<img src="${ctx}/wap/html/images/tx_07.png" />全部订单</li>
 	    <li onclick="javascript:window.location.href='#'" style="cursor:pointer;">
 	    	<img src="${ctx}/wap/html/images/tx_13.png" />常用地址</li>
+		<li onclick="javascript:window.location.href='${ctx}/pub/menber/personalInfo.do?type=wap'" style="cursor:pointer;">
+			<img src="${ctx}/wap/html/images/tx_09.png" />个人信息</li>
 	</ul>
 	
 	<br><br><br><br>

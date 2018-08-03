@@ -14,12 +14,17 @@
 	</head>
 	
 	<body>
-		<!--头部  star-->
+		<!--头部  star
 		<header>
 			<a href="javascript:history.go(-1);">
 				<div class="_left"><img src="html/images/back.png" width="50" height="40"></div>
 				   评价
 			</a>
+		</header>
+		-->
+		<header class="header" id="header">
+			<a href="javascript:history.go(-1);" target="_self" class="back">返回</a>
+			<h1>评价</h1>
 		</header>
 		<!--头部 end-->
         <!--内容 star-->

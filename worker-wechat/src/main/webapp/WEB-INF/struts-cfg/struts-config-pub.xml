@@ -58,7 +58,8 @@
 			<forward name="index" path="/wap/index.jsp" />
 			<forward name="sign_wap" path="/wap/indexWap.jsp" />
 			<forward name="planDetail_wap" path="/wap/planDetail.jsp" />
-			<forward name="center_wap" path="/wap/userCenter/center.jsp" />
+			<forward name="userCenter_wap" path="/wap/userCenter/center.jsp" />
+			<forward name="workCenter_wap" path="/wap/workerCenter/center.jsp" />
 			<forward name="menberUpdate_wap" path="/wap/userCenter/menberUpdate.jsp" />
 			<forward name="myAccount_wap" path="/wap/userCenter/myAccount.jsp" />
 			<forward name="myInvitation_wap" path="/wap/userCenter/myInvitation.jsp" />
@@ -67,7 +68,9 @@
 			<forward name="myInvitationPage2View_wap" path="/wap/userCenter/myInvitationPage2View.jsp" />
 			<forward name="invitation_wap" path="/wap/invitation.jsp" />
 			<forward name="recharge_wap" path="/wap/userCenter/recharge.jsp" />
+			<forward name="personalInfo_wap" path="/wap/userCenter/personalInfo.jsp" />
 			<forward name="workApply_wap" path="/wap/workApply.jsp" />
+			<forward name="workPersonalInfo_wap" path="/wap/workerCenter/personalInfo.jsp" />
 			<!-- front web -->
 			<forward name="sign_web" path="/web/index.jsp" />
 			<forward name="planDetail_web" path="/web/planDetail.jsp" />

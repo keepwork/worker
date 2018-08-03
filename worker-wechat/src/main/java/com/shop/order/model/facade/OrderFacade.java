@@ -83,6 +83,18 @@ public class OrderFacade {
 		return myOrderBPO.getWorkerOrderTotalNum(workerId);
 	}
 
+	public OrderDTO historyoutputAndNum(String workerId) throws AppException {
+		return myOrderBPO.historyoutputAndNum(workerId);
+	}
+
+	public OrderDTO monthOutputAndNum(String workerId) throws AppException {
+		return myOrderBPO.monthOutputAndNum(workerId);
+	}
+
+	public List<OrderDTO> outputAndNumByMonth(final String workerId,String beginTime,String endTime) throws AppException {
+		return myOrderBPO.outputAndNumByMonth(workerId,beginTime,endTime);
+	}
+
 	public OrderBPO getMyOrderBPO() {
 		return myOrderBPO;
 	}

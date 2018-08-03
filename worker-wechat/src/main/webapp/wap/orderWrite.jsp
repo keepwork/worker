@@ -266,7 +266,7 @@
 	<input type="hidden" id="shipFee" />
 	<input type="hidden" id="totalFee" />
 	
-	<header>
+	<!--<header>
 	  <ul>
 	    <li class="back">
 				<a href="${ctx}/pub/goodCate/secondCates.do?type=wap&serviceType=${requestScope.serviceType}&firstCateCode=${firstCate.code}">
@@ -277,6 +277,12 @@
 	    <li class="more">&nbsp;</li>
 	  </ul>
 	</header>
+	-->
+	<header class="header" id="header">
+		<a href="${ctx}/pub/goodCate/secondCates.do?type=wap&serviceType=${requestScope.serviceType}&firstCateCode=${firstCate.code}" target="_self" class="back">返回</a>
+		<h1>订单填写</h1>
+	</header>
+	<div style="margin-top: 2rem"></div>
 	
 	<div class="qrddxxo" style="margin: 0px 0 0;font-size: 16px;" id="addressListDiv">
 	    <h4 style="background: #71c3f530;">地址</h4>

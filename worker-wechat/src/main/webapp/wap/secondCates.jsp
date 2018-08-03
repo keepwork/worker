@@ -9,13 +9,19 @@
 </head>
 
 <body>
-	<header>
+	<!--<header>
 	  <ul>
 	    <li class="back"><a href="${ctx}/pub/goodCate/firstCates.do?type=wap&serviceType=${requestScope.serviceType}"><img src="${ctx}/wap/html/images/back.png" width="40" height="50" /></a></li>
 	    <li class="logo">开始预约</li>
 	    <li class="more"><a href="${ctx}/pub/menber/centerInit.do?type=wap"><img src="${ctx}/wap/html/images/more.png" alt="" width="40" height="50" /></a></li>
 	  </ul>
 	</header>
+	-->
+	<header class="header" id="header">
+		<a href="${ctx}/pub/goodCate/firstCates.do?type=wap&serviceType=${requestScope.serviceType}" target="_self" class="back">返回</a>
+		<h1>开始预约</h1>
+	</header>
+	<div style="margin-top: 2rem"></div>
 
 	<div class="xzxh">
 		<ul style="font-size: 18px;margin-top: 10px;background: #71c3f530;">

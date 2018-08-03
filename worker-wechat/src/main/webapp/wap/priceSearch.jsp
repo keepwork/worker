@@ -9,7 +9,7 @@
 </head>
 
 <body>
-	<header>
+	<!--<header>
 	  <ul>
 	    <li class="back"><a href="${ctx}/weixin/index.do?type=wx"><img src="${ctx}/wap/html/images/back.png" width="40" height="50" /></a></li>
 	    <li class="logo">收费查询</li>
@@ -20,8 +20,13 @@
 		</li>
 	  </ul>
 	</header>
+	-->
+	<header class="header" id="header">
+		<a href="${ctx}/weixin/index.do?type=wap" target="_self" class="back">返回</a>
+		<h1>收费查询</h1>
+	</header>
 
-	<div >
+	<div style="margin-top: 2rem">
 		<ul style="font-size: 18px;background: #71c3f530;">
 			<br/>&nbsp;&nbsp;&nbsp;&nbsp;请选要查询的项目：
 			<br/><br/>

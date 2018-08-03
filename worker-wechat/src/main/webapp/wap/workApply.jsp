@@ -133,7 +133,7 @@
 </head>
 
 <body>
-	<!-- 公用头部-->
+	<!-- 公用头部
 	<header>
 		<ul>
 			<li class="back">&nbsp;</li>
@@ -141,6 +141,13 @@
 			<li class="more">&nbsp;</li>
 		</ul>
 	</header>
+	-->
+
+	<header class="header" id="header">
+		<a href="${ctx}/pub/goodCate/firstCates.do?type=wap&serviceType=${requestScope.serviceType}" target="_self" class="back">返回</a>
+		<h1>开始预约</h1>
+	</header>
+	<div style="margin-top: 2rem"></div>
 
 <div class="list-block" >
 	<ul class="round">

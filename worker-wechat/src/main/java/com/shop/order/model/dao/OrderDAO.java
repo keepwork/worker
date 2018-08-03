@@ -1,6 +1,7 @@
 package com.shop.order.model.dao;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.common.util.string.StringUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -275,7 +277,7 @@ public class OrderDAO extends DaoSupport
 	}
 
 	public int getWorkerOrderTotalNum(String workerId){
-		final String sql = "select t.ORDER_ID from pub_order t  where t.order_status<>'7'and t.worker_id='" +workerId+"'";
+		final String sql = "select t.ORDER_ID from pub_order t  where t.order_status<>'8'and t.worker_id='" +workerId+"'";
 		List list = (List) this.getHibernateTemplate().execute(
 				new HibernateCallback() {
 					@Override
@@ -287,7 +289,107 @@ public class OrderDAO extends DaoSupport
 				});
 		return list.size();
 	}
-	
-	
 
+	/**
+	 * 历史产值和总订单数
+	 *
+	 * @param workerId 工人ID
+	 * @return
+	 */
+	public OrderDTO historyoutputAndNum(String workerId)
+	{
+		final String sql = "SELECT SUM(o.total_price) AS OUTPUTVALUE," +
+				"COUNT(o.order_id) AS TOTALNUM FROM pub_order o  " +
+//				"WHERE o.worker_id='"+workerId+"' AND o.order_status IN('6','7') " +
+				"WHERE o.worker_id='8aaf204f53a339890153a348aa940001' AND o.order_status IN('6','7') " +
+				"GROUP BY o.worker_id";
+		return outputAndTotalNum(sql);
+	}
+
+	/**
+	 * 本月产值和单数
+	 *
+	 * @param workerId
+	 * @return
+	 */
+	public OrderDTO monthOutputAndNum(String workerId){
+		final String sql = "SELECT SUM(o.total_price) AS OUTPUTVALUE," +
+				"COUNT(o.order_id) AS TOTALNUM FROM pub_order o  " +
+//				"WHERE o.worker_id='"+workerId+"' AND o.order_status IN('6','7') " +
+				"WHERE o.worker_id='8aaf204f53a339890153a348aa940001' AND o.order_status IN('6','7') " +
+				"AND DATE_FORMAT(o.order_time, '%Y%m') = DATE_FORMAT(CURDATE() , '%Y%m') "+
+				"GROUP BY o.worker_id";
+		return outputAndTotalNum(sql);
+	}
+
+	/**
+	 * 统计产值和总订单数
+	 *
+	 * @return
+	 */
+	public OrderDTO outputAndTotalNum(final String sql)
+	{
+		List list = (List) this.getHibernateTemplate().execute(
+				new HibernateCallback() {
+					@Override
+					public Object doInHibernate(Session arg0)
+							throws HibernateException, SQLException {
+						SQLQuery query = arg0.createSQLQuery(sql);
+						query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+						return query.list();
+					}
+				});
+		OrderDTO dto = new OrderDTO();
+		dto.setHistoryOutputValue(new BigDecimal("0"));
+		dto.setTotalOrderNum(new BigInteger("0"));
+		for (Iterator iterator = list.iterator(); iterator.hasNext();) {
+			Map map = (Map) iterator.next();
+			dto.setHistoryOutputValue(BigDecimal.valueOf((Double) map.get("OUTPUTVALUE")));
+			dto.setTotalOrderNum((BigInteger) map.get("TOTALNUM"));
+		}
+		return dto;
+	}
+
+	/**
+	 * 根据时间按月统计产值和总订单数
+	 *
+	 * @return
+	 */
+	public List<OrderDTO> outputAndNumByMonth(final String workerId,String beginTime,String endTime)
+	{
+		String timeWhere = "";
+		if(StringUtil.isNotBlank(beginTime)){
+			timeWhere += "AND o.order_time >= '"+beginTime+"' ";
+		}
+		if(StringUtil.isNotBlank(endTime)){
+			timeWhere += "AND o.order_time < '"+endTime+"' ";
+		}
+		final String sql = "SELECT MONTH(o.order_time) AS MONTH,SUM(o.total_price) AS OUTPUTVALUE,COUNT(o.order_id) AS TOTALNUM " +
+							"FROM pub_order o " +
+							//"WHERE o.worker_id='"+workerId+"' AND o.order_status IN( '6','7') " +timeWhere+
+							"WHERE o.worker_id='8aaf204f53a339890153a348aa940001' AND o.order_status IN( '6','7') " +"AND o.order_time >= '2018-06-01'AND o.order_time < '2018-09-01' "+
+							"GROUP BY MONTH(o.order_time)";
+		List list = (List) this.getHibernateTemplate().execute(
+				new HibernateCallback() {
+					@Override
+					public Object doInHibernate(Session arg0)
+							throws HibernateException, SQLException {
+						SQLQuery query = arg0.createSQLQuery(sql);
+						query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+						return query.list();
+					}
+				});
+		List<OrderDTO> result = new ArrayList<OrderDTO>();
+		for (Iterator iterator = list.iterator(); iterator.hasNext();) {
+			OrderDTO dto = new OrderDTO();
+			Map map = (Map) iterator.next();
+			dto.setMonth((Integer) map.get("MONTH")+"");
+			dto.setMonthOutputValue(BigDecimal.valueOf((Double) map.get("OUTPUTVALUE")));
+			dto.setMonthOrderNum((BigInteger) map.get("TOTALNUM"));
+			result.add(dto);
+		}
+		return result;
+	}
+
+	
 }

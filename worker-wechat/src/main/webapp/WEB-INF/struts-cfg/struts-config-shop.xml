@@ -71,6 +71,7 @@
 			<!-- front wap 工人端-->
 			<forward name="workerOrderList_wap" path="/wap/workerCenter/myOrderList.jsp" />
 			<forward name="workerOrderView_wap" path="/wap/workerCenter/myOrderView.jsp" />
+			<forward name="outputAndNumList_wap" path="/wap/workerCenter/outputAndNumList.jsp" />
 
 			<!-- front web -->
 			<forward name="orderWrite_web" path="/web/orderWrite.jsp" />
