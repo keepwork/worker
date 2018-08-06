@@ -122,7 +122,7 @@
                   <li class="listyle_4">
                     <label class="left pt5"><em>*</em>会员类型：</label>
                     <h1 class="cmxformh1"> <span class="cmxformspan" style="width: 300px;">
-                      <domain:radioDomain domain="menberType" name="type" uid="type" />
+                      <domain:radioDomain domain="menberType" name="type" uid="type" value="1"/>
                     </span></h1>
                   </li>
                   <li class="listyle_4">
@@ -142,15 +142,27 @@
                     </span></h1>
                   </li>
                   <li class="listyle_4">
-                    <label class="left pt5">性别：</label>
+                    <label class="left pt5"><em>*</em>性别：</label>
                     <h1 class="cmxformh1"> <span class="cmxformspan" style="width: 200px;">
                       <domain:radioDomain domain="SEX" name="sex" uid="sex" value="1" />
                     </span></h1>
                   </li>
                   <li class="listyle_4">
-                    <label class="left pt5">真实姓名：</label>
+                    <label class="left pt5"><em>*</em>真实姓名：</label>
                     <h1 class="cmxformh1"> <span class="cmxformspan">
                       <input type="text" id="realName" name="realName"  class="bgw" />
+                    </span></h1>
+                  </li>
+                  <li class="listyle_4">
+                    <label class="left pt5"><em>*</em>工种：</label>
+                    <h1 class="cmxformh1"> <span class="cmxformspan">
+                      <domain:selectDomain name="workType" uid="workType_" domain="workType" />
+                    </span></h1>
+                  </li>
+                  <li class="listyle_4">
+                    <label class="left pt5"><em>*</em>工龄：</label>
+                    <h1 class="cmxformh1"> <span class="cmxformspan">
+                      <input type="text" id="workYears" name="workYears"  class="bgw" />
                     </span></h1>
                   </li>
                   <li class="listyle_4">

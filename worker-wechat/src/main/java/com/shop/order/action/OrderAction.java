@@ -172,7 +172,7 @@ public class OrderAction extends BaseAdmAction
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-    	String type = request.getParameter("type");//类型：wap,web
+		String type = request.getParameter("type");//类型：wap,web
 		String returnPage = "";
 		MenberDTO menber = null;
 		if(type.equals("wap")){
@@ -1001,21 +1001,27 @@ public class OrderAction extends BaseAdmAction
 		OrderDTO order = myOrderFacade.get(orderId);
 		String payTitle = "";
 		String payPrice = "";
+		String payText = "";
 		if(payState.equals("0")){
 			payTitle = "订单总金额支付";
+			payText = "总额";
 			payPrice = order.getPayPrice1().toString();
 		}else if(payState.equals("1")){
 			payTitle = "定金金额支付";
+			payText = "定金";
 			payPrice = order.getPayPrice1().toString();
 		}else if(payState.equals("2")){
 			payTitle = "中期款金额支付";
+			payText = "中期";
 			payPrice = order.getPayPrice2().toString();
 		}else if(payState.equals("3")){
 			payTitle = "尾款金额支付";
+			payText = "尾款";
 			payPrice = order.getPayPrice3().toString();
 		}
 		request.setAttribute("payTitle",payTitle);
 		request.setAttribute("payPrice",payPrice);
+		request.setAttribute("payText",payText);
 		request.setAttribute("order",order);
 		return mapping.findForward("paymentPage_wap");
 	}
