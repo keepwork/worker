@@ -1,5 +1,5 @@
 html, body {position: relative;height: 100%;}
-body {font-family:"Microsoft YaHei";  font-size:12px; line-height:24px; color:#333; margin: 0;padding: 0;}
+body {font-family:"Microsoft YaHei";color:#333; margin: 0;padding: 0;}
 img { border:0; }
 dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td{ list-style: none outside none; margin:0; padding: 0; }
 a { color:#000000; text-decoration: none; }
@@ -140,7 +140,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=
 .jhxq1 h4{height:26px; line-height:26px; overflow:hidden;white-space:nowrap; padding:10px;background:#008fcb; text-align:center; color:#FFF; font-size:16px; font-weight:normal;margin:0;}
 .jhxq1_c{ padding:15px; line-height:22px; font-size:14px;}
 .jhxq1_c b{ color:#999999; font-weight:normal;}
-.submit { width:90%; margin:0 5%;
+.submit { width:80%; margin:0 auto;
 	background-color:#0097d3;
 	padding:10px 20px;
 	font-size:16px;

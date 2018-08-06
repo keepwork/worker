@@ -24,20 +24,20 @@
 	<div style="margin-top: 2rem"></div>
 
 	<div class="xzxh">
-		<ul style="font-size: 18px;margin-top: 10px;background: #71c3f530;">
-				<br/>&nbsp;&nbsp;&nbsp;&nbsp;已选服务类型：<em style="color: #222222;font-size: 0.6rem">
+		<ul style="font-size: 0.8rem;margin-top: 10px;background: #71c3f530;">
+				<br/>&nbsp;&nbsp;&nbsp;&nbsp;已选服务类型：
 				<c:if test="${requestScope.serviceType eq '1'}">安装</c:if>
 				<c:if test="${requestScope.serviceType eq '2'}">维修</c:if>
 				<c:if test="${requestScope.serviceType eq '3'}">保养</c:if>
 				<c:if test="${requestScope.serviceType eq '4'}">测量</c:if>
 				<c:if test="${requestScope.serviceType eq '5'}">咨询</c:if>
-				</em><br/><br/>
+			<br/><br/>
 		</ul>
 		<br/>
 
-		<ul style="font-size: 18px;margin-top: 10px;background: #71c3f530;">
+		<ul style="font-size: 0.8rem;margin-top: 10px;background: #71c3f530;">
 
-			<br/>&nbsp;&nbsp;&nbsp;&nbsp;已选服务项目：<strong> ${firstCate.name}</strong>
+			<br/>&nbsp;&nbsp;&nbsp;&nbsp;已选服务项目：${firstCate.name}
 			<br/><br/>
 		</ul>
 		<br/>

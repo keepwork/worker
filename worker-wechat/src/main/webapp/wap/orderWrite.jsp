@@ -25,8 +25,8 @@
 
 	/*单选*/
 	.radio_box{ display:inline-block; position:relative;margin-left: 15px;}
-	.radio_box label{ width:15px; height:15px; position:absolute; top:0; left:0; border:2px solid #ef4949; border-radius:50%; background:#fff; cursor:pointer;}
-	.radio_box input:checked + label:after{ content:''; width:9px; height:9px; position:absolute; top:3px; left:3px; background:#ef4949; border-radius:50%;}
+	.radio_box label{ width:1rem; height:1rem; position:absolute; top:0; left:0; border:2px solid #ef4949; border-radius:50%; background:#fff; cursor:pointer;}
+	.radio_box input:checked + label:after{ content:''; width:0.6rem; height:0.6rem; position:absolute; top:0.1rem; left:0.1rem; background:#ef4949; border-radius:50%;}
 	.radio_box em{ margin:0 0 0 10px;}
 	.radio_box input{ float:none;}
 	</style>
@@ -282,7 +282,7 @@
 		<a href="${ctx}/pub/goodCate/secondCates.do?type=wap&serviceType=${requestScope.serviceType}&firstCateCode=${firstCate.code}" target="_self" class="back">返回</a>
 		<h1>订单填写</h1>
 	</header>
-	<div style="margin-top: 2rem"></div>
+	<%--<div style="margin-top: 2rem"></div>--%>
 	
 	<div class="qrddxxo" style="margin: 0px 0 0;font-size: 16px;" id="addressListDiv">
 	    <h4 style="background: #71c3f530;">地址</h4>
@@ -311,13 +311,13 @@
 	<ul class="qrddxxt" style="display: none;" id="addAddress">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tr>
-						<td width="28%" style="text-align:right;height:32px;"><font size="2">姓名：</font></td>
-						<td width="72%">
+						<td width="15%" style="text-align:right;height:32px;padding: 0.6rem 0;"><font size="2">姓名：</font></td>
+						<td width="85%">
 							<input type="text" name="consignee" id="consignee" class="input" style="width:210px;border: 1px solid #e1e1e1;height: 30px;" /><font color="red">*</font>
 						</td>
 					</tr>
 					<tr>
-						<td  style="text-align:right;height:32px;"><font size="2">电话：</font></td>
+						<td  style="text-align:right;height:32px;padding: 0.6rem 0;"><font size="2">电话：</font></td>
 						<td>
 							<input type="text" name="mobile" id="mobile" class="input" style="width:210px;border: 1px solid #e1e1e1;height: 30px;" 
 								onkeyup="this.value=this.value.replace(/[^0-9]/gi,''); "
@@ -326,8 +326,8 @@
 						</td>
 					</tr>
 					<tr style="margin-top: 5px;">
-						<td style="text-align:right;height:32px;"><font size="2">地址：</font></td>
-						<td>
+						<td style="text-align:right;height:32px;padding: 0.6rem 0;"><font size="2">地址：</font></td>
+						<td style="padding: 0.1rem 0;">
 							<select name="province" id="province"></select>
 				            <select name="city" id="city"></select>
 				            <select name="county" id="county"></select><br/>
@@ -340,10 +340,10 @@
 	</ul>
 	
 	<ul class="qrddxxt" id="addNewButton">
-		<li><input class="submit" style="padding: 5px 11px;" type="button" name="newAdd" id="newAdd" value="新增地址" onclick="addNewAddressInit()"/></li>
+		<li style="background: #f5f5f5"><input class="submit" style="float: none;margin-top: 0.8rem;" type="button" name="newAdd" id="newAdd" value="新增地址" onclick="addNewAddressInit()"/></li>
 	</ul>
 	<ul class="qrddxxt" id="saveNewButton" style="display: none;">
-		<li style="margin-left: 10px;"><div class="aabbcc">
+		<li style="margin-left:12%"><div class="aabbcc">
 			<input class="submit" style="padding: 2px 11px;" type="button" name="newAdd" id="newAdd" value="保存" onclick="saveNewAddress('','add')"/>
 			<input class="submit" style="padding: 2px 11px;" type="button" name="newCancel" id="newCancel" value="取消" onclick="cancelNewAddressInit()"/>
 		</div></li>
@@ -354,7 +354,7 @@
 	</div>
 
 	<div class="qrddxxf">
-	    <ul>
+	    <ul style="background: #f5f5f5">
 	        <li>服务类型：<span style="float:right">
 		        <c:if test="${serviceType=='1'}">预约安装</c:if>
 		        <c:if test="${serviceType=='2'}">预约维修</c:if>
@@ -391,8 +391,8 @@
 		   <em>分期支付</em>
 		</span>
 
-		<ul>
-			<li style="font-size:10px">*注：小金额请选择一次性支付，一次性支付可在施工完成后再进行支付；分期支付需在师傅上门后支付定金，工程中期支付中期金额，工程尾期需支付尾款。</li>
+		<ul style="background: #f5f5f5">
+			<li style="font-size:0.5rem">*注：小金额请选择一次性支付，一次性支付可在施工完成后再进行支付；分期支付需在师傅上门后支付定金，工程中期支付中期金额，工程尾期需支付尾款。</li>
 		</ul>
 		<br>
 		<br>
@@ -429,7 +429,7 @@
 	    	<input class="submit" type="button" value="立即预约" onclick="saveOrder('${serviceType}','${firstCate.code}','${firstCate.name}')"/>
 	    </c:if>
 	    --%>
-		<input class="submit" type="button" value="立即预约" onclick="saveOrder('${serviceType}','${firstCate.code}','${firstCate.name}')"/>
+		<input class="submit" style="float: none;" type="button" value="立即预约" onclick="saveOrder('${serviceType}','${firstCate.code}','${firstCate.name}')"/>
 	</div>
 	
 	<table height="180px;"><tr><td >&nbsp;</td></tr></table>

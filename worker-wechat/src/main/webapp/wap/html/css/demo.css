@@ -84,7 +84,7 @@ footer ul li a:hover,.top_menu li a:active{}
 .txdd3 .text{border-radius:10px; border:solid #dedede 1px; background:#FFF; padding:15px 10px; overflow:hidden; font-size:16px;color:#666;}
 .txdd3 .detail { }
 .txdd3 .detail span{ display:block; float:right;color:#999;background: url(../images/dd_03.png) left center no-repeat; padding:0 0 0 20px; height:40px; line-height:40px; font-size:14px; background-size:12px 14px; }
-.submit { width:90%; margin:0 5%;
+.submit { width:80%; margin:0 auto;
 	background-color:#0097d3;
 	padding:10px 20px;
 	font-size:16px;

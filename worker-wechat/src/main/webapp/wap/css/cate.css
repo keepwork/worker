@@ -56,7 +56,8 @@ h2 { font-size:16px; }
 .mdxqt{ border-top:solid #CCC 1px; position:relative; z-index:1; clear:both; margin:20px 0 0 0;}
 .mdxqt li{ height:40px; line-height:40px;font-size:14px;border-bottom:solid #CCC 1px; background:#FFF url(../images/go.png) no-repeat 98% 13px; padding:0 20px 0 20px;}
 .mdxqt li img{vertical-align:middle; margin:0 15px 0 0;}
-.mdxqh{ margin:30px 30px 0 30px; position:relative; z-index:1; clear:both;}
+/*.mdxqh{ margin:30px 30px 0 30px; position:relative; z-index:1; clear:both;}*/
+.mdxqh{ margin-top:1.4rem; position:relative; z-index:1; clear:both;}
 
 .ydwzo{ height:40px; line-height:40px; padding:8px 20px 8px 20px; border-bottom:solid #CCC 1px; position:relative; z-index:1; clear:both; background:#FFF url(../images/ydwz.png) no-repeat 97% 18px; font-size:18px;}
 .ydwzt{ border-top:solid #CCC 1px; position:relative; z-index:1; clear:both; margin:20px 0 0 0;}
@@ -208,12 +209,12 @@ filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=
 .newso li span{ float:right; color:#999;}
 
 .qrddxxo{ margin:28px 0 0 0;}
-.qrddxxo h4{height:20px; line-height:20px; padding:10px;background:#efefef; border-top:solid #dedede 1px; border-bottom:solid #dedede 1px;}
+.qrddxxo h4{height:1.6rem; line-height:1.6rem;padding-left:0.4rem;background:#efefef; border-top:solid #dedede 1px; border-bottom:solid #dedede 1px;}
 .qrddxxo_o{ padding:15px; line-height:22px; font-size:14px;border-radius:5px; border:solid #ff4400 1px; margin:10px;}
 .qrddxxo b{ color:#999999; font-weight:normal;}
 .qrddxxo_t{ padding:15px; line-height:22px; font-size:14px;border-radius:5px; border:solid #dedede 1px; margin:10px;}
 .qrddxxt{}
-.qrddxxt li{ height:auto; overflow:hidden; margin:5px 0;}
+.qrddxxt li{ height:auto; overflow:hidden;}
 .qrddxxt li h4{ width:25%; float:left; text-align:right; padding:0 2% 0 0; font-size:14px; font-weight:normal;}
 .qrddxxt li .ipt{ width:68%; float:left;}
 .qrddxxt li p{ width:68%; float:left;}

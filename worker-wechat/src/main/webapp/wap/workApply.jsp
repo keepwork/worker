@@ -98,7 +98,7 @@
     width: 100%;
     height: 2.15rem;
     color: #3d4145;
-    font-size: .85rem;
+    font-size: .8rem;
     font-family: inherit;
 }
 	/*下拉框样式*/
@@ -145,7 +145,7 @@
 
 	<header class="header" id="header">
 		<a href="${ctx}/pub/goodCate/firstCates.do?type=wap&serviceType=${requestScope.serviceType}" target="_self" class="back">返回</a>
-		<h1>开始预约</h1>
+		<h1>工人入驻</h1>
 	</header>
 	<div style="margin-top: 2rem"></div>
 

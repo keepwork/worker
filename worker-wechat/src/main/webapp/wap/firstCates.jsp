@@ -25,7 +25,7 @@
 	
 	<div class="xzfl">
 		<ul style="background: #71c3f530;">
-				<li style="margin-left: 20px;font-size: 18px; ">
+				<li style="margin-left: 0.4rem;font-size: 0.8rem; ">
 					<br/>已选服务类型：
 					<c:if test="${requestScope.serviceType eq '1'}">安装</c:if>
 					<c:if test="${requestScope.serviceType eq '2'}">维修</c:if>
@@ -37,10 +37,10 @@
 		</ul>
 		<br/>
 
-		<ul>
+		<ul style="margin-top: -1rem">
 	  	<c:forEach var="a" items="${requestScope.firstCateList}">
 	         <li class="l" onclick="javascript:window.location.href='${ctx}/pub/goodCate/secondCates.do?type=wap&serviceType=${requestScope.serviceType}&firstCateCode=${a.code}'">
-	         	<a href="#" ><img src="${ctx}/${a.pic}" width="60" height="60"/><span><strong>${a.name}</strong></span></a>
+	         	<a href="#" ><img src="${ctx}/${a.pic}" width="60" height="60"/><span style="font-size: 0.8rem;color: #222222;">${a.name}</span></a>
 	         </li>
 	    </c:forEach>
 	  </ul>	

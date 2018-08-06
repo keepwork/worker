@@ -1,5 +1,5 @@
 html, body {position: relative;height: 100%;}
-body {font-family:"Microsoft YaHei"; font-size:12px; line-height:24px; color:#333;margin: 0;padding: 0;}
+body {font-family:"Microsoft YaHei";color:#333;margin: 0;padding: 0;}
 
 img { border:0; }
 dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td{ list-style: none outside none; margin:0; padding: 0; }
