@@ -24,7 +24,7 @@ header ul .more{ width:30%; text-align:right;}
 #insert1, #insert2{ position:relative}
 .mainmenu li { border:solid #dedede 1px; overflow: hidden; }
 .mainmenu li p {margin:0;}
-.mainmenu li a img {margin:40px 0 20px 0; width:41%; height:11%;}
+.mainmenu li a img {margin:0.4rem 0 0.1rem 0; width:41%; height:11%;}
 .mainmenu li a span { display:block;  padding:0px 0 30px 0;  line-height:30px; font-size:1rem;color:#222222; overflow:hidden;text-overflow:ellipsis; white-space:nowrap; text-align:center   }
 .mainmenu li:nth-child(6n+1){ background-color:#fff}
 .mainmenu li:nth-child(6n+2){ background-color:#fff}
