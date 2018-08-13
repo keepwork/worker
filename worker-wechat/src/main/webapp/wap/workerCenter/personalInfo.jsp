@@ -25,7 +25,7 @@
   <div class="container" id="container">
 
     <div class="personal-data1">
-      <ul>
+      <ul style="margin-top: 2rem">
         <li><a href="javascript:void(0);"><span>我的姓名</span><em>${m.realName}</em></a></li>
         <li><a href="javascript:void(0);"><span>我的手机</span><em>${m.mobile}</em></a></li>
         <li><a href="javascript:void(0);"><span>工作年限</span><em>${m.workYears}年</em></a></li>

@@ -83,6 +83,9 @@ public class WXAccessFilter implements Filter
 				if ("/worker-wechat/weixin/index.do".equals(uri)
 						|| "/worker-wechat/pub/menber/myAccount.do".equals(uri)
 						|| "/worker-wechat/pub/menber/workApply.do".equals(uri))
+//				if ("/weixin/index.do".equals(uri)
+//						|| "/pub/menber/myAccount.do".equals(uri)
+//						|| "/pub/menber/workApply.do".equals(uri))
 				{
 					String openID = request.getParameter("openID");
 					if(null!=openID && !openID.equals("")){

@@ -214,7 +214,7 @@
 	<jsp:include page="head.jsp"></jsp:include>
 
 	<!-- Tabs -->
-	<div id="tabsholder">
+	<div id="tabsholder" style="margin-top: 3.8rem">
 	
 	        <ul class="tabs">
 	            <li id="tab1" onclick="initData(0,'9')" >全部</li>

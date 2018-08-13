@@ -14,7 +14,7 @@
 	<jsp:include page="../public/head.jsp"></jsp:include>
 
 	<div class="notes" style="margin-top: 3.2rem;">
-		<img src="${ctx}/wap/images/notes.png" width="1.2rem" height="1rem" />
+		<img src="${ctx}/wap/images/notes.png" width="26px" height="24px" />
 		<%--<font size="2">年终奖提前发，80元现金拿回家!</font>--%>
 		年终奖提前发，80元现金拿回家!
 	</div>

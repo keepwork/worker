@@ -1,6 +1,6 @@
 /* 头部    */
-header{width:100%; height:50px; line-height:50px; background:#0676e1;}
-header ul { margin:0 10px 0 10px;}
+header{width:100%; height:2.5rem; line-height:2.5rem; background:#0676e1;}
+header ul { margin:0 0.5rem 0 0.5rem;}
 header ul li{ width:33%; height:50px; line-height:50px; float:left;}
 header ul .back{ width:30%;}
 header ul .logo{ width:40%; text-align:center; font-size:18px; color:#FFF;}

@@ -260,7 +260,7 @@
 	<jsp:include page="../userCenter/head.jsp"></jsp:include>
 	<div id="datePlugin"></div>
 	<!-- Tabs -->
-	<div id="tabsholder">
+	<div id="tabsholder" style="margin-top: 3.8rem">
 	
 	        <ul class="tabs">
 	            <li id="tab1" onclick="initData(0,'9')" >全部</li>

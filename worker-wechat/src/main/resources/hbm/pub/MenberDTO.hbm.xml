@@ -191,7 +191,7 @@
 
 		<many-to-one name="tbTBmsLocationDTO"
 					 class="com.sinovatech.bms.adm.model.dto.TBmsLocationDTO"
-					 fetch="select">
+					 fetch="select" lazy="false">
 			<column name="LOCATIONID" length="32">
 				<comment>区域编号</comment>
 			</column>

@@ -40,7 +40,7 @@
 		<ul style="margin-top: -1rem">
 	  	<c:forEach var="a" items="${requestScope.firstCateList}">
 	         <li class="l" onclick="javascript:window.location.href='${ctx}/pub/goodCate/secondCates.do?type=wap&serviceType=${requestScope.serviceType}&firstCateCode=${a.code}'">
-	         	<a href="#" ><img src="${ctx}/${a.pic}" width="60" height="60"/><span style="font-size: 0.8rem;color: #222222;">${a.name}</span></a>
+	         	<a href="#" ><img src="${ctx}/${a.pic}" width="60" height="60"/><span style="font-size: 0.7rem;color: #222222;">${a.name}</span></a>
 	         </li>
 	    </c:forEach>
 	  </ul>	

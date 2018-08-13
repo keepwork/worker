@@ -38,7 +38,7 @@
 	  	<c:forEach var="a" items="${requestScope.cateList}">
 	         <li class="l" onclick="javascript:window.location.href='${ctx}/pub/article/priceList.do?type=wap&cateCode=${a.code}'">
 				 <br/>
-	         	<a href="#" ><p><span><strong>${a.name}</strong></span></p></a>
+	         	<a href="#" ><p><span style="color: #222222;font-size: 0.8rem;">${a.name}</span></p></a>
 				 <br/>
 	         </li>
 	    </c:forEach>
@@ -48,12 +48,12 @@
 		<ul>
 			<li class="l" onclick="javascript:window.location.href='${ctx}/pub/article/articleDetail.do?type=wap&id=103'">
 				<br/>
-				<a href="#" ><p><span><strong>报价说明</strong></span></p></a>
+				<a href="#" ><p><span style="color: #222222;font-size: 0.8rem;">报价说明</span></p></a>
 				<br/>
 			</li>
 			<li class="l" onclick="javascript:window.location.href='${ctx}/pub/article/articleDetail.do?type=wap&id=105'">
 				<br/>
-				<a href="#" ><p><span><strong>保修说明</strong></span></p></a>
+				<a href="#" ><p><span style="color: #222222;font-size: 0.8rem;">保修说明</span></p></a>
 				<br/>
 			</li>
 			<%--
@@ -65,7 +65,7 @@
 			--%>
 			<li class="l" onclick="javascript:window.location.href='${ctx}/pub/article/articleDetail.do?type=wap&id=107'">
 				<br/>
-				<a href="#" ><p><span><strong>扫码支付</strong></span></p></a>
+				<a href="#" ><p><span style="color: #222222;font-size: 0.8rem;">扫码支付</span></p></a>
 				<br/>
 			</li>
 		</ul>

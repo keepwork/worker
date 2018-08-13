@@ -4,7 +4,7 @@
 
 <style type="text/css"> 
 <!--
-.wdddo{ background:url(${ctx}/wap/userCenter/images/hyzx_wddd_bg.jpg) center no-repeat; height:8rem;background-size: cover; overflow:hidden;margin:0; padding:20px;}
+.wdddo{ background:url(${ctx}/wap/userCenter/images/hyzx_wddd_bg.jpg) center no-repeat; height:6rem;background-size: cover; overflow:hidden;margin:0; padding:20px;}
 .wdddo .tx{border-radius: 50%;height:80px; width:80px; overflow:hidden; border:solid #FFF 1px; float:left;}
 .wdddo .xm{ font-size:24px; color:#FFF; margin:20px 0 0 20px; float:left;}
 .wdddo .xm span{ font-size:14px; color:#FFF;}

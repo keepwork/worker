@@ -146,9 +146,9 @@ public class MenberAction extends BaseAdmAction
 		if(type.equals("wap")){
 			menber = (MenberDTO)request.getSession().getAttribute("wxmenber");
 			if(null != menber) {
-				if ("1".equals(menber.getType())) {
+				if (1 == menber.getType()) {
 					returnPage = "userCenter_wap";
-				} else {
+				} else if(2 == menber.getType()){
 					OrderDTO order1 = myOrderFacade.historyoutputAndNum(menber.getId());
 					OrderDTO order2 = myOrderFacade.monthOutputAndNum(menber.getId());//查询本月
 					order1.setMonthOrderNum(order2.getTotalOrderNum());
@@ -1019,9 +1019,9 @@ public class MenberAction extends BaseAdmAction
 		MenberDTO menber = null;
 		if(type.equals("wap")){
 			menber = (MenberDTO)request.getSession().getAttribute("wxmenber");
-			if(menber.getType().equals("1")){
+			if(1 == menber.getType()){
 				returnPage = "personalInfo_wap";
-			}else{
+			}else if(2 == menber.getType()){
 				if(null != menber.getTbTBmsLocationDTO()){
 					menber.setLocationName( menber.getTbTBmsLocationDTO().getName());
 				}else{

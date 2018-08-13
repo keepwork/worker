@@ -5,23 +5,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-	<title>惠达</title>
-	<link rel="stylesheet" href="${ctx}/wap/html/css/Basc.css" />
-	<link rel="stylesheet" href="${ctx}/wap/html/css/demo.css" />
+	<jsp:include page="public/common.jsp"></jsp:include>
 </head>
 
 <body>
-	<header>
-	  <ul>
-	    <li class="back"><a href="#"><img src="${ctx}/wap/html/images/back.png" width="40" height="50" /></a></li>
-	    <li class="logo">订单结果</li>
-	    <li class="more"><a href="#"><img src="${ctx}/wap/html/images/more.png" alt="" width="40" height="50" /></a></li>
-	  </ul>
+	<%--<header>--%>
+	  <%--<ul>--%>
+	    <%--<li class="back"><a href="#"><img src="${ctx}/wap/html/images/back.png" width="40" height="50" /></a></li>--%>
+	    <%--<li class="logo">订单结果</li>--%>
+	    <%--<li class="more"><a href="#"><img src="${ctx}/wap/html/images/more.png" alt="" width="40" height="50" /></a></li>--%>
+	  <%--</ul>--%>
+	<%--</header>--%>
+
+	<header class="header" id="header">
+		<a href="${ctx}/weixin/index.do?type=wap" target="_self" class="back">返回</a>
+		<h1>订单结果</h1>
 	</header>
-	        
+	<div style="margin-top: 2rem"></div>
 	<main class="end">
 	  <section class="one">订单已提交，等待派单...</section>
 	  <section class="two">您可以到我的订单中查看订单的进度<br>页面可以关闭，不影响师傅接单。</section>
