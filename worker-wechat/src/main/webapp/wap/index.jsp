@@ -50,9 +50,9 @@
 	<div class="banner" id="index-banner">
 		<div class="banner-pics">
 			<ul class="banner-pics-list OnSale-banner">
-				<li><a href="#"><img src="${ctx}/wap/images/ind-banner.jpg" alt=""/></a></li>
-				<li><a href="#"><img src="${ctx}/wap/images/ind-banner.jpg" alt=""/></a></li>
-				<li><a href="#"><img src="${ctx}/wap/images/ind-banner.jpg" alt=""/></a></li>
+				<li><a href="#"><img src="${ctx}/wap/images/ind-banner1.jpg" alt=""/></a></li>
+				<li><a href="#"><img src="${ctx}/wap/images/ind-banner2.png" alt=""/></a></li>
+				<li><a href="#"><img src="${ctx}/wap/images/ind-banner3.png" alt=""/></a></li>
 			</ul>
 		</div>
 		<ul class="banner-tit">
@@ -95,20 +95,20 @@
 
 		<!--二手置换 货运配送开始-->
 		<div class="ind-item" style="margin-top: 0.4rem;">
-			<a href="${ctx}/wap/news.jsp">
-				<div class="ind-item-img"><img src="${ctx}/wap/images/eszh.png" style="display: block; width: 100%;height: auto;"></div>
+			<a href="${ctx}/wap/book1.jsp">
+				<div class="ind-item-img"><img src="${ctx}/wap/images/book_.jpg" style="display: block; width: 100%;height: auto;"></div>
 				<div class="ind-item-txt">
-					<h3 class="red">88修</h3>
-					<p>88修正式上线啦</p>
+					<h3 class="red">装修指南</h3>
+					<p>装修知识知多少？不知道这些就out了</p>
 				</div>
 			</a>
 		</div>
 		<div class="ind-item">
-			<a href="${ctx}/wap/news.jsp">
-				<div class="ind-item-img"><img src="${ctx}/wap/images/hyps.png" style="display: block; width: 100%;height: auto;"></div>
+			<a href="${ctx}/wap/book2.jsp">
+				<div class="ind-item-img"><img src="${ctx}/wap/images/book.jpg" style="display: block; width: 100%;height: auto;"></div>
 				<div class="ind-item-txt">
-					<h3 class="green">88修房屋快修</h3>
-					<p>88修您的房屋打理专家</p>
+					<h3 class="green">选材经验</h3>
+					<p>现在装修用的防水材料，要注意什么？</p>
 				</div>
 			</a>
 		</div>

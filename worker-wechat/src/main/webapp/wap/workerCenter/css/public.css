@@ -223,7 +223,7 @@ span.cancel{ color:#ff731c; background-color:transparent; border:1px solid #ff73
 .project-description{ padding:0 0.6rem; }
 .project-description-tit{ padding: 0.5rem 0;}
 .project-description-tit h2 { font-size: 0.7rem; border-left: 2px solid #fa4b28; padding-left: 0.25rem; color: #999999; }
-.project-description-con{ font-size: 0.6rem; line-height:1rem; padding-bottom:0.75rem;}
+.project-description-con{ font-size: 0.6rem; line-height:1rem; padding-bottom:0.2rem;}
 .book-recovery-bot{ width: 100%; position:fixed; bottom: 0;left: 0; height: 2.1rem; line-height: 2.1rem;}
 .book-recovery-bot div{ width: 50%; height: 100%; float: left;}
 .book-recovery-bot a{ color: #fff;font-size: 0.75rem; text-align: center; display: block;}
