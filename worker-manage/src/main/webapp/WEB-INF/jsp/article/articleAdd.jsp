@@ -114,8 +114,8 @@
                     <label class="left pt5" >图片：</label>
                     <h1 class="cmxformh1"> <span class="cmxformspan">
                       <input type="hidden" id="pic" name="pic" value="" />
-                      <img src="" id="sPic_view" style="width: 50px;height: 50px;"/>
-                      <input type="file" id="imgFile" name="imgFile" onchange="uploadImg()"  />
+                      <img src="" id="pic_view" style="width: 50px;height: 50px;"/>
+                      <input type="file" id="upFile" name="upFile" onchange="uploadImg()"  />
                     </span></h1>
                   </li>
                     <li class="listyle_4">
@@ -138,7 +138,7 @@
                     </span></h1>
                   </li>
                 </ol>
-                <!--ol 结束-->               
+                <!--ol 结束-->
               </fieldset>
             </form>
           </div>
@@ -157,7 +157,7 @@
 //上传商品图片
 function uploadImg()
 {
-	var fieldId = "imgFile";
+	var fieldId = "upFile";
 	var jpgname = jQuery("#"+fieldId).val();
 	if(jpgname != null && jpgname!=""){
 		var lastname = jpgname.toLowerCase().substr(jpgname.lastIndexOf(".")); 
@@ -169,7 +169,7 @@ function uploadImg()
        alert("请选择文件！");
        return;
     }
-    alert("jQuery:"+jQuery);
+    //alert("jQuery:"+jQuery);
     var url ='${pageContext.request.contextPath}/sys/upolad/uploadImg.do?filePath=article&r='+new Date().getTime();
 	jQuery.ajaxFileUpload({
          async:false,
@@ -178,7 +178,7 @@ function uploadImg()
          fileElementId:fieldId,
          dataType: 'json',
          success: function (data,status){
-                 alert("22");
+                 //alert("22");
                  jQuery(data).each(function(i,n){
                         if(n.maxSize!=null && n.maxSize!=''){
                         	alert("图片大小不能大于"+n.maxSize+"kb！");

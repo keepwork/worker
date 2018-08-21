@@ -1,15 +1,14 @@
 package com.weixin.util;
 
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import javax.servlet.http.HttpServletRequest;
 
-import com.qq.weixin.mp.aes.AesException;
-import com.qq.weixin.mp.aes.WXBizMsgCrypt;
+
 import com.sinovatech.common.config.GlobalConfig;
 import com.weixin.po.WeiXinOauth2Token;
 import com.weixin.po.WeiXinUserInfo;
 import net.sf.json.JSONObject;
+import org.apache.log4j.Logger;
 
 /**
  * 微信接口帮助类
@@ -19,6 +18,7 @@ import net.sf.json.JSONObject;
  *
  */
 public class WeixinUtil {
+	private static Logger log = Logger.getLogger(WeixinUtil.class);
 
 	 /**
      * 通过code换取网页授权access_token
@@ -75,7 +75,6 @@ public class WeixinUtil {
      * 查询 access_token
      * @param appId
      * @param appSecret
-     * @param code
      * @return
      */
     public static WeiXinOauth2Token getAccessToken(String appId,String appSecret) {
@@ -109,8 +108,6 @@ public class WeixinUtil {
     /**
      * 刷新access_token（如果需要）
      * @param appId
-     * @param appSecret
-     * @param code
      * @return
      */
     public static WeiXinOauth2Token refreshAccessToken(String appId, String refreshToken) {
@@ -367,7 +364,141 @@ public class WeixinUtil {
 		returnStr.append("<Content><![CDATA["+content+"]]></Content>");  
 		returnStr.append("</xml>");  
 	}
-    
+
+
+	/**
+	 * 下载并压缩文件
+	 *
+	 * @param accessToken
+	 * @param media_id
+	 * @param path
+	 * @return null为成功
+	 */
+	private static final String download_url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&media_id=MEDIA_ID";
+	public static String download(String accessToken, String media_id, String type) {
+//		log.debug("======================================== WeixinUtil download");
+		String url = download_url.replace("ACCESS_TOKEN", accessToken).replace("MEDIA_ID", media_id);
+		log.debug("======================================== url :"+url);
+		byte[] data = CommonUtil.httpRequestImage(url);
+		log.debug("======================================== data.length :"+data.length);
+		log.debug("======================================== data :"+data);
+		if (data.length < 200) { //报错
+			String s = new String(data);
+			log.debug("======================================== s :"+s);
+			if (s.startsWith("{") && s.endsWith("}")) {
+				return s;
+			}
+		}
+		try {
+			// 将字符串转换成二进制，用于显示图片
+			// 将上面生成的图片格式字符串 imgStr，还原成图片显示
+			InputStream in = new ByteArrayInputStream(data);
+			//String file = "/data/wwwroot/default/common/upload/temporary/"+(int) ((Math.random() * 9 + 1) * 100000)+".jpg";//临时图片路径
+			String filePath = GlobalConfig.getProperty("filePath", "order.transaction.record.path");//订单交易记录图片存储路径
+			filePath = filePath+type+"/"+(int) ((Math.random() * 9 + 1) * 100000)+".jpg";
+			File tempFile = new File(filePath);
+			FileOutputStream fos = new FileOutputStream(tempFile);
+			byte[] b = new byte[1024];
+			int nRead = 0;
+			while ((nRead = in.read(b)) != -1) {
+				fos.write(b, 0, nRead);
+			}
+			fos.flush();
+			fos.close();
+			in.close();
+
+			/* 压缩处理
+			int weight = Integer.parseInt(GlobalConfig.getProperty("filePath", "photo.small.weight"));
+			//int height = Integer.parseInt(GlobalConfig.getProperty("filePath", "photo.small.height"));
+			InputStream photoSmallIs = ImageUtil.zoomImageScale(tempFile, weight);//固定宽度，等比生成缩略图
+			File file = new File(filePath,fileName);
+			FileOutputStream fos1 = new FileOutputStream(file);
+			byte[] b1 = new byte[1024];
+			int nRead1 = 0;
+			while ((nRead1 = photoSmallIs.read(b1)) != -1) {
+				fos1.write(b1, 0, nRead1);
+			}
+			fos1.flush();
+			fos1.close();
+			photoSmallIs.close();
+
+			FileTool.deleteFile(temporary);//删除临时文件
+			-*/
+
+//			FileOutputStream os = new FileOutputStream(filePath);
+//			os.write(data);
+//			os.close();
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("assn_err_msg", "Download Exception:" + e.toString());
+			return jsonObject.toString();
+		}
+	}
+
+	/**
+	 * 查询 用户列表
+	 * @param accessToken
+	 * @return
+	 */
+	public static boolean getCallBackIp(String accessToken) {
+		String url = "https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token="+accessToken;
+		log.debug("==================getCallBackIp======================");
+		log.debug(url);
+		log.debug("==================getCallBackIp======================");
+
+		Boolean exist = false;
+		JSONObject jsonObject = CommonUtil.httpsRequest(url,"GET");
+		if (null != jsonObject) {
+			try {
+				String ip_list = jsonObject.getString("ip_list")+"";
+				log.debug("==================ip_list.length======================:"+ip_list.length());
+				if(null != ip_list && !"".equals(ip_list)){
+					exist = true;
+				}
+			} catch (Exception e) {
+				String errorCode = jsonObject.getString("errcode");
+				String errorMsg = jsonObject.getString("errmsg");
+				log.debug("查询 微信服务器IP地址失败 errcode{},errMsg,errorCode:"
+						+ errorCode + ",errorMsg:" + errorMsg);
+			}
+		}
+		return exist;
+	}
+
+	/**
+	 * 上传文件
+	 * @return
+	 */
+	/*private static final String upload_url = "https://qyapi.weixin.qq.com/cgi-bin/media/upload?access_token=ACCESS_TOKEN&type=TYPE";
+	public static Result<MdlUpload> Upload(String accessToken, String type, File file) {
+		Result<MdlUpload> result = new Result<MdlUpload>();
+		String url = upload_url.replace("ACCESS_TOKEN", accessToken).replace("TYPE", type);
+		JSONObject jsonObject;
+		try {
+			HttpPostUtil post = new HttpPostUtil(url);
+			post.addParameter("media", file);
+			String s = post.send();
+			jsonObject = JSONObject.fromObject(s);
+			if (jsonObject.containsKey("media_id")) {
+				MdlUpload upload=new MdlUpload();
+				upload.setMedia_id(jsonObject.getString("media_id"));
+				upload.setType(jsonObject.getString("type"));
+				upload.setCreated_at(jsonObject.getString("created_at"));
+				result.setObj(upload);
+				result.setErrmsg("success");
+				result.setErrcode("0");
+			} else {
+				result.setErrmsg(jsonObject.getString("errmsg"));
+				result.setErrcode(jsonObject.getString("errcode"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.setErrmsg("Upload Exception:"+e.toString());
+		}
+		return result;
+	}*/
 
     public static void main(String[] args) {
 		String url = "http://huida.lianshikeji.cn/weixin/index.do?type=wap";

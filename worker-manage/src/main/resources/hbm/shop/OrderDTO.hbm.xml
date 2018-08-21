@@ -257,6 +257,21 @@
 				<comment>支付时间3</comment>
 			</column>
 		</property>
+		<property name="protocolImgPath" type="java.lang.String">
+			<column name="PROTOCOL_IMG_PATH" length="200">
+				<comment>协议书图片路径</comment>
+			</column>
+		</property>
+		<property name="quoteImgPath" type="java.lang.String">
+			<column name="QUOTE_IMG_PATH" length="200">
+				<comment>报价单图片路径</comment>
+			</column>
+		</property>
+		<property name="serviceImgPath" type="java.lang.String">
+			<column name="SERVICE_IMG_PATH" length="200">
+				<comment>服务单图片路径</comment>
+			</column>
+		</property>
 
 		<many-to-one name="tbTBmsLocationDTO"
 					 class="com.sinovatech.bms.adm.model.dto.TBmsLocationDTO"

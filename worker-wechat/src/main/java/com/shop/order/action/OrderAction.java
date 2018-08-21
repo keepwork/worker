@@ -27,6 +27,9 @@ import com.sinovatech.common.web.action.CommonMapping;
 import com.sinovatech.common.web.limit.ExLimitUtil;
 import com.sinovatech.common.web.limit.ILimitUtil;
 import com.sinovatech.common.web.limit.LimitInfo;
+import com.sinovatech.hd.tools.cache.CacheFactory;
+import com.sinovatech.hd.tools.cache.ICache;
+import com.weixin.util.WeixinUtil;
 import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
@@ -61,6 +64,7 @@ public class OrderAction extends BaseAdmAction
 	private MenberAddrFacade myMenberAddrFacade;
 	private MenberPointFacade myMenberPointFacade;
 	private AppraiseFacade myAppraiseFacade;
+	private ICache cache = CacheFactory.newCache();
 	
 	public void init(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
@@ -1058,6 +1062,47 @@ public class OrderAction extends BaseAdmAction
 		{
 			return mapping.findForward(returnPage);
 		}
+		return null;
+	}
+
+	/**
+	 * 上传人脸图片
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward uploadImg(ActionMapping mapping,
+									   ActionForm form, HttpServletRequest request,
+									   HttpServletResponse response) throws Exception
+	{
+		log.info("========================= WeixinAction uploadFaceImg begin");
+		String mediaId = (String)request.getParameter("mediaId");
+		String type = (String)request.getParameter("type");
+		String orderId = (String)request.getParameter("orderId");
+		String token = (String)cache.get("access_token");
+		String fileName = "";
+
+		OrderDTO dto = myOrderFacade.get(orderId);
+		if("protocol".equals(type)){
+			dto.setProtocolImgPath("common/upload/transactionRecord/"+type+fileName);
+		}else if("quote".equals(type)){
+			dto.setQuoteImgPath("common/upload/transactionRecord/"+type+fileName);
+		}else if("service".equals(type)){
+			dto.setServiceImgPath("common/upload/transactionRecord/"+type+fileName);
+		}
+		myOrderFacade.update(dto);
+
+		log.info("mediaId:"+mediaId);
+		log.info("token:"+token);
+
+		//从微信服务器下载人脸图片到云服务器
+		WeixinUtil.download(token,mediaId,type);
+
+		response.getWriter().write(fileName);
+		response.getWriter().flush();
 		return null;
 	}
 

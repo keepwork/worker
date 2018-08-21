@@ -28,7 +28,7 @@ public class WeixinAction extends BaseAdmAction
 	
     private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
-    
+
     private MenberFacade myMenberFacade;
 //    private MenberFamilyFacade myMenberFamilyFacade;
     
@@ -86,7 +86,7 @@ public class WeixinAction extends BaseAdmAction
     	
     	return mapping.findForward("indexWap");
 	}
-  
-    
-    
+
+
+
 }

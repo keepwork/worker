@@ -68,6 +68,9 @@ public abstract class AbstractOrderDTO extends DtoSupport
 	private Integer cycleInit;//完成施工周期(天)
 	private Integer cycleAdd;//完成施工补充周期(天)
 	private BigDecimal cost;//成本
+	private String protocolImgPath;//协议书图片
+	private String quoteImgPath;//报价单图片
+	private String serviceImgPath;//服务单图片
 
 	//所属地区或团队
 	private TBmsLocationDTO tbTBmsLocationDTO;
@@ -412,5 +415,29 @@ public abstract class AbstractOrderDTO extends DtoSupport
 
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
+	}
+
+	public String getProtocolImgPath() {
+		return protocolImgPath;
+	}
+
+	public void setProtocolImgPath(String protocolImgPath) {
+		this.protocolImgPath = protocolImgPath;
+	}
+
+	public String getQuoteImgPath() {
+		return quoteImgPath;
+	}
+
+	public void setQuoteImgPath(String quoteImgPath) {
+		this.quoteImgPath = quoteImgPath;
+	}
+
+	public String getServiceImgPath() {
+		return serviceImgPath;
+	}
+
+	public void setServiceImgPath(String serviceImgPath) {
+		this.serviceImgPath = serviceImgPath;
 	}
 }

@@ -1,6 +1,29 @@
 <%@ page language="java" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="/WEB-INF/tld/c.tld" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<%@ page language="java" import="com.weixin.util.SignUtil" %>
+<%@ page language="java" import="com.sinovatech.common.config.GlobalConfig" %>
+<%@ page language="java" import="java.util.Map" %>
+
+<%
+  String appId = GlobalConfig.getProperty("weixin", "appid");
+  String jsapi_ticket = (String)request.getAttribute("jsapi_ticket")+"";
+  String code = (String)request.getParameter("code")+"";//网页自带的参数
+  String url = "http://kg.hncnbot.com/kguser/beforeAddBaby.do?type=wap";
+  Map<String, String> map = SignUtil.sign(jsapi_ticket, url);
+  String signature = map.get("signature").toString();
+  int timestamp = Integer.parseInt(map.get("timestamp").toString());
+  String nonceStr = map.get("nonceStr");
+
+  System.out.println("");
+  System.out.println("url:"+url);
+  System.out.println("appId:"+appId);
+  System.out.println("jsapi_ticket:"+jsapi_ticket);
+  System.out.println("signature:"+signature);
+  System.out.println("timestamp:"+timestamp);
+  System.out.println("nonceStr:"+nonceStr);
+  System.out.println("");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +40,10 @@
 <link rel="stylesheet" type="text/css" href="${ctx }/wap/css/footer.css">
 <link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/public.css">
 <script type="text/javascript" src="${ctx }/wap/workerCenter/js/jquery.min.js" ></script>
+<%--<script type="text/javascript" src="${ctx}/wap/common/js/jweixin-1.2.0.js"></script>--%>
+<script type="text/javascript" src="${ctx}/common/js/ajaxfileupload.js"></script>
 <script src="${ctx }/wap/js/rem.js"></script>
+
 <%--footer 结束--%>
   <style>
     .pay-state {
@@ -33,7 +59,7 @@
   </style>
 </head>
 
-<body>
+<body style="overflow:scroll;overflow-x:hidden">
 <header class="header" id="header">
 <a href="javascript:history.go(-1)" target=_self class="back">返回</a>
 <h1>订单详情</h1>
@@ -133,6 +159,24 @@
       <li><h2>评价内容</h2><span>${requestScope.appraise.content}</span></li>
     </ul>
   </c:if>
+
+  <div style="margin-bottom: 0.3rem"></div>
+  <ul class="order-confirm-list clearfix order-cancel-list">
+    <li><p>交易凭证</p></li>
+    <li ><h2>协议书</h2></li>
+    <li ><img src="${ctx}/wap/images/tptj.png" style="height: 3rem;width: 3rem;" id="protocol">
+        <img src="${ctx}/${requestScope.order.protocolImgPath}" style="height: 3rem;width: 3rem;" id="protocol_img" onerror="this.style.display='none'" >
+    </li>
+    <li ><h2>报价单</h2></li>
+    <li ><img src="${ctx}/wap/images/tptj.png" style="height: 3rem;width: 3rem;" id="quote">
+        <img src="${ctx}/${requestScope.order.quoteImgPath}" style="height: 3rem;width: 3rem;" id="quote_img" onerror="this.style.display='none'">
+    </li>
+    <li ><h2>服务表</h2></li>
+    <li ><img src="${ctx}/wap/images/tptj.png" style="height: 3rem;width: 3rem;" id="service">
+        <img src="${ctx}/${requestScope.order.serviceImgPath}" style="height: 3rem;width: 3rem;" id="service_img" onerror="this.style.display='none'">
+    </li>
+  </ul>
+
   <div style="margin-bottom: 0.3rem"></div>
   <ul class="order-confirm-list clearfix order-cancel-list">
     <li><p>订单进度</p></li>
@@ -236,10 +280,115 @@
     </div>
   </ul>
 
+  <div style="position: fixed;bottom: 0;width: 100%;">
+    <button style="width: 50%;height: 2rem;float:left;background: #5bc0de;color: #fff;" id="uploadPhoto">保存</button>
+    <button style="width: 50%;height: 2rem;float:right;background: #819bd8;color: #fff;">重选</button>
+  </div>
 </div>
 <!--order-confirm-end-->
 
 </div>
 <!--container-end-->
+
+
+<script type="text/javascript">
+    var mediaId = '';
+    var uploadType = '';
+    var orderId = '${requestScope.order.id}'
+    function test() {
+        alert("999");
+        $("#protocol").next().attr("src","${ctx}/wap/images/tptj.png").show();
+    }
+
+    /**
+     *选择照片事件绑定
+     *
+     * @param id
+     */
+    function selectImgEventBing(id) {
+        var takePhoto = document.getElementById(id);
+        takePhoto.addEventListener('click', function() {
+            wx.chooseImage({
+                count: 1, // 张数,默认9
+                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                success: function (res) {
+                    //var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                    var localId = res.localIds[0];
+                    faceObj.src = localId;
+
+                    wx.uploadImage({
+                        localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+                        isShowProgressTips: 1, // 默认为1，显示进度提示
+                        success: function (res) {
+                            mediaId = res.serverId; // 返回图片的服务器端ID
+                            //$("#"+id+"_img").val(mediaId);
+                            $("#"+id+"_img").attr("src",mediaId).show();
+                            uploadType = id;
+                        },
+                        fail: function (error) {
+
+                        }
+                    });
+                }
+            });
+        });
+    }
+
+    window.onload = function() {
+        //alert(window.location.href.split('#')[0]);
+        wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: '<%=appId%>', // 必填，公众号的唯一标识
+            timestamp: <%=timestamp%>, // 必填，生成签名的时间戳
+            nonceStr: '<%=nonceStr%>', // 必填，生成签名的随机串
+            signature: '<%=signature%>',// 必填，签名，见附录1
+            jsApiList: [
+                'chooseImage',
+                'uploadImage',
+                'getLocalImgData',
+                'downloadImage'
+            ],
+            success:function(res){
+                alert("配置成功");
+                alert(JSON.stringify(res));
+            },
+            fail:function(){
+                alert("配置失败");
+            }
+        });
+
+//        var takePhoto = document.getElementById('takePhoto');
+        var uploadPhoto = document.getElementById('uploadPhoto');
+        var faceObj = document.getElementById('faceImg');
+
+        wx.ready(function(){
+            selectImgEventBing("protocol");
+            selectImgEventBing("quote");
+            selectImgEventBing("service");
+
+            uploadPhoto.addEventListener('click', function() {
+              //alert(mediaId);
+              if('' != mediaId){
+                var url = "${ctx}/order/uploadImg.do?mediaId="+mediaId+"&uploadType="+uploadType+"&orderId="+orderId;
+                $.ajax({
+                  type : "get",
+                  url : url,
+                  dataType : "text",
+                  success : function(data) {
+                    //$("#headImgPath").val("/common/upload/face/"+data);
+                    alert("保存成功");
+                }
+                });
+              }else{
+                alert("请先选择照片");
+              }
+            });
+        });
+    }
+
+
+</script>
+<iframe name="hideframe" id="hideframe" width="0" height="0"></iframe>
 </body>
 </html>

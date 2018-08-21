@@ -33,7 +33,7 @@
 <body>
 	<header>
 	  <ul>
-		  <li class="back"><img src="${ctx}/wap/images/logo.jpg" style="width: 2.6rem;height: 2rem;margin-top: 0.2rem;"/></li>
+		  <li class="back"><img src="${ctx}/wap/images/logo.png" style="width: 2.6rem;height: 2rem;margin-top: 0.2rem;"/></li>
 	    <li class="logo"><strong>88修房屋快修</strong></li>
 	    <li class="more">&nbsp;</li>
 	  </ul>
@@ -89,6 +89,7 @@
 		<li><a href="javacript:void(0);" ><p><img src="${ctx}/wap/html/images/fl_20.png"/><span style="font-size:0.8rem">全部类型</span></p></a></li>
 	  </ul>
 
+
 	  <%--<ul style="margin-top: 13px;margin-left: 5px;"> --%>
 		<%--<li><img src="${ctx}/wap/images/banner1.jpg" width="100%" height="160" /></li>--%>
 	  <%--</ul>--%>
@@ -113,6 +114,12 @@
 			</a>
 		</div>
 		<!--二手置换 货运配送结束-->
+
+		<div style="width: 100%;text-align: center;background-color:#fff">
+			<div style="width: 100%;height: auto;overflow: hidden;clear: both;display: block;">
+				<img src="${ctx}/wap/images/ywlc.jpg" style="max-width: 100%;overflow: hidden;"/>
+			</div>
+		</div>
 
 		<div class="m_dibu" style="border-bottom:1px dashed #CECECE;">
 			<a href="${ctx}/pub/article/articleDetail.do?type=wap&id=101">公司介绍<img src="${ctx}/wap/images/d_xian.png" width="1px" style="float:right"></a>

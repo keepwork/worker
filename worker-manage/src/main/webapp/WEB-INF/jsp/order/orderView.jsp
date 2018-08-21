@@ -14,6 +14,9 @@
 		<script src="${ctx}/common/js/jquery.min.js"></script>
 		<script src="${ctx}/common/js/jquery.myProgress.js"></script>
 		<link rel="stylesheet" href="${ctx}/common/css/myProgress.css">
+		<link rel="stylesheet" type="text/css" href="${ctx}/style/normalize.css" />
+		<link rel="stylesheet" href="${ctx}/style/main.css">
+
 	</head>
 	<script>
         $(function () {
@@ -38,6 +41,7 @@
 			</div>
 			<!-- 订单基本信息 -->
 			<div class="flex_box_top"><strong class="fl ml10 font14">订单基本信息</strong></div>
+			<div id="image_container">
 			 	<table width="100%" cellspacing="0" cellpadding="0" border="0" align="center" class="table001 text_l  mt5">
 					<tr>
 						<th width="12%" align="right">订单ID：</th>
@@ -93,30 +97,41 @@
 						<th width="12%" align="right">支付时间：</th>
 						<td>${m.payTimeStr}</td>
 					</tr>
+
 					<tr>
-						<th width="12%" align="right">支付方式：</th>
+						<th width="12%" align="right">协议书</th>
 						<td>
-							<c:if test="${m.payType eq '1'}">余额支付</c:if>
-							<c:if test="${m.payType eq '2'}">积分支付</c:if>
-							<c:if test="${m.payType eq '3'}">微信支付</c:if>
+
+							<%--<img src="${ctx}/images/wt.png" style="width:30%;height: 15%">--%>
+							<c:if test="${m.protocolImgPath eq null}">
+								<img src="${ctx}/images/wt.png" style="width:30%;height: 15%">
+							</c:if>
+							<c:if test="${m.protocolImgPath ne null}">
+								<img src="${m.protocolImgPath}" style="width:30%;height: 15%">
+							</c:if>
 						</td>
-						<%--<th width="12%" align="right">服务时间：</th>--%>
-						<%--<td>--%>
-							<%--<c:if test="${m.orderStatus == '1'}">师傅跟我确认</c:if>--%>
-				       		<%--<c:if test="${m.orderStatus == '2'}">师傅跟我确认</c:if>--%>
-				       		<%--<c:if test="${m.orderStatus == '3'}">${m.sureTimeStr}</c:if>--%>
-				       		<%--<c:if test="${m.orderStatus == '4'}">${m.sureTimeStr}</c:if>--%>
-				       		<%--<c:if test="${m.orderStatus == '5'}">${m.sureTimeStr}</c:if>--%>
-						<%--</td>--%>
-						<th width="12%" align="right">计划工期(天)：</th>
+						<th width="12%" align="right">报价单</th>
 						<td>
-							${m.cycleInit}
+							<c:if test="${m.quoteImgPath eq null}">
+								<img src="${ctx}/images/wt.png" style="width:30%;height: 15%">
+							</c:if>
+							<c:if test="${m.quoteImgPath ne null}">
+								<img src="${m.quoteImgPath}" style="width:30%;height: 15%">
+							</c:if>
 						</td>
-						<th width="12%" align="right">新增工期(天)：</th>
-						<td>${m.cycleAdd}</td>
+						<th width="12%" align="right">服务单</th>
+						<td>
+							<c:if test="${m.serviceImgPath eq null}">
+								<img src="${ctx}/images/wt.png" style="width:30%;height: 15%">
+							</c:if>
+							<c:if test="${m.serviceImgPath ne null}">
+								<img src="${m.serviceImgPath}" style="width:30%;height: 15%">
+							</c:if>
+						</td>
 					</tr>
 
 				</table>
+			</div>
 				
 				<!-- 服务师傅信息 -->
 				<div class="flex_box_top mt15"><strong class="fl ml10 font14">服务师傅信息</strong></div>
@@ -176,8 +191,27 @@
 	</div>
 	<div class="clear"></div>
 </div>
-<!--主体 结束--> 
+<!--主体 结束-->
+
+<script src="${ctx}/js/BigPicture.js"></script>
+<script>
+    (function() {
+
+        function setClickHandler(id, fn) {
+            document.getElementById(id).onclick = fn;
+        }
+
+        setClickHandler('image_container', function(e) {
+            e.target.tagName === 'IMG' && BigPicture({
+                el: e.target,
+                imgSrc: e.target.src.replace('_thumb', '')
+            });
+        });
+
+    })();
+</script>
 
 </body>
+
 
 </html>
