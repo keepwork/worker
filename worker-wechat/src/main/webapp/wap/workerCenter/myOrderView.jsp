@@ -9,7 +9,7 @@
   String appId = GlobalConfig.getProperty("weixin", "appid");
   String jsapi_ticket = (String)request.getAttribute("jsapi_ticket")+"";
   String code = (String)request.getParameter("code")+"";//网页自带的参数
-  String url = "http://kg.hncnbot.com/kguser/beforeAddBaby.do?type=wap";
+  String url = "http://www.zhixiu.xyz/order/beforeAddBaby.do?type=wap";
   Map<String, String> map = SignUtil.sign(jsapi_ticket, url);
   String signature = map.get("signature").toString();
   int timestamp = Integer.parseInt(map.get("timestamp").toString());
@@ -164,15 +164,24 @@
   <ul class="order-confirm-list clearfix order-cancel-list">
     <li><p>交易凭证</p></li>
     <li ><h2>协议书</h2></li>
-    <li ><img src="${ctx}/wap/images/tptj.png" style="height: 3rem;width: 3rem;" id="protocol">
+    <li >
+      <c:if test="${m.protocolImgPath eq null}">
+        <img src="${ctx}/wap/images/tptj.png" style="height: 3rem;width: 3rem;" id="protocol">
+      </c:if>
         <img src="${ctx}/${requestScope.order.protocolImgPath}" style="height: 3rem;width: 3rem;" id="protocol_img" onerror="this.style.display='none'" >
     </li>
     <li ><h2>报价单</h2></li>
-    <li ><img src="${ctx}/wap/images/tptj.png" style="height: 3rem;width: 3rem;" id="quote">
+    <li >
+      <c:if test="${m.quoteImgPath eq null}">
+        <img src="${ctx}/wap/images/tptj.png" style="height: 3rem;width: 3rem;" id="quote">
+      </c:if>
         <img src="${ctx}/${requestScope.order.quoteImgPath}" style="height: 3rem;width: 3rem;" id="quote_img" onerror="this.style.display='none'">
     </li>
     <li ><h2>服务表</h2></li>
-    <li ><img src="${ctx}/wap/images/tptj.png" style="height: 3rem;width: 3rem;" id="service">
+    <li >
+      <c:if test="${m.serviceImgPath eq null}">
+        <img src="${ctx}/wap/images/tptj.png" style="height: 3rem;width: 3rem;" id="service">
+      </c:if>
         <img src="${ctx}/${requestScope.order.serviceImgPath}" style="height: 3rem;width: 3rem;" id="service_img" onerror="this.style.display='none'">
     </li>
   </ul>
@@ -294,7 +303,7 @@
 <script type="text/javascript">
     var mediaId = '';
     var uploadType = '';
-    var orderId = '${requestScope.order.id}'
+    var orderId = '${requestScope.order.orderId}'
     function test() {
         alert("999");
         $("#protocol").next().attr("src","${ctx}/wap/images/tptj.png").show();

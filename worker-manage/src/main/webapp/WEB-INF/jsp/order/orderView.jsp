@@ -107,7 +107,7 @@
 								<img src="${ctx}/images/wt.png" style="width:30%;height: 15%">
 							</c:if>
 							<c:if test="${m.protocolImgPath ne null}">
-								<img src="${m.protocolImgPath}" style="width:30%;height: 15%">
+								<img src="${ctx}/${m.protocolImgPath}" style="width:30%;height: 15%">
 							</c:if>
 						</td>
 						<th width="12%" align="right">报价单</th>
