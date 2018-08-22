@@ -34,9 +34,6 @@ import com.weixin.util.MessageUtil;
  */
 public class WXCheckServlet extends HttpServlet {
 
-//	private String token = "keepwork512";
-//	private String encodingAESKey = "WDF5Or4SGr2S6zyx1DYukN0A7ehXC8YBjkEDY1ZgQPs";
-//	private String corpId = "wx795a6bd223954b76";//appId
 	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static MenberFacade myMenberFacade;
 	public MenberFacade getMyMenberFacade() {
@@ -75,7 +72,7 @@ public class WXCheckServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-//		System.out.println("=============WXCheckServlet doGet");
+		System.out.println("=============WXCheckServlet doGet");
 //		response.setContentType("text/html");
 		request.setCharacterEncoding("UTF-8");
 	  	response.setCharacterEncoding("UTF-8");
@@ -110,7 +107,7 @@ public class WXCheckServlet extends HttpServlet {
 //		System.out.println("WXCheckServlet===================== timestamp:"+timestamp);
 //		System.out.println("WXCheckServlet===================== nonce:"+nonce);
 //		System.out.println("WXCheckServlet===================== echostr:"+echostr);
-		
+
 		String token = request.getParameter("token");
 		String encodingAESKey = request.getParameter("key");
 		String appId = request.getParameter("appId");
@@ -167,7 +164,7 @@ public class WXCheckServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-//			System.out.println("=============WXCheckServlet init");
+			System.out.println("=============WXCheckServlet doPost");
 			// 将请求、响应的编码均设置为UTF-8（防止中文乱码）
 		  	request.setCharacterEncoding("UTF-8");
 		  	response.setCharacterEncoding("UTF-8");
@@ -229,6 +226,9 @@ public class WXCheckServlet extends HttpServlet {
 			} catch (AesException e) {
 				e.printStackTrace();
 			}
+//			System.out.println("------------encryptMsg------------------------------------");
+//			System.out.println(encryptMsg);
+//			System.out.println("------------encryptMsg------------------------------------");
 			
 			// 响应消息
 			PrintWriter out = response.getWriter();

@@ -79,7 +79,7 @@ public class WXAccessFilter implements Filter
 						|| "/pub/menber/workApply.do".equals(uri)
 						|| "/pub/articleCate/articleCateList.do".equals(uri)
 						|| "/pub/goodCate/firstCates.do".equals(uri)
-						|| "/pub/menber/myAccount.do".equals(uri))
+						|| "/pub/menber/centerInit.do".equals(uri))
 				{
 
 				////////////////////////////////////////////////测试用，生产上要去掉
