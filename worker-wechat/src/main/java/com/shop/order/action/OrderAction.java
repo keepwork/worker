@@ -1083,7 +1083,10 @@ public class OrderAction extends BaseAdmAction
 		String type = (String)request.getParameter("type");
 		String orderId = (String)request.getParameter("orderId");
 		String token = (String)cache.get("access_token");
-		String fileName = "";
+		String fileName = (int) ((Math.random() * 9 + 1) * 100000)+".jpg";
+
+        //从微信服务器下载人脸图片到云服务器
+        WeixinUtil.download(token,mediaId,type,fileName);
 
 		OrderDTO dto = myOrderFacade.get(orderId);
 		if("protocol".equals(type)){
@@ -1097,9 +1100,6 @@ public class OrderAction extends BaseAdmAction
 
 		log.info("mediaId:"+mediaId);
 		log.info("token:"+token);
-
-		//从微信服务器下载人脸图片到云服务器
-		WeixinUtil.download(token,mediaId,type);
 
 		response.getWriter().write(fileName);
 		response.getWriter().flush();
