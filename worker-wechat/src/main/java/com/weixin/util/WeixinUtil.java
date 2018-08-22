@@ -375,7 +375,7 @@ public class WeixinUtil {
 	 * @return null为成功
 	 */
 	private static final String download_url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&media_id=MEDIA_ID";
-	public static String download(String accessToken, String media_id, String type) {
+	public static String download(String accessToken, String media_id, String type,String fileName) {
 //		log.debug("======================================== WeixinUtil download");
 		String url = download_url.replace("ACCESS_TOKEN", accessToken).replace("MEDIA_ID", media_id);
 		log.debug("======================================== url :"+url);
@@ -395,7 +395,8 @@ public class WeixinUtil {
 			InputStream in = new ByteArrayInputStream(data);
 			//String file = "/data/wwwroot/default/common/upload/temporary/"+(int) ((Math.random() * 9 + 1) * 100000)+".jpg";//临时图片路径
 			String filePath = GlobalConfig.getProperty("filePath", "order.transaction.record.path");//订单交易记录图片存储路径
-			filePath = filePath+type+"/"+(int) ((Math.random() * 9 + 1) * 100000)+".jpg";
+
+			filePath = filePath+type+"/"+fileName;
 			File tempFile = new File(filePath);
 			FileOutputStream fos = new FileOutputStream(tempFile);
 			byte[] b = new byte[1024];
