@@ -49,182 +49,179 @@ public class WXAccessFilter implements Filter
 		log.info("WXAccessFilter ============= uri:"+uri);
 		
 		String type = request.getParameter("type");
-//		log.info("WXAccessFilter ============= type:"+type);
+		log.info("WXAccessFilter ============= type:"+type);
 		
 		//网页版
-//		if(null != type && type.equals("web")){
-//			String leftMenu = request.getParameter("leftMenu");
-//			if(null != leftMenu && !leftMenu.equals("")){
-//				MenberDTO menber = (MenberDTO)request.getSession().getAttribute("pcmenber");
-//				if(null == menber){//未登录
-//					response.sendRedirect(serverDomain+"/web/login.jsp");
-//				}else{
-//					filterchain.doFilter(request, response);
-//					if(1==1){return;}
-//				}
-//			}
-//		}
+		if(null != type && type.equals("web")){
+			String leftMenu = request.getParameter("leftMenu");
+			if(null != leftMenu && !leftMenu.equals("")){
+				MenberDTO menber = (MenberDTO)request.getSession().getAttribute("pcmenber");
+				if(null == menber){//未登录
+					response.sendRedirect(serverDomain+"/web/login.jsp");
+				}else{
+					filterchain.doFilter(request, response);
+					if(1==1){return;}
+				}
+			}
+		}
 		
 		//微信版
 		if(null != type && type.equals("wap")){
 			try{
 				
 				//判断是否微信浏览器
-//		        boolean wxBrowser = WeixinUtil.isWeiXinBrowser(request);
-//		        if(!wxBrowser){
-//		        	response.sendRedirect(serverDomain+"/wap/error.html");
-//		        }
-		        
-//				if ("/weixin/index.do".equals(uri))
-//				{
-//					log.info("WXAccessFilter ============= 微信访问");
-				
-				////////////////////////////////////////////////测试用，生产上要去掉
-				if ("/worker-wechat/weixin/index.do".equals(uri)
-						|| "/worker-wechat/pub/menber/myAccount.do".equals(uri)
-						|| "/worker-wechat/pub/menber/workApply.do".equals(uri))
-//				if ("/weixin/index.do".equals(uri)
-//						|| "/pub/menber/myAccount.do".equals(uri)
-//						|| "/pub/menber/workApply.do".equals(uri))
-				{
-					String openID = request.getParameter("openID");
-					if(null!=openID && !openID.equals("")){
-						request.getSession().setAttribute("openID", openID);
-						MenberDTO sessionMenber1 = myMenberFacade.findMenberByOpenId(openID);
-//	                request.getSession().setAttribute("openID", "o7Jq2wIeiWcLoA7UCQL5VhAa118M");
-//	                MenberDTO sessionMenber1 = myMenberFacade.findMenberByOpenId("o7Jq2wIeiWcLoA7UCQL5VhAa118M");
-						request.getSession().setAttribute("wxmenber", sessionMenber1);
-						request.getSession().setAttribute("wxmenberId", sessionMenber1.getId());
-						request.getSession().setAttribute("jsapi_ticket", "");
-					}
+		        boolean wxBrowser = WeixinUtil.isWeiXinBrowser(request);
+		        if(!wxBrowser){
+		        	response.sendRedirect(serverDomain+"/wap/error.html");
+		        }
 
-            		filterchain.doFilter(request, response);
-	                if(1==1){return;}
+				if ("/weixin/index.do".equals(uri)
+						|| "/pub/menber/workApply.do".equals(uri)
+						|| "/pub/articleCate/articleCateList.do".equals(uri)
+						|| "/pub/goodCate/firstCates.do".equals(uri)
+						|| "/pub/menber/myAccount.do".equals(uri))
+				{
+
+				////////////////////////////////////////////////测试用，生产上要去掉
+//				if ("/worker-wechat/weixin/index.do".equals(uri)
+//						|| "/worker-wechat/pub/menber/workApply.do".equals(uri)
+//						|| "/worker-wechat/pub/articleCate/articleCateList.do".equals(uri)
+//						|| "/worker-wechat/pub/goodCate/firstCates.do".equals(uri)
+//						|| "/worker-wechat/pub/menber/myAccount.do".equals(uri))
+//				{
+//					String _openID = "o7Jq2wIeiWcLoA7UCQL5VhAa118M";
+//					log.info("WXAccessFilter ============= openID:"+openID);
+//					if(null!=_openID && !_openID.equals("")){
+//						request.getSession().setAttribute("openID", _openID);
+//						MenberDTO sessionMenber = myMenberFacade.findMenberByOpenId(_openID);
+//						request.getSession().setAttribute("wxmenber", sessionMenber);
+//						request.getSession().setAttribute("wxmenberId", sessionMenber.getId());
+//						request.getSession().setAttribute("jsapi_ticket", "");
+//					}
+
+//            		filterchain.doFilter(request, response);
+//	                if(1==1){return;}
 				//////////////////////////////////////////////测试用，生产上要去掉
 					
 	                
 	                
-							// 将请求、响应的编码均设置为UTF-8（防止中文乱码）
-			                request.setCharacterEncoding("UTF-8");
-			                response.setCharacterEncoding("UTF-8");
+					// 将请求、响应的编码均设置为UTF-8（防止中文乱码）
+					request.setCharacterEncoding("UTF-8");
+					response.setCharacterEncoding("UTF-8");
+
+					String appid = GlobalConfig.getProperty("weixin", "appid");//应用ID
+					String appsecret = GlobalConfig.getProperty("weixin", "appsecret");//应用密钥
+					String openID = (String)request.getSession().getAttribute("openID");
+					log.info("WXAccessFilter ============= session openId:"+openID);
 			                
-			                String appid = GlobalConfig.getProperty("weixin", "appid");//应用ID
-			    			String appsecret = GlobalConfig.getProperty("weixin", "appsecret");//应用密钥
-			    			openID = (String)request.getSession().getAttribute("openID");
-//			    			String openID = (String)request.getSession().getAttribute("openID");
-			    			log.info("WXAccessFilter ============= session openId:"+openID);
-			                
-			                MenberDTO sm = (MenberDTO)request.getSession().getAttribute("wxmenber");
-			                if(null==sm){
-			                	log.info("WXAccessFilter ============= session menber is null ");
-			                }else{
-			                	log.info("WXAccessFilter ============= session menber loginName:"+sm.getLoginName()+",realName:"+sm.getRealName());
-			                }
+					MenberDTO sm = (MenberDTO)request.getSession().getAttribute("wxmenber");
+					if(null==sm){
+						log.info("WXAccessFilter ============= session menber is null ");
+					}else{
+						log.info("WXAccessFilter ============= session menber loginName:"+sm.getLoginName()+",realName:"+sm.getRealName());
+					}
 			                
 			                
-			                if(null == openID || "".equals(openID))// || null == sm)
-			                {
-			                	// ====== 第一步：用户同意授权，获取code（通过访问菜单地址进行授权后会返回code）
-			                    String code = (String)request.getParameter("code");
-			                    log.info("WXAccessFilter ============= code:"+code);
-			                    if(null == code || code.equals("")){
-			                    	log.info("WXAccessFilter ============= 用户不同意授权");
-			                    	request.getSession().invalidate();
-				                	return;
-			                    }
+					if(null == openID || "".equals(openID))// || null == sm)
+					{
+						// ====== 第一步：用户同意授权，获取code（通过访问菜单地址进行授权后会返回code）
+						String code = (String)request.getParameter("code");
+						log.info("WXAccessFilter ============= code:"+code);
+						if(null == code || code.equals("")){
+							log.info("WXAccessFilter ============= 用户不同意授权");
+							request.getSession().invalidate();
+							return;
+						}
 			                    
-			                    // ====== 第二步：通过code换取网页授权access_token
-			                	WeiXinOauth2Token token = new WeiXinOauth2Token();
-			                    token = WeixinUtil.getOauth2AccessToken(appid,appsecret,code);
-			                    log.info("WXAccessFilter ============= token:"+token);
-			                    if(null != token){
-			                    	request.getSession().setAttribute("openID", token.getOpenId());
-			                    	request.getSession().setAttribute("accessToken", token.getAccessToken());
-			                    	log.info("set seesion accessToken:"+token.getAccessToken());
+						// ====== 第二步：通过code换取网页授权access_token
+						WeiXinOauth2Token token = new WeiXinOauth2Token();
+						token = WeixinUtil.getOauth2AccessToken(appid,appsecret,code);
+						log.info("WXAccessFilter ============= token:"+token);
+						if(null != token){
+							request.getSession().setAttribute("openID", token.getOpenId());
+							request.getSession().setAttribute("accessToken", token.getAccessToken());
+							log.info("set seesion accessToken:"+token.getAccessToken());
 			                    	
-			                        // ====== 第四步：拉取用户信息(需scope为 snsapi_userinfo)
-			                        WeiXinUserInfo wxuser = WeixinUtil.getWeiXinUserInfo(token.getAccessToken(),token.getOpenId(),request);
-			                        log.info("wxuser0:"+wxuser);
-			                        if(null == wxuser)
-			                        {
-			                        	log.info("getRefeshToken:"+token.getRefeshToken());
-			                        	token = WeixinUtil.refreshAccessToken(appid,token.getRefeshToken());
-			                        	log.info("getAccessToken:"+token.getAccessToken());
-			                        	wxuser = WeixinUtil.getWeiXinUserInfo(token.getAccessToken(),token.getOpenId(),request);
-			                        	log.info("wxuser1:"+wxuser);
-			                        }
+							// ====== 第四步：拉取用户信息(需scope为 snsapi_userinfo)
+							WeiXinUserInfo wxuser = WeixinUtil.getWeiXinUserInfo(token.getAccessToken(),token.getOpenId(),request);
+							log.info("wxuser0:"+wxuser);
+							if(null == wxuser){
+								log.info("getRefeshToken:"+token.getRefeshToken());
+								token = WeixinUtil.refreshAccessToken(appid,token.getRefeshToken());
+								log.info("getAccessToken:"+token.getAccessToken());
+								wxuser = WeixinUtil.getWeiXinUserInfo(token.getAccessToken(),token.getOpenId(),request);
+								log.info("wxuser1:"+wxuser);
+							}
 			                        
-			                        if(null != wxuser && null != wxuser.getOpenid())
-			                        {
-			                        	log.info("wxuser openId:"+wxuser.getOpenid());
-			                        	// 保存微信用户到数据库
-			                        	MenberDTO menber = myMenberFacade.findMenberByOpenId(wxuser.getOpenid());
-										log.info("WXAccessFilter ============= menber1:"+menber);
+							if(null != wxuser && null != wxuser.getOpenid()){
+								log.info("wxuser openId:"+wxuser.getOpenid());
+								// 保存微信用户到数据库
+								MenberDTO menber = myMenberFacade.findMenberByOpenId(wxuser.getOpenid());
+								log.info("WXAccessFilter ============= menber1:"+menber);
 
-
-			                        	if(null == menber && "/menber/workerBind.do".equals(uri)){//工人师傅绑定
-											response.sendRedirect("http://" + serverDomain + "/wap/workerBind.html");
-											return;
-										}else if(null == menber){
-			                        		addMenber(request,response,wxuser);//新增会员信息
-			                        	}else{
-			                        		//将用户信息保存在session中
-			                        		request.getSession().setAttribute("wxmenber", menber);
-				                        	request.getSession().setAttribute("wxmenberId", menber.getId());
-				                        	
-				                        	if(!menber.getHeadimgurl().equals(wxuser.getHeadimgurl())){
-			                        			updateMenber(menber,wxuser);//修改会员信息
-			                        		}
-			                        	}
-			                        }
-			                        
-			                    }else{//获取网页授权凭证失败
-			                    	log.info("WXAccessFilter ============= 获取网页授权凭证失败");
-			                    	request.getSession().invalidate();
-				                	return;
-			                    }
-			                }else{
-			                	
-			                	// 更新微信用户资料到数据库
-			                	MenberDTO menber = myMenberFacade.findMenberByOpenId(openID);
-			                    log.info("WXAccessFilter ============= menber2:"+menber);
 								if(null == menber && "/menber/workerBind.do".equals(uri)){//工人师傅绑定
 									response.sendRedirect("http://" + serverDomain + "/wap/workerBind.html");
 									return;
-								}else if(null != menber)
-			                    {
-			                    	String accessToken = (String)request.getSession().getAttribute("accessToken");
-			                    	log.info("WXAccessFilter ============= accessToken2:"+accessToken);
-			                    	if(null != accessToken)
-			                    	{
-			                    		WeiXinUserInfo wxuser = WeixinUtil.getWeiXinUserInfo(accessToken,openID,request);
-			                    		log.info("WXAccessFilter ============= wxuser2:"+wxuser);
-			                    		if(null != wxuser){
-			                        		//将用户信息保存在session中
-			                        		request.getSession().setAttribute("wxmenber", menber);
-			                            	request.getSession().setAttribute("wxmenberId", menber.getId());
-			                            	
-			                            	if(!menber.getHeadimgurl().equals(wxuser.getHeadimgurl())){
-			                        			updateMenber(menber,wxuser);//修改会员信息
-			                        		}
-			                    		}
-			                    	}
-			                    }else{
-			                    	String accessToken = (String)request.getSession().getAttribute("accessToken");
-			                    	log.info("WXAccessFilter ============= accessToken3:"+accessToken);
-			                    	if(null != accessToken)
-			                    	{
-			                    		WeiXinUserInfo wxuser = WeixinUtil.getWeiXinUserInfo(accessToken,openID,request);
-			                    		addMenber(request,response,wxuser);//新增会员信息
-			                    	}
-			                    }
-			                }
+								}else if(null == menber){
+									addMenber(request,response,wxuser);//新增会员信息
+								}else{
+									//将用户信息保存在session中
+									request.getSession().setAttribute("wxmenber", menber);
+									request.getSession().setAttribute("wxmenberId", menber.getId());
+
+									if(!menber.getHeadimgurl().equals(wxuser.getHeadimgurl())){
+										updateMenber(menber,wxuser);//修改会员信息
+									}
+								}
+							}
+			                        
+						}else{//获取网页授权凭证失败
+							log.info("WXAccessFilter ============= 获取网页授权凭证失败");
+							request.getSession().invalidate();
+							return;
+						}
+					}else{
+
+						// 更新微信用户资料到数据库
+						MenberDTO menber = myMenberFacade.findMenberByOpenId(openID);
+						log.info("WXAccessFilter ============= menber2:"+menber);
+						if(null == menber && "/menber/workerBind.do".equals(uri)){//工人师傅绑定
+							response.sendRedirect("http://" + serverDomain + "/wap/workerBind.html");
+							return;
+						}else if(null != menber)
+						{
+							String accessToken = (String)request.getSession().getAttribute("accessToken");
+							log.info("WXAccessFilter ============= accessToken2:"+accessToken);
+							if(null != accessToken)
+							{
+								WeiXinUserInfo wxuser = WeixinUtil.getWeiXinUserInfo(accessToken,openID,request);
+								log.info("WXAccessFilter ============= wxuser2:"+wxuser);
+								if(null != wxuser){
+									//将用户信息保存在session中
+									request.getSession().setAttribute("wxmenber", menber);
+									request.getSession().setAttribute("wxmenberId", menber.getId());
+
+									if(!menber.getHeadimgurl().equals(wxuser.getHeadimgurl())){
+										updateMenber(menber,wxuser);//修改会员信息
+									}
+								}
+							}
+						}else{
+							String accessToken = (String)request.getSession().getAttribute("accessToken");
+							log.info("WXAccessFilter ============= accessToken3:"+accessToken);
+							if(null != accessToken)
+							{
+								WeiXinUserInfo wxuser = WeixinUtil.getWeiXinUserInfo(accessToken,openID,request);
+								addMenber(request,response,wxuser);//新增会员信息
+							}
+						}
+					}
 //			            }else{
 //			            	log.info("WXAccessFilter ============= 未进入");
 //			            }
 			            
-			            filterchain.doFilter(request, response); 
-			            if(1==1){return;}
+					filterchain.doFilter(request, response);
+					if(1==1){return;}
 	            }
 				
 				}catch (Exception e) {

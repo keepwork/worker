@@ -295,8 +295,7 @@ public class WeixinUtil {
     
     /**
      * 通过ticket换取二维码
-     * @param ticket
-     * @return 
+     * @return
      * @throws UnsupportedEncodingException 
      */
     /*public static void getCodeImageByTicket(String ticket,String basePath)
@@ -501,9 +500,9 @@ public class WeixinUtil {
 	}*/
 
     public static void main(String[] args) {
-		String url = "http://huida.lianshikeji.cn/weixin/index.do?type=wap";
+		String url = "http://www.zhixiu.xyz/pub/menber/myAccount.do?type=wap";
 		url = urlEncodeUTF8(url);
-		System.out.println(url);
+		System.out.println(url+"&response_type=code&scope=snsapi_userinfo&state=678#wechat_redirect");
 		
 //		String nickname = "_a%%d:中f|国[]{}|";
 //		nickname = nickname.replaceAll("[^A-Za-z0-9!@#$%^&*()|<>{}?\\u4e00-\\u9fa5]", " ");//取出中文和数字，去掉其他字符
