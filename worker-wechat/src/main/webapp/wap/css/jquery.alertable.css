@@ -34,8 +34,8 @@
 
 /* Message */
 .alertable-message {
-  margin-bottom: 20px;
-  font-size: 1rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.8rem;
 }
 
 /* Prompt */
@@ -67,7 +67,7 @@
   background: #09d;
   border: solid 1px #09d;
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: white;
   border-radius: 4px;
   padding: 3px 16px;
@@ -86,7 +86,7 @@
   border: solid 1px #ddd;
   background: white;
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: #888;
   border-radius: 4px;
   padding: 3px 16px;

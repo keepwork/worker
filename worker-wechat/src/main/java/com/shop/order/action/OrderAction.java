@@ -1030,6 +1030,7 @@ public class OrderAction extends BaseAdmAction
 			payPrice = order.getPayPrice3().toString();
 		}
 		request.setAttribute("payTitle",payTitle);
+		request.setAttribute("payState",payState);
 		request.setAttribute("payPrice",payPrice);
 		request.setAttribute("payText",payText);
 		request.setAttribute("order",order);

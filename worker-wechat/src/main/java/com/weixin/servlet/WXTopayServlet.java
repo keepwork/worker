@@ -51,11 +51,13 @@ public class WXTopayServlet extends HttpServlet {
 //		System.out.println("openId:"+openId);
 		
     	String orderId = request.getParameter("orderId");
+    	String payInfo = request.getParameter("payInfo");//支付信息（0全额支付，1定金支付，2中期款支付，3尾款支付）
 //    	System.out.println("orderId:"+orderId);
-    	
+    	System.out.println("payInfo:"+payInfo);
+
     	OrderDTO order = myOrderFacade.get(orderId);
-    	String out_trade_no = order.getOrderSn(); 	//商户订单号
-    	String attach = order.getMenId().toString();//附加数据，存放用户的menId
+    	String out_trade_no = order.getOrderSn()+payInfo; 	//商户订单号+支付信息（防止分期支付时同一订单二次支付时页面报'缺少参数total_fee'）
+    	String attach = payInfo;//附加数据，存放支付信息（0全额支付，1定金支付，2中期款支付，3尾款支付）
     	
     	//商品描述
     	String body = "";
@@ -74,12 +76,35 @@ public class WXTopayServlet extends HttpServlet {
 //		if(amount.contains(".")){
 //			amount = amount.substring(0,amount.indexOf("."));
 //		}
-		double totalPay = order.getTotalPrice().doubleValue()* 100;//总金额以分为单位，不带小数点
+
+		double total_fee = 0.0d;
+		double totalPay = 0.0d;
+		String payTitle = "";
+		if("0".equals(attach)){//订单总金额支付
+			totalPay = order.getPayPrice1().doubleValue()* 100;//总金额以分为单位，不带小数点
+			total_fee = order.getPayPrice1().doubleValue();
+			payTitle = "订单总金额";
+		}else if("1".equals(attach)){//定金支付
+			totalPay = order.getPayPrice1().doubleValue()* 100;//总金额以分为单位，不带小数点
+			total_fee = order.getPayPrice1().doubleValue();
+			payTitle = "定金金额";
+		}else if("2".equals(attach)){//中期款支付
+			totalPay = order.getPayPrice2().doubleValue()* 100;//总金额以分为单位，不带小数点
+			total_fee = order.getPayPrice2().doubleValue();
+			payTitle = "中期款金额";
+		}else if("3".equals(attach)){//尾款支付
+			totalPay = order.getPayPrice3().doubleValue()* 100;//总金额以分为单位，不带小数点
+			total_fee = order.getPayPrice3().doubleValue();
+			payTitle = "尾款金额";
+		}
+
 		String totalPayStr = totalPay + "";
 		if((totalPayStr).contains(".")){
 			totalPayStr = totalPayStr.substring(0,totalPayStr.indexOf("."));
 		}
-		double total_fee = order.getTotalPrice().doubleValue();
+
+
+
 		
 		//String currTime = TenpayUtil.getCurrTime();
 		//String strTime = currTime.substring(8, currTime.length());//8位日期
@@ -146,9 +171,9 @@ public class WXTopayServlet extends HttpServlet {
 			"<trade_type>"+trade_type+"</trade_type>"+
 			"<sign>"+sign+"</sign>"+
 		"</xml>";
-//		System.out.println("=====================xml");
-//		System.out.println(xml);
-//		System.out.println("=====================xml");
+		System.out.println("=====================xml");
+		System.out.println(xml);
+		System.out.println("=====================xml");
 		
 		//统一下单接口提交
 		String createOrderURL = "https://api.mch.weixin.qq.com/pay/unifiedorder";
@@ -170,13 +195,14 @@ public class WXTopayServlet extends HttpServlet {
 		String finalsign = reqHandler.createSign(finalpackage);
 		
 		String serverDomain = GlobalConfig.getProperty("filePath", "prefix");
-		System.out.println("微信订单支付完成....................................................(" +
+		System.out.println("微信订单"+payTitle+"支付完成....................................................(" +
 				"orderId="+orderId+",openId="+openId+",prepay_id:"+prepay_id+","+format.format(new Date())+")");
 		
 		//测试目录跳转
 		//response.sendRedirect("http://"+serverDomain+"/wap/test/pay.jsp?orderSn="+out_trade_no+"&totalFee="+total_fee+"&appid="+appid2+"&timeStamp="+timestamp+"&nonceStr="+nonce_str+"&package="+packages+"&sign="+finalsign);
 		//正式目录跳转
-		response.sendRedirect(serverDomain+"/wap/pay.jsp?orderSn="+out_trade_no+"&totalFee="+total_fee+"&appid="+appid2+"&timeStamp="+timestamp+"&nonceStr="+nonce_str+"&package="+prepay_id+"&sign="+finalsign);
+		System.out.println(serverDomain+"/wap/pay.jsp?orderSn="+out_trade_no+"&totalFee="+total_fee+"&appid="+appid2+"&timeStamp="+timestamp+"&nonceStr="+nonce_str+"&package="+prepay_id+"&sign="+finalsign+"&payInfo="+payInfo);
+		response.sendRedirect(serverDomain+"/wap/pay.jsp?orderSn="+out_trade_no+"&totalFee="+total_fee+"&appid="+appid2+"&timeStamp="+timestamp+"&nonceStr="+nonce_str+"&package="+prepay_id+"&sign="+finalsign+"&payInfo="+payInfo);
 	}
 	
 	

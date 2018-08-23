@@ -290,8 +290,8 @@ public class WeixinUtil {
 		System.out.println("==================getOpenId======================");
 		return "";
 	}*/
-    
-    
+
+
     
     /**
      * 通过ticket换取二维码

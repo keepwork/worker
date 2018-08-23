@@ -12,9 +12,9 @@
 	<script type="text/javascript" src="${ctx}/wap/js/jquery.js"></script>
 </head>
 
-<body>
-	<!-- 公用头部 -->
-	<jsp:include page="public/header.jsp"></jsp:include>
+<%--<body>--%>
+	<%--<!-- 公用头部 -->--%>
+	<%--<jsp:include page="public/header.jsp"></jsp:include>--%>
 	
 	<%
 		System.out.println("微信支付....................................................开始支付");
@@ -26,6 +26,17 @@
 		String nonceStr = request.getParameter("nonceStr")+"";
 		String packageValue = request.getParameter("package")+"";
 		String paySign = request.getParameter("sign")+"";
+		String payInfo = request.getParameter("payInfo")+"";
+		String payTitle = "";
+		if("0".equals(payInfo)){//订单总金额支付
+			payTitle = "订单总金额";
+		}else if("1".equals(payInfo)){//定金支付
+			payTitle = "定金金额";
+		}else if("2".equals(payInfo)){//中期款支付
+			payTitle = "中期款金额";
+		}else if("3".equals(payInfo)){//尾款支付
+			payTitle = "尾款金额";
+		}
 		//System.out.println("");
 		//System.out.println("appId:"+appId);
 		//System.out.println("timeStamp:"+timeStamp);
@@ -63,14 +74,18 @@
 </head>
 
 <body>
-	<div class="top">
-	    <ul>
-	        <li class="back"><a href="javascript:window.history.back(-1);"><img src="${ctx}/wap/images/back.png" width="40" height="50" /></a></li>
-	        <li class="logo">微信支付</li>
-	    </ul>
-	</div>
+	<%--<div class="top">--%>
+	    <%--<ul>--%>
+	        <%--<li class="back"><a href="javascript:window.history.back(-1);"><img src="${ctx}/wap/images/back.png" width="40" height="50" /></a></li>--%>
+	        <%--<li class="logo">微信支付</li>--%>
+	    <%--</ul>--%>
+	<%--</div>--%>
+	<header class="header" id="header">
+		<a href="javascript:history.go(-1)" target=_self class="back">返回</a>
+		<h1>微信支付</h1>
+	</header>
 
-	<div class="ddwco"><b>订单总金额：</b><font color="red">￥<%= Double.parseDouble(totalFee) %> </font>元</div>
+	<div class="ddwco"><b><%= payTitle %>：</b><font color="red">￥<%= Double.parseDouble(totalFee) %> </font>元</div>
 
 	<div class="ddwch">
 	    <div class="ddwct">
@@ -86,10 +101,10 @@
 	
 	<table height="150px;"><tr><td >&nbsp;</td></tr></table>
 	
-	<!-- 公用底部 -->
-	<jsp:include page="public/foot.jsp" flush="false">
-		<jsp:param name="menu" value="fw" />
-	</jsp:include>
+	<!-- 公用底部
+	<%--<jsp:include page="public/foot.jsp" flush="false">--%>
+		<%--<jsp:param name="menu" value="fw" />--%>
+	<%--</jsp:include>--%>
 	
 </body>
 </html>

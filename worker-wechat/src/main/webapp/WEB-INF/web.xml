@@ -72,6 +72,24 @@
 	    <servlet-name>WXIndexServlet</servlet-name>
 	    <url-pattern>/indexWap.do</url-pattern>
     </servlet-mapping>
+	<!--微信去支付-->
+	<servlet>
+		<servlet-name>WXTopayServlet</servlet-name>
+		<servlet-class>com.weixin.servlet.WXTopayServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WXTopayServlet</servlet-name>
+		<url-pattern>/wxtopay.do</url-pattern>
+	</servlet-mapping>
+	<!--微信支付结果回调-->
+	<servlet>
+		<servlet-name>WXBackServlet</servlet-name>
+		<servlet-class>com.weixin.servlet.WXBackServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WXBackServlet</servlet-name>
+		<url-pattern>/wxback.do</url-pattern>
+	</servlet-mapping>
     	
 	
 	<error-page>

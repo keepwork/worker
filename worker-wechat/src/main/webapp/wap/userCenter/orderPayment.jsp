@@ -60,7 +60,7 @@
     <div class="payways-tit">支付方式</div>
     <ul>
       <li>
-        <a href="#">
+        <a href="#" onclick="wxtopay()">
           <div class="payways-img"><img src="${ctx}/wap/images/weixinzf.png"></div>
           <div class="payways-txt">
             <h2>微信支付</h2>
@@ -107,6 +107,13 @@
     clipboard.on('error', function(e) {
         console.log(e);
     });
+
+    var orderId = '${order.orderId}';
+    var payInfo = '${payState}';
+    /*点击微信支付*/
+    function wxtopay() {
+        window.location.href="${ctx}/wxtopay.do?orderId="+orderId+"&payInfo="+payInfo;
+    }
 </script>
 </body>
 </html>

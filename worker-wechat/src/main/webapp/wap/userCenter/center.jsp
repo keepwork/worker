@@ -22,8 +22,8 @@
 	<ul class="hyzx1" >
 	    <li onclick="javascript:window.location.href='${ctx}/pub/order/myOrderList.do?type=wap'" style="cursor:pointer;">
 	    	<img src="${ctx}/wap/html/images/tx_07.png" />全部订单</li>
-	    <li onclick="javascript:window.location.href='#'" style="cursor:pointer;">
-	    	<img src="${ctx}/wap/html/images/tx_13.png" />常用地址</li>
+	    <%--<li onclick="javascript:window.location.href='#'" style="cursor:pointer;">--%>
+	    	<%--<img src="${ctx}/wap/html/images/tx_13.png" />常用地址</li>--%>
 		<li onclick="javascript:window.location.href='${ctx}/pub/menber/personalInfo.do?type=wap'" style="cursor:pointer;">
 			<img src="${ctx}/wap/html/images/tx_09.png" />个人信息</li>
 	</ul>

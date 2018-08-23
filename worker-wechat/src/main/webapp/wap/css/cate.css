@@ -94,7 +94,8 @@ h2 { font-size:16px; }
 .gwcf span{font-size:18px; color:#ff4400;}
 .gwcf input{ margin:6px 5px 0 0;}
 
-.ddwco{height:40px; line-height:40px; padding:10px;margin:50px 0 0 0; background:#efefef; border-bottom:solid #dedede 1px; font-size:20px;  text-align:center;}
+/*.ddwco{height:2.4rem; line-height:2.4rem; padding:0.6rem 0;margin:2.4rem 0 0 0; background:#efefef; border-bottom:solid #dedede 1px; font-size:1.2rem;  text-align:center;}*/
+.ddwco{height:2.4rem; line-height:2.4rem; margin:3rem 0 0 0;font-size:1.2rem;  text-align:center;}
 .ddwct{ padding:15px; line-height:22px; font-size:14px;}
 .ddwct b{ color:#999999; font-weight:normal;}
 .ddwct span{ color:#ff4400;}
