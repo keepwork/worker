@@ -9,7 +9,8 @@
   String appId = GlobalConfig.getProperty("weixin", "appid");
   String jsapi_ticket = (String)request.getAttribute("jsapi_ticket")+"";
   String code = (String)request.getParameter("code")+"";//网页自带的参数
-  String url = "http://www.zhixiu.xyz/order/beforeAddBaby.do?type=wap";
+  String orderId = (String)request.getParameter("orderId")+"";//网页自带的参数
+  String url = "http://www.zhixiu.xyz/pub/order/workerOrderView.do?type=wap&orderId="+orderId;
   Map<String, String> map = SignUtil.sign(jsapi_ticket, url);
   String signature = map.get("signature").toString();
   int timestamp = Integer.parseInt(map.get("timestamp").toString());
@@ -40,7 +41,7 @@
 <link rel="stylesheet" type="text/css" href="${ctx }/wap/css/footer.css">
 <link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/public.css">
 <script type="text/javascript" src="${ctx }/wap/workerCenter/js/jquery.min.js" ></script>
-<%--<script type="text/javascript" src="${ctx}/wap/common/js/jweixin-1.2.0.js"></script>--%>
+<script type="text/javascript" src="${ctx}/wap/js/jweixin-1.2.0.js"></script>
 <script type="text/javascript" src="${ctx}/common/js/ajaxfileupload.js"></script>
 <script src="${ctx }/wap/js/rem.js"></script>
 
@@ -324,7 +325,8 @@
                 success: function (res) {
                     //var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                     var localId = res.localIds[0];
-                    faceObj.src = localId;
+                    //faceObj.src = localId;
+                    $("#"+id+"_img").attr("src",localId).show();
 
                     wx.uploadImage({
                         localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
@@ -347,7 +349,7 @@
     window.onload = function() {
         //alert(window.location.href.split('#')[0]);
         wx.config({
-            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
             appId: '<%=appId%>', // 必填，公众号的唯一标识
             timestamp: <%=timestamp%>, // 必填，生成签名的时间戳
             nonceStr: '<%=nonceStr%>', // 必填，生成签名的随机串

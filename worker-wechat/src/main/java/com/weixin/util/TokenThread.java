@@ -27,7 +27,7 @@ public class TokenThread implements Runnable {
 		String appsecret = GlobalConfig.getProperty("weixin", "appsecret");//应用密钥
 		ICache cache = CacheFactory.newCache();
         
-    	/*while (true) {    
+    	while (true) {
             try {    
             	boolean isSuccess = true;
 				if(null != appid && !appid.equals("") && null != appsecret && !appsecret.equals(""))
@@ -72,6 +72,6 @@ public class TokenThread implements Runnable {
                 }    
                 logger.error("{}", e);    
             }    
-        }    */
+        }
     }    
 }

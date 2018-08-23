@@ -54,7 +54,7 @@
     </servlet>
 	<servlet-mapping>
 		<servlet-name>WXInitServlet</servlet-name>
-		<url-pattern>/wxinit.do</url-pattern>
+		<url-pattern>/init.do</url-pattern>
 	</servlet-mapping>
     <servlet>
 	    <servlet-name>WXCheckServlet</servlet-name>

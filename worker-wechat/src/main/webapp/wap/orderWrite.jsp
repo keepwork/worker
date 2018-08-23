@@ -328,10 +328,11 @@
 					<tr style="margin-top: 5px;">
 						<td style="text-align:right;height:32px;padding: 0.6rem 0;"><font size="2">地址：</font></td>
 						<td style="padding: 0.1rem 0;">
-							<select name="province" id="province"></select>
-				            <select name="city" id="city"></select>
-				            <select name="county" id="county"></select><br/>
-							<textarea name="street" id="street" style="width:210px;border: 1px solid #e1e1e1;height: 50px;" class="input" cols="20" rows="2"></textarea><font color="red">*</font>
+							<select name="province" id="province" style="border: 1px solid #e1e1e1;font-size: 0.7rem;"></select>
+				            <select name="city" id="city"  style="border: 1px solid #e1e1e1;font-size: 0.7rem;"></select>
+				            <select name="county" id="county"  style="border: 1px solid #e1e1e1;font-size: 0.7rem;"></select><br>
+
+							<textarea name="street" id="street" style="width:210px;border: 1px solid #e1e1e1;height: 2.4rem;margin-top: 0.2rem;" class="input" cols="20" rows="2"></textarea><font color="red">*</font>
 							<br><font size="2" color="red">地址格式：**路**号</font> 
 						</td>
 					</tr>
@@ -391,7 +392,7 @@
 		   <em>分期支付</em>
 		</span>
 
-		<ul style="background: #f5f5f5">
+		<ul style="background: #f5f5f5;margin-bottom: 0.4rem;">
 			<li style="font-size:0.5rem">*注：小金额请选择一次性支付，一次性支付可在施工完成后再进行支付；分期支付需在师傅上门后支付定金，工程中期支付中期金额，工程尾期需支付尾款。</li>
 		</ul>
 		<br>

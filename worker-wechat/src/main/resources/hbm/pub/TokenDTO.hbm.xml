@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class  name="com.weixin.token.dto.TokenDTO"  table="pub_token" >
+		<comment>TOKEN</comment>
+		<id name="id"  type="java.lang.String" >
+			<column  name="ID"  length="32"  />
+			<generator class="uuid.hex" />
+		</id>
+		<property  name="updateTime"  type="java.util.Date" >
+			<column  name="UPDATE_TIME" >
+				<comment>修改时间</comment>
+			</column>
+		</property>
+
+		<property  name="access_token"  type="java.lang.String" >
+			<column  name="ACCESS_TOKEN"  length="500" >
+				<comment>调用接口凭证</comment>
+			</column>
+		</property>
+		
+		<property  name="jsapi_ticket"  type="java.lang.String" >
+			<column  name="jsapi_ticket"  length="500" >
+				<comment>公众号用于调用微信JS接口的临时票据</comment>
+			</column>
+		</property>
+
+	</class>
+</hibernate-mapping>

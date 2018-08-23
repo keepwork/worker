@@ -975,6 +975,7 @@ public class OrderAction extends BaseAdmAction
 //				order.setTakeTimeStr(format.format(order.getTakeTime()));
 //			}
 			request.setAttribute("order", order);
+			request.setAttribute("orderId", order.getOrderId());
 
 			MenberAddrDTO address = myMenberAddrFacade.get(order.getAddrId());
 			request.setAttribute("address", address);
@@ -985,6 +986,11 @@ public class OrderAction extends BaseAdmAction
 //	    	request.setAttribute("secondCateName", secondCate.getName());
 			AppraiseDTO appraise = myAppraiseFacade.getByOrderId(orderId);
 			request.setAttribute("appraise", appraise);
+
+			//获取ticket
+			String jsapi_ticket = (String)cache.get("jsapi_ticket");
+			log.info("jsapi_ticket："+jsapi_ticket);
+			request.setAttribute("jsapi_ticket",jsapi_ticket);
 
 			return mapping.findForward(returnPage);
 		}

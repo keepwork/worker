@@ -18,7 +18,7 @@ public class WXInitServlet extends HttpServlet {
     public void init() throws ServletException 
     {    
         // 启动定时获取access_token的线程    
-        //new Thread(new TokenThread()).start();      
+        new Thread(new TokenThread()).start();
     }   
 
 }

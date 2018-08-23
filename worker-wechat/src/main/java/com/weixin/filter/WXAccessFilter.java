@@ -71,6 +71,7 @@ public class WXAccessFilter implements Filter
 				
 				//判断是否微信浏览器
 		        boolean wxBrowser = WeixinUtil.isWeiXinBrowser(request);
+		        //wxBrowser = true;//测试用
 		        if(!wxBrowser){
 		        	response.sendRedirect(serverDomain+"/wap/error.html");
 		        }
@@ -87,11 +88,11 @@ public class WXAccessFilter implements Filter
 //						|| "/worker-wechat/pub/menber/workApply.do".equals(uri)
 //						|| "/worker-wechat/pub/articleCate/articleCateList.do".equals(uri)
 //						|| "/worker-wechat/pub/goodCate/firstCates.do".equals(uri)
-//						|| "/worker-wechat/pub/menber/myAccount.do".equals(uri))
-//				{
-//					String _openID = "o7Jq2wIeiWcLoA7UCQL5VhAa118M";
-//					log.info("WXAccessFilter ============= openID:"+openID);
-//					if(null!=_openID && !_openID.equals("")){
+//						|| "/worker-wechat/pub/menber/myAccount.do".equals(uri)) {
+//					//String _openID = "o7Jq2wIeiWcLoA7UCQL5VhAa118M";
+//					String _openID = request.getParameter("openId");
+//					log.info("WXAccessFilter ============= openID:" + _openID);
+//					if (null != _openID && !_openID.equals("")) {
 //						request.getSession().setAttribute("openID", _openID);
 //						MenberDTO sessionMenber = myMenberFacade.findMenberByOpenId(_openID);
 //						request.getSession().setAttribute("wxmenber", sessionMenber);
@@ -99,8 +100,8 @@ public class WXAccessFilter implements Filter
 //						request.getSession().setAttribute("jsapi_ticket", "");
 //					}
 
-//            		filterchain.doFilter(request, response);
-//	                if(1==1){return;}
+//					filterchain.doFilter(request, response);
+//					if(1==1){return;}
 				//////////////////////////////////////////////测试用，生产上要去掉
 					
 	                
