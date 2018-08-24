@@ -396,9 +396,8 @@
 					<c:if test="${m.orderStatus eq '2'}">已派单</c:if>
 					<c:if test="${m.orderStatus eq '3'}">已确认时间</c:if>
 					<c:if test="${m.orderStatus eq '4'}">已上门</c:if>
-					<c:if test="${m.orderStatus eq '5' && m.payStatus eq '0'}"><font color="red">待支付</font></c:if>
-					<c:if test="${m.orderStatus eq '5' && m.payStatus eq '1'}"><font color="red">已支付</font></c:if>
-					<c:if test="${m.orderStatus eq '6'}">已完成施工</c:if>
+					<c:if test="${m.orderStatus eq '5'}">已开始施工</c:if>
+					<c:if test="${m.orderStatus eq '6'}"><font color="#76EE00">已完成施工</font></c:if>
 					<c:if test="${m.orderStatus eq '7'}"><font color="#999">已评价</font></c:if>
 					<c:if test="${m.orderStatus eq '8'}"><font color="#999">已取消</font></c:if>
 				</ec:column>

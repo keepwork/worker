@@ -81,11 +81,11 @@
 	  </ul>
      -->
 	  <ul class="mainmenu" >
-		<li><a href="${ctx}/pub/goodCate/firstCates.do?type=wap&serviceType=1" ><p><img src="${ctx}/wap/html/images/fw_07.png"/><span style="font-size:0.8rem">预约安装</span></p></a></li>
+		<li><a href="${ctx}/pub/goodCate/firstCates.do?type=wap&serviceType=5" ><p><img src="${ctx}/wap/html/images/fw_07.png"/><span style="font-size:0.8rem">预约施工</span></p></a></li>
 		<li><a href="${ctx}/pub/goodCate/firstCates.do?type=wap&serviceType=2" ><p><img src="${ctx}/wap/html/images/fw_03.png"/><span style="font-size:0.8rem">预约维修</span></p></a></li>
 		<li><a href="${ctx}/pub/goodCate/firstCates.do?type=wap&serviceType=3" ><p><img src="${ctx}/wap/html/images/fw_10.png"/><span style="font-size:0.8rem">预约保养</span></p></a></li>
 		<li><a href="${ctx}/pub/goodCate/firstCates.do?type=wap&serviceType=4" ><p><img src="${ctx}/wap/html/images/fw_14.png"/><span style="font-size:0.8rem">预约测量</span></p></a></li>
-		<li><a href="${ctx}/pub/goodCate/firstCates.do?type=wap&serviceType=5" ><p><img src="${ctx}/wap/html/images/fw_15.png"/><span style="font-size:0.8rem">预约咨询</span></p></a></li>
+		<li><a href="${ctx}/pub/goodCate/firstCates.do?type=wap&serviceType=1" ><p><img src="${ctx}/wap/html/images/fl_15.png"/><span style="font-size:0.8rem">预约安装</span></p></a></li>
 		<li><a href="javacript:void(0);" ><p><img src="${ctx}/wap/html/images/fl_20.png"/><span style="font-size:0.8rem">全部类型</span></p></a></li>
 	  </ul>
 

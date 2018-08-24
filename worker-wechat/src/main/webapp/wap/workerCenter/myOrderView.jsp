@@ -60,7 +60,7 @@
   </style>
 </head>
 
-<body style="overflow:scroll;overflow-x:hidden">
+<body style="overflow-x:hidden">
 <header class="header" id="header">
 <a href="javascript:history.go(-1)" target=_self class="back">返回</a>
 <h1>订单详情</h1>
@@ -166,24 +166,37 @@
     <li><p>交易凭证</p></li>
     <li ><h2>协议书</h2></li>
     <li >
-      <c:if test="${m.protocolImgPath eq null}">
+      <c:if test="${order.protocolImgPath eq null}">
         <img src="${ctx}/wap/images/tptj.png" style="height: 3rem;width: 3rem;" id="protocol">
+        <img id="protocol_img" src="${ctx}/wap/images/nopic.png" style="height: 3rem;width: 3rem;">
       </c:if>
-        <img src="${ctx}/${requestScope.order.protocolImgPath}" style="height: 3rem;width: 3rem;" id="protocol_img" onerror="this.style.display='none'" >
+        <%--<img src="${ctx}/${requestScope.order.protocolImgPath}" style="height: 3rem;width: 3rem;" id="protocol_img" onerror="this.style.display='none'" >--%>
+      <c:if test="${order.protocolImgPath ne null}">
+        ${ctx}
+        <img id="protocol_img" src="${ctx}/${order.protocolImgPath}"  style="height: 3rem;width: 3rem;">
+      </c:if>
     </li>
     <li ><h2>报价单</h2></li>
     <li >
-      <c:if test="${m.quoteImgPath eq null}">
+      <c:if test="${order.quoteImgPath eq null}">
         <img src="${ctx}/wap/images/tptj.png" style="height: 3rem;width: 3rem;" id="quote">
+        <img id="quote_img" src="${ctx}/wap/images/nopic.png" style="height: 3rem;width: 3rem;">
       </c:if>
-        <img src="${ctx}/${requestScope.order.quoteImgPath}" style="height: 3rem;width: 3rem;" id="quote_img" onerror="this.style.display='none'">
+      <c:if test="${order.quoteImgPath ne null}">
+        <img id="protocol_img" src="${ctx}/${order.quoteImgPath}"  style="height: 3rem;width: 3rem;">
+      </c:if>
+
     </li>
     <li ><h2>服务表</h2></li>
     <li >
-      <c:if test="${m.serviceImgPath eq null}">
+      <c:if test="${order.serviceImgPath eq null}">
         <img src="${ctx}/wap/images/tptj.png" style="height: 3rem;width: 3rem;" id="service">
+        <img id="service_img" src="${ctx}/wap/images/nopic.png" style="height: 3rem;width: 3rem;">
       </c:if>
-        <img src="${ctx}/${requestScope.order.serviceImgPath}" style="height: 3rem;width: 3rem;" id="service_img" onerror="this.style.display='none'">
+      <c:if test="${order.serviceImgPath ne null}">
+        <img id="protocol_img" src="${ctx}/${order.serviceImgPath}"  style="height: 3rem;width: 3rem;">
+      </c:if>
+
     </li>
   </ul>
 
@@ -292,7 +305,7 @@
 
   <div style="position: fixed;bottom: 0;width: 100%;">
     <button style="width: 50%;height: 2rem;float:left;background: #5bc0de;color: #fff;" id="uploadPhoto">保存</button>
-    <button style="width: 50%;height: 2rem;float:right;background: #819bd8;color: #fff;">重选</button>
+    <button style="width: 50%;height: 2rem;float:right;background: #819bd8;color: #fff;" onclick="location.reload();">刷新</button>
   </div>
 </div>
 <!--order-confirm-end-->
@@ -317,39 +330,41 @@
      */
     function selectImgEventBing(id) {
         var takePhoto = document.getElementById(id);
-        takePhoto.addEventListener('click', function() {
-            wx.chooseImage({
-                count: 1, // 张数,默认9
-                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-                success: function (res) {
-                    //var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                    var localId = res.localIds[0];
-                    //faceObj.src = localId;
-                    $("#"+id+"_img").attr("src",localId).show();
+        if(takePhoto){
+          var img = document.getElementById(id+"_img");
+          takePhoto.addEventListener('click', function() {
+              wx.chooseImage({
+                  count: 1, // 张数,默认9
+                  sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                  sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                  success: function (res) {
+                      //var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                      var localId = res.localIds[0];
+                      img.src = localId;
 
-                    wx.uploadImage({
-                        localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
-                        isShowProgressTips: 1, // 默认为1，显示进度提示
-                        success: function (res) {
-                            mediaId = res.serverId; // 返回图片的服务器端ID
-                            //$("#"+id+"_img").val(mediaId);
-                            $("#"+id+"_img").attr("src",mediaId).show();
-                            uploadType = id;
-                        },
-                        fail: function (error) {
+                      wx.uploadImage({
+                          localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+                          isShowProgressTips: 1, // 默认为1，显示进度提示
+                          success: function (res) {
+                              mediaId = res.serverId; // 返回图片的服务器端ID
+                              //$("#"+id+"_img").val(mediaId);
+                              //$("#"+id+"_img").attr("src",mediaId).show();
+                              uploadType = id;
+                          },
+                          fail: function (error) {
 
-                        }
-                    });
-                }
-            });
-        });
+                          }
+                      });
+                  }
+              });
+          });
+        }
     }
 
     window.onload = function() {
         //alert(window.location.href.split('#')[0]);
         wx.config({
-            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
             appId: '<%=appId%>', // 必填，公众号的唯一标识
             timestamp: <%=timestamp%>, // 必填，生成签名的时间戳
             nonceStr: '<%=nonceStr%>', // 必填，生成签名的随机串
@@ -369,9 +384,9 @@
             }
         });
 
-//        var takePhoto = document.getElementById('takePhoto');
+        //var takePhoto = document.getElementById('takePhoto');
         var uploadPhoto = document.getElementById('uploadPhoto');
-        var faceObj = document.getElementById('faceImg');
+        //var faceObj = document.getElementById('faceImg');
 
         wx.ready(function(){
             selectImgEventBing("protocol");
@@ -381,7 +396,7 @@
             uploadPhoto.addEventListener('click', function() {
               //alert(mediaId);
               if('' != mediaId){
-                var url = "${ctx}/order/uploadImg.do?mediaId="+mediaId+"&uploadType="+uploadType+"&orderId="+orderId;
+                var url = "${ctx}/pub/order/uploadImg.do?mediaId="+mediaId+"&type="+uploadType+"&orderId="+orderId;
                 $.ajax({
                   type : "get",
                   url : url,
@@ -389,6 +404,7 @@
                   success : function(data) {
                     //$("#headImgPath").val("/common/upload/face/"+data);
                     alert("保存成功");
+                    location.reload();
                 }
                 });
               }else{

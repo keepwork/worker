@@ -30,7 +30,7 @@
 				<c:if test="${requestScope.serviceType eq '2'}">维修</c:if>
 				<c:if test="${requestScope.serviceType eq '3'}">保养</c:if>
 				<c:if test="${requestScope.serviceType eq '4'}">测量</c:if>
-				<c:if test="${requestScope.serviceType eq '5'}">咨询</c:if>
+				<c:if test="${requestScope.serviceType eq '5'}">施工</c:if>
 			<br/><br/>
 		</ul>
 		<br/>
@@ -53,10 +53,10 @@
 
 		<br/>
 		<input class="submit" type="button" value="电话咨询" onclick="tel()"/>
-		<c:if test="${serviceType!='5'}">
+		<%--<c:if test="${serviceType!='5'}">--%>
 			<br/>
 			<input class="submit" type="button" value="立即预约" onclick="javascript:window.location.href='${ctx}/pub/order/orderWrite.do?type=wap&serviceType=${serviceType}&firstCateCode=${firstCate.code}'" />
-		</c:if>
+		<%--</c:if>--%>
 		<br/>
 
 	  </ul>	

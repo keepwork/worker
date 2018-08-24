@@ -61,10 +61,10 @@
 							<c:if test="${m.orderStatus eq '2'}">已派单</c:if>
 							<c:if test="${m.orderStatus eq '3'}">已确认时间</c:if>
 							<c:if test="${m.orderStatus eq '4'}">已上门</c:if>
-							<c:if test="${m.orderStatus eq '5' && m.payStatus eq '0'}"><font color="red">待支付</font></c:if>
-							<c:if test="${m.orderStatus eq '5' && m.payStatus eq '1'}"><font color="red">已支付</font></c:if>
-							<c:if test="${m.orderStatus eq '6'}">已评价</c:if>
-							<c:if test="${m.orderStatus eq '7'}"><font color="#999">已取消</font></c:if>
+							<c:if test="${m.orderStatus eq '5'}">已开始施工</c:if>
+							<c:if test="${m.orderStatus eq '6'}">已完成施工</c:if>
+							<c:if test="${m.orderStatus eq '7'}">已评价</c:if>
+							<c:if test="${m.orderStatus eq '8'}"><font color="#999">已取消</font></c:if>
 						</td>
 					</tr>
 					<tr>
@@ -94,8 +94,75 @@
 						<td>${m.actualTimeStr}</td>
 						<th width="12%" align="right">施工完成时间：</th>
 						<td>${m.finishTimeStr}</td>
-						<th width="12%" align="right">支付时间：</th>
-						<td>${m.payTimeStr}</td>
+						<th width="12%" align="right">支付类型：</th>
+						<td>
+							<c:if test="${m.payType eq '1' }">
+								一次性支付
+							</c:if>
+							<c:if test="${m.payType eq '2' }">
+								分期支付
+							</c:if>
+							<%--<c:if test="${m.payType eq '1' && m.payTime1 eq null }">--%>
+								<%--未支付--%>
+							<%--</c:if>--%>
+							<%--<c:if test="${m.payType eq '1' && m.payTime1 ne null }">--%>
+								<%--已支付订单总额--%>
+							<%--</c:if>--%>
+							<%--<c:if test="${m.payType eq '2' && m.payTime1 eq null && m.payTime2 eq null && m.payTime1 eq null && m.payTime3 eq null }">--%>
+								<%--未支付--%>
+							<%--</c:if>--%>
+							<%--<c:if test="${m.payType eq '2' && m.payTime1 ne null}">--%>
+								<%--已支付定金、--%>
+							<%--</c:if>--%>
+							<%--<c:if test="${m.payType eq '2' && m.payTime2 ne null}">--%>
+								<%--已支付中期款、--%>
+							<%--</c:if>--%>
+							<%--<c:if test="${m.payType eq '2' && m.payTime3 ne null}">--%>
+								<%--已支付尾款--%>
+							<%--</c:if>--%>
+						</td>
+					</tr>
+					<tr>
+						<c:if test="${m.payType eq '1' }">
+							<th width="12%" align="right">总额支付状态</th>
+							<td colspan="5">
+								<c:if test="${m.payTime1 eq null }">
+									<font color="red">未支付</font>
+								</c:if>
+								<c:if test="${m.payTime1 ne null }">
+									<font color="green">已支付</font>
+								</c:if>
+							</td>
+						</c:if>
+						<c:if test="${m.payType eq '2' }">
+							<th width="12%" align="right">定金支付状态：</th>
+							<td>
+								<c:if test="${m.payTime1 eq null }">
+									<font color="red">未支付</font>
+								</c:if>
+								<c:if test="${m.payTime1 ne null }">
+									<font color="green">已支付</font>
+								</c:if>
+							</td>
+							<th width="12%" align="right">中期款支付状态：</th>
+							<td>
+								<c:if test="${m.payTime2 eq null }">
+									<font color="red">未支付</font>
+								</c:if>
+								<c:if test="${m.payTime2 ne null }">
+									<font color="green">已支付</font>
+								</c:if>
+							</td>
+							<th width="12%" align="right">尾款支付状态：</th>
+							<td>
+								<c:if test="${m.payTime3 eq null }">
+									<font color="red">未支付</font>
+								</c:if>
+								<c:if test="${m.payTime3 ne null }">
+									<font color="green">已支付</font>
+								</c:if>
+							</td>
+						</c:if>
 					</tr>
 
 					<tr>
@@ -107,7 +174,7 @@
 								<img src="${ctx}/images/wt.png" style="width:30%;height: 15%">
 							</c:if>
 							<c:if test="${m.protocolImgPath ne null}">
-								<img src="${ctx}/${m.protocolImgPath}" style="width:30%;height: 15%">
+								<img src="http://www.zhixiu.xyz/${m.protocolImgPath}" style="width:30%;height: 15%">
 							</c:if>
 						</td>
 						<th width="12%" align="right">报价单</th>
@@ -116,7 +183,7 @@
 								<img src="${ctx}/images/wt.png" style="width:30%;height: 15%">
 							</c:if>
 							<c:if test="${m.quoteImgPath ne null}">
-								<img src="${m.quoteImgPath}" style="width:30%;height: 15%">
+								<img src="http://www.zhixiu.xyz/${m.quoteImgPath}" style="width:30%;height: 15%">
 							</c:if>
 						</td>
 						<th width="12%" align="right">服务单</th>
@@ -125,7 +192,7 @@
 								<img src="${ctx}/images/wt.png" style="width:30%;height: 15%">
 							</c:if>
 							<c:if test="${m.serviceImgPath ne null}">
-								<img src="${m.serviceImgPath}" style="width:30%;height: 15%">
+								<img src="http://www.zhixiu.xyz/${m.serviceImgPath}" style="width:30%;height: 15%">
 							</c:if>
 						</td>
 					</tr>

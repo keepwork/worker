@@ -44,15 +44,15 @@ ScrollDiv('KeFuDiv');
 <!--在线帮助 End-->
 
 <!--百度商桥 start-->
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-    var hm = document.createElement("script");
-    hm.src = "https://hm.baidu.com/hm.js?67aa9eb318e758303d1fa88b344127fc";
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+<%--<script>--%>
+    <%--var _hmt = _hmt || [];--%>
+    <%--(function() {--%>
+    <%--var hm = document.createElement("script");--%>
+    <%--hm.src = "https://hm.baidu.com/hm.js?67aa9eb318e758303d1fa88b344127fc";--%>
+    <%--var s = document.getElementsByTagName("script")[0];--%>
+    <%--s.parentNode.insertBefore(hm, s);--%>
+    <%--})();--%>
+<%--</script>--%>
 <!--百度商桥 end-->
 
 

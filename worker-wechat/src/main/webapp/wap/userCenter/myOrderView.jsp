@@ -93,7 +93,8 @@
         <p>
           <em>￥${requestScope.order.totalPrice}</em>
           <c:if test="${requestScope.order.payType eq '1'}">
-            <c:if test="${requestScope.order.payTime1 eq null && (requestScope.order.orderStatus eq '4' || requestScope.order.orderStatus eq '5')}">
+            <%--<c:if test="${requestScope.order.payTime1 eq null && (requestScope.order.orderStatus eq '4' || requestScope.order.orderStatus eq '5')}">--%>
+            <c:if test="${requestScope.order.payTime1 eq null && (requestScope.order.orderStatus eq '2' || requestScope.order.orderStatus eq '3' || requestScope.order.orderStatus eq '4' || requestScope.order.orderStatus eq '5')}">
               <a href="${ctx}/pub/order/toPaymentPage.do?type=wap&payState=0&orderId=${requestScope.order.orderId}" class="button-info">&emsp;支付&emsp;</a>
             </c:if>
             <c:if test="${requestScope.order.payTime1 ne '' && requestScope.order.payTime1 ne null}">
