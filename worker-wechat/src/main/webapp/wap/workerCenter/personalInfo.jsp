@@ -5,13 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-<meta content="yes" name="apple-mobile-web-app-capable" />
-<meta content="black" name="apple-mobile-web-app-status-bar-style" />
-<meta content="telephone=no" name="format-detection" />
-<title>个人信息</title>
-  <link rel="stylesheet" type="text/css" href="${ctx }/wap/css/footer.css">
+  <jsp:include page="../public/common.jsp"></jsp:include>
+  <!-- 公用JS|-->
+  <link rel="stylesheet" href="${ctx}/wap/userCenter/css/style.css">
   <link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/public.css">
 </head>
 
@@ -25,7 +21,7 @@
   <div class="container" id="container">
 
     <div class="personal-data1">
-      <ul style="margin-top: 2rem">
+      <ul style="margin-top: 0rem">
         <li><a href="javascript:void(0);"><span>我的姓名</span><em>${m.realName}</em></a></li>
         <li><a href="javascript:void(0);"><span>我的手机</span><em>${m.mobile}</em></a></li>
         <li><a href="javascript:void(0);"><span>工作年限</span><em>${m.workYears}年</em></a></li>
@@ -45,5 +41,10 @@
 
   </div>
 <!--container-end-->
+
+  <!-- 公用底部 -->
+  <jsp:include page="../public/foot.jsp" flush="false">
+    <jsp:param name="menu" value="fw" />
+  </jsp:include>
 </body>
 </html>

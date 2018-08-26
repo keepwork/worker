@@ -16,7 +16,7 @@
 	<div class="notes" style="margin-top: 3.2rem;">
 		<img src="${ctx}/wap/images/notes.png" width="26px" height="24px" />
 		<%--<font size="2">年终奖提前发，80元现金拿回家!</font>--%>
-		年终奖提前发，80元现金拿回家!
+		88修全国服务热线：400-601-0731
 	</div>
 
 	<ul class="hyzx1" >
@@ -26,6 +26,8 @@
 	    	<%--<img src="${ctx}/wap/html/images/tx_13.png" />常用地址</li>--%>
 		<li onclick="javascript:window.location.href='${ctx}/pub/menber/personalInfo.do?type=wap'" style="cursor:pointer;">
 			<img src="${ctx}/wap/html/images/tx_09.png" />个人信息</li>
+		<li onclick="javascript:window.location.href='${ctx}/pub/article/articleDetail.do?type=wap&id=107'" style="cursor:pointer;">
+			<img src="${ctx}/wap/html/images/tx_13.png" />扫码支付</li>
 	</ul>
 	
 	<br><br><br><br>

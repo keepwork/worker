@@ -34,7 +34,7 @@
 	<header>
 	  <ul>
 		  <li class="back"><img src="${ctx}/wap/images/logo.png" style="width: 2.6rem;height: 2rem;margin-top: 0.2rem;"/></li>
-	    <li class="logo"><strong>88修房屋快修</strong></li>
+		  <li class="logo"><strong><font size="5">88修房屋快修</font></strong></li>
 	    <li class="more">&nbsp;</li>
 	  </ul>
 	</header>
@@ -124,31 +124,22 @@
 		<div class="m_dibu" style="border-bottom:1px dashed #CECECE;">
 			<a href="${ctx}/pub/article/articleDetail.do?type=wap&id=101">公司介绍<img src="${ctx}/wap/images/d_xian.png" width="1px" style="float:right"></a>
 			<a href="${ctx}/pub/article/articleDetail.do?type=wap&id=102">联系我们<img src="${ctx}/wap/images/d_xian.png" width="1" style="float:right"></a>
-			<a href="${ctx}/pub/article/articleDetail.do?type=wap&id=104">师傅招聘<img src="${ctx}/wap/images/d_xian.png" width="1" style="float:right"></a>
+			<a href="${ctx}/pub/article/articleDetail.do?type=wap&id=104">师傅招聘</a>
 		</div>
-		<!--
 		<div class="m_dibu" style="border-top:0px; ">
-			<a href="${ctx}/pub/article/articleDetail.do?type=wap&id=2">最新动态<img src="${ctx}/wap/images/d_xian.png" width="1px" style="float:right"></a>
-			<a href="${ctx}/pub/article/articleDetail.do?type=wap&id=2">自营门店</a>
-			<a href="${ctx}/pub/article/articleDetail.do?type=wap&id=2">淘宝店铺</a>
+			<a href="${ctx}/pub/article/articleDetail.do?type=wap&id=107">扫码支付<img src="${ctx}/wap/images/d_xian.png" width="1px" style="float:right"></a>
+			<a href="${ctx}/pub/article/articleDetail.do?type=wap&id=103">报价说明<img src="${ctx}/wap/images/d_xian.png" width="1px" style="float:right"></a>
+			<a href="${ctx}/pub/article/articleDetail.do?type=wap&id=105">保修说明</a>
 		</div>
-		-->
 
-
-		<br/>
-
-		<!--
-		<ul style="margin-top: 13px;margin-left: 5px;">
-			<li style="margin-left: 15px;">©2018-2019 惠修房屋快修版权所有，并保留所有权利</li>
-			<li style="margin-left: 85px;margin-top: 10px;">ICP备1111111-1号</li>
+		<ul style="padding-top:10px; margin-bottom:0px;font-family:微软雅黑; font-size:12px;background: #f5f5f5;text-align:center;">
+			<li>©2018-2019 88修房屋快修版权所有，并保留所有权利</li>
+			<li>湘ICP备18016571号-1</li>
 		</ul>
-		<br/><br/>
-		-->
-
-
 
 		<!--置顶-->
-		<div style="position: fixed;bottom: 50px;right: 10px;margin-bottom: 10px;"><a href="javascript:window.scrollTo(0,0);"><img src="${ctx}/wap/images/fanhui.png" width="42px"></a></div>
+		<div style="position: fixed;bottom: 50px;right: 10px;margin-bottom: 10px;">
+			<a href="javascript:window.scrollTo(0,0);"><img src="${ctx}/wap/images/fanhui.png" width="42px"></a></div>
 
 	</div>
 	

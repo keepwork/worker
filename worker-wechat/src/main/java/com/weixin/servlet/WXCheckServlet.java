@@ -368,9 +368,9 @@ public class WXCheckServlet extends HttpServlet {
 					
 					if(content.equals("")){
 						if(null != menber && !menber.getLoginName().equals("")){
-							content = "恭喜您【" + menber.getLoginName() + "】已经关注到88修,我们采用线上线下相结合的互联网+模式满足大众房屋维修需求，致力于解决千家万户房屋居住烦恼！";
+							content = "恭喜您【" + menber.getLoginName() + "】已经关注到88修,我们采用线上线下相结合的互联网+模式满足大众房屋维修需求，致力于解决千家万户房屋居住烦恼！全国服务热线：400-601-0731";
 						}else{
-							content = "恭喜您已经关注到88修,我们采用线上线下相结合的互联网+模式满足大众房屋维修需求，致力于解决千家万户房屋居住烦恼！";
+							content = "恭喜您已经关注到88修,我们采用线上线下相结合的互联网+模式满足大众房屋维修需求，致力于解决千家万户房屋居住烦恼！全国服务热线：400-601-0731";
 						}
 					}
 					

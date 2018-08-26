@@ -218,13 +218,11 @@
 						     	html +="<div class='qrddxxo_t' style='cursor:pointer;' name='selectAddressDiv' id='selectAddress_"+n.id+"' onclick=\"changeSelectAddress('"+n.id+"')\">";
 						     }
 						     
-						     html +="<b>姓名：</b>"+n.consignee;
+						     html +="<b>姓名：</b>"+n.consignee+"<br />";
 					         //html +="<a href='javascript:saveNewAddress(\"${addr.id}\",\"update\")' style='margin-left: 60px;'><font color='red'>修改</font></a>&nbsp;&nbsp;";
-					         html +="<a href=\"javascript:saveNewAddress('"+n.id+"','del')\" style='margin-left: 150px;'><font color='red'>删除</font></a> ";
-					         html +="<br />";
-		        
 						     html +="<b>电话：</b>"+n.mobile+"<br />";
-						     html +="<b>地址：</b>"+n.province+n.city+n.county+n.street+"<br />";
+						     html +="<b>地址：</b>"+n.province+n.city+n.county+n.street;
+                             html +="<span style=\"float:right;\"><a href=\"javascript:saveNewAddress('"+n.id+"','del')\" ><font color='red'>删除</font></a> </span>";
 						     html +="</div>";
 						     DIV.innerHTML += html;
 						     
@@ -299,12 +297,11 @@
 				<input style="display: none;" name="selectAddress" value="${addr.id}" type="radio" />
 				<div class="qrddxxo_t" style="cursor:pointer;" name='selectAddressDiv' id="selectAddress_${addr.id}" onclick="changeSelectAddress('${addr.id}')">
 			</c:if>
-		        <b>姓名：</b>${addr.consignee}
+		        <b>姓名：</b>${addr.consignee}<br />
 		        <!-- <a href="javascript:saveNewAddress('${addr.id}','update')" style="margin-left: 60px;"><font color="red">修改</font></a>&nbsp;&nbsp; -->
-		        <a href="javascript:saveNewAddress('${addr.id}','del')" style="margin-left: 150px;"><font color="red">删除</font></a>
-		        <br />
 		        <b>电话：</b>${addr.mobile}<br />
-		        <b>地址：</b>${addr.province}${addr.city}${addr.county}${addr.street}<br />
+		        <b>地址：</b>${addr.province}${addr.city}${addr.county}${addr.street}
+				<span style="float:right;"><a href="javascript:saveNewAddress('${addr.id}','del')" ><font color="red">删除</font></a></span>
 		    </div>
 	    </c:forEach>
 	</div>
@@ -394,6 +391,7 @@
 
 		<ul style="background: #f5f5f5;margin-bottom: 0.4rem;">
 			<li style="font-size:0.5rem">*注：小金额请选择一次性支付，一次性支付可在施工完成后再进行支付；分期支付需在师傅上门后支付定金，工程中期支付中期金额，工程尾期需支付尾款。</li>
+			<li></li>
 		</ul>
 		<br>
 		<br>
@@ -418,7 +416,7 @@
 		<%--</ul>--%>
 	<%--</div>--%>
 	<div class="qrddxxf">
-	    <h4 style="height:5px;padding:0px;">&nbsp;</h4>
+	    <h4 style="height:1px;padding:0px;">&nbsp;</h4>
 	</div>
 	
 	<div class="mdxqh">

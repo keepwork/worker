@@ -24,23 +24,17 @@
 	<div style="margin-top: 2rem"></div>
 
 	<div class="xzxh">
-		<ul style="font-size: 0.8rem;margin-top: 10px;background: #71c3f530;">
+		<ul style="font-size: 0.8rem;margin-top: 1px;background: #71c3f530;">
 				<br/>&nbsp;&nbsp;&nbsp;&nbsp;已选服务类型：
 				<c:if test="${requestScope.serviceType eq '1'}">安装</c:if>
 				<c:if test="${requestScope.serviceType eq '2'}">维修</c:if>
 				<c:if test="${requestScope.serviceType eq '3'}">保养</c:if>
 				<c:if test="${requestScope.serviceType eq '4'}">测量</c:if>
 				<c:if test="${requestScope.serviceType eq '5'}">施工</c:if>
-			<br/><br/>
-		</ul>
-		<br/>
-
-		<ul style="font-size: 0.8rem;margin-top: 10px;background: #71c3f530;">
-
 			<br/>&nbsp;&nbsp;&nbsp;&nbsp;已选服务项目：${firstCate.name}
 			<br/><br/>
 		</ul>
-		<br/>
+
 
 	  <ul style="margin-top: 10px;background: #71c3f530;">
 		<%--
@@ -52,7 +46,8 @@
 	    --%>
 
 		<br/>
-		<input class="submit" type="button" value="电话咨询" onclick="tel()"/>
+			<a href="tel:4006010731"><input class="submit" type="button" value="电话咨询" /></a>
+
 		<%--<c:if test="${serviceType!='5'}">--%>
 			<br/>
 			<input class="submit" type="button" value="立即预约" onclick="javascript:window.location.href='${ctx}/pub/order/orderWrite.do?type=wap&serviceType=${serviceType}&firstCateCode=${firstCate.code}'" />
@@ -73,5 +68,6 @@
 <SCRIPT type=text/javascript>
     function tel(){
         alert("拨打电话");
+
     }
 </SCRIPT>

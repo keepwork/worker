@@ -29,7 +29,7 @@
 		<h1>收费查询</h1>
 	</header>
 	<div style="margin-top: 2rem"></div>
-	<img src="${ctx}/wap/images/hyzx_wddd_bg2.jpg" style="height: 6rem;width: 100%;">
+	<img src="${ctx}/wap/images/hyzx_wddd_bg2.jpg" style="height: 4rem;width: 100%;">
 
 	<div class="Z_con2_2" style="height:auto">
 			<div class="F_wd_top_con2_l" id="wrapper" style="height:auto">
