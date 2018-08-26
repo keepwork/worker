@@ -451,7 +451,7 @@
 							<%--<span><span>新增工期</span></span>--%>
 						<%--</a>--%>
 					<%--</c:if>--%>
-					<c:if test="${m.orderStatus eq '6'}">
+					<c:if test="${m.orderStatus eq '6' && null!=m.appraiseId}">
 						<a class="sexybutton" href="${ctx}/pub/appraise/appraiseView.do?appraiseId=${m.appraiseId}">
 							<span><span>评价详情</span></span>
 						</a>

@@ -16,7 +16,7 @@
   <script type="text/javascript">
    window.onload = function(){
 	    if(isWeiXin()){
-	        location.href="${pageContext.request.contextPath}/weixin/index.do";
+	        location.href="${pageContext.request.contextPath}/weixin/index.do?type=wap";
 	    }else{
 	    	location.href="${pageContext.request.contextPath}/pc/index.do";
 	    }

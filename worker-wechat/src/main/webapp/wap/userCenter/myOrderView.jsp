@@ -71,7 +71,7 @@
         <c:if test="${requestScope.order.serviceType == '2'}">维修</c:if>
         <c:if test="${requestScope.order.serviceType == '3'}">保养</c:if>
         <c:if test="${requestScope.order.serviceType == '4'}">测量</c:if>
-        <c:if test="${requestScope.order.serviceType == '5'}">咨询</c:if>
+        <c:if test="${requestScope.order.serviceType == '5'}">施工</c:if>
       </span>
     </li>
     <li><h2>产品类型</h2><span>${requestScope.firstCateName}</span></li>
@@ -152,7 +152,10 @@
     <li><h2>师傅姓名</h2><span>${requestScope.worker.realName}</span></li>
     <li><h2>接单数量</h2><span>${requestScope.totalOrderNum}</span></li>
     <li><h2>好评指数</h2><span>${requestScope.positiveAppraiseRate}%</span></li>
-    <li><h2>师傅头像</h2><span><img src="${sessionScope.worker.headimgurl}" style="width: 80px;height: 100px" /></span></li>
+    <li><h2>师傅头像</h2><span>
+      <c:if test="${null!=sessionScope.worker.headimgurl}"><img src="${sessionScope.worker.headimgurl}" style="width: 80px;height: 100px" /></c:if>
+      <c:if test="${null==sessionScope.worker.headimgurl}"><img src="${ctx}/wap/html/images/dz_03.png" style="width: 80px;height: 100px" /></c:if>
+    </span></li>
   </ul>
   <div style="margin-bottom: 0.3rem"></div>
   <ul class="order-confirm-list clearfix order-cancel-list">

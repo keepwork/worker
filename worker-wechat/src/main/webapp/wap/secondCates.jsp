@@ -31,7 +31,7 @@
 				<c:if test="${requestScope.serviceType eq '3'}">保养</c:if>
 				<c:if test="${requestScope.serviceType eq '4'}">测量</c:if>
 				<c:if test="${requestScope.serviceType eq '5'}">施工</c:if>
-			<br/>&nbsp;&nbsp;&nbsp;&nbsp;已选服务项目：${firstCate.name}
+			<br/>&nbsp;&nbsp;&nbsp;&nbsp;已选服务项目：&nbsp;${firstCate.name}
 			<br/><br/>
 		</ul>
 

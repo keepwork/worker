@@ -995,9 +995,14 @@ public class MenberAction extends BaseAdmAction
 			this.myMenberFacade.update(menber);
 		}
 
-		CommonMapping mping = new CommonMapping("保存成功!", getRealUri(mapping,"menber/index") + "?type=" + type, ActionConstent.ALERT);
-		request.setAttribute("mping", mping);
-		return mapping.findForward(ActionConstent.COMMON_MAPPING);
+		response.setContentType("text/html; charset=UTF-8"); //转码
+		PrintWriter writer = response.getWriter();
+		writer.flush();
+		writer.println("<script>");
+		writer.println("alert('保存成功!');");
+		writer.println("</script>");
+
+		return mapping.findForward("index");
 	}
 
 	/**

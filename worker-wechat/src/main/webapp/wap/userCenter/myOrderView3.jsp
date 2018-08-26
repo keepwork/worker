@@ -67,7 +67,7 @@
 		        <c:if test="${requestScope.order.serviceType == '2'}">维修</c:if>
 		        <c:if test="${requestScope.order.serviceType == '3'}">保养</c:if>
 		        <c:if test="${requestScope.order.serviceType == '4'}">测量</c:if>
-		        <c:if test="${requestScope.order.serviceType == '5'}">咨询</c:if>
+		        <c:if test="${requestScope.order.serviceType == '5'}">施工</c:if>
 	        </span></li>
 	        <li>预约产品类型<span style="float:right">${requestScope.firstCateName}</span></li>
 	    </ul>

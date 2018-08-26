@@ -43,15 +43,28 @@
 			
 			var mobile = document.getElementById("mobile");
 			if(mobile.value == ""){
-				alert("请输入联系电话！");
+				alert("请输入手机号码！");
 				mobile.focus();
 				return false;
 			}
 			if(mobile.value!=''&&!/^1\d{10}$/g.test(mobile.value)){
-				alert("联系电话不合法!");
+				alert("手机号码不合法!");
 				mobile.focus();
 				return false;
 			}
+
+            var workType = $('#workType_ option:selected') .val();//选中的值
+            if(workType == '0'){
+                alert("请选择工作种类");
+                return;
+            }
+
+            var workYears = document.getElementById("workYears");
+            if(workYears.value == ''){
+                alert("工作年限不能为空");
+                workYears.focus();
+                return;
+            }
 			
 			var email = document.getElementById("email");
 			if(email.value != ""){
@@ -94,7 +107,7 @@
 
 <div class="list-block" >
 	<ul class="round">
-	    <form name="frmApply" class="cmxform" action="${ctx}/pub/menber/workApplySave.do?type=wap" target="hideframe" method="post" >
+	    <form name="frmApply" class="cmxform" action="${ctx}/pub/menber/workApplySave.do?type=wap"  method="post" >
 			<input type="hidden" name="salesMenId" id="salesMenId" value="${sessionScope.wxmenber.id}" />
 			<li class="title">在此申请成为工人</li>
 			<li class="nob" style="height: 2rem;font-size: 16px;">
@@ -168,7 +181,7 @@
 	</div>
 
 
-	<input class="submit" value="提交申请" type="button" onclick="beforeSubmit();return false" />
+	<input class="submit" value="提交申请" type="button" onclick="beforeSubmit();" />
 	
 	<br><br><br>
 
