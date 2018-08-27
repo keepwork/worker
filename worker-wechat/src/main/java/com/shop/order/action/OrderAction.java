@@ -333,7 +333,7 @@ public class OrderAction extends BaseAdmAction
 		if(type.equals("wap")){
 			menber = (MenberDTO)req.getSession().getAttribute("wxmenber");
 			String userType = menber.getType()+"";
-			if("1".equals(userType)){//1:微信客户2：安装工
+			if("1".equals(userType) || "3".equals(userType)){//1:微信客户2：安装工3:正在审核
 				params.put("menId", menber.getId());
 			}else{
 				params.put("workerId", menber.getId());
