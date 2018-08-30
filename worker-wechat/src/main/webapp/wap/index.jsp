@@ -134,7 +134,11 @@
 
 		<ul style="padding-top:10px; margin-bottom:0px;font-family:微软雅黑; font-size:12px;background: #f5f5f5;text-align:center;">
 			<li>©2018-2019 88修房屋快修版权所有，并保留所有权利</li>
-			<li>湘ICP备18016571号-1</li>
+			<li>
+				湘ICP备18016571号-1
+				<!-- cnzz -->
+				<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1259784926'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1259784926%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+			</li>
 		</ul>
 
 		<!--置顶-->
@@ -148,6 +152,7 @@
 	<jsp:include page="public/foot.jsp" flush="false">
 		<jsp:param name="menu" value="fw" />
 	</jsp:include>
-	
+
+
 </body>
 </html>
