@@ -8,7 +8,15 @@
 	<jsp:include page="public/common.jsp"></jsp:include>
 	<link rel="stylesheet" type="text/css" href="${ctx }/wap/workerCenter/css/public.css">
 	<script type="text/javascript" charset="UTF-8" src="${ctx}/wap/js/TouchSlide.1.1.js" ></script>
-
+	<script type="text/javascript" charset="UTF-8" src="${ctx}/wap/js/scroll.js" ></script>
+	<script type="text/javascript">
+		$(function(){
+			$("div.zjmmbox").myScroll({
+				speed:40, //数值越大，速度越慢
+				rowHeight:34 //li的高度
+			});
+		});
+	</script>
 	<style type="text/css">
 		.m_dibu {
 			border-bottom: 1px solid #afafaf;
@@ -27,6 +35,13 @@
 			font-weight: 600;
 			color: #333;
 		}
+		.zjmd{background:#e5f9b5;border-radius:10px;width:100%;margin:0 auto;padding:0.2rem 0}
+		.zjmd h2{color:#e2473e; margin-top:10px;text-align:center;}
+		.zjmd .zjmmbox {background:#fff; border:1px solid #898989;height:3rem; overflow:hidden;width:90%;margin:0.5em auto}
+		.zjmd .zjmmbox ul{margin:15px}
+		.zjmd .zjmmbox ul li{line-height:34px;font-size: 0.6rem;}
+		.zjmd .zjmmbox ul li span{padding:0 30px;}
+		.zpxx span{color:#e2473e;font-size: 1.5em;}
 	</style>
 </head>
 
@@ -114,6 +129,61 @@
 			</a>
 		</div>
 		<!--二手置换 货运配送结束-->
+
+		<!--中奖名单转盘 开始-->
+		<div class="zjmd">
+			<h2>最新订单</h2>
+			<div class="zjmmbox">
+				<ul>
+					<li>139****2100<span>长沙</span>墙面粉刷</li>
+					<li>135****3826<span>长沙</span>水电维修</li>
+					<li>139****1262<span>长沙</span>门窗维修</li>
+					<li>189****5529<span>长沙</span>厨房改造</li>
+					<li>132****2415<span>长沙</span>打孔安转</li>
+					<li>180****8813<span>长沙</span>泥瓦维修</li>
+					<li>151****1156<span>长沙</span>防水补漏</li>
+					<li>136****7815<span>长沙</span>水电维修</li>
+					<li>152****4156<span>长沙</span>水电维修</li>
+					<li>188****3441<span>长沙</span>局部改造</li>
+					<li>133****1818<span>长沙</span>地板维修</li>
+					<li>189****5966<span>长沙</span>墙面粉刷</li>
+					<li>138****5326<span>长沙</span>家具维修</li>
+					<li>186****8915<span>长沙</span>门窗维修</li>
+					<li>159****1222<span>长沙</span>整体翻新</li>
+					<li>135****7715<span>长沙</span>水电维修</li>
+					<li>181****6833<span>长沙</span>厨卫漏水</li>
+					<li>156****9071<span>长沙</span>地板打蜡</li>
+					<li>180****4689<span>长沙</span>水电维修</li>
+					<li>182****1398<span>长沙</span>水电维修</li>
+					<li>137****3900<span>长沙</span>管道疏通</li>
+					<li>155****9923<span>长沙</span>防水补漏</li>
+					<li>186****2110<span>长沙</span>墙面粉刷</li>
+					<li>155****1466<span>长沙</span>水电维修</li>
+					<li>158****1262<span>长沙</span>门窗维修</li>
+					<li>135****8829<span>长沙</span>厨房改造</li>
+					<li>132****1286<span>长沙</span>打孔安转</li>
+					<li>180****2284<span>长沙</span>泥瓦维修</li>
+					<li>139****1515<span>长沙</span>防水补漏</li>
+					<li>136****9903<span>长沙</span>水电维修</li>
+					<li>189****7816<span>长沙</span>水电维修</li>
+					<li>156****2263<span>长沙</span>局部改造</li>
+					<li>151****3562<span>长沙</span>地板维修</li>
+					<li>133****4422<span>长沙</span>墙面粉刷</li>
+					<li>139****4862<span>长沙</span>家具维修</li>
+					<li>186****3806<span>长沙</span>门窗维修</li>
+					<li>186****9026<span>长沙</span>整体翻新</li>
+					<li>159****8511<span>长沙</span>水电维修</li>
+					<li>183****6033<span>长沙</span>厨卫漏水</li>
+					<li>134****2366<span>长沙</span>地板打蜡</li>
+					<li>159****6859<span>长沙</span>水电维修</li>
+					<li>188****6235<span>长沙</span>水电维修</li>
+					<li>182****5552<span>长沙</span>管道疏通</li>
+					<li>139****3710<span>长沙</span>防水补漏</li>
+
+				</ul>
+			</div>
+		</div>
+		<!--中奖名单转盘 结束-->
 
 		<div style="width: 100%;text-align: center;background-color:#fff">
 			<div style="width: 100%;height: auto;overflow: hidden;clear: both;display: block;">
